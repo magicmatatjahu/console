@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Icon from '../Icon';
 
@@ -19,5 +20,13 @@ const Notification = ({ title, color, icon, onClick, visible }) => (
     </NotificationHeader>
   </NotificationWrapper>
 );
+
+Notification.propTypes = {
+  title: PropTypes.string.isRequired,
+  color: PropTypes.string,
+  icon: PropTypes.string,
+  onClick: PropTypes.func,
+  visible: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+};
 
 export default Notification;
