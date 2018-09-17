@@ -9,6 +9,9 @@ RUN npm install --no-optional
 COPY src /app/src
 COPY public /app/public
 
+# Copy local changes from react-components package
+COPY react-components/index.js /app/node_modules/@kyma-project/react-components/lib/index.js
+
 # Set env variables 
 ENV PRODUCTION true
 

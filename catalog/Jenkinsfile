@@ -75,12 +75,16 @@ podTemplate(label: label) {
                             // }
                         // }
 
+                        stage("prepare react-components") {
+                            execute("../scripts/docker-image.sh --ci")
+                        }
+
                         stage("build $application") {
                             execute('make build')
                         }
 
                         stage("build image $application") {
-                            dir(env.APP_FOLDER){
+                            dir(env.APP_FOLDER) {
                                 sh "docker build . -t $application:latest"
                             }
                         }

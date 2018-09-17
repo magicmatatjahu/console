@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const TabsContent = styled.div`
   margin: 20px;
   font-size: 14px;
-  color: #515559;
+  color: #3BC74E;
   line-height: 1.57;
 `;
 

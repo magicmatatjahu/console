@@ -96,7 +96,7 @@ class Modal extends React.Component {
         maxHeight: '85vh',
         margin: 'auto',
         borderRadius: '4px',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#ff0000',
         padding: '0px',
         position: 'relative',
         top: '50%',
