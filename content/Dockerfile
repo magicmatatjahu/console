@@ -1,6 +1,9 @@
 FROM node:9.11.2-alpine as ui-generator
 WORKDIR /app
 
+# Argument
+ARG react-components
+
 # Install global dependencies
 RUN apk update && apk upgrade && \
     apk add --no-cache curl
@@ -12,6 +15,9 @@ RUN npm install --no-optional
 # Copy sources
 COPY src /app/src
 COPY public /app/public
+
+# Copy local changes from react-components package
+RUN if [ "$react-components" = true ]; then cp react-components/index.js /app/node_modules/@kyma-project/react-components/lib/index.js ; fi
 
 # Download manifest
 RUN npm run prepare

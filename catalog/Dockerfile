@@ -1,6 +1,9 @@
 FROM node:9.11.2-alpine as ui-generator
 WORKDIR /app
 
+# Argument
+ARG react-components
+
 # Install app dependencies
 COPY package.json package-lock.json config-overrides.js /app/
 RUN npm install --no-optional
@@ -8,6 +11,9 @@ RUN npm install --no-optional
 # Copy sources
 COPY src /app/src
 COPY public /app/public
+
+# Copy local changes from react-components package
+RUN if [ "$react-components" = true ]; then cp react-components/index.js /app/node_modules/@kyma-project/react-components/lib/index.js ; fi
 
 # Set env variables 
 ENV PRODUCTION true
