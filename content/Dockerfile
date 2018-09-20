@@ -17,7 +17,7 @@ COPY src /app/src
 COPY public /app/public
 
 # Copy local changes from react-components package
-RUN if [ "$react-components" = true ]; then cp react-components/index.js /app/node_modules/@kyma-project/react-components/lib/index.js ; fi
+COPY react-components/index.js /app/node_modules/@kyma-project/react-components/lib/index.js
 
 # Download manifest
 RUN npm run prepare

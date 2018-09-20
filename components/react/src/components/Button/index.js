@@ -5,7 +5,7 @@ import { media } from '../../commons/style-utils';
 
 const Button = styled.button`
   background-color: ${props =>
-    (props.primary && '#0b74de') ||
+    (props.primary && '#EE4420') ||
     (props.secondary && '#fff') ||
     'transparent'};
   color: ${props =>

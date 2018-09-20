@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 
-# variables
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+INVERTED='\033[7m'
+NC='\033[0m' # No Color
+
+# arguments
 APP_NAME=
 CI=
 
+# variables
+REACT_COMPONENTS="react-components"
 CWD=$PWD
 
 # read arguments
@@ -34,12 +41,11 @@ npm run build
 cd $CWD
 
 # copy lib index.js for DOCKERFILE
-mkdir react-components
-cp ../components/react/lib/index.js ./react-components/index.js
+mkdir $REACT_COMPONENTS
+cp ../components/react/lib/index.js ./${REACT_COMPONENTS}/index.js
 
 # prepare image of app
-if [ CI == true ]; then
-    docker build -t ${APP_NAME} . --build-arg react-components=true
-else
+if [ -z "$CI" ] && [ -n "$APP_NAME" ]; then
     docker build -t ${APP_NAME} .
+    rm -rf $REACT_COMPONENTS
 fi

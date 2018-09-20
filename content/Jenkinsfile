@@ -77,7 +77,7 @@ podTemplate(label: label) {
                         // }
 
                         stage("prepare react-components") {
-                            execute("../scripts/docker-image.sh --ci=true")
+                            execute("../scripts/docker-image.sh --ci")
                         }
 
                         stage("build $application") {
