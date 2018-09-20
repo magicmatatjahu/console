@@ -35,8 +35,9 @@ if $OVERWRITE; then
 fi
 
 # push to remote
-git subtree split --prefix=components/react/docs -b gh-pages
-#git push -f origin gh-pages:gh-pages
+git add ./components/react/docs
+git commit -m "New version of gh-pages of @kyma-project/react-components"
+#git push origin HEAD:gh-pages
 gitResult=$?
 
 if [ ${gitResult} != 0 ]; then
