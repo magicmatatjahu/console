@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { NotificationMessage, Spinner } from '@kyma-project/react-components';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import { Spinner } from '@kyma-project/react-components';
 
 import ServiceInstances from '../ServiceInstances/ServiceInstances.container';
 import ServiceInstanceDetails from '../ServiceInstanceDetails/ServiceInstanceDetails.container';
@@ -14,7 +14,8 @@ class RouteWrapper extends React.Component {
   }
 
   render() {
-    const { serviceInstances } = this.props;
+    const { serviceInstances, modulesDisabled } = this.props;
+
     if (serviceInstances.loading) {
       return (
         <EmptyList>
@@ -23,24 +24,27 @@ class RouteWrapper extends React.Component {
       );
     }
 
-    if (serviceInstances.error) {
-      return (
-        <NotificationMessage
-          type="error"
-          title="Error"
-          message={serviceInstances.error && serviceInstances.error.message}
-        />
-      );
-    }
+    // if (serviceInstances.error) {
+    //   return (
+    //     <NotificationMessage
+    //       type="error"
+    //       title="Error"
+    //       message={serviceInstances.error && serviceInstances.error.message}
+    //     />
+    //   );
+    // }
+
+    const ServiceInstancesWithRouter = withRouter(ServiceInstances);
+    const ServiceInstanceDetailsWithRouter = withRouter(ServiceInstanceDetails);
 
     return (
       <Fragment>
         <Switch>
-          <Route exact path="/" component={ServiceInstances} />
+          <Route exact path="/" render={() => <ServiceInstancesWithRouter modulesDisabled={modulesDisabled} />} />
           <Route
             exact
             path="/details/:name"
-            component={ServiceInstanceDetails}
+            render={() => <ServiceInstanceDetailsWithRouter modulesDisabled={modulesDisabled} />}
           />
         </Switch>
       </Fragment>

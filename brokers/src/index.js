@@ -9,7 +9,8 @@ import './index.css';
 import builder from './commons/builder';
 
 import { createApolloClient } from './store';
-import App from './components/App/App.component';
+
+import BackendModulesProvider from './components/BackendModulesProvider/BackendModulesProvider.container';
 
 const client = createApolloClient();
 
@@ -18,7 +19,7 @@ const client = createApolloClient();
   ReactDOM.render(
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <App />
+        <BackendModulesProvider />
       </ApolloProvider>
     </BrowserRouter>,
     document.getElementById('root'),

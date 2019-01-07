@@ -75,7 +75,7 @@ class Tabs extends React.Component {
   render() {
     const children = []
       .concat(...this.props.children)
-      .filter(child => child !== null && child !== undefined);
+      .filter(child => child !== null && child !== undefined && typeof child !== "boolean");
 
     const props = this.getPropsFromActiveTab(children);
 

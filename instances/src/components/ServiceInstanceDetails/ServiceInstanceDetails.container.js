@@ -10,6 +10,7 @@ import { Spinner } from '@kyma-project/react-components';
 import { EmptyList } from './styled';
 
 import builder from '../../commons/builder';
+import { SERVICE_CATALOG_ADDONS, CONTENT } from '../../commons/graphql-errors';
 
 export default compose(
   graphql(SERVICE_INSTANCES_DETAILS, {
@@ -51,7 +52,14 @@ export default compose(
     loading: false,
   };
 
+  if (!serviceInstance.serviceInstance) {
+    return <EmptyList>Service Instance doesn't exist</EmptyList>;
+  }
+
+  const isContentModuleDisabled = otherProps.modulesDisabled[CONTENT];
+  const isServiceCatalogAddonsModuleDisabled = otherProps.modulesDisabled[SERVICE_CATALOG_ADDONS];
+
   return (
-    <ServiceInstanceDetails serviceInstance={serviceInstance} {...otherProps} />
+    <ServiceInstanceDetails serviceInstance={serviceInstance} {...otherProps} isContentModuleDisabled={isContentModuleDisabled} isServiceCatalogAddonsModuleDisabled={isServiceCatalogAddonsModuleDisabled} />
   );
 });

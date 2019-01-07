@@ -83,6 +83,7 @@ class ServiceInstanceBindings extends React.Component {
       deleteBindingUsage,
       serviceInstance,
       callback,
+      isServiceCatalogAddonsModuleDisabled,
     } = this.props;
 
     const bindable = serviceInstance.bindable;
@@ -355,31 +356,33 @@ class ServiceInstanceBindings extends React.Component {
           defaultActiveTabIndex={this.props.defaultActiveTabIndex}
           callback={callback}
         >
-          <Tab
-            title={
-              <Tooltip
-                content="ServiceBindingUsage is a Kyma custom resource that allows the ServiceBindingUsage controller to inject Secrets into a given application."
-                minWidth="210px"
-                showTooltipTimeout={750}
-                key="service-binding-usage-tooltip"
-              >
-                Bound Applications
-              </Tooltip>
-            }
-            id={'service-binding-usage-tab'}
-            addHeaderContent={boundApplicationContent}
-            aditionalStatus={this.status(
-              serviceBindingsUsageTable.data,
-              'service-binding-usage-tab',
-            )}
-          >
-            <Table
-              columns={serviceBindingsUsageTable.columns}
-              data={serviceBindingsUsageTable.data}
-              notFoundMessage="No applications found"
-              margin="-21px -20px -20px"
-            />
-          </Tab>
+          {!isServiceCatalogAddonsModuleDisabled && (
+            <Tab
+              title={
+                <Tooltip
+                  content="ServiceBindingUsage is a Kyma custom resource that allows the ServiceBindingUsage controller to inject Secrets into a given application."
+                  minWidth="210px"
+                  showTooltipTimeout={750}
+                  key="service-binding-usage-tooltip"
+                >
+                  Bound Applications
+                </Tooltip>
+              }
+              id={'service-binding-usage-tab'}
+              addHeaderContent={boundApplicationContent}
+              aditionalStatus={this.status(
+                serviceBindingsUsageTable.data,
+                'service-binding-usage-tab',
+              )}
+            >
+              <Table
+                columns={serviceBindingsUsageTable.columns}
+                data={serviceBindingsUsageTable.data}
+                notFoundMessage="No applications found"
+                margin="-21px -20px -20px"
+              />
+            </Tab>
+          )}
           <Tab
             title={
               <Tooltip

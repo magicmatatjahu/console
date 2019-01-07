@@ -8,10 +8,6 @@ class Builder {
 
   init() {
     return new Promise((resolve, reject) => {
-      if (!process.env.REACT_APP_ENV === 'production') {
-        resolve();
-        return;
-      }
       const timeout = setTimeout(resolve, 1000);
       LuigiClient.addInitListener(e => {
         this.currentEnvironmentId = e.environmentId;

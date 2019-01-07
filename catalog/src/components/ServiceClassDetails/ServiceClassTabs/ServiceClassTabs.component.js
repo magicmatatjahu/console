@@ -15,7 +15,7 @@ import {
 
 import { asyncApiConfig, asyncApiTheme } from '../../../commons/asyncapi';
 
-const ServiceClassTabs = ({ serviceClass, serviceClassLoading }) => {
+const ServiceClassTabs = ({ serviceClass }) => {
   const content = serviceClass.content && serviceClass.content;
   const apiSpec = serviceClass.apiSpec && serviceClass.apiSpec;
   const asyncApiSpec = serviceClass.asyncApiSpec && serviceClass.asyncApiSpec;
@@ -28,11 +28,9 @@ const ServiceClassTabs = ({ serviceClass, serviceClassLoading }) => {
     let documentsByType = [],
       documentsTypes = [];
 
-    if (!serviceClassLoading) {
-      if (content && Object.keys(content).length) {
-        documentsByType = sortDocumentsByType(content);
-        documentsTypes = Object.keys(documentsByType);
-      }
+    if (content && Object.keys(content).length) {
+      documentsByType = sortDocumentsByType(content);
+      documentsTypes = Object.keys(documentsByType);
     }
 
     const validatDocumentsByType = type => {
@@ -94,7 +92,6 @@ const ServiceClassTabs = ({ serviceClass, serviceClassLoading }) => {
 
 ServiceClassTabs.propTypes = {
   serviceClass: PropTypes.object.isRequired,
-  serviceClassLoading: PropTypes.bool.isRequired,
 };
 
 export default ServiceClassTabs;

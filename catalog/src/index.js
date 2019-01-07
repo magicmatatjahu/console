@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './index.css';
 
-import App from './components/App/App.container';
+import BackendModulesProvider from './components/BackendModulesProvider/BackendModulesProvider.container';
 
 import builder from './commons/builder';
 
@@ -18,7 +18,7 @@ const client = createApolloClient();
   ReactDOM.render(
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <App />
+        <BackendModulesProvider />
       </ApolloProvider>
     </BrowserRouter>,
     document.getElementById('root'),

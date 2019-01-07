@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Spinner } from '@kyma-project/react-components';
+import { Button } from '@kyma-project/react-components';
 
 import ServiceClassToolbar from './ServiceClassToolbar/ServiceClassToolbar.component';
 import ServiceClassInfo from './ServiceClassInfo/ServiceClassInfo.component';
@@ -13,26 +13,24 @@ import {
   ServiceClassDetailsWrapper,
   LeftSideWrapper,
   CenterSideWrapper,
-  EmptyList,
 } from './styled';
 
 import { getResourceDisplayName, getDescription } from '../../commons/helpers';
+import { CONTENT } from '../../commons/graphql-errors';
 
 class ServiceClassDetails extends React.Component {
   static propTypes = {
     serviceClass: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     createServiceInstance: PropTypes.func.isRequired,
+    modulesDisabled: PropTypes.object.isRequired,
   };
 
   render() {
-    const { history, createServiceInstance } = this.props;
-    const serviceClass =
-      this.props.serviceClass.clusterServiceClass ||
-      this.props.serviceClass.serviceClass;
+    const { serviceClass, history, createServiceInstance, modulesDisabled } = this.props;
+    const isContentModuleDisabled = modulesDisabled[CONTENT];
 
     const serviceClassDisplayName = getResourceDisplayName(serviceClass);
-
     const serviceClassDescription = getDescription(serviceClass);
 
     const modalOpeningComponent = (
@@ -40,19 +38,6 @@ class ServiceClassDetails extends React.Component {
         Add to your Namespace
       </Button>
     );
-
-    if (this.props.serviceClass.loading) {
-      return (
-        <EmptyList>
-          <Spinner size="40px" color="#32363a" />
-        </EmptyList>
-      );
-    }
-    if (!this.props.serviceClass.loading && !serviceClass) {
-      return (
-        <EmptyList>Service Class doesn't exist in this namespace</EmptyList>
-      );
-    }
 
     return (
       <div>
@@ -92,10 +77,11 @@ class ServiceClassDetails extends React.Component {
                     description={serviceClassDescription}
                   />
                 )}
-                <ServiceClassTabs
-                  serviceClass={serviceClass}
-                  serviceClassLoading={this.props.serviceClass.loading}
-                />
+                {!isContentModuleDisabled && (
+                  <ServiceClassTabs
+                    serviceClass={serviceClass}
+                  />
+                )}
               </CenterSideWrapper>
             </ServiceClassDetailsWrapper>
           </div>

@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
   NotificationMessage,
-  Spinner,
   ThemeWrapper,
 } from '@kyma-project/react-components';
 
@@ -11,7 +10,7 @@ import ServiceInstanceInfo from './ServiceInstanceInfo/ServiceInstanceInfo.compo
 import ServiceInstanceBindings from './ServiceInstanceBindings/ServiceInstanceBindings.container';
 import ServiceInstanceTabs from './ServiceInstanceTabs/ServiceInstanceTabs.component';
 
-import { ServiceInstanceWrapper, EmptyList } from './styled';
+import { ServiceInstanceWrapper } from './styled';
 import { transformDataScalarStringsToObjects } from '../../store/transformers';
 
 class ServiceInstanceDetails extends React.Component {
@@ -21,25 +20,13 @@ class ServiceInstanceDetails extends React.Component {
     this.setState({ ...data });
   };
   render() {
-    const { serviceInstance = {}, deleteServiceInstance, history } = this.props;
-
-    if (serviceInstance && serviceInstance.loading) {
-      return (
-        <EmptyList>
-          <Spinner size="40px" color="#32363a" />
-        </EmptyList>
-      );
-    }
+    const { serviceInstance = {}, deleteServiceInstance, history, isContentModuleDisabled, isServiceCatalogAddonsModuleDisabled } = this.props;
 
     const instance =
       serviceInstance &&
       transformDataScalarStringsToObjects(serviceInstance.serviceInstance);
     const serviceClass =
       instance && (instance.serviceClass || instance.clusterServiceClass);
-
-    if (!serviceInstance.loading && !instance) {
-      return <EmptyList>Service Instance doesn't exist</EmptyList>;
-    }
 
     return (
       <ThemeWrapper>
@@ -61,8 +48,9 @@ class ServiceInstanceDetails extends React.Component {
             defaultActiveTabIndex={this.state.defaultActiveTabIndex}
             callback={this.callback}
             serviceInstance={instance}
+            isServiceCatalogAddonsModuleDisabled={isServiceCatalogAddonsModuleDisabled}
           />
-          {serviceClass && <ServiceInstanceTabs serviceClass={serviceClass} />}
+          {!isContentModuleDisabled && serviceClass ? <ServiceInstanceTabs serviceClass={serviceClass} /> : null}
         </ServiceInstanceWrapper>
       </ThemeWrapper>
     );

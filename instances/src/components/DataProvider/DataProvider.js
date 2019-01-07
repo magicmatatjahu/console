@@ -91,6 +91,7 @@ export default compose(
     name: 'serviceInstances',
     options: () => ({
       fetchPolicy: 'network-only',
+      errorPolicy: 'all',
       variables: {
         environment: builder.getCurrentEnvironmentId(),
       },

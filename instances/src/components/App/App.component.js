@@ -30,6 +30,7 @@ class App extends React.Component {
   };
 
   render() {
+    const modulesDisabled = this.props.modulesDisabled;
     const notificationQuery = this.props.notification;
     const notification = notificationQuery && notificationQuery.notification;
     if (notification) {
@@ -40,7 +41,7 @@ class App extends React.Component {
       <div>
         <Notification {...notification} onClick={this.clearNotification} />
         <div className="ph3 pv1 background-gray">
-          <DataProvider>{props => <RouteWrapper {...props} />}</DataProvider>
+          <DataProvider>{props => <RouteWrapper {...props} modulesDisabled={modulesDisabled} />}</DataProvider>
         </div>
       </div>
     );
