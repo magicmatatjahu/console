@@ -48,6 +48,8 @@ class ServiceInstanceBindings extends React.Component {
   };
 
   relatedBindingUsage = bindingName => {
+    if (!this.props.serviceInstance.serviceBindingUsages) return null;
+    
     return this.props.serviceInstance.serviceBindingUsages.filter(item => {
       if (!item.serviceBinding) {
         return null;

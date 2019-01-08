@@ -12,6 +12,7 @@ import {
   handleServiceBindingEvent,
   handleServiceBindingUsageEvent,
 } from '../../store/ServiceInstances/events';
+import { SERVICE_CATALOG_ADDONS } from '../../commons/graphql-errors';
 import builder from '../../commons/builder';
 
 const DataProvider = ({ serviceInstances, children, modulesDisabled }) => {
@@ -56,8 +57,7 @@ const DataProvider = ({ serviceInstances, children, modulesDisabled }) => {
       },
     });
 
-    // TODO: Import `servicecatalogaddons` const
-    if (modulesDisabled && modulesDisabled.servicecatalogaddons) {
+    if (modulesDisabled && modulesDisabled[SERVICE_CATALOG_ADDONS]) {
       return;
     }
 

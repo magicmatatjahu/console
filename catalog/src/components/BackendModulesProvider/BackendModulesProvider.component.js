@@ -13,7 +13,7 @@ const BackendModulesProvider = ({ backendModules }) => {
     };
 
     function isModuleDisabled(modules, name) {
-        return !Boolean(modules.filter(mod => mod.name === name).length);
+        return modules ? !Boolean(modules.filter(mod => mod.name === name).length) : false; 
     }
 
     if (backendModules && backendModules.loading) return null;
