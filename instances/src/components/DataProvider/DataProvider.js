@@ -14,7 +14,7 @@ import {
 } from '../../store/ServiceInstances/events';
 import builder from '../../commons/builder';
 
-const DataProvider = ({ serviceInstances, children }) => {
+const DataProvider = ({ serviceInstances, children, modulesDisabled }) => {
   const subscribeToEvents = () => {
     if (!serviceInstances) {
       return;
@@ -55,6 +55,11 @@ const DataProvider = ({ serviceInstances, children }) => {
         );
       },
     });
+
+    // TODO: Import `servicecatalogaddons` const
+    if (modulesDisabled && modulesDisabled.servicecatalogaddons) {
+      return;
+    }
 
     serviceInstances.subscribeToMore({
       document: SERVICE_BINDING_USAGE_EVENT_SUBSCRIPTION,

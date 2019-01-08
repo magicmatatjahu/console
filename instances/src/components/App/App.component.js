@@ -41,7 +41,11 @@ class App extends React.Component {
       <div>
         <Notification {...notification} onClick={this.clearNotification} />
         <div className="ph3 pv1 background-gray">
-          <DataProvider>{props => <RouteWrapper {...props} modulesDisabled={modulesDisabled} />}</DataProvider>
+          <DataProvider modulesDisabled={modulesDisabled}>
+            {props => (
+              <RouteWrapper {...props} modulesDisabled={modulesDisabled} />
+            )}
+          </DataProvider>
         </div>
       </div>
     );
