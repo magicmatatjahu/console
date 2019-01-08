@@ -156,6 +156,7 @@ function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
         name: 'Bound Applications',
         size: 0.2,
         accesor: el => {
+          if (!el.serviceBindingUsages) return null;
           const bindingUsages = displayBindingsUsages(el.serviceBindingUsages);
           return (
             <TextOverflowWrapper>
