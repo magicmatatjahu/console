@@ -28,7 +28,9 @@ class Table extends React.Component {
   extractHeaderData(columns) {
     let columnsData = [];
     columns.map(column => {
-      columnsData.push({ size: column.size, name: column.name });
+      console.log(column.visibility)
+      columnsData.push({ size: column.size, name: column.name, visibility: column.visibility === undefined ? true : column.visibility });
+      return column;
     });
 
     return columnsData;

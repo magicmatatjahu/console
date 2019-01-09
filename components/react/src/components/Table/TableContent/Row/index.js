@@ -18,11 +18,11 @@ class TableRow extends React.Component {
     const { columnsData, element } = this.props;
 
     const renderRow = element
-      ? columnsData.map((column, index) => (
+      ? columnsData.map((column, index) => (column.visibility === undefined || column.visibility) ? (
           <Grid.Unit key={index} size={column.size}>
             <TableCell>{column.accesor(element)}</TableCell>
           </Grid.Unit>
-        ))
+        ): null)
       : null;
 
     return <Grid>{renderRow}</Grid>;

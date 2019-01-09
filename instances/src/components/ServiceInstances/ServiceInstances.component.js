@@ -40,6 +40,7 @@ class ServiceInstances extends React.Component {
       allFilters = {},
       activeFilters = {},
       allItems = {},
+      modulesDisabled,
     } = this.props;
 
     if (allItems.loading || filteredItems.loading) {
@@ -85,6 +86,7 @@ class ServiceInstances extends React.Component {
           <ServiceInstancesTable
             data={items}
             deleteServiceInstance={deleteServiceInstance}
+            modulesDisabled={modulesDisabled}
           />
         </ServiceInstancesWrapper>
       </ThemeWrapper>

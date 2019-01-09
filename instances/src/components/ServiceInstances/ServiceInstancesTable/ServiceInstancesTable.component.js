@@ -22,8 +22,9 @@ import {
 } from './styled';
 
 import { getResourceDisplayName, statusColor } from '../../../commons/helpers';
+import { SERVICE_CATALOG_ADDONS } from '../../../commons/graphql-errors';
 
-function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
+function ServiceInstancesTable({ data, deleteServiceInstance, loading, modulesDisabled }) {
   const handleDelete = async element => {
     await deleteServiceInstance(element.name);
   };
@@ -71,12 +72,27 @@ function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
     </AddServiceInstanceRedirectButton>
   );
 
+  const tableSize = !modulesDisabled[SERVICE_CATALOG_ADDONS] ? {
+    'Name': 0.2,
+    'Service Class': 0.15,
+    'Plan': 0.15,
+    'Bound Applications': 0.2,
+    'Status': 0.2,
+    '': 0.1,
+  } : {
+    'Name': 0.25,
+    'Service Class': 0.2,
+    'Plan': 0.2,
+    'Status': 0.25,
+    '': 0.1,
+  }
+
   const table = {
     title: 'Manage Service Instances',
     columns: [
       {
         name: 'Name',
-        size: 0.2,
+        size: tableSize['Name'],
         accesor: el => (
           <TextOverflowWrapper>
             <LinkButton data-e2e-id="instance-name">
@@ -93,7 +109,7 @@ function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
       },
       {
         name: 'Service Class',
-        size: 0.15,
+        size: tableSize['Service Class'],
         accesor: el => {
           const elClass = el.clusterServiceClass || el.serviceClass;
           if (!elClass || !elClass.name) {
@@ -115,7 +131,7 @@ function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
       },
       {
         name: 'Plan',
-        size: 0.15,
+        size: tableSize['Plan'],
         accesor: el => {
           const plan = el.clusterServicePlan || el.servicePlan;
           if (!plan) {
@@ -154,9 +170,11 @@ function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
       },
       {
         name: 'Bound Applications',
-        size: 0.2,
+        size: tableSize['Bound Applications'],
+        visibility: !modulesDisabled[SERVICE_CATALOG_ADDONS],
         accesor: el => {
-          if (!el.serviceBindingUsages) return null;
+          if (!el.serviceBindingUsages) return null
+
           const bindingUsages = displayBindingsUsages(el.serviceBindingUsages);
           return (
             <TextOverflowWrapper>
@@ -167,7 +185,7 @@ function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
       },
       {
         name: 'Status',
-        size: 0.2,
+        size: tableSize['Status'],
         accesor: el => {
           if (!el.status) {
             return '-';
@@ -208,7 +226,7 @@ function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
       },
       {
         name: '',
-        size: 0.1,
+        size: tableSize[''],
         accesor: el => (
           <ConfirmationModal
             title="Warning"

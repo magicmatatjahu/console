@@ -41,7 +41,7 @@ class TableHeader extends React.Component {
         <TableHeaderColumnsWrapper data-e2e-id={'instances-header'}>
           <Grid>
             {columns &&
-              columns.map(column => (
+              columns.map(column => column.visibility && (
                 <Grid.Unit key={column.name} size={column.size}>
                   <TableHeaderColumnName>{column.name}</TableHeaderColumnName>
                 </Grid.Unit>
