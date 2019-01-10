@@ -16,7 +16,6 @@ export default compose(
     name: 'serviceClasses',
     options: () => ({
       fetchPolicy: 'network-only',
-      errorPolicy: 'all',
       variables: {
         environment: builder.getCurrentEnvironmentId(),
       },

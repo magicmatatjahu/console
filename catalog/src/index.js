@@ -6,7 +6,9 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './index.css';
 
+import { GraphQLErrorBoundary } from '@kyma-project/react-components';
 import BackendModulesProvider from './components/BackendModulesProvider/BackendModulesProvider.container';
+import App from './components/App/App.container';
 
 import builder from './commons/builder';
 
@@ -18,7 +20,16 @@ const client = createApolloClient();
   ReactDOM.render(
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <BackendModulesProvider />
+        <BackendModulesProvider>
+          {modulesDisabled => {
+            console.log(modulesDisabled)
+            return (
+              <GraphQLErrorBoundary>
+                <App modulesDisabled={modulesDisabled} />
+              </GraphQLErrorBoundary>
+            )
+          }}
+        </BackendModulesProvider>
       </ApolloProvider>
     </BrowserRouter>,
     document.getElementById('root'),

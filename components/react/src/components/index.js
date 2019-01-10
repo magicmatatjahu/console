@@ -33,6 +33,9 @@ import ThemeWrapper from './ThemeWrapper';
 import Toolbar from './Toolbar';
 import Tooltip from './Tooltip';
 
+import BackendModulesProvider from './BackendModulesProvider';
+import { GraphQLErrorHandler, GraphQLErrorBoundary } from './GraphQLError';
+
 module.exports = {
   Button,
   Dropdown,
@@ -65,4 +68,7 @@ module.exports = {
   ThemeWrapper,
   Toolbar,
   Tooltip,
+  BackendModulesProvider,
+  GraphQLErrorHandler,
+  GraphQLErrorBoundary,
 };

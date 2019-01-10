@@ -1,8 +1,7 @@
 import { graphql, compose } from 'react-apollo';
+import { BackendModulesProvider } from '@kyma-project/react-components';
 
 import { BACKEND_MODULES_QUERY } from './queries';
-
-import BackendModulesProvider from './BackendModulesProvider.component';
 
 export default compose(
   graphql(BACKEND_MODULES_QUERY, {
