@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button as Btn } from 'fundamental-react';
 
 import { Button, Spinner } from '@kyma-project/react-components';
 
@@ -36,9 +37,9 @@ class ServiceClassDetails extends React.Component {
     const serviceClassDescription = getDescription(serviceClass);
 
     const modalOpeningComponent = (
-      <Button normal primary first last microFullWidth data-e2e-id="add-to-env">
+      <Btn normal primary first last microFullWidth data-e2e-id="add-to-env">
         Add to your Namespace
-      </Button>
+      </Btn>
     );
 
     if (this.props.serviceClass.loading) {

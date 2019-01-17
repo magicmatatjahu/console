@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'fiori-fundamentals/dist/fiori-fundamentals.min.css';
 
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter } from 'react-router-dom';

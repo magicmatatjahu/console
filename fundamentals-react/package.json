@@ -14,7 +14,7 @@
     "build-js": "node scripts/build.js",
     "build:lint:fix": "eslint --fix 'src/**' --ext .js,.jsx --env browser,node",
     "build:lint": "eslint 'src/**' --ext .js,.jsx --env browser,node",
-    "build": "rm -rf dist && NODE_ENV=production babel src --out-dir dist --ignore \"src/**/*.spec.js\",\"src/**/*.test.js\",\"src/**/*.Component.js\",\"src/_playground/*\"",
+    "build": "rm -rf dist && NODE_ENV=production babel src --watch --out-dir dist --ignore \"src/**/*.spec.js\",\"src/**/*.test.js\",\"src/**/*.Component.js\",\"src/_playground/*\"",
     "deploy": "gh-pages -d build",
     "lint:fix": "npm run build:lint:fix",
     "lint:pre-commit": "printf \"running pre-commit lint...\"  && npm run lint && printf \"done!\n\"",
@@ -23,6 +23,7 @@
     "release": "./ci-scripts/publish_release.sh",
     "start-js": "node scripts/start.js",
     "start": "node scripts/start.js",
+    "start:kyma": "npm run build",
     "std-version:release": "standard-version -m \"chore(release): version %s\"",
     "std-version": "standard-version -m \"chore(release): version %s build ${TRAVIS_BUILD_NUMBER} [ci skip]\"",
     "test:coverage": "jest --coverage",
@@ -37,6 +38,7 @@
     "react-router-dom": "^4.3.1",
     "react-syntax-highlighter": "^9.0.1"
   },
+  "main": "./dist/index.js",
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "7.1.0",
