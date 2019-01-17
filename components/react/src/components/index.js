@@ -33,6 +33,8 @@ import ThemeWrapper from './ThemeWrapper';
 import Toolbar from './Toolbar';
 import Tooltip from './Tooltip';
 
+import 'fiori-fundamentals/dist/fiori-fundamentals.min.css';
+
 module.exports = {
   Button,
   Dropdown,
