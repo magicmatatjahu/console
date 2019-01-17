@@ -1,0 +1,200 @@
+$fd-icons-path: '../../node_modules/fiori-fundamentals/scss/icons/';
+$fd-fonts-path: '../../node_modules/fiori-fundamentals/dist/fonts/';
+@import '../../node_modules/fiori-fundamentals/scss/all.scss';
+
+.App {
+    background-color: white;
+}
+
+.fd-counter--notification {
+    position: relative;
+}
+
+.fd-tile__content {
+    .fd-button--grouped {
+        margin-right: 0;
+    }
+
+    .fd-input-group {
+        [class*='fd-button'] {
+            margin-right: 0;
+        }
+    }
+
+    .fd-doc__margin--popover .fd-popover,
+    .fd-doc__margin--datePicker .fd-date-picker,
+    .fd-doc__margin--token .fd-token,
+    .fd-doc__margin--buttonGroup .fd-button-group,
+    .fd-doc__margin--button button,
+    .fd-doc__margin--panel .fd-token,
+    .fd-doc__margin--panel .fd-button,
+    .fd-doc__margin--dropdown .fd-dropdown,
+    .fd-doc__margin--icon span,
+    .fd-doc__margin--identifier span,
+    .fd-doc__margin--image span,
+    .fd-doc__margin--statusIndicator span {
+        margin-right: 20px;
+    }
+}
+
+.fd-tabs__content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.docs-component {
+    margin-bottom: -28px;
+    border-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-bottom: 8px;
+    border: 1px solid #ccc;
+}
+
+.fd-side-nav.fd-side-nav--icons {
+    max-width: 65px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    overflow: hidden;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo {
+    font-size: 1.25rem;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    > a {
+        color: inherit;
+    }
+}
+
+.logo-subtitle {
+    font-size: 0.75rem;
+}
+
+.sidebar {
+    color: #21262c;
+    min-width: 16rem;
+    background-color: #f1f3f6;
+}
+
+.nav {
+    list-style: none;
+    border-top: 2px solid #dbe7f3;
+    height: 90%;
+    overflow: auto;
+}
+
+.nav-item {
+    display: block;
+    color: #21262c;
+    font-size: 0.875rem;
+    position: relative;
+    padding: 13px 40px;
+}
+
+.side-nav__headers {
+    color: #424e5a;
+    padding: 15px 20px;
+    display: block;
+}
+
+.nav-item--selected {
+    border-left: 6px solid #2fd0c8;
+}
+
+.nav-item:hover,
+.nav-item--active {
+    color: #424e5a;
+    border-left: 6px solid #2fd0c8;
+    padding-left: 34px;
+}
+
+.content {
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding-bottom: 2rem;
+    background-color: white;
+}
+
+.content-margin {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.property-header {
+    text-align: left;
+    padding-right: 15px;
+}
+
+.header {
+    margin: 12px 0;
+}
+
+.fd-side-nav {
+    max-width: 250px;
+}
+
+.row {
+    display: flex;
+}
+
+.col {
+    padding-right: 15px;
+    padding-left: 15px;
+    -webkit-box-flex: 1;
+    flex: 1;
+}
+
+.form-group {
+    max-height: 500px;
+    overflow-y: scroll;
+    display: block;
+    padding: 20px;
+    border: 1px #eee solid;
+}
+
+.schema {
+    display: block;
+    padding: 20px;
+    border: 1px #eee solid;
+}
+
+.form-group-sublevel {
+    display: block;
+    padding: 20px;
+    border: 1px #eee solid;
+}
+
+.tn-form__label {
+    padding-left: 25px;
+}
+
+.fd-calendar__content {
+    background: white;
+}
+
+.fd-date-picker {
+    display: inline-block;
+}
+
+.fd-calendar {
+    display: inline-block;
+}
+
+.demo-icon-wrapper {
+    padding: 10px;
+    float: left;
+    width: 16%;
+    text-align: center;
+    height: 120px;
+}
