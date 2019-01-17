@@ -3,7 +3,7 @@
     "precommit": "lint-staged",
     "bootstrap": "lerna bootstrap && npm run build:components && npm run git-ignore-config && sudo npm run append-host",
     "clean": "lerna clean",
-    "start": "lerna exec --ignore ui-tests --ignore @kyma-project/react-components --parallel -- npm run start:kyma",
+    "start": "lerna exec --ignore ui-tests --parallel -- npm run start:kyma",
     "start:api": "lerna exec --ignore ui-tests --ignore @kyma-project/react-components --parallel -- npm run start:kyma:api",
     "build:components": "npm run build:components:react",
     "build:components:react": "cd components/react && npm run build",

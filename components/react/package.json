@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "npm run styleguide",
+    "start:kyma": "npm run build:watch",
     "build": "webpack --config webpack.config.prod.js",
     "build:watch": "webpack -w --config webpack.config.prod.js",
     "styleguide": "styleguidist server",
