@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const Table = props => {
-    const { headers, tableData, className, ...rest } = props;
+export const Table = ({ headers, tableData, className, ...rest }) => {
     return (
         <table className={`fd-table${className ? ' ' + className : ''}`} {...rest}>
             <thead>
@@ -26,6 +25,7 @@ export const Table = props => {
         </table>
     );
 };
+
 Table.propTypes = {
     tableData: PropTypes.arrayOf(
         PropTypes.shape({
@@ -33,5 +33,5 @@ Table.propTypes = {
         }).isRequired
     ).isRequired,
     className: PropTypes.string,
-    headers: PropTypes.array
+    headers: PropTypes.array,
 };

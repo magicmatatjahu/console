@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Icon, Tooltip } from '@kyma-project/react-components';
+import { Label, Icon, Tooltip } from '@kyma-project/react-components';
 
 import {
   CardWrapper,
@@ -15,7 +15,6 @@ import {
   CardDescription,
   CardFooter,
   CardLabelWrapper,
-  CardLabelWithTooltip,
 } from './styled';
 
 import { isStringValueEqualToTrue } from '../../../commons/helpers';
@@ -65,11 +64,11 @@ const Card = ({ title, company, description, imageUrl, labels, onClick }) => {
                 )) ? (
                   <CardLabelWrapper key={label}>
                     <Tooltip content={labelsDescription[label]}>
-                      <CardLabelWithTooltip>
+                      <Label cursorType="help">
                         {label === 'connected-app'
                           ? labels['connected-app']
                           : label}
-                      </CardLabelWithTooltip>
+                      </Label>
                     </Tooltip>
                   </CardLabelWrapper>
                 ) : null,

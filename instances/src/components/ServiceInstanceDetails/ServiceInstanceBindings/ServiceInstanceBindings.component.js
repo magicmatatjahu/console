@@ -24,6 +24,7 @@ import {
   ParametersModalButton,
   ActionsWrapper,
 } from './styled';
+
 import { TextOverflowWrapper } from '../../ServiceInstances/ServiceInstancesTable/styled';
 
 class ServiceInstanceBindings extends React.Component {
@@ -75,40 +76,18 @@ class ServiceInstanceBindings extends React.Component {
     return <StatusIndicator data={data} key={id} />;
   };
 
-  render() {
-    const {
-      createBinding,
-      createBindingUsage,
-      deleteBinding,
-      deleteBindingUsage,
-      serviceInstance,
-      callback,
-    } = this.props;
-
-    const bindable = serviceInstance.bindable;
-
-    if (!bindable) {
-      return null;
-    }
-
-    const serviceBindingsUsageTable = {
-      title: 'Bindings',
-      columns: [
-        {
-          name: 'Service Binding Usage',
-          size: 0.2,
-          accesor: el => (
+  createBindingUsagesTableData = (data) => {
+    return data.map(bindingUsage => {
+      return {
+        rowData: [
+          (
             <TextOverflowWrapper>
-              <span title={el.name}>{el.name}</span>
+              <span title={bindingUsage.name}>{bindingUsage.name}</span>
             </TextOverflowWrapper>
           ),
-        },
-        {
-          name: 'Bound Applications',
-          size: 0.2,
-          accesor: el => {
-            const text = `${el.usedBy.name} (${this.capitalize(
-              el.usedBy.kind,
+          (_ => {
+            const text = `${bindingUsage.usedBy.name} (${this.capitalize(
+              bindingUsage.usedBy.kind,
             )})`;
 
             return (
@@ -116,29 +95,22 @@ class ServiceInstanceBindings extends React.Component {
                 <span title={text}>{text}</span>
               </TextOverflowWrapper>
             );
-          },
-        },
-        {
-          name: 'Service Binding',
-          size: 0.2,
-          accesor: el =>
-            el.serviceBinding && (
+          })(),
+          (_ => {
+            return bindingUsage.serviceBinding && (
               <TextOverflowWrapper>
-                <span title={el.serviceBinding.name}>
-                  {el.serviceBinding.name}
+                <span title={bindingUsage.serviceBinding.name}>
+                  {bindingUsage.serviceBinding.name}
                 </span>
               </TextOverflowWrapper>
-            ),
-        },
-        {
-          name: 'Secret',
-          size: 0.2,
-          accesor: el => {
+            )
+          })(),
+          (_ => {
             const prefix =
-              el.parameters &&
-              el.parameters.envPrefix &&
-              el.parameters.envPrefix.name;
-            const secret = el.serviceBinding && el.serviceBinding.secret;
+              bindingUsage.parameters &&
+              bindingUsage.parameters.envPrefix &&
+              bindingUsage.parameters.envPrefix.name;
+            const secret = bindingUsage.serviceBinding && bindingUsage.serviceBinding.secret;
 
             return secret && Object.keys(secret).length ? (
               <TextOverflowWrapper>
@@ -160,165 +132,62 @@ class ServiceInstanceBindings extends React.Component {
             ) : (
               '-'
             );
-          },
-        },
-        {
-          name: 'Status',
-          size: 0.1,
-          accesor: el => (
+          })(),
+          (
             <Tooltip
               wrapperStyles="max-width: 100%;"
-              type={this.getStatusType(el.status.type)}
-              content={el.status.message}
+              type={this.getStatusType(bindingUsage.status.type)}
+              content={bindingUsage.status.message}
               minWidth="250px"
             >
               <TextOverflowWrapper>
                 <span
                   style={{
-                    color: statusColor(el.status.type),
-                    cursor: `${el.status.message ? 'help' : 'default'}`,
+                    color: statusColor(bindingUsage.status.type),
+                    cursor: `${bindingUsage.status.message ? 'help' : 'default'}`,
                   }}
-                  title={el.status.type}
+                  title={bindingUsage.status.type}
                 >
-                  {el.status.type}
+                  {bindingUsage.status.type}
                 </span>
               </TextOverflowWrapper>
             </Tooltip>
           ),
-        },
-        {
-          name: '',
-          size: 0.1,
-          accesor: el => (
+          (
             <ActionsWrapper>
               <DeleteBindingModal
-                deleteBindingUsage={deleteBindingUsage}
-                bindingUsageName={el.name}
-                bindingUsageCount={this.countBindingUsage(el)}
-                id={`service-binding-delete-${el.name}`}
+                deleteBindingUsage={this.props.deleteBindingUsage}
+                bindingUsageName={bindingUsage.name}
+                bindingUsageCount={this.countBindingUsage(bindingUsage)}
+                id={`service-binding-delete-${bindingUsage.name}`}
               />
             </ActionsWrapper>
-          ),
-        },
-      ],
-      data: serviceInstance.serviceBindingUsages,
-    };
+          )
+        ]
+      }
+    })
+  }
 
-    const serviceBindingsTable = {
-      title: 'Bindings',
-      columns: [
-        {
-          name: 'Service Binding',
-          size: 0.3,
-          accesor: el => (
-            <TextOverflowWrapper>
-              <span title={el.name}>{el.name}</span>
-            </TextOverflowWrapper>
-          ),
-        },
-        {
-          name: 'Secret',
-          size: 0.3,
-          accesor: el => {
-            const secret = el && el.secret;
-            return secret && Object.keys(secret).length ? (
-              <TextOverflowWrapper>
-                <SecretDataModal
-                  title={
-                    <Fragment>
-                      Secret <Bold>{secret.name}</Bold>
-                    </Fragment>
-                  }
-                  data={secret.data}
-                  modalOpeningComponent={
-                    <SecretModalButton title={secret.name}>
-                      {secret.name}
-                    </SecretModalButton>
-                  }
-                />
-              </TextOverflowWrapper>
-            ) : (
-              '-'
-            );
-          },
-        },
-        {
-          name: 'Status',
-          size: 0.25,
-          accesor: el => (
-            <Tooltip
-              type={this.getStatusType(el.status.type)}
-              content={el.status.message}
-              minWidth="250px"
-              wrapperStyles="max-width: 100%;"
-            >
-              <TextOverflowWrapper>
-                <span
-                  style={{
-                    color: statusColor(el.status.type),
-                    cursor: `${el.status.message ? 'help' : 'default'}`,
-                  }}
-                  title={el.status.type}
-                >
-                  {el.status.type}
-                </span>
-              </TextOverflowWrapper>
-            </Tooltip>
-          ),
-        },
-        {
-          name: '',
-          size: 0.15,
-          halign: 'right',
-          accesor: el => {
-            const parameters = el && el.parameters;
-            return (
-              <ActionsWrapper>
-                {parameters &&
-                  Object.keys(parameters).length > 0 && (
-                    <Tooltip content={'Parameters'} minWidth="90px">
-                      <span
-                        style={{
-                          cursor: 'help',
-                        }}
-                      >
-                        <ParametersDataModal
-                          title={
-                            <Fragment>
-                              Parameters for <Bold>{el.name}</Bold>
-                            </Fragment>
-                          }
-                          data={parameters}
-                          modalOpeningComponent={
-                            <ParametersModalButton
-                              id={`service-binding-parameters-${el.name}`}
-                              margin={'0 8px'}
-                            >
-                              <Icon icon={'\uE139'} />
-                            </ParametersModalButton>
-                          }
-                        />
-                      </span>
-                    </Tooltip>
-                  )}
+  createBindingsTableData = (data) => {
+    return data.map(binding => {
 
-                <DeleteBindingModal
-                  deleteBinding={deleteBinding}
-                  bindingName={el.name || null}
-                  bindingExists={Boolean(el)}
-                  bindingUsageCount={this.countBindingUsage({
-                    serviceBinding: el,
-                  })}
-                  relatedBindingUsage={this.relatedBindingUsage(el.name)}
-                  id={`service-binding-delete-${el.name}`}
-                />
-              </ActionsWrapper>
-            );
-          },
-        },
-      ],
-      data: serviceInstance.serviceBindings.items,
-    };
+    })
+  }
+
+  render() {
+    const {
+      createBinding,
+      createBindingUsage,
+      deleteBinding,
+      deleteBindingUsage,
+      serviceInstance,
+      callback,
+    } = this.props;
+
+    const bindable = serviceInstance.bindable;
+    if (!bindable) {
+      return null;
+    }
 
     const bindApplication = (
       <BindApplicationModal
@@ -349,6 +218,10 @@ class ServiceInstanceBindings extends React.Component {
       </Fragment>
     );
 
+    const bindingUsagesHeaders = ['Service Binding Usage', 'Bound Applications', 'Service Binding', 'Secret', 'Status', ''];
+    const bindingUsagesTableData = this.createBindingUsagesTableData(serviceInstance.serviceBindingUsages);
+    const bindingsTableData = this.createBindingsTableData(serviceInstance.serviceBindings.items);
+
     return (
       <ServiceInstanceBindingsWrapper>
         <Tabs
@@ -369,18 +242,43 @@ class ServiceInstanceBindings extends React.Component {
             id={'service-binding-usage-tab'}
             addHeaderContent={boundApplicationContent}
             aditionalStatus={this.status(
-              serviceBindingsUsageTable.data,
+              bindingUsagesTableData,
               'service-binding-usage-tab',
             )}
           >
             <Table
-              columns={serviceBindingsUsageTable.columns}
-              data={serviceBindingsUsageTable.data}
+              headers={bindingUsagesHeaders}
+              tableData={bindingUsagesTableData}
               notFoundMessage="No applications found"
               margin="-21px -20px -20px"
             />
           </Tab>
           <Tab
+            title={
+              <Tooltip
+                content="ServiceBindingUsage is a Kyma custom resource that allows the ServiceBindingUsage controller to inject Secrets into a given application."
+                minWidth="210px"
+                showTooltipTimeout={750}
+                key="service-binding-usage-tooltip"
+              >
+                Bound Applications
+              </Tooltip>
+            }
+            id={'service-binding-usage-tab'}
+            addHeaderContent={boundApplicationContent}
+            aditionalStatus={this.status(
+              bindingUsagesTableData,
+              'service-binding-usage-tab',
+            )}
+          >
+            <Table
+              headers={bindingUsagesHeaders}
+              tableData={bindingUsagesTableData}
+              notFoundMessage="No applications found"
+              margin="-21px -20px -20px"
+            />
+          </Tab>
+          {/* <Tab
             title={
               <Tooltip
                 content="ServiceBinding is a link between a ServiceInstance and an application that cluster users create to obtain access credentials for their applications."
@@ -404,7 +302,7 @@ class ServiceInstanceBindings extends React.Component {
               notFoundMessage="No credentials found"
               margin="-21px -20px -20px"
             />
-          </Tab>
+          </Tab> */}
         </Tabs>
       </ServiceInstanceBindingsWrapper>
     );
@@ -412,3 +310,233 @@ class ServiceInstanceBindings extends React.Component {
 }
 
 export default ServiceInstanceBindings;
+
+
+// const serviceBindingsUsageTable = {
+//   title: 'Bindings',
+//   columns: [
+//     {
+//       name: 'Service Binding Usage',
+//       size: 0.2,
+//       accesor: el => (
+//         <TextOverflowWrapper>
+//           <span title={el.name}>{el.name}</span>
+//         </TextOverflowWrapper>
+//       ),
+//     },
+//     {
+//       name: 'Bound Applications',
+//       size: 0.2,
+//       accesor: el => {
+//         const text = `${el.usedBy.name} (${this.capitalize(
+//           el.usedBy.kind,
+//         )})`;
+
+//         return (
+//           <TextOverflowWrapper>
+//             <span title={text}>{text}</span>
+//           </TextOverflowWrapper>
+//         );
+//       },
+//     },
+//     {
+//       name: 'Service Binding',
+//       size: 0.2,
+//       accesor: el =>
+//         el.serviceBinding && (
+//           <TextOverflowWrapper>
+//             <span title={el.serviceBinding.name}>
+//               {el.serviceBinding.name}
+//             </span>
+//           </TextOverflowWrapper>
+//         ),
+//     },
+//     {
+//       name: 'Secret',
+//       size: 0.2,
+//       accesor: el => {
+//         const prefix =
+//           el.parameters &&
+//           el.parameters.envPrefix &&
+//           el.parameters.envPrefix.name;
+//         const secret = el.serviceBinding && el.serviceBinding.secret;
+
+//         return secret && Object.keys(secret).length ? (
+//           <TextOverflowWrapper>
+//             <SecretDataModal
+//               title={
+//                 <span title={secret.name}>
+//                   Secret <Bold>{secret.name}</Bold>
+//                 </span>
+//               }
+//               data={secret.data}
+//               prefix={prefix}
+//               modalOpeningComponent={
+//                 <SecretModalButton title={secret.name}>
+//                   {secret.name}
+//                 </SecretModalButton>
+//               }
+//             />
+//           </TextOverflowWrapper>
+//         ) : (
+//           '-'
+//         );
+//       },
+//     },
+//     {
+//       name: 'Status',
+//       size: 0.1,
+//       accesor: el => (
+//         <Tooltip
+//           wrapperStyles="max-width: 100%;"
+//           type={this.getStatusType(el.status.type)}
+//           content={el.status.message}
+//           minWidth="250px"
+//         >
+//           <TextOverflowWrapper>
+//             <span
+//               style={{
+//                 color: statusColor(el.status.type),
+//                 cursor: `${el.status.message ? 'help' : 'default'}`,
+//               }}
+//               title={el.status.type}
+//             >
+//               {el.status.type}
+//             </span>
+//           </TextOverflowWrapper>
+//         </Tooltip>
+//       ),
+//     },
+//     {
+//       name: '',
+//       size: 0.1,
+//       accesor: el => (
+//         <ActionsWrapper>
+//           <DeleteBindingModal
+//             deleteBindingUsage={deleteBindingUsage}
+//             bindingUsageName={el.name}
+//             bindingUsageCount={this.countBindingUsage(el)}
+//             id={`service-binding-delete-${el.name}`}
+//           />
+//         </ActionsWrapper>
+//       ),
+//     },
+//   ],
+//   data: serviceInstance.serviceBindingUsages,
+// };
+
+// const serviceBindingsTable = {
+//   title: 'Bindings',
+//   columns: [
+//     {
+//       name: 'Service Binding',
+//       size: 0.3,
+//       accesor: el => (
+//         <TextOverflowWrapper>
+//           <span title={el.name}>{el.name}</span>
+//         </TextOverflowWrapper>
+//       ),
+//     },
+//     {
+//       name: 'Secret',
+//       size: 0.3,
+//       accesor: el => {
+//         const secret = el && el.secret;
+//         return secret && Object.keys(secret).length ? (
+//           <TextOverflowWrapper>
+//             <SecretDataModal
+//               title={
+//                 <Fragment>
+//                   Secret <Bold>{secret.name}</Bold>
+//                 </Fragment>
+//               }
+//               data={secret.data}
+//               modalOpeningComponent={
+//                 <SecretModalButton title={secret.name}>
+//                   {secret.name}
+//                 </SecretModalButton>
+//               }
+//             />
+//           </TextOverflowWrapper>
+//         ) : (
+//           '-'
+//         );
+//       },
+//     },
+//     {
+//       name: 'Status',
+//       size: 0.25,
+//       accesor: el => (
+//         <Tooltip
+//           type={this.getStatusType(el.status.type)}
+//           content={el.status.message}
+//           minWidth="250px"
+//           wrapperStyles="max-width: 100%;"
+//         >
+//           <TextOverflowWrapper>
+//             <span
+//               style={{
+//                 color: statusColor(el.status.type),
+//                 cursor: `${el.status.message ? 'help' : 'default'}`,
+//               }}
+//               title={el.status.type}
+//             >
+//               {el.status.type}
+//             </span>
+//           </TextOverflowWrapper>
+//         </Tooltip>
+//       ),
+//     },
+//     {
+//       name: '',
+//       size: 0.15,
+//       halign: 'right',
+//       accesor: el => {
+//         const parameters = el && el.parameters;
+//         return (
+//           <ActionsWrapper>
+//             {parameters &&
+//               Object.keys(parameters).length > 0 && (
+//                 <Tooltip content={'Parameters'} minWidth="90px">
+//                   <span
+//                     style={{
+//                       cursor: 'help',
+//                     }}
+//                   >
+//                     <ParametersDataModal
+//                       title={
+//                         <Fragment>
+//                           Parameters for <Bold>{el.name}</Bold>
+//                         </Fragment>
+//                       }
+//                       data={parameters}
+//                       modalOpeningComponent={
+//                         <ParametersModalButton
+//                           id={`service-binding-parameters-${el.name}`}
+//                           margin={'0 8px'}
+//                         >
+//                           <Icon icon={'\uE139'} />
+//                         </ParametersModalButton>
+//                       }
+//                     />
+//                   </span>
+//                 </Tooltip>
+//               )}
+
+//             <DeleteBindingModal
+//               deleteBinding={deleteBinding}
+//               bindingName={el.name || null}
+//               bindingExists={Boolean(el)}
+//               bindingUsageCount={this.countBindingUsage({
+//                 serviceBinding: el,
+//               })}
+//               relatedBindingUsage={this.relatedBindingUsage(el.name)}
+//               id={`service-binding-delete-${el.name}`}
+//             />
+//           </ActionsWrapper>
+//         );
+//       },
+//     },
+//   ],
+//   data: serviceInstance.serviceBindings.items,
+// };

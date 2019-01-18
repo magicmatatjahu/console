@@ -66,36 +66,13 @@ export const ExternalLink = styled.a`
   }
 `;
 
-export const TagsWrapper = styled.div`
+export const LabelsWrapper = styled.div`
   margin-top: 32px;
   width: 100%;
   height: auto;
 `;
 
-export const TagWrapper = styled.div`
+export const LabelWrapper = styled.div`
   display: inline-block;
   margin: 0 10px 10px 0;
-`;
-
-export const Tag = styled.span`
-  display: inline-block;
-  max-width: 220px;
-  mix-blend-mode: multiply;
-  border-radius: 4px;
-  background-color: #e2eaf2;
-  font-size: 12px;
-  font-family: 72;
-  font-weight: 300;
-  text-transform: uppercase;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: #73787d;
-  padding: 6px 10px;
-  cursor: pointer;
 `;
