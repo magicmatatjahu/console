@@ -7,7 +7,7 @@ import {
   MenuItem,
   Menu,
   CheckBox,
-  FormFieldset,
+  FormSet,
   FormInput,
   FormLabel,
   FormItem,
@@ -22,7 +22,7 @@ const FilterDropdown = ({ filter, activeValues = [], onChange }) =>
     <Dropdown name="Filter" enabled={filter.values && filter.values.length > 0}>
       <Panel>
         <PanelBody>
-          <FormFieldset>
+          <FormSet>
             {filter.values.map((item, index) => {
               const count = item.count !== null ? ` (${item.count})` : '';
               // const active = activeValues.some(value => value === item.value);
@@ -42,7 +42,7 @@ const FilterDropdown = ({ filter, activeValues = [], onChange }) =>
                 </FormItem>
               );
             })}
-          </FormFieldset>
+          </FormSet>
         </PanelBody>
       </Panel>
 
