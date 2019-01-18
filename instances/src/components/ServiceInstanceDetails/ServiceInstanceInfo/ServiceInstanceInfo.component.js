@@ -3,6 +3,7 @@ import Grid from 'styled-components-grid';
 import LuigiClient from '@kyma-project/luigi-client';
 
 import {
+  Label,
   Icon,
   Header,
   Separator,
@@ -19,7 +20,7 @@ import {
   InfoIcon,
   PlanModalButton,
   ServiceClassButton,
-  Label,
+  LabelWrapper,
   ExternalLink,
   JSONCode,
 } from './styled';
@@ -130,7 +131,9 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
                     <Grid.Unit size={INFORMATION_VALUE_SIZE}>
                       <Element margin="1px 0 0 0">
                         {serviceInstance.labels.map(label => (
-                          <Label key={label}>{label}</Label>
+                          <LabelWrapper>
+                            <Label key={label}>{label}</Label>
+                          </LabelWrapper>
                         ))}
                       </Element>
                     </Grid.Unit>

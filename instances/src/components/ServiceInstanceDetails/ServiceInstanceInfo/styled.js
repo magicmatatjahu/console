@@ -94,23 +94,8 @@ export const PlanModalButton = styled.button`
   cursor: pointer;
 `;
 
-export const Label = styled.span`
-  width: auto;
+export const LabelWrapper = styled.div`
   display: inline-block;
-  mix-blend-mode: multiply;
-  border-radius: 4px;
-  background-color: #eef5fc;
-  font-size: 12px;
-  font-family: 72;
-  font-weight: 300;
-  text-transform: uppercase;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #64696d;
-  padding: 5px 8px;
   margin: 10px 10px 0 0;
 `;
 

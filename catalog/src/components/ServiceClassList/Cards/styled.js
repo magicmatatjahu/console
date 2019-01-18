@@ -89,27 +89,3 @@ export const CardLabelWrapper = styled.div`
   display: inline-block;
   margin: 8px 8px 0 0;
 `;
-
-export const CardLabel = styled.div`
-  display: inline-block;
-  color: #515559;
-  font-size: 12px;
-  padding: 5px 8px;
-  background-color: #eef5fc;
-  border-radius: 4px;
-  max-width: 75px;
-  overflow-x: hidden
-  text-overflow: ellipsis;
-  white-space: nowrap;
-
-  &:hover {
-    width: auto;
-    max-width: 300px;
-  }
-`;
-
-export const CardLabelWithTooltip = styled(CardLabel)`
-  &:hover {
-    background-color: #e2effd;
-  }
-`;

@@ -13,11 +13,11 @@ const ServiceInstancesToolbar = ({
 }) => {
   return (
     <Toolbar
-      headline="Service Instances"
+      title="Service Instances"
       description="You can configure the instances and manage bindings of each of your instantiated services here"
     >
       {serviceInstancesExists ? (
-        <div>
+        <>
           <SearchDropdown
             onChange={e =>
               filterClassesAndSetActiveFilters('search', e.target.value)
@@ -28,7 +28,7 @@ const ServiceInstancesToolbar = ({
             filter={labelFilter}
             activeValues={allActiveFilters.labels}
           />
-        </div>
+        </>
       ) : null}
     </Toolbar>
   );

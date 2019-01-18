@@ -47,8 +47,8 @@ export const ActionBarHeader = ({ title, description, className, ...props }) => 
 
 ActionBarHeader.propTypes = {
     className: PropTypes.string,
-    description: PropTypes.string,
-    title: PropTypes.string
+    description: PropTypes.any,
+    title: PropTypes.any
 };
 
 export const ActionBarActions = ({ children, className, ...props }) => {
