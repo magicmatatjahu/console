@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
 import {
+  Label,
   Icon,
   Header,
   Separator,
@@ -17,9 +18,8 @@ import {
   ServiceProvider,
   ExternalLink,
   Image,
-  TagsWrapper,
-  TagWrapper,
-  Tag,
+  LabelsWrapper,
+  LabelWrapper,
 } from './styled';
 
 import { isStringValueEqualToTrue } from '../../../commons/helpers';
@@ -115,18 +115,18 @@ const ServiceClassInfo = ({
         )}
         {modifiedTags &&
           modifiedTags.length > 0 && (
-            <TagsWrapper>
+            <LabelsWrapper>
               {modifiedTags.sort(sortTags).map(tag => (
-                <TagWrapper key={`${tag.type}-${tag.name}`}>
+                <LabelWrapper key={`${tag.type}-${tag.name}`}>
                   <Tooltip
                     content={tagsDescription[tag.type]}
                     minWidth={tooltipWidth[tag.type]}
                   >
-                    <Tag>{tag.name}</Tag>
+                    <Label cursorType="help">{tag.name}</Label>
                   </Tooltip>
-                </TagWrapper>
+                </LabelWrapper>
               ))}
-            </TagsWrapper>
+            </LabelsWrapper>
           )}
       </div>
     </div>

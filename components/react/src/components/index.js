@@ -13,6 +13,7 @@ import H1 from './Header/H1';
 import H2 from './Header/H2';
 import H3 from './Header/H3';
 import H4 from './Header/H4';
+import Label from './Label';
 import Icon from './Icon';
 import Markdown from './Markdown';
 import Modal from './Modal';
@@ -30,6 +31,7 @@ import Tab from './Tabs/Tab';
 import Table from './Table';
 import Text from './Text';
 import ThemeWrapper from './ThemeWrapper';
+import Token from './Token';
 import Toolbar from './Toolbar';
 import Tooltip from './Tooltip';
 
@@ -48,6 +50,7 @@ module.exports = {
   H2,
   H3,
   H4,
+  Label,
   Icon,
   Markdown,
   Modal,
@@ -65,6 +68,7 @@ module.exports = {
   Table,
   Text,
   ThemeWrapper,
+  Token,
   Toolbar,
   Tooltip,
 };
