@@ -188,30 +188,23 @@ class ServiceClassList extends React.Component {
           title="Service Catalog"
           description="Enrich your experience with additional services"
         >
-          <>
-            <SearchWrapper>
-              <Search
-                noIcon
-                darkBorder
-                placeholder="Search"
-                onChange={searchFn}
-              />
-            </SearchWrapper>
+          <SearchWrapper>
+            <Search noSearchBtn placeholder="Search" onChange={searchFn} />
+          </SearchWrapper>
 
-            {!classFilters.loading && (
-              <FilterList
-                filters={classFilters.serviceClassFilters}
-                filtersExists={filtersExists}
-                active={activeFilters}
-                activeFiltersCount={activeFiltersCount}
-                activeTagsFilters={activeCategoriesFilters}
-                clearAllActiveFilters={clearAllActiveFilters}
-                onChange={(key, value) => setServiceClassesFilter(key, value)}
-                onSearch={filterFn}
-                onSeeMore={seeMoreFn}
-              />
-            )}
-          </>
+          {!classFilters.loading && (
+            <FilterList
+              filters={classFilters.serviceClassFilters}
+              filtersExists={filtersExists}
+              active={activeFilters}
+              activeFiltersCount={activeFiltersCount}
+              activeTagsFilters={activeCategoriesFilters}
+              clearAllActiveFilters={clearAllActiveFilters}
+              onChange={(key, value) => setServiceClassesFilter(key, value)}
+              onSearch={filterFn}
+              onSeeMore={seeMoreFn}
+            />
+          )}
         </Toolbar>
 
         {renderFilters()}

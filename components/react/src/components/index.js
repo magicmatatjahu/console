@@ -23,7 +23,7 @@ import StepsModal from './Modal/Steps';
 import Notification from './Notification';
 import NotificationMessage from './NotificationMessage';
 import Paragraph from './Paragraph';
-import Search from './Search';
+// import Search from './Search';
 import Separator from './Separator';
 import Spinner from './Spinner';
 import Tabs from './Tabs';
@@ -36,6 +36,7 @@ import Toolbar from './Toolbar';
 import Tooltip from './Tooltip';
 import { MenuItem, MenuList, Menu } from '../fundamentals-react/Menu/Menu';
 import { Panel, PanelBody } from '../fundamentals-react/Panel/Panel';
+import { SearchInput as Search } from '../fundamentals-react/SearchInput/SearchInput';
 import {
   FormFieldset,
   FormItem,
