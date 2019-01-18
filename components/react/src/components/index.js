@@ -34,9 +34,21 @@ import ThemeWrapper from './ThemeWrapper';
 import Token from './Token';
 import Toolbar from './Toolbar';
 import Tooltip from './Tooltip';
+import { MenuItem, MenuList, Menu } from '../fundamentals-react/Menu/Menu';
+import { Panel, PanelBody } from '../fundamentals-react/Panel/Panel';
+import {
+  FormFieldset,
+  FormItem,
+  FormInput,
+  FormLabel as FrmLb,
+} from '../fundamentals-react/Forms/Forms';
 
 import 'fiori-fundamentals/dist/fiori-fundamentals.min.css';
+import styled from 'styled-components';
 
+const FormLabel = styled(FrmLb)`
+  padding-right: 20px;
+`;
 module.exports = {
   Button,
   Dropdown,
@@ -71,4 +83,13 @@ module.exports = {
   Token,
   Toolbar,
   Tooltip,
+  MenuItem,
+  Menu,
+  MenuList,
+  FormFieldset,
+  FormItem,
+  FormInput,
+  FormLabel,
+  Panel,
+  PanelBody,
 };
