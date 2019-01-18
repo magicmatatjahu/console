@@ -1,35 +1,69 @@
 import React from 'react';
 
-import { Dropdown, Text } from '@kyma-project/react-components';
+import {
+  Dropdown,
+  Text,
+  MenuList,
+  MenuItem,
+  Menu,
+  CheckBox,
+  FormFieldset,
+  FormInput,
+  FormLabel,
+  FormItem,
+  Panel,
+  PanelBody,
+} from '@kyma-project/react-components';
 
 import { List, Item, Checkmark } from './styled';
 
 const FilterDropdown = ({ filter, activeValues = [], onChange }) =>
   !filter ? null : (
-    <Dropdown
-      name="Filter"
-      enabled={filter.values && filter.values.length > 0}
-      lastButton
-    >
-      <List>
+    <Dropdown name="Filter" enabled={filter.values && filter.values.length > 0}>
+      <Panel>
+        <PanelBody>
+          <FormFieldset>
+            {filter.values.map((item, index) => {
+              const count = item.count !== null ? ` (${item.count})` : '';
+              // const active = activeValues.some(value => value === item.value);
+
+              return (
+                <FormItem isCheck key={index}>
+                  <FormInput
+                    type="checkbox"
+                    id={`checkbox-${index}`}
+                    name={`checkbox-name-${index}`}
+                    onClick={() => onChange(filter.name, item.value)}
+                  />
+                  <FormLabel>
+                    {item.name}
+                    {count}
+                  </FormLabel>
+                </FormItem>
+              );
+            })}
+          </FormFieldset>
+        </PanelBody>
+      </Panel>
+
+      {/* <MenuList>
         {filter.values.map(item => {
           const count = item.count !== null ? ` (${item.count})` : '';
           const active = activeValues.some(value => value === item.value);
 
           return (
-            <Item
+            <MenuItem
               key={item.name}
               onClick={() => onChange(filter.name, item.value)}
             >
               <Checkmark checked={active} />
-              <Text>
-                {item.name}
-                {count}
-              </Text>
-            </Item>
+
+              {item.name}
+              {count}
+            </MenuItem>
           );
         })}
-      </List>
+      </MenuList> */}
     </Dropdown>
   );
 
