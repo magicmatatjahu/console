@@ -1,35 +1,84 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import { Dropdown, Text } from '@kyma-project/react-components';
-
+import {
+  Dropdown,
+  Text,
+  MenuList,
+  MenuItem,
+  Menu,
+  CheckBox,
+  FormSet,
+  FormInput,
+  FormLabel as UnstyledFormLabel,
+  FormItem,
+  Panel as UnstyledPanel,
+  PanelBody as UnstyledPanelBody,
+} from '@kyma-project/react-components';
 import { List, Item, Checkmark } from './styled';
 
+const FormLabel = styled(UnstyledFormLabel)`
+  &&& {
+    padding-right: 10px;
+    font-size: 16px;
+  }
+`;
+const PanelBody = styled(UnstyledPanelBody)`
+  && {
+    padding: 12px;
+  }
+`;
+const Panel = styled(UnstyledPanel)`
+  && {
+    min-width: 200px;
+  }
+`;
 const FilterDropdown = ({ filter, activeValues = [], onChange }) =>
   !filter ? null : (
-    <Dropdown
-      name="Filter"
-      enabled={filter.values && filter.values.length > 0}
-      lastButton
-    >
-      <List>
+    <Dropdown name="Filter" enabled={filter.values && filter.values.length > 0}>
+      <Panel>
+        <PanelBody>
+          <FormSet>
+            {filter.values.map((item, index) => {
+              const count = item.count !== null ? ` (${item.count})` : '';
+              // const active = activeValues.some(value => value === item.value);
+
+              return (
+                <FormItem isCheck key={index}>
+                  <FormInput
+                    type="checkbox"
+                    id={`checkbox-${index}`}
+                    name={`checkbox-name-${index}`}
+                    onClick={() => onChange(filter.name, item.value)}
+                  />
+                  <FormLabel>
+                    {item.name}
+                    {count}
+                  </FormLabel>
+                </FormItem>
+              );
+            })}
+          </FormSet>
+        </PanelBody>
+      </Panel>
+      {/* <MenuList>
         {filter.values.map(item => {
           const count = item.count !== null ? ` (${item.count})` : '';
           const active = activeValues.some(value => value === item.value);
 
           return (
-            <Item
+            <MenuItem
               key={item.name}
               onClick={() => onChange(filter.name, item.value)}
             >
               <Checkmark checked={active} />
-              <Text>
-                {item.name}
-                {count}
-              </Text>
-            </Item>
+
+              {item.name}
+              {count}
+            </MenuItem>
           );
         })}
-      </List>
+      </MenuList> */}
     </Dropdown>
   );
 

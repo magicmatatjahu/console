@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import styled from 'styled-components';
 import {
   FieldWrapper,
   FieldLabel,
@@ -8,9 +8,18 @@ import {
   FieldMessage,
   FieldRequired,
 } from '../field-components';
-
+import {
+  FormSet as UnstyledFormSet,
+  FormItem,
+  FormLabel,
+  FormInput,
+  FormMessage,
+} from '../../../fundamentals-react/Forms/Forms';
 import { InputWrapper, InputField, InputPasswordField } from './components';
 
+const FormSet = styled(UnstyledFormSet)`
+  padding-top: ${props => props.marginTop || '0'}px;
+`;
 class Input extends React.Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
@@ -28,6 +37,7 @@ class Input extends React.Component {
     type: PropTypes.string,
     noBottomMargin: PropTypes.bool,
     noMessageField: PropTypes.bool,
+    marginTop: PropTypes.number,
   };
 
   static defaultProps = {
@@ -74,7 +84,6 @@ class Input extends React.Component {
     let results = [],
       numberOfSucesses = 0;
     validFunctions.map(func => results.push(func(value)));
-
     for (const result of results) {
       if (result !== undefined) {
         if (
@@ -93,11 +102,11 @@ class Input extends React.Component {
         }
       }
       this.setState({
-        validationType: numberOfSucesses === results.length ? 'success' : '',
+        validationType: numberOfSucesses === results.length ? 'valid' : '',
       });
     }
     this.setState({
-      validationType: 'success',
+      validationType: 'valid',
       validationMessage: '',
     });
   };
@@ -125,6 +134,7 @@ class Input extends React.Component {
       type,
       noBottomMargin,
       noMessageField,
+      marginTop,
     } = this.props;
 
     const {
@@ -135,62 +145,99 @@ class Input extends React.Component {
       validationMessage,
     } = this.state;
 
+    // const finalMessage = validationMessage ? validationMessage : message;
+    // const success = validationType === 'success' ? true : isSuccess;
+    // const warning = validationType === 'warning' ? true : isWarning;
+    // const error = validationType === 'error' ? true : isError;
+
     const finalMessage = validationMessage ? validationMessage : message;
-    const success = validationType === 'success' ? true : isSuccess;
-    const warning = validationType === 'warning' ? true : isWarning;
-    const error = validationType === 'error' ? true : isError;
+    const valid = validationType === 'valid' || isSuccess ? 'valid' : '';
+    const warning = validationType === 'warning' || isWarning ? 'warning' : '';
+    const error = validationType === 'error' || isError ? 'error' : '';
 
-    const isPassword = type === 'password';
+    //not available for now
+    //const isPassword = type === 'password';
 
+    const randomId = `input-${(Math.random() + 1).toString(36).substring(7)}`;
     return (
-      <FieldWrapper noBottomMargin={noBottomMargin}>
-        <FieldLabel>
-          {label}
-          {required ? <FieldRequired>*</FieldRequired> : ''}
-        </FieldLabel>
-        <InputWrapper>
-          <InputField
+      <FormSet marginTop={marginTop}>
+        <FormItem>
+          {label && (
+            <FormLabel htmlFor={randomId} /*required={required}*/>
+              {label}
+              {required ? <FieldRequired>*</FieldRequired> : ''}
+            </FormLabel>
+          )}
+          <FormInput
+            id={randomId}
             type={typeField ? typeField : 'text'}
             placeholder={placeholder}
-            value={value}
             name={name}
+            value={value}
+            state={error ? 'invalid' : '' || warning || valid}
             onChange={e => {
               const value = e.target.value;
               this.setState({ value: value });
               this.validate(value);
               handleChange(value);
             }}
-            isSuccess={success}
-            isWarning={warning}
-            isError={error}
-            required={required}
           />
-          <FieldIcon
-            visible={success || warning || error}
-            isSuccess={success}
-            isWarning={warning}
-            isError={error}
-            isPassword={isPassword}
-          >
-            {this.extractIcon(success, warning, error)}
-          </FieldIcon>
-          {isPassword && (
-            <InputPasswordField onClick={this.handleClickEyeIcon}>
-              {showPassword ? '\uE1EA' : '\uE1E9'}
-            </InputPasswordField>
-          )}
-        </InputWrapper>
-        {noMessageField ? null : (
-          <FieldMessage
-            visible={finalMessage}
-            isSuccess={success}
-            isWarning={warning}
-            isError={error}
-          >
-            {finalMessage}
-          </FieldMessage>
-        )}
-      </FieldWrapper>
+          {!noMessageField &&
+            finalMessage && (
+              <FormMessage type={error || warning || valid}>
+                {finalMessage}
+              </FormMessage>
+            )}
+        </FormItem>
+      </FormSet>
+      // {/* <FieldWrapper noBottomMargin={noBottomMargin}>
+      //   <FieldLabel>
+      //     {label}
+      //     {required ? <FieldRequired>*</FieldRequired> : ''}
+      //   </FieldLabel>
+      //   <InputWrapper>
+      //     <InputField
+      //       type={typeField ? typeField : 'text'}
+      //       placeholder={placeholder}
+      //       value={value}
+      //       name={name}
+      //       onChange={e => {
+      //         const value = e.target.value;
+      //         this.setState({ value: value });
+      //         this.validate(value);
+      //         handleChange(value);
+      //       }}
+      //       isSuccess={success}
+      //       isWarning={warning}
+      //       isError={error}
+      //       required={required}
+      //     />
+      //     <FieldIcon
+      //       visible={success || warning || error}
+      //       isSuccess={success}
+      //       isWarning={warning}
+      //       isError={error}
+      //       isPassword={isPassword}
+      //     >
+      //       {this.extractIcon(success, warning, error)}
+      //     </FieldIcon>
+      //     {isPassword && (
+      //       <InputPasswordField onClick={this.handleClickEyeIcon}>
+      //         {showPassword ? '\uE1EA' : '\uE1E9'}
+      //       </InputPasswordField>
+      //     )}
+      //   </InputWrapper>
+      //   {noMessageField ? null : (
+      //     <FieldMessage
+      //       visible={finalMessage}
+      //       isSuccess={success}
+      //       isWarning={warning}
+      //       isError={error}
+      //     >
+      //       {finalMessage}
+      //     </FieldMessage>
+      //   )}
+      // </FieldWrapper> */}
     );
   }
 }

@@ -34,7 +34,7 @@ const FilterList = ({
   >
     <SearchWrapper>
       <Search
-        backgroundColor="#fff"
+        // backgroundColor="#fff"
         placeholder="Search"
         onChange={onSearch}
         id="search-filter"

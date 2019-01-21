@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Spinner from '../Spinner';
 
-import { 
+import {
   TableWrapper,
   TableHeader,
   TableHeaderHead,
@@ -22,28 +22,24 @@ const Table = ({
   emptyData,
   notFoundMessage,
 }) => {
-  console.log(emptyData);
   return (
     <TableWrapper>
       {title && (
         <TableHeader>
           <TableHeaderHead title={title} />
-          <TableHeaderActions>
-            {addHeaderContent}
-          </TableHeaderActions>  
+          <TableHeaderActions>{addHeaderContent}</TableHeaderActions>
         </TableHeader>
       )}
       <TableBody>
-        <TableContent
-          headers={headers}
-          tableData={tableData}
-        />
+        <TableContent headers={headers} tableData={tableData} />
         {loadingData && <Spinner />}
-        {!loadingData && emptyData ? <EmptyData>{notFoundMessage}</EmptyData> : null}
+        {!loadingData && emptyData ? (
+          <EmptyData>{notFoundMessage}</EmptyData>
+        ) : null}
       </TableBody>
     </TableWrapper>
   );
-}
+};
 
 Table.defaultProps = {
   loadingData: false,
