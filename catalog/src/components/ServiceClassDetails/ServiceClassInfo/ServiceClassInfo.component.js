@@ -14,6 +14,7 @@ import {
 import {
   ServiceClassInfoContentWrapper,
   ImagePlaceholder,
+  ServiceClassInfoContent,
   ServiceTitle,
   ServiceProvider,
   ExternalLink,
@@ -77,16 +78,11 @@ const ServiceClassInfo = ({
     <div>
       <ServiceClassInfoContentWrapper>
         <ImagePlaceholder imageUrl={imageUrl}>
-          {imageUrl ? <Image src={imageUrl} /> : <Icon icon={'\ue113'} />}
+          {imageUrl ? <Image size="l" photo={imageUrl} /> : <Icon icon={'\ue113'} />}
         </ImagePlaceholder>
-        <div>
-          <ServiceTitle data-e2e-id="service-title">
-            {serviceClassDisplayName}
-          </ServiceTitle>
-          <ServiceProvider data-e2e-id="service-provider">
-            {providerDisplayName || ''}
-          </ServiceProvider>
-        </div>
+        <ServiceClassInfoContent title={serviceClassDisplayName} data-e2e-id="service-title">
+          {providerDisplayName || ''}
+        </ServiceClassInfoContent>
       </ServiceClassInfoContentWrapper>
       <Separator margin="30px 0 30px" />
       <div>

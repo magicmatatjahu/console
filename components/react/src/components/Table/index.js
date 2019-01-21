@@ -10,7 +10,7 @@ import {
   TableHeaderActions,
   TableBody,
   TableContent,
-  EmptyData,
+  NotFoundMessage,
 } from './styled';
 
 const Table = ({
@@ -19,7 +19,6 @@ const Table = ({
   headers,
   tableData,
   loadingData,
-  emptyData,
   notFoundMessage,
 }) => {
   return (
@@ -31,11 +30,12 @@ const Table = ({
         </TableHeader>
       )}
       <TableBody>
-        <TableContent headers={headers} tableData={tableData} />
-        {loadingData && <Spinner />}
-        {!loadingData && emptyData ? (
-          <EmptyData>{notFoundMessage}</EmptyData>
-        ) : null}
+        <TableContent
+          headers={headers}
+          tableData={tableData}
+        />
+        {loadingData && <Spinner padding="20px" size="30px" color="rgba(50,54,58,0.6)" />}
+        {!loadingData && !(tableData && tableData.length) ? <NotFoundMessage>{notFoundMessage}</NotFoundMessage> : null}
       </TableBody>
     </TableWrapper>
   );
@@ -43,7 +43,6 @@ const Table = ({
 
 Table.defaultProps = {
   loadingData: false,
-  emptyData: false,
   notFoundMessage: 'Not found resources',
 };
 
@@ -53,7 +52,6 @@ Table.propTypes = {
   headers: PropTypes.arrayOf(PropTypes.string).isRequired,
   tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
   loadingData: PropTypes.bool,
-  emptyData: PropTypes.bool,
   notFoundMessage: PropTypes.string,
 };
 

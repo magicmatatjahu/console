@@ -38,7 +38,7 @@ const ServiceInstanceToolbar = ({
 
   return (
     <Toolbar
-      headline={
+      title={
         <ServiceInstanceToolbarHeadline>
           <ServiceInstanceToolbarHeadlineLink onClick={goToServiceInstances}>
             Service Instances

@@ -212,7 +212,6 @@ function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
       headers={headers}
       tableData={tableData}
       loadingData={loading}
-      emptyData={!Boolean(data && data.length)}
       notFoundMessage="No Service Instances found"
     />
   );

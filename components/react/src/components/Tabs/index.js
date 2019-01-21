@@ -79,6 +79,8 @@ class Tabs extends React.Component {
 
     const props = this.getPropsFromActiveTab(children);
 
+    console.log(props);
+
     return (
       <TabsWrapper>
         <TabsHeader>
@@ -88,7 +90,7 @@ class Tabs extends React.Component {
           </TabsHeaderAdditionalContent>
         </TabsHeader>
         <Separator />
-        <TabsContent margin={props.margin ? props.margin : ""} background={props.background ? props.background : ""}>{this.renderActiveTab(children)}</TabsContent>
+        <TabsContent noMargin={props.noMargin} background={props.background ? props.background : ""}>{this.renderActiveTab(children)}</TabsContent>
       </TabsWrapper>
     );
   }
