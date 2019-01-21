@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import {
   Dropdown,
@@ -9,14 +10,29 @@ import {
   CheckBox,
   FormSet,
   FormInput,
-  FormLabel,
+  FormLabel as UnstyledFormLabel,
   FormItem,
-  Panel,
-  PanelBody,
+  Panel as UnstyledPanel,
+  PanelBody as UnstyledPanelBody,
 } from '@kyma-project/react-components';
-
 import { List, Item, Checkmark } from './styled';
 
+const FormLabel = styled(UnstyledFormLabel)`
+  &&& {
+    padding-right: 10px;
+    font-size: 16px;
+  }
+`;
+const PanelBody = styled(UnstyledPanelBody)`
+  && {
+    padding: 12px;
+  }
+`;
+const Panel = styled(UnstyledPanel)`
+  && {
+    min-width: 200px;
+  }
+`;
 const FilterDropdown = ({ filter, activeValues = [], onChange }) =>
   !filter ? null : (
     <Dropdown name="Filter" enabled={filter.values && filter.values.length > 0}>
@@ -45,7 +61,6 @@ const FilterDropdown = ({ filter, activeValues = [], onChange }) =>
           </FormSet>
         </PanelBody>
       </Panel>
-
       {/* <MenuList>
         {filter.values.map(item => {
           const count = item.count !== null ? ` (${item.count})` : '';
