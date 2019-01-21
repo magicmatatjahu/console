@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const TabsContent = styled.div`
-  margin: ${props => (props.margin ? props.margin : '20px')};
+  margin: ${props => (props.noMargin ? "" : '20px')};
   font-size: 14px;
   color: #515559;
   line-height: 1.57;

@@ -48,7 +48,6 @@ function ServiceBrokersTable({ data, refetch, loading }) {
       headers={headers}
       tableData={tableData}
       loadingData={loading}
-      emptyData={!Boolean(data && data.length)}
       notFoundMessage="No Service Brokers found"
     />
   );

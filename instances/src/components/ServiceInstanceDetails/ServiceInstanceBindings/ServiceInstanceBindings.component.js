@@ -77,6 +77,8 @@ class ServiceInstanceBindings extends React.Component {
   };
 
   createBindingUsagesTableData = (data) => {
+    if (!data.length) return [];
+
     return data.map(bindingUsage => {
       return {
         rowData: [
@@ -169,8 +171,105 @@ class ServiceInstanceBindings extends React.Component {
   }
 
   createBindingsTableData = (data) => {
-    return data.map(binding => {
+    if (!data.length) return [];
 
+    return data.map(binding => {
+      return {
+        rowData: [
+          (
+            <TextOverflowWrapper>
+              <span title={binding.name}>{binding.name}</span>
+            </TextOverflowWrapper>
+          ),
+          (_ => {
+            const secret = binding && binding.secret;
+            return secret && Object.keys(secret).length ? (
+              <TextOverflowWrapper>
+                <SecretDataModal
+                  title={
+                    <Fragment>
+                      Secret <Bold>{secret.name}</Bold>
+                    </Fragment>
+                  }
+                  data={secret.data}
+                  modalOpeningComponent={
+                    <SecretModalButton title={secret.name}>
+                      {secret.name}
+                    </SecretModalButton>
+                  }
+                />
+              </TextOverflowWrapper>
+            ) : (
+              '-'
+            );
+          })(),
+          (
+            <Tooltip
+              type={this.getStatusType(binding.status.type)}
+              content={binding.status.message}
+              minWidth="250px"
+              wrapperStyles="max-width: 100%;"
+            >
+              <TextOverflowWrapper>
+                <span
+                  style={{
+                    color: statusColor(binding.status.type),
+                    cursor: `${binding.status.message ? 'help' : 'default'}`,
+                  }}
+                  title={binding.status.type}
+                >
+                  {binding.status.type}
+                </span>
+              </TextOverflowWrapper>
+            </Tooltip>
+          ),
+          (_ => {
+            const parameters = binding && binding.parameters;
+            return (
+              <ActionsWrapper>
+                {parameters &&
+                  Object.keys(parameters).length > 0 && (
+                    <Tooltip content={'Parameters'} minWidth="90px">
+                      <span
+                        style={{
+                          cursor: 'help',
+                        }}
+                      >
+                        <ParametersDataModal
+                          title={
+                            <Fragment>
+                              Parameters for <Bold>{binding.name}</Bold>
+                            </Fragment>
+                          }
+                          data={parameters}
+                          modalOpeningComponent={
+                            <ParametersModalButton
+                              id={`service-binding-parameters-${binding.name}`}
+                              margin={'0 8px'}
+                            >
+                              <Icon icon={'\uE139'} />
+                            </ParametersModalButton>
+                          }
+                        />
+                      </span>
+                    </Tooltip>
+                  )}
+    
+                <DeleteBindingModal
+                  deleteBinding={this.props.deleteBinding}
+                  bindingName={binding.name || null}
+                  bindingExists={Boolean(binding)}
+                  bindingUsageCount={this.countBindingUsage({
+                    serviceBinding: binding,
+                  })}
+                  relatedBindingUsage={this.relatedBindingUsage(binding.name)}
+                  id={`service-binding-delete-${binding.name}`}
+                />
+              </ActionsWrapper>
+            );
+          })()
+        ]
+      }
     })
   }
 
@@ -199,9 +298,9 @@ class ServiceInstanceBindings extends React.Component {
     );
 
     const boundApplicationContent = (
-      <Fragment>
+      <>
         <ActionsWrapper>{bindApplication}</ActionsWrapper>
-      </Fragment>
+      </>
     );
 
     const createCredentials = (
@@ -213,13 +312,15 @@ class ServiceInstanceBindings extends React.Component {
       />
     );
     const createCredentialsContent = (
-      <Fragment>
+      <>
         <ActionsWrapper>{createCredentials}</ActionsWrapper>
-      </Fragment>
+      </>
     );
 
     const bindingUsagesHeaders = ['Service Binding Usage', 'Bound Applications', 'Service Binding', 'Secret', 'Status', ''];
     const bindingUsagesTableData = this.createBindingUsagesTableData(serviceInstance.serviceBindingUsages);
+
+    const bindingsHeaders = ['Bindings', 'Secret', 'Status', ''];
     const bindingsTableData = this.createBindingsTableData(serviceInstance.serviceBindings.items);
 
     return (
@@ -245,40 +346,15 @@ class ServiceInstanceBindings extends React.Component {
               bindingUsagesTableData,
               'service-binding-usage-tab',
             )}
+            noMargin
           >
             <Table
               headers={bindingUsagesHeaders}
               tableData={bindingUsagesTableData}
               notFoundMessage="No applications found"
-              margin="-21px -20px -20px"
             />
           </Tab>
           <Tab
-            title={
-              <Tooltip
-                content="ServiceBindingUsage is a Kyma custom resource that allows the ServiceBindingUsage controller to inject Secrets into a given application."
-                minWidth="210px"
-                showTooltipTimeout={750}
-                key="service-binding-usage-tooltip"
-              >
-                Bound Applications
-              </Tooltip>
-            }
-            id={'service-binding-usage-tab'}
-            addHeaderContent={boundApplicationContent}
-            aditionalStatus={this.status(
-              bindingUsagesTableData,
-              'service-binding-usage-tab',
-            )}
-          >
-            <Table
-              headers={bindingUsagesHeaders}
-              tableData={bindingUsagesTableData}
-              notFoundMessage="No applications found"
-              margin="-21px -20px -20px"
-            />
-          </Tab>
-          {/* <Tab
             title={
               <Tooltip
                 content="ServiceBinding is a link between a ServiceInstance and an application that cluster users create to obtain access credentials for their applications."
@@ -292,17 +368,17 @@ class ServiceInstanceBindings extends React.Component {
             id={'service-binding-tab'}
             addHeaderContent={createCredentialsContent}
             aditionalStatus={this.status(
-              serviceBindingsTable.data,
+              bindingsTableData,
               'service-binding-tab',
             )}
+            noMargin
           >
             <Table
-              columns={serviceBindingsTable.columns}
-              data={serviceBindingsTable.data}
+              headers={bindingsHeaders}
+              tableData={bindingsTableData}
               notFoundMessage="No credentials found"
-              margin="-21px -20px -20px"
             />
-          </Tab> */}
+          </Tab>
         </Tabs>
       </ServiceInstanceBindingsWrapper>
     );
