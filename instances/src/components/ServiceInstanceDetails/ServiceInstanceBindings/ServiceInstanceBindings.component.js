@@ -343,7 +343,7 @@ class ServiceInstanceBindings extends React.Component {
             id={'service-binding-usage-tab'}
             addHeaderContent={boundApplicationContent}
             aditionalStatus={this.status(
-              bindingUsagesTableData,
+              serviceInstance.serviceBindingUsages,
               'service-binding-usage-tab',
             )}
             noMargin
@@ -368,7 +368,7 @@ class ServiceInstanceBindings extends React.Component {
             id={'service-binding-tab'}
             addHeaderContent={createCredentialsContent}
             aditionalStatus={this.status(
-              bindingsTableData,
+              serviceInstance.serviceBindings.items,
               'service-binding-tab',
             )}
             noMargin

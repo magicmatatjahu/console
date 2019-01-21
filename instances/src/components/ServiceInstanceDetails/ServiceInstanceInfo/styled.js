@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import Grid from 'styled-components-grid';
+import { PanelGrid, Panel, PanelHeader, PanelBody } from '@kyma-project/react-components';
 
-export const ServiceInstanceInfoWrapper = styled(Grid)`
+export const ServiceInstanceInfoWrapper = styled(PanelGrid)`
   display: flex;
+  padding-bottom: 20px; 
 `;
 
 export const ContentWrapper = styled.div`
@@ -22,40 +24,25 @@ export const StretchedContentWrapper = styled(ContentWrapper)`
   align-self: stretch;
 `;
 
-export const CenterSideWrapper = styled.div`
-  box-sizing: border-box;
-  margin: ${props => ('left' === props.margin ? '30px 20px 0 0' : '30px 0 0')};
-  text-align: left;
-  flex: 0 1 auto;
-  display: flex;
-  min-height: calc(100% - 30px);
+export const CenterSideWrapper = styled(Panel)`
+  && {
+    border-left: ${props => (props.color ? '6px solid ' + props.color : 'none')};
+  }
 `;
 
-export const ContentHeader = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-  line-height: 1.19;
-  font-size: 16px;
-  padding: 16px 20px;
+export const ContentHeader = styled(PanelHeader)`
+  && {
+    color: rgb(50, 54, 58);
+    font-size: 16px;
+    font-weight: normal;
+  }
 `;
 
-export const ContentDescription = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-  padding: 8px 22px 22px;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.14;
-  letter-spacing: normal;
-  text-align: left;
-  color: #32363b;
+export const ContentDescription = styled(PanelBody)`
 `;
 
 export const Element = styled.div`
+  font-family: "72";
   margin: ${props => (props.margin ? props.margin : '16px 0 0 0')};
 `;
 

@@ -50,4 +50,6 @@ export const NotFoundMessage = styled.p`
   padding: 20px 0;
   margin: 0 auto;
   text-align: center;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 `;

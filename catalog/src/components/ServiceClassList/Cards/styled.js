@@ -11,7 +11,9 @@ export const CardWrapper = styled.div`
 
 export const CardContent = styled(Panel)`
   && {
+    box-sizing: border-box;
     padding: 20px;
+    transition: 0.125s box-shadow ease-in-out;
 
     &:hover {
       box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1), 0 2px 14px 0 rgba(0, 0, 0, 0.1);
@@ -22,6 +24,7 @@ export const CardContent = styled(Panel)`
 
 export const CardTop = styled(PanelHeader)`
   && {
+    display: flex;
     border-bottom: none;
     justify-content: flex-start;
     padding: 0;
@@ -67,15 +70,12 @@ export const CardHeaderContent = styled(TileContent)`
     padding: 0;
     margin-left: 20px;
     align-self: flex-start;
+
+    > h2 {
+      color: rgb(50, 54, 58);
+      font-weight: normal;
+    }
   }
-`;
-
-export const CardTitle = styled.h3`
-  font-size: 16px;
-`;
-
-export const CardCompany = styled.h4`
-  color: #b2b9bf;
 `;
 
 export const CardDescription = styled(PanelBody)`
