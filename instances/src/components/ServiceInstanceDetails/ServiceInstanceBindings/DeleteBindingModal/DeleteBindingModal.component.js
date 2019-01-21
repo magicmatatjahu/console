@@ -122,11 +122,7 @@ class DeleteBindingModal extends React.Component {
         content={modalContent}
         handleConfirmation={this.handleConfirmation}
         modalOpeningComponent={
-          <div style={{ textAlign: 'right' }}>
-            <Button padding={'0'} marginTop={'0'} marginBottom={'0'} id={id}>
-              <Icon icon={'\uE03D'} />
-            </Button>
-          </div>
+          <Button compact option="light" glyph="delete" />
         }
         warning={true}
         disabled={!submitEnabled}
