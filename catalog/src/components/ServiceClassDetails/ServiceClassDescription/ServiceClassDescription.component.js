@@ -13,10 +13,9 @@ const ServiceClassDescription = ({ description }) => {
   return (
     <ServiceClassDescriptionContentWrapper data-e2e-id="service-docs">
       <ContentHeader>
-        <Header>General Information</Header>
+        General Information
       </ContentHeader>
 
-      <Separator />
       <ContentDescription>
         <Text data-e2e-id="service-description" fontSize="14px">
           {description}
