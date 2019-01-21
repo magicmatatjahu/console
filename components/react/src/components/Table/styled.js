@@ -24,6 +24,7 @@ export const TableBody = styled(PanelBody)`
 
 export const TableContent = styled(Table)`
   && {
+    margin-bottom: 0;
     border: none;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
@@ -43,7 +44,8 @@ export const TableContent = styled(Table)`
   }
 `;
 
-export const EmptyData = styled.div`
+export const NotFoundMessage = styled.p`
+  width: 100%;
   font-size: 18px;
   padding: 20px 0;
   margin: 0 auto;
