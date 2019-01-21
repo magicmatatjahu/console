@@ -252,6 +252,7 @@ class BasicData extends React.Component {
               name="nameServiceBindingUsage"
               noBottomMargin
               noMessageField
+              marginTop={15}
             />
           </Grid.Unit>
         </Grid>
