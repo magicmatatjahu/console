@@ -168,17 +168,15 @@ function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
                 content={instance.status.message}
                 minWidth="250px"
               >
-                <TextOverflowWrapper>
-                  <span
-                    style={{
-                      color: statusColor(instance.status.type),
-                      cursor: 'help',
-                    }}
-                    title={instance.status.type}
-                  >
-                    {instance.status.type}
-                  </span>
-                </TextOverflowWrapper>
+                <span
+                  style={{
+                    color: statusColor(instance.status.type),
+                    cursor: 'help',
+                  }}
+                  title={instance.status.type}
+                >
+                  {instance.status.type}
+                </span>
               </Tooltip>
             );
           })(),
