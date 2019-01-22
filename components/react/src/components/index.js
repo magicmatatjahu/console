@@ -23,16 +23,16 @@ import ConfirmationModal from './Modal/Confirmation';
 import StepsModal from './Modal/Steps';
 import Notification from './Notification';
 import NotificationMessage from './NotificationMessage';
-import {     
-  Panel, 
-  PanelGrid, 
-  PanelBody, 
-  PanelHeader, 
-  PanelHead, 
-  PanelActions, 
-  PanelFilters, 
-  PanelContent, 
-  PanelFooter 
+import {
+  Panel,
+  PanelGrid,
+  PanelBody,
+  PanelHeader,
+  PanelHead,
+  PanelActions,
+  PanelFilters,
+  PanelContent,
+  PanelFooter,
 } from './Panel';
 import Paragraph from './Paragraph';
 // import Search from './Search';
@@ -43,16 +43,13 @@ import Tab from './Tabs/Tab';
 import Table from './Table';
 import Text from './Text';
 import ThemeWrapper from './ThemeWrapper';
-import { 
-  Tile,
-  TileMedia,
-  TileContent,
-} from './Tile';
+import { Tile, TileMedia, TileContent } from './Tile';
 import Token from './Token';
 import Toolbar from './Toolbar';
 import Tooltip from './Tooltip';
 import { MenuItem, MenuList, Menu } from '../fundamentals-react/Menu/Menu';
 import { SearchInput as Search } from '../fundamentals-react/SearchInput/SearchInput';
+import { Modal as NewModal } from '../fundamentals-react/Modal/Modal'; //change this name later
 import {
   FormFieldset,
   FormItem,
@@ -87,14 +84,14 @@ module.exports = {
   StepsModal,
   Notification,
   NotificationMessage,
-  Panel, 
-  PanelGrid, 
-  PanelBody, 
-  PanelHeader, 
-  PanelHead, 
-  PanelActions, 
-  PanelFilters, 
-  PanelContent, 
+  Panel,
+  PanelGrid,
+  PanelBody,
+  PanelHeader,
+  PanelHead,
+  PanelActions,
+  PanelFilters,
+  PanelContent,
   PanelFooter,
   Paragraph,
   Search,
@@ -121,4 +118,5 @@ module.exports = {
   Panel,
   PanelBody,
   FormSet,
+  NewModal,
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import LuigiClient from '@kyma-project/luigi-client';
 
 import {
@@ -7,7 +7,7 @@ import {
   ConfirmationModal,
   Table,
   Tooltip,
-  InformationModal,
+  NewModal,
 } from '@kyma-project/react-components';
 
 import {
@@ -23,12 +23,14 @@ import {
 
 import { getResourceDisplayName, statusColor } from '../../../commons/helpers';
 
-function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
-  const handleDelete = async element => {
-    await deleteServiceInstance(element.name);
+const deleteButton = <Button compact option="light" glyph="delete" />;
+
+export class ServiceInstancesTable extends Component {
+  state = {
+    showModal: Array(this.props.data.length).fill(false),
   };
 
-  const displayBindingsUsages = (bindings = []) => {
+  displayBindingsUsages = (bindings = []) => {
     switch (bindings.length) {
       case 0:
         return '-';
@@ -39,151 +41,170 @@ function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
     }
   };
 
-  const goToServiceCatalog = () => {
+  goToServiceCatalog = () => {
     LuigiClient.linkManager()
       .fromContext('namespaces')
       .navigate('service-catalog');
   };
 
-  const goToServiceClassDetails = name => {
+  goToServiceClassDetails = name => {
     LuigiClient.linkManager()
       .fromContext('namespaces')
       .navigate(`service-catalog/details/${name}`);
   };
 
-  const goToServiceInstanceDetails = name => {
+  goToServiceInstanceDetails = name => {
     LuigiClient.linkManager()
       .fromContext('namespaces')
       .navigate(`instances/details/${name}`);
   };
 
-  const deleteButton = (
-    <Button compact option="light" glyph="delete" />
-  );
+  render() {
+    const { data, deleteServiceInstance, loading } = this.props;
+    const handleDelete = async element => {
+      await deleteServiceInstance(element.name);
+    };
 
-  const addServiceInstanceRedirectButton = (
-    <Button compact option="light" onClick={goToServiceCatalog}>
-      + Add Instance
-    </Button>
-  );
-
-  const createTableData = () => {
-    return data.map(instance => {
-      return {
-        rowData: [
-          (
+    const createTableData = () => {
+      return data.map((instance, index) => {
+        return {
+          rowData: [
             <TextOverflowWrapper>
               <LinkButton data-e2e-id="instance-name">
                 <Link
-                  onClick={() => goToServiceInstanceDetails(instance.name)}
+                  onClick={() => this.goToServiceInstanceDetails(instance.name)}
                   data-e2e-id={`instance-name-${instance.name}`}
                   title={instance.name}
                 >
                   {instance.name}
                 </Link>
               </LinkButton>
-            </TextOverflowWrapper>
-          ),
-          (_ => {
-            const instanceClass = instance.clusterServiceClass || instance.serviceClass;
-            if (!instanceClass || !instanceClass.name) {
-              return '-';
-            }
-  
-            const classTitle = getResourceDisplayName(instanceClass);
-            return (
-              <TextOverflowWrapper>
-                <ServiceClassButton
-                  onClick={() => goToServiceClassDetails(instanceClass.name)}
-                  title={classTitle}
-                >
-                  {classTitle}
-                </ServiceClassButton>
-              </TextOverflowWrapper>
-            );
-          })(),
-          (_ => {
-            const plan = instance.clusterServicePlan || instance.servicePlan;
-            if (!plan) {
-              return '-';
-            }
+            </TextOverflowWrapper>,
+            (_ => {
+              const instanceClass =
+                instance.clusterServiceClass || instance.serviceClass;
+              if (!instanceClass || !instanceClass.name) {
+                return '-';
+              }
 
-            const planDisplayName = getResourceDisplayName(plan);
-            if (
-              instance.planSpec &&
-              instance.planSpec !== null &&
-              typeof instance.planSpec === 'object' &&
-              Object.keys(instance.planSpec).length
-            ) {
+              const classTitle = getResourceDisplayName(instanceClass);
               return (
                 <TextOverflowWrapper>
-                  <InformationModal
-                    title="Instances Parameters"
-                    modalOpeningComponent={
-                      <ServicePlanButton title={planDisplayName}>
-                        {planDisplayName}
-                      </ServicePlanButton>
+                  <ServiceClassButton
+                    onClick={() =>
+                      this.goToServiceClassDetails(instanceClass.name)
                     }
-                    content={
-                      <JSONCode>{JSON.stringify(instance.planSpec, null, 2)}</JSONCode>
-                    }
-                  />
+                    title={classTitle}
+                  >
+                    {classTitle}
+                  </ServiceClassButton>
                 </TextOverflowWrapper>
               );
-            }
-            return (
-              <TextOverflowWrapper>
-                <span title={planDisplayName}>{planDisplayName}</span>
-              </TextOverflowWrapper>
-            );
-          })(),
-          (_ => {
-            const bindingUsages = displayBindingsUsages(instance.serviceBindingUsages);
-            return (
-              <TextOverflowWrapper>
-                <span title={bindingUsages}>{bindingUsages}</span>
-              </TextOverflowWrapper>
-            );
-          })(),
-          (_ => {
-            if (!instance.status) {
-              return '-';
-            }
+            })(),
+            (_ => {
+              const plan = instance.clusterServicePlan || instance.servicePlan;
+              if (!plan) {
+                return '-';
+              }
 
-            let type = '';
-            switch (instance.status.type) {
-              case 'RUNNING':
-                type = 'success';
-                break;
-              case 'FAILED':
-                type = 'error';
-                break;
-              default:
-                type = 'warning';
-            }
-            return (
-              <Tooltip
-                wrapperStyles="max-width: 100%;"
-                type={type}
-                content={instance.status.message}
-                minWidth="250px"
-              >
-                <span
-                  style={{
-                    color: statusColor(instance.status.type),
-                    cursor: 'help',
-                  }}
-                  title={instance.status.type}
+              const planDisplayName = getResourceDisplayName(plan);
+
+              if (
+                instance.planSpec &&
+                instance.planSpec !== null &&
+                typeof instance.planSpec === 'object' &&
+                Object.keys(instance.planSpec).length
+              ) {
+                return (
+                  <TextOverflowWrapper>
+                    <ServicePlanButton
+                      title={planDisplayName}
+                      onClick={() => {
+                        this.setState({
+                          showModal: [
+                            ...this.state.showModal.slice(0, index),
+                            true,
+                            ...this.state.showModal.slice(index),
+                          ],
+                        });
+                      }}
+                    >
+                      {planDisplayName}
+                    </ServicePlanButton>
+                    <NewModal
+                      title="Instances Parameters"
+                      show={this.state.showModal[index]}
+                      onClose={() =>
+                        this.setState({
+                          showModal: Array(data.length).fill(false),
+                        })
+                      }
+                    >
+                      <JSONCode>
+                        {JSON.stringify(instance.planSpec, null, 2)}
+                      </JSONCode>
+                    </NewModal>
+                  </TextOverflowWrapper>
+                );
+              }
+              return (
+                <TextOverflowWrapper>
+                  <span title={planDisplayName}>{planDisplayName}</span>
+                </TextOverflowWrapper>
+              );
+            })(),
+            (_ => {
+              const bindingUsages = this.displayBindingsUsages(
+                instance.serviceBindingUsages,
+              );
+              return (
+                <TextOverflowWrapper>
+                  <span title={bindingUsages}>{bindingUsages}</span>
+                </TextOverflowWrapper>
+              );
+            })(),
+            (_ => {
+              if (!instance.status) {
+                return '-';
+              }
+
+              let type = '';
+              switch (instance.status.type) {
+                case 'RUNNING':
+                  type = 'success';
+                  break;
+                case 'FAILED':
+                  type = 'error';
+                  break;
+                default:
+                  type = 'warning';
+              }
+              return (
+                <Tooltip
+                  wrapperStyles="max-width: 100%;"
+                  type={type}
+                  content={instance.status.message}
+                  minWidth="250px"
                 >
-                  {instance.status.type}
-                </span>
-              </Tooltip>
-            );
-          })(),
-          (
+                  <TextOverflowWrapper>
+                    <span
+                      style={{
+                        color: statusColor(instance.status.type),
+                        cursor: 'help',
+                      }}
+                      title={instance.status.type}
+                    >
+                      {instance.status.type}
+                    </span>
+                  </TextOverflowWrapper>
+                </Tooltip>
+              );
+            })(),
             <ConfirmationModal
               title="Warning"
-              content={`Are you sure you want to delete instance "${instance.name}"?`}
+              content={`Are you sure you want to delete instance "${
+                instance.name
+              }"?`}
               confirmText="Delete"
               cancelText="Cancel"
               handleConfirmation={() => handleDelete(instance)}
@@ -192,27 +213,38 @@ function ServiceInstancesTable({ data, deleteServiceInstance, loading }) {
               width={'481px'}
               onShow={() => LuigiClient.uxManager().addBackdrop()}
               onHide={() => LuigiClient.uxManager().removeBackdrop()}
-            />
-          )
-        ]
-      }
-    })
+            />,
+          ],
+        };
+      });
+    };
+    const addServiceInstanceRedirectButton = (
+      <Button compact option="light" onClick={this.goToServiceCatalog}>
+        + Add Instance
+      </Button>
+    );
+    const title = 'Manage Service Instances';
+    const headers = [
+      'Name',
+      'Service Class',
+      'Plan',
+      'Bound Applications',
+      'Status',
+      '',
+    ];
+    const tableData = createTableData();
+
+    return (
+      <Table
+        title={title}
+        addHeaderContent={addServiceInstanceRedirectButton}
+        headers={headers}
+        tableData={tableData}
+        loadingData={loading}
+        notFoundMessage="No Service Instances found"
+      />
+    );
   }
-
-  const title = "Manage Service Instances";
-  const headers = ["Name", "Service Class", "Plan", "Bound Applications", 'Status', ''];
-  const tableData = createTableData();
-
-  return (
-    <Table
-      title={title}
-      addHeaderContent={addServiceInstanceRedirectButton}
-      headers={headers}
-      tableData={tableData}
-      loadingData={loading}
-      notFoundMessage="No Service Instances found"
-    />
-  );
 }
 
 export default ServiceInstancesTable;

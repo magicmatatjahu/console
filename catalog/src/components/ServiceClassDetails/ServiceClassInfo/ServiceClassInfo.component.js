@@ -77,10 +77,17 @@ const ServiceClassInfo = ({
   return (
     <div>
       <ServiceClassInfoContentWrapper>
-        <ImagePlaceholder imageUrl={imageUrl}>
-          {imageUrl ? <Image size="l" photo={imageUrl} /> : <Icon icon={'\ue113'} />}
+        <ImagePlaceholder>
+          {imageUrl ? (
+            <Image size="l" photo={imageUrl} />
+          ) : (
+            <Icon icon={'\ue113'} />
+          )}
         </ImagePlaceholder>
-        <ServiceClassInfoContent title={serviceClassDisplayName} data-e2e-id="service-title">
+        <ServiceClassInfoContent
+          title={serviceClassDisplayName}
+          data-e2e-id="service-title"
+        >
           {providerDisplayName || ''}
         </ServiceClassInfoContent>
       </ServiceClassInfoContentWrapper>
