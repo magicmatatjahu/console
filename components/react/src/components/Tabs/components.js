@@ -18,8 +18,8 @@ export const TabsHeader = styled.ul`
 `;
 
 export const TabsHeaderAdditionalContent = styled.li`
-  margin: 0 15px 0 auto;
-  padding: 17px 0 15px;
+  margin: 0 0 0 auto;
+  padding: 16px 15px 0 16px;
   border: none;
   position: relative;
   color: ${props => (props.active ? '#0a6ed1' : '#32363b')};

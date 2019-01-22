@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import dcopy from 'deep-copy';
 
-import { ConfirmationModal, Tooltip } from '@kyma-project/react-components';
+import { Button, ConfirmationModal, Tooltip } from '@kyma-project/react-components';
 
 import SchemaData from './SchemaData.component';
 import { bindingVariables } from '../InfoButton/variables';
@@ -173,9 +173,9 @@ class CreateCredentialsModal extends React.Component {
     ];
 
     const createCredentialsButton = (
-      <CreateCredentialsButton data-e2e-id={id} onClick={this.handleOpen}>
+      <Button compact option="light" data-e2e-id={id} onClick={this.handleOpen}>
         + Create Credentials
-      </CreateCredentialsButton>
+      </Button>
     );
 
     if (serviceInstance.status.type !== 'RUNNING') {
@@ -189,21 +189,21 @@ class CreateCredentialsModal extends React.Component {
           }
           minWidth="161px"
         >
-          <CreateCredentialsButton disabled={true}>
+          <Button compact option="light" disabled={true}>
             + Create Credentials
-          </CreateCredentialsButton>
+          </Button>
         </Tooltip>
       );
     }
 
     if (!bindingCreateParameterSchemaExists) {
       return (
-        <CreateCredentialsButton
+        <Button compact option="light"
           data-e2e-id={id}
           onClick={this.createWithoutOpening}
         >
           + Create Credentials
-        </CreateCredentialsButton>
+        </Button>
       );
     }
 

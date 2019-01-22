@@ -79,8 +79,6 @@ class Tabs extends React.Component {
 
     const props = this.getPropsFromActiveTab(children);
 
-    console.log(props);
-
     return (
       <TabsWrapper>
         <TabsHeader>

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import dcopy from 'deep-copy';
 
 import {
+  Button,
   ConfirmationModal,
   Tooltip,
   Separator,
@@ -274,9 +275,9 @@ class BindApplicationModal extends React.Component {
     ];
 
     const bindApplicationButton = (
-      <BindApplicationButton data-e2e-id={id} onClick={this.handleOpen}>
+      <Button compact option="light" data-e2e-id={id} onClick={this.handleOpen}>
         + Bind Application
-      </BindApplicationButton>
+      </Button>
     );
 
     if (serviceInstance.status.type !== 'RUNNING') {
@@ -290,9 +291,9 @@ class BindApplicationModal extends React.Component {
           }
           minWidth="161px"
         >
-          <BindApplicationButton disabled={true}>
+          <Button compact option="light" disabled={true}>
             + Bind Application
-          </BindApplicationButton>
+          </Button>
         </Tooltip>
       );
     }
@@ -308,9 +309,9 @@ class BindApplicationModal extends React.Component {
           }
           minWidth="161px"
         >
-          <BindApplicationButton disabled={true}>
+          <Button compact option="light" disabled={true}>
             + Bind Application
-          </BindApplicationButton>
+          </Button>
         </Tooltip>
       );
     }
