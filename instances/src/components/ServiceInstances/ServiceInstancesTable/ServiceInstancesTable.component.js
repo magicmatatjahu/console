@@ -132,7 +132,7 @@ export class ServiceInstancesTable extends Component {
                       {planDisplayName}
                     </ServicePlanButton>
                     <NewModal
-                      title="Instances Parameters"
+                      title="Instance's Parameters"
                       show={this.state.showModal[index]}
                       onClose={() =>
                         this.setState({
@@ -186,17 +186,15 @@ export class ServiceInstancesTable extends Component {
                   content={instance.status.message}
                   minWidth="250px"
                 >
-                  <TextOverflowWrapper>
-                    <span
-                      style={{
-                        color: statusColor(instance.status.type),
-                        cursor: 'help',
-                      }}
-                      title={instance.status.type}
-                    >
-                      {instance.status.type}
-                    </span>
-                  </TextOverflowWrapper>
+                  <span
+                    style={{
+                      color: statusColor(instance.status.type),
+                      cursor: 'help',
+                    }}
+                    title={instance.status.type}
+                  >
+                    {instance.status.type}
+                  </span>
                 </Tooltip>
               );
             })(),
