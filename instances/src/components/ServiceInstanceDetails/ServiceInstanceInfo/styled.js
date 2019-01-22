@@ -42,7 +42,6 @@ export const ContentDescription = styled(PanelBody)`
 `;
 
 export const Element = styled.div`
-  font-family: "72";
   margin: ${props => (props.margin ? props.margin : '16px 0 0 0')};
 `;
 
@@ -65,12 +64,11 @@ export const ServiceClassButton = styled.span`
   cursor: pointer;
 `;
 
-export const PlanModalButton = styled.button`
-  font-family: '72';
+export const PlanModalButton = styled.span`
   font-size: 14px;
   font-weight: normal;
   display: inline-block;
-  font-weight: 300;
+  font-weight: 500;
   border: none;
   margin: 0;
   padding: 0;
@@ -87,14 +85,15 @@ export const LabelWrapper = styled.div`
 `;
 
 export const ExternalLink = styled.a`
-  font-family: '72';
-  font-size: 14px;
-  color: #167ee6;
-  font-weight: 300;
-  text-decoration: none;
+  && {
+    font-size: 14px;
+    color: #167ee6;
+    font-weight: 500;
+    text-decoration: none;
 
-  :hover {
-    text-decoration: underline;
+    :hover {
+      text-decoration: underline;
+    }
   }
 `;
 

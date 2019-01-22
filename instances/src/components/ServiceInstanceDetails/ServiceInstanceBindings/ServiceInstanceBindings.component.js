@@ -142,17 +142,15 @@ class ServiceInstanceBindings extends React.Component {
               content={bindingUsage.status.message}
               minWidth="250px"
             >
-              <TextOverflowWrapper>
-                <span
-                  style={{
-                    color: statusColor(bindingUsage.status.type),
-                    cursor: `${bindingUsage.status.message ? 'help' : 'default'}`,
-                  }}
-                  title={bindingUsage.status.type}
-                >
-                  {bindingUsage.status.type}
-                </span>
-              </TextOverflowWrapper>
+              <span
+                style={{
+                  color: statusColor(bindingUsage.status.type),
+                  cursor: `${bindingUsage.status.message ? 'help' : 'default'}`,
+                }}
+                title={bindingUsage.status.type}
+              >
+                {bindingUsage.status.type}
+              </span>
             </Tooltip>
           ),
           (
@@ -210,17 +208,15 @@ class ServiceInstanceBindings extends React.Component {
               minWidth="250px"
               wrapperStyles="max-width: 100%;"
             >
-              <TextOverflowWrapper>
-                <span
-                  style={{
-                    color: statusColor(binding.status.type),
-                    cursor: `${binding.status.message ? 'help' : 'default'}`,
-                  }}
-                  title={binding.status.type}
-                >
-                  {binding.status.type}
-                </span>
-              </TextOverflowWrapper>
+              <span
+                style={{
+                  color: statusColor(binding.status.type),
+                  cursor: `${binding.status.message ? 'help' : 'default'}`,
+                }}
+                title={binding.status.type}
+              >
+                {binding.status.type}
+              </span>
             </Tooltip>
           ),
           (_ => {
