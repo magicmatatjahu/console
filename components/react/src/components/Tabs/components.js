@@ -27,7 +27,6 @@ export const TabsHeaderAdditionalContent = styled.li`
   outline: none;
   display: inline-block;
   transition: 0.2s color linear;
-  cursor: pointer;
 
   &:first-letter {
     text-transform: uppercase;
@@ -35,7 +34,6 @@ export const TabsHeaderAdditionalContent = styled.li`
 
   &:hover {
     color: #0a6ed1;
-    cursor: pointer;
   }
 `;
 

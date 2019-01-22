@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Dropdown, Search, Separator } from '@kyma-project/react-components';
+import { Button, Search, Separator } from '@kyma-project/react-components';
 
 import Filter from './Filter.component';
 
 import {
-  FilterContainer,
+  FiltersDropdown,
+  FiltersContainer,
   SearchWrapper,
   ClearAllActiveFiltersButton,
 } from './styled';
@@ -22,7 +23,7 @@ const FilterList = ({
   activeFiltersCount,
   clearAllActiveFilters,
 }) => (
-  <Dropdown
+  <FiltersDropdown
     name={activeFiltersCount ? `Filter (${activeFiltersCount})` : 'Filter'}
     enabled={filters && filters.length > 0}
     buttonWidth="97px"
@@ -31,23 +32,29 @@ const FilterList = ({
     primary
     arrowTop
     arrowTopRight="41px"
+    control= {
+      <Button option="emphasized" disabled={!(filters && filters.length > 0)}>
+        {activeFiltersCount ? `Filter (${activeFiltersCount})` : 'Filter'}
+      </Button>
+    }
   >
     <SearchWrapper>
       <Search
-        // backgroundColor="#fff"
+        noSearchBtn
         placeholder="Search"
         onChange={onSearch}
         id="search-filter"
       />
       <ClearAllActiveFiltersButton
         onClick={clearAllActiveFilters}
+        option="light"
         data-e2e-id="clear-all-filters"
       >
         Clear all filters
       </ClearAllActiveFiltersButton>
-      <Separator margin="15px -16px 15px" />
     </SearchWrapper>
-    <FilterContainer data-e2e-id="filter">
+    <Separator />
+    <FiltersContainer data-e2e-id="filter">
       {filters &&
         filters.map((filter, idx) => (
           <Fragment key={filter.name}>
@@ -65,14 +72,14 @@ const FilterList = ({
                     isMore={filter.isMore}
                   />
                   {idx < filters.length - 1 && (
-                    <Separator margin="15px -16px 15px" />
+                    <Separator margin="0 -10px 0"  />
                   )}
                 </Fragment>
               )}
           </Fragment>
         ))}
-    </FilterContainer>
-  </Dropdown>
+    </FiltersContainer>
+  </FiltersDropdown>
 );
 
 FilterList.propTypes = {
