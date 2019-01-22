@@ -8,5 +8,6 @@ export const FdModal = styled(Modal)`
   && .fd-modal__content {
     max-width: unset;
     width: 681px;
+    border-left: ${props => props.type === "negative" ? '6px solid #ee0000' : ""}
   }
 `;

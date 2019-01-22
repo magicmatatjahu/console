@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import Button from '../Button';
 import { FdModal } from './styled';
 
 class Modal extends Component {
@@ -15,15 +16,17 @@ class Modal extends Component {
         onShow: PropTypes.func,
         onHide: PropTypes.func,
         onConfirm: PropTypes.func.isRequired,
-        confirmationText: PropTypes.string,
+        confirmText: PropTypes.string,
         cancelText: PropTypes.string,
+        type: PropTypes.string,
     };
 
     static defaultProps = {
         title: 'Modal',
-        confirmationText: "Confirm",
+        confirmText: "Confirm",
         cancelText: "Cancel",
         actions: null,
+        type: "default",
     };
 
     onOpen = () => {
@@ -51,28 +54,30 @@ class Modal extends Component {
     }
 
     confirmActions = () => {
-        const { props: { confirmationText, cancelText } } = this;
+        const { props: { confirmText, cancelText, type } } = this;
 
         return (
             <Fragment>
                 <Button
+                    style={{ marginRight: "12px" }}
                     option="light"
                     onclick={this.onClose}
                 >
-                    {confirmationText}
+                    {cancelText}
                 </Button>
                 <Button
                     option="emphasized"
+                    type={type}
                     onclick={this.onConfirmation}
                 >
-                    {cancelText}
+                    {confirmText}
                 </Button>
             </Fragment>
         )
     }
 
     render() {
-        const { props: { children, title, modalOpeningComponent, actions, onConfirm }, state: { show } } = this;
+        const { props: { children, title, modalOpeningComponent, actions, onConfirm, type }, state: { show } } = this;
 
         let ac = actions;
         if (!ac && onConfirm && typeof onConfirm === 'function') {
@@ -82,7 +87,7 @@ class Modal extends Component {
         return (
             <Fragment>
                 <div onClick={this.onOpen}>{modalOpeningComponent}</div>
-                <FdModal title={title} show={show} onClose={this.onClose} actions={ac}>
+                <FdModal type={type} title={title} show={show} onClose={this.onClose} actions={ac}>
                     {children}
                 </FdModal>
             </Fragment>
