@@ -1,9 +1,20 @@
 import styled from 'styled-components';
-import { Button, Dropdown } from '@kyma-project/react-components';
+import { Button } from '@kyma-project/react-components';
 
-export const FiltersDropdown = styled(Dropdown)`
-  && {
-    margin-right: 10px;
+export const FiltersDropdown = styled.div`
+  .fd-popover__body--right {
+    &:after {
+      right: 22px;
+    }
+  }
+
+  .fd-popover__body--right {
+    margin-top: 5px;
+    right: 0px;
+
+    &:before {
+      right: 22px;
+    }
   }
 `;
 

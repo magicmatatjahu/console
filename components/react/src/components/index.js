@@ -49,7 +49,7 @@ import Toolbar from './Toolbar';
 import Tooltip from './Tooltip';
 import { MenuItem, MenuList, Menu } from '../fundamentals-react/Menu/Menu';
 import { SearchInput as Search } from '../fundamentals-react/SearchInput/SearchInput';
-import { Modal as NewModal } from '../fundamentals-react/Modal/Modal'; //change this name later
+import NewModal from './NewModal';
 import {
   FormFieldset,
   FormItem,
