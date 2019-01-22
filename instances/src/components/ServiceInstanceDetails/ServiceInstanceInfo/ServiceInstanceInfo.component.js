@@ -7,7 +7,7 @@ import {
   Icon,
   Header,
   Separator,
-  InformationModal,
+  NewModal,
   PanelActions,
 } from '@kyma-project/react-components';
 
@@ -98,23 +98,24 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
                 serviceInstance.planSpec !== null &&
                 typeof serviceInstance.planSpec === 'object' &&
                 Object.keys(serviceInstance.planSpec).length ? (
-                  <InformationModal
+                  <NewModal
                     modalOpeningComponent={
                       <PlanModalButton data-e2e-id="instance-service-plan">
                         {getResourceDisplayName(instancePlan)}
                       </PlanModalButton>
                     }
                     title="Instance Parameters"
-                    content={
-                      <JSONCode>
-                        {JSON.stringify(
-                          serviceInstance.planSpec,
-                          undefined,
-                          2,
-                        )}
-                      </JSONCode>
-                    }
-                  />
+                    onShow={() => LuigiClient.uxManager().addBackdrop()}
+                    onHide={() => LuigiClient.uxManager().removeBackdrop()}
+                  >
+                    <JSONCode>
+                      {JSON.stringify(
+                        serviceInstance.planSpec,
+                        undefined,
+                        2,
+                      )}
+                    </JSONCode>
+                  </NewModal>
                 ) : (
                   `${getResourceDisplayName(instancePlan) || '-'}`
                 )}

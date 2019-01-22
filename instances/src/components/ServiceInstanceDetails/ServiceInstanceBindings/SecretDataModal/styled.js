@@ -25,6 +25,7 @@ export const Item = styled.li`
   color: #515559;
   word-break: break-all;
 `;
+
 export const Text = styled.p`
   font-family: 72;
   font-size: 14px;

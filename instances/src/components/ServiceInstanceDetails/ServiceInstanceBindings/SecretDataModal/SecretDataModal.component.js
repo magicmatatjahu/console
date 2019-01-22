@@ -5,19 +5,9 @@ import LuigiClient from '@kyma-project/luigi-client';
 import {
   Button,
   InformationModal,
-  NewModal as UnstyledModal,
+  NewModal,
 } from '@kyma-project/react-components';
 import { List, Item, Bold, Text } from './styled';
-
-const Modal = styled(UnstyledModal)`
-  && .fd-modal {
-    max-width: unset;
-  }
-  && .fd-modal__content {
-    max-width: unset;
-    width: 681px;
-  }
-`;
 
 class SecretDataModal extends React.Component {
   constructor(props) {
@@ -53,7 +43,7 @@ class SecretDataModal extends React.Component {
   };
 
   render() {
-    const { title, data, prefix, showModal } = this.props;
+    const { title, data, prefix, modalOpeningComponent } = this.props;
     const { encoded } = this.state;
 
     const items = this.populateItems(data, encoded);
@@ -67,12 +57,11 @@ class SecretDataModal extends React.Component {
         <List>{items}</List>
       </Fragment>
     );
-    const footer = (
-      <Button normal first last onClick={this.toggleEncoded}>
+    const actions = (
+      <Button onClick={this.toggleEncoded}>
         {encoded ? 'Decode' : 'Encode'}
       </Button>
     );
-    showModal && LuigiClient.uxManager().addBackdrop();
 
     return (
       // <InformationModal
@@ -83,17 +72,15 @@ class SecretDataModal extends React.Component {
       //   onShow={() => LuigiClient.uxManager().addBackdrop()}
       //   onHide={() => LuigiClient.uxManager().removeBackdrop()}
       // />
-      <Modal
+      <NewModal
         title={title}
-        show={showModal}
-        onClose={() => {
-          LuigiClient.uxManager().removeBackdrop();
-          this.props.onClose();
-        }}
-        actions={footer}
+        modalOpeningComponent={modalOpeningComponent}
+        onShow={() => LuigiClient.uxManager().addBackdrop()}
+        onHide={() => LuigiClient.uxManager().removeBackdrop()}
+        actions={actions}
       >
         {content}
-      </Modal>
+      </NewModal>
     );
   }
 }

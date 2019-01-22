@@ -117,28 +117,15 @@ export class ServiceInstancesTable extends Component {
               ) {
                 return (
                   <TextOverflowWrapper>
-                    <ServicePlanButton
-                      title={planDisplayName}
-                      onClick={() => {
-                        this.setState({
-                          showModal: [
-                            ...this.state.showModal.slice(0, index),
-                            true,
-                            ...this.state.showModal.slice(index),
-                          ],
-                        });
-                      }}
-                    >
-                      {planDisplayName}
-                    </ServicePlanButton>
                     <NewModal
                       title="Instance's Parameters"
-                      show={this.state.showModal[index]}
-                      onClose={() =>
-                        this.setState({
-                          showModal: Array(data.length).fill(false),
-                        })
-                      }
+                      modalOpeningComponent={(
+                        <ServicePlanButton>
+                          {planDisplayName}
+                        </ServicePlanButton>
+                      )}
+                      onShow={() => LuigiClient.uxManager().addBackdrop()}
+                      onHide={() => LuigiClient.uxManager().removeBackdrop()}
                     >
                       <JSONCode>
                         {JSON.stringify(instance.planSpec, null, 2)}
