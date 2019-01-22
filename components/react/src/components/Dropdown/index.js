@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import Button from '../Button';
-
 import { RelativeWrapper, DropdownWrapper } from './components';
 import { Dropdown as Drpd } from '../../fundamentals-react/Dropdown/Dropdown';
 import { Button } from '../../fundamentals-react/Button/Button';
 import { Popover } from '../../fundamentals-react/Popover/Popover';
 import { Menu, MenuList } from '../../fundamentals-react/Menu/Menu';
+
 class Dropdown extends React.Component {
   static propTypes = {
     children: PropTypes.any.isRequired,
@@ -21,6 +20,8 @@ class Dropdown extends React.Component {
     secondary: PropTypes.bool,
     arrowTop: PropTypes.bool,
     arrowTopRight: PropTypes.string,
+    control: PropTypes.any.isRequired,
+    noArrow: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -32,6 +33,7 @@ class Dropdown extends React.Component {
     this.node = React.createRef();
     this.state = {
       visible: false,
+      noArrow: false,
     };
   }
 
@@ -75,6 +77,8 @@ class Dropdown extends React.Component {
       secondary,
       arrowTop,
       arrowTopRight,
+      control,
+      noArrow,
     } = this.props;
     const { visible } = this.state;
     const itemId = name
@@ -118,13 +122,9 @@ class Dropdown extends React.Component {
       // </RelativeWrapper>
       <Drpd>
         <Popover
-          noArrow
+          noArrow={noArrow}
           alignment="right"
-          control={
-            <Button dropdown disabled={!enabled}>
-              {name}
-            </Button>
-          }
+          control={control}
           body={children}
         />
       </Drpd>
