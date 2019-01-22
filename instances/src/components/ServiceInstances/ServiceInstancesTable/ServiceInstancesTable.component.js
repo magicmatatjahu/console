@@ -149,7 +149,7 @@ export class ServiceInstancesTable extends Component {
               }
               return (
                 <TextOverflowWrapper>
-                  <span title={planDisplayName}>{planDisplayName}</span>
+                  <span>{planDisplayName}</span>
                 </TextOverflowWrapper>
               );
             })(),
@@ -159,7 +159,7 @@ export class ServiceInstancesTable extends Component {
               );
               return (
                 <TextOverflowWrapper>
-                  <span title={bindingUsages}>{bindingUsages}</span>
+                  <span>{bindingUsages}</span>
                 </TextOverflowWrapper>
               );
             })(),
@@ -191,7 +191,6 @@ export class ServiceInstancesTable extends Component {
                       color: statusColor(instance.status.type),
                       cursor: 'help',
                     }}
-                    title={instance.status.type}
                   >
                     {instance.status.type}
                   </span>
