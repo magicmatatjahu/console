@@ -36,4 +36,5 @@ export const Text = styled.p`
 
 export const Bold = styled.span`
   font-weight: bold;
+  white-space: nowrap;
 `;
