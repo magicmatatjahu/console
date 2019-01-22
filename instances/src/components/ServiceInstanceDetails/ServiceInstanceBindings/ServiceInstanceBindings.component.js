@@ -199,18 +199,6 @@ class ServiceInstanceBindings extends React.Component {
             const secret = binding && binding.secret;
             return secret && Object.keys(secret).length ? (
               <TextOverflowWrapper>
-                {/* <SecretModalButton title={secret.name}>
-                      {secret.name}
-                    </SecretModalButton>
-                <SecretDataModal
-                  title={
-                    <Fragment>
-                      Secret <Bold>{secret.name}</Bold>
-                    </Fragment>
-                  }
-                  data={secret.data}
-                  
-                /> */}
                 <SecretModalButton
                   title={secret.name}
                   onClick={() => {
