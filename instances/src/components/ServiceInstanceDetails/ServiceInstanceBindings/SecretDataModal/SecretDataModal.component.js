@@ -1,10 +1,23 @@
 import React, { Fragment } from 'react';
 import Grid from 'styled-components-grid';
-
-import { Button, InformationModal } from '@kyma-project/react-components';
-
-import { List, Item, Bold, Text } from './styled';
+import styled from 'styled-components';
 import LuigiClient from '@kyma-project/luigi-client';
+import {
+  Button,
+  InformationModal,
+  NewModal as UnstyledModal,
+} from '@kyma-project/react-components';
+import { List, Item, Bold, Text } from './styled';
+
+const Modal = styled(UnstyledModal)`
+  && .fd-modal {
+    max-width: unset;
+  }
+  && .fd-modal__content {
+    max-width: unset;
+    width: 681px;
+  }
+`;
 
 class SecretDataModal extends React.Component {
   constructor(props) {
@@ -40,7 +53,7 @@ class SecretDataModal extends React.Component {
   };
 
   render() {
-    const { title, data, modalOpeningComponent, prefix } = this.props;
+    const { title, data, prefix, showModal } = this.props;
     const { encoded } = this.state;
 
     const items = this.populateItems(data, encoded);
@@ -59,16 +72,28 @@ class SecretDataModal extends React.Component {
         {encoded ? 'Decode' : 'Encode'}
       </Button>
     );
+    showModal && LuigiClient.uxManager().addBackdrop();
 
     return (
-      <InformationModal
+      // <InformationModal
+      //   title={title}
+      //   content={content}
+      //   footer={footer}
+      //   modalOpeningComponent={modalOpeningComponent}
+      //   onShow={() => LuigiClient.uxManager().addBackdrop()}
+      //   onHide={() => LuigiClient.uxManager().removeBackdrop()}
+      // />
+      <Modal
         title={title}
-        content={content}
-        footer={footer}
-        modalOpeningComponent={modalOpeningComponent}
-        onShow={() => LuigiClient.uxManager().addBackdrop()}
-        onHide={() => LuigiClient.uxManager().removeBackdrop()}
-      />
+        show={showModal}
+        onClose={() => {
+          LuigiClient.uxManager().removeBackdrop();
+          this.props.onClose();
+        }}
+        actions={footer}
+      >
+        {content}
+      </Modal>
     );
   }
 }
