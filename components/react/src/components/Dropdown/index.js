@@ -37,14 +37,6 @@ class Dropdown extends React.Component {
     };
   }
 
-  // componentWillMount() {
-  //   document.addEventListener('mousedown', this.handleClickOutside, false);
-  // }
-
-  // componentWillUnmount() {
-  //   document.removeEventListener('mousedown', this.handleClickOutside, false);
-  // }
-
   toggleDropdown = () => {
     this.setState({
       visible: !this.state.visible,
@@ -89,37 +81,6 @@ class Dropdown extends React.Component {
       : '';
 
     return (
-      // <RelativeWrapper innerRef={node => (this.node = node)}>
-      //   <Button
-      //     normal
-      //     width={buttonWidth}
-      //     padding={
-      //       buttonWidth
-      //         ? '9px 0'
-      //         : !primary && !secondary
-      //           ? '9px 0 9px 16px'
-      //           : '9px 16px'
-      //     }
-      //     first={firstButton}
-      //     last={lastButton}
-      //     marginTop={marginTop}
-      //     primary={primary}
-      //     secondary={secondary}
-      //     onClick={this.toggleDropdown}
-      //     disabled={!enabled}
-      //     data-e2e-id={`toggle-${itemId}`}
-      //   >
-      //     {name}
-      //   </Button>
-      //   <DropdownWrapper
-      //     visible={visible}
-      //     arrowTop={arrowTop}
-      //     arrowTopRight={arrowTopRight}
-      //     data-e2e-id={`wrapper-${itemId}`}
-      //   >
-      //     {children}
-      //   </DropdownWrapper>
-      // </RelativeWrapper>
       <Drpd>
         <Popover
           noArrow={noArrow}
