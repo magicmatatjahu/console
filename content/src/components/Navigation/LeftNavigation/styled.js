@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+<<<<<<< HEAD
 export const GoBack = styled.div`
   margin: 18px 0 20px 0;
   color: #51555a;
@@ -22,5 +23,10 @@ export const GoBack = styled.div`
     cursor: pointer;
     background-color: #fafafa;
     color: #085caf;
+=======
+export const ToolbarWrapper = styled.div`
+  > .fd-action-bar {
+    padding: 20px 12px 0 12px;
+>>>>>>> Remove warnings
   }
 `;

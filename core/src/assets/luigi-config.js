@@ -657,6 +657,7 @@ getBackendModules()
           ]
         }
       },
+<<<<<<< HEAD
       routing: {
         nodeParamPrefix: '~',
         skipRoutingForUrlPatterns: [/access_token=/, /id_token=/]
@@ -674,6 +675,28 @@ getBackendModules()
             title,
             favicon
           };
+=======
+      {
+        pathSegment: 'docs',
+        viewUrl: config.docsModuleUrl,
+        label: 'Docs',
+        hideSideNav: true,
+        context: {
+          idToken: token
+        },
+        icon: 'sap-box'
+      }
+    ],
+    contextSwitcher: {
+      defaultLabel: 'Select Namespace ...',
+      parentNodePath: '/home/namespaces', // absolute path
+      lazyloadOptions: true, // load options on click instead on page load
+      options: getEnvs,
+      actions: [
+        {
+          label: '+ New Namespace',
+          link: '/home/workspace?~showModal=true'
+>>>>>>> Remove warnings
         }
       }
     });

@@ -17,7 +17,11 @@ export const NavigationHeader = styled.div`
   background: #fafafa;
   font-weight: 500;
   text-align: left;
+<<<<<<< HEAD
   color: rgba(63, 80, 96, 0.8);
+=======
+  color: rgba(63, 80, 96, 0.6);
+>>>>>>> Remove warnings
   padding: 10px 20px 10px 16px;
   font-size: 14px;
   line-height: 20px;
@@ -37,7 +41,11 @@ export const NavigationItems = styled.ul`
     margin-top: ${props => (props.marginTop ? '10px' : '0')};
     margin-bottom: ${props => (props.marginTop ? '-10px' : '0')};
     margin-left: ${props => (props.secondary ? '10px' : '0')};
+<<<<<<< HEAD
     padding: ${props => props.showAll ? "0 34px 20px 34px" : "0"};
+=======
+    padding: ${props => props.showAll ? "0 34px" : "0"};
+>>>>>>> Remove warnings
     max-height: ${props =>
       (props.show && '9000px') || (props.showAll && 'auto') || '0'};
     overflow: ${props => (props.show ? 'auto' : 'hidden')};
