@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Grid from 'styled-components-grid';
 import { PanelGrid, Panel, PanelHeader, PanelBody } from '@kyma-project/react-components';
 
 export const ServiceInstanceInfoWrapper = styled(PanelGrid)`

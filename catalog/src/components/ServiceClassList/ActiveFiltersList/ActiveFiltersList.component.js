@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Token, Icon } from '@kyma-project/react-components';
+import { Token } from '@kyma-project/react-components';
 
 import {
   ActiveFiltersListWrapper,
@@ -41,10 +41,3 @@ ActiveFiltersList.propTypes = {
 };
 
 export default ActiveFiltersList;
-
-{/* <ActiveFilter key={`${filter}-${id}`} data-e2e-id="active-filter">
-{filter}
-<CancelButton onClick={() => onCancel(category, filter)}>
-  <Icon icon={'\uE1C7'} color="#0a6ed1" />
-</CancelButton>
-</ActiveFilter> */}

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media, Tile, TileMedia, TileContent, Image as Img } from '@kyma-project/react-components';
+import { Tile, TileMedia, TileContent, Image as Img } from '@kyma-project/react-components';
 
 export const ServiceClassInfoContentWrapper = styled(Tile)`
   && {

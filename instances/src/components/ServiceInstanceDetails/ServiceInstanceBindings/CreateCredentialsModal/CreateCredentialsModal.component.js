@@ -6,8 +6,6 @@ import { Button, ConfirmationModal, Tooltip } from '@kyma-project/react-componen
 import SchemaData from './SchemaData.component';
 import { bindingVariables } from '../InfoButton/variables';
 
-import { CreateCredentialsButton } from './styled';
-
 import { clearEmptyPropertiesInObject } from '../../../../commons/helpers';
 import LuigiClient from '@kyma-project/luigi-client';
 

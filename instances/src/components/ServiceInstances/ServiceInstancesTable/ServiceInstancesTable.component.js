@@ -3,7 +3,6 @@ import LuigiClient from '@kyma-project/luigi-client';
 
 import {
   Button,
-  Icon,
   Table,
   Tooltip,
   NewModal,
@@ -13,10 +12,8 @@ import {
   LinkButton,
   Link,
   ServiceClassButton,
-  AddServiceInstanceRedirectButton,
   ServicePlanButton,
   JSONCode,
-  DeleteButtonWrapper,
   TextOverflowWrapper,
 } from './styled';
 
