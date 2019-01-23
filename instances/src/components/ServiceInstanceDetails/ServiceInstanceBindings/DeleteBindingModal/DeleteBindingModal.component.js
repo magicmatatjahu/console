@@ -2,8 +2,6 @@ import React, { Fragment } from 'react';
 
 import {
   NewModal,
-  ConfirmationModal,
-  Icon,
   Button,
   Separator,
 } from '@kyma-project/react-components';
@@ -61,7 +59,6 @@ class DeleteBindingModal extends React.Component {
       bindingExists,
       bindingUsageName,
       relatedBindingUsage,
-      id,
     } = this.props;
     const { bindingChecked, bindingUsageChecked } = this.state;
 

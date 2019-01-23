@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 import { Token } from '../../fundamentals-react';
 
+export const LabelWrapper = styled.div`
+    cursor: ${props => props.cursorType ? props.cursorType : "auto"};
+`;
+
 export const Label = styled(Token)`
     && {
-        cursor: ${props => props.cursorType ? props.cursorType : "auto"};
         transition: 0.3s background-color ease-in-out;
 
         &:hover {
@@ -16,3 +19,4 @@ export const Label = styled(Token)`
         }
     }
 `;
+ 

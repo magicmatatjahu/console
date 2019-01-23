@@ -11,8 +11,6 @@ import {
   CardHeaderContent,
   CardThumbnail,
   CardImage,
-  CardTitle,
-  CardCompany,
   CardDescription,
   CardFooter,
   CardLabelWrapper,

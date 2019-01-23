@@ -71,22 +71,3 @@ const ServiceInstanceToolbar = ({
 };
 
 export default ServiceInstanceToolbar;
-
-      {/* <ConfirmationModal
-        title="Delete"
-        content={`Are you sure you want to delete instance "${
-          serviceInstance.name
-        }"?`}
-        confirmText="Delete"
-        cancelText="Cancel"
-        handleConfirmation={handleDelete}
-        modalOpeningComponent={
-          <Button option="light" type="negative">
-            Delete
-          </Button>
-        }
-        warning={true}
-        width={'481px'}
-        onShow={() => LuigiClient.uxManager().addBackdrop()}
-        onHide={() => LuigiClient.uxManager().removeBackdrop()}
-      /> */}

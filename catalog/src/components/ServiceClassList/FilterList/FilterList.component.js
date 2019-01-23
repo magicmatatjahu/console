@@ -12,8 +12,6 @@ import {
   ClearAllActiveFiltersButton,
 } from './styled';
 
-console.log(FiltersDropdown)
-
 const FilterList = ({
   filters,
   filtersExists,

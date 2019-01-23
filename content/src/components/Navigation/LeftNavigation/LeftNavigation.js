@@ -1,19 +1,23 @@
-import React, { Fragment } from "react";
-
+import React from "react";
 import { Toolbar } from '@kyma-project/react-components';
 import NavigationList from "./NavigationList/NavigationList";
 
+import {
+  ToolbarWrapper
+} from './styled';
+
 function LeftNavigation(props) {
   return (
-    <Fragment>
-      <Toolbar
-        headline="Docs"
-        addSeparator
-        smallText
-        back={props.history.goBack}
-      />
+    <>
+      <ToolbarWrapper>
+        <Toolbar
+          title="Docs"
+          addSeparator
+          goBack={props.history.goBack}
+        />
+      </ToolbarWrapper>
       <NavigationList {...props} />
-    </Fragment>
+    </>
   );
 }
 

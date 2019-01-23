@@ -277,8 +277,6 @@ class ServiceInstanceBindings extends React.Component {
     const {
       createBinding,
       createBindingUsage,
-      deleteBinding,
-      deleteBindingUsage,
       serviceInstance,
       callback,
     } = this.props;

@@ -15,8 +15,6 @@ import {
   ServiceClassInfoContentWrapper,
   ImagePlaceholder,
   ServiceClassInfoContent,
-  ServiceTitle,
-  ServiceProvider,
   ExternalLink,
   Image,
   LabelsWrapper,
