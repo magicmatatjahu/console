@@ -320,7 +320,7 @@ class BindApplicationModal extends React.Component {
     const title = (
       <>
         <span>{'Bind Application'}</span>
-        <InfoButton content={bindingVariables.serviceBingingUsage} />
+        <InfoButton content={bindingVariables.serviceBingingUsage} orientation="bottom" />
       </>
     )
 
