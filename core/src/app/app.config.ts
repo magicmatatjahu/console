@@ -50,6 +50,7 @@ const config = {
   serviceInstancesModuleUrl: `https://instances.${domain}`,
   serviceBrokersModuleUrl: `https://brokers.${domain}`,
   docsModuleUrl: `https://docs.${domain}`,
+  serviceCatalogUIModuleUrl: `https://service-catalog.${domain}`,
   kubeconfigGeneratorUrl: `https://configurations-generator.${domain}/kube-config`,
   idpLogoutUrl
 };

@@ -8,6 +8,7 @@ var config = {
   lambdasModuleUrl: 'https://lambdas-ui.' + k8sDomain,
   serviceBrokersModuleUrl: 'https://brokers.' + k8sDomain,
   docsModuleUrl: 'https://docs.' + k8sDomain,
+  serviceCatalogUIModuleUrl: 'https://service-catalog.' + k8sDomain,
   graphqlApiUrl: 'https://ui-api.' + k8sDomain + '/graphql'
 };
 
@@ -41,10 +42,10 @@ function getNodes(context) {
     {
       category: { label: 'Service Catalog', icon: 'add-coursebook' },
       navigationContext: 'service-catalog',
-      pathSegment: 'service-catalog',
+      pathSegment: 'catalog',
       label: 'Catalog',
       viewGroup: 'catalog',
-      viewUrl: config.serviceCatalogModuleUrl,
+      viewUrl: config.serviceCatalogUIModuleUrl + '/catalog',
       keepSelectedForChildren: true,
       children: [
         {
@@ -52,7 +53,7 @@ function getNodes(context) {
           children: [
             {
               pathSegment: ':serviceId',
-              viewUrl: config.serviceCatalogModuleUrl + '/details/:serviceId'
+              viewUrl: config.serviceCatalogUIModuleUrl + '/details/:serviceId'
             }
           ]
         }
@@ -63,7 +64,7 @@ function getNodes(context) {
       keepSelectedForChildren: true,
       pathSegment: 'instances',
       label: 'Instances',
-      viewUrl: config.serviceInstancesModuleUrl,
+      viewUrl: config.serviceCatalogUIModuleUrl + '/instances',
       viewGroup: 'instances',
       children: [
         {
@@ -81,7 +82,13 @@ function getNodes(context) {
       category: 'Service Catalog',
       pathSegment: 'brokers',
       label: 'Brokers',
-      viewUrl: config.serviceBrokersModuleUrl
+      viewUrl: config.serviceCatalogUIModuleUrl + '/brokers',
+    },
+    {
+      category: 'Service Catalog',
+      pathSegment: 'cluster-brokers',
+      label: 'Cluster Brokers',
+      viewUrl: config.serviceCatalogUIModuleUrl + '/cluster-brokers',
     },
     {
       category: { label: 'Configuration', icon: 'key-user-settings' },
