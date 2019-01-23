@@ -3,7 +3,8 @@ import dcopy from 'deep-copy';
 
 import {
   Button,
-  ConfirmationModal,
+  Icon,
+  NewModal,
   Tooltip,
   Separator,
 } from '@kyma-project/react-components';
@@ -316,26 +317,32 @@ class BindApplicationModal extends React.Component {
       );
     }
 
+    const title = (
+      <>
+        <span>{'Bind Application'}</span>
+        <InfoButton content={bindingVariables.serviceBingingUsage} />
+      </>
+    )
+
     return (
-      <ConfirmationModal
+      <NewModal
         ref={modal => {
           this.child = modal;
         }}
         key={serviceInstance.name}
-        title={'Bind Application'}
+        title={title}
         confirmText="Create"
-        cancelText="Cancel"
         content={content}
-        handleConfirmation={this.handleConfirmation}
+        onConfirm={this.handleConfirmation}
         modalOpeningComponent={bindApplicationButton}
-        disabled={disabled}
+        disabledConfirm={disabled}
         tooltipData={tooltipData}
-        borderFooter={true}
         handleClose={this.clearState}
-        headerAdditionalInfo={bindingVariables.serviceBingingUsage}
         onShow={() => LuigiClient.uxManager().addBackdrop()}
         onHide={() => LuigiClient.uxManager().removeBackdrop()}
-      />
+      >
+        {content}
+      </NewModal>
     );
   }
 }

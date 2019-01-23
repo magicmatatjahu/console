@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 import {
+  NewModal,
   ConfirmationModal,
   Icon,
   Button,
@@ -40,7 +41,6 @@ class DeleteBindingModal extends React.Component {
   handleConfirmation = () => {
     const { bindingUsageChecked, bindingChecked } = this.state;
     this.handleDeletion(bindingUsageChecked, bindingChecked);
-    this.child.child.handleCloseModal();
   };
 
   toggleBinding = () => {
@@ -115,20 +115,21 @@ class DeleteBindingModal extends React.Component {
     );
 
     return (
-      <ConfirmationModal
+      <NewModal
         ref={modal => (this.child = modal)}
-        title={'Warning'}
+        title='Warning'
         confirmText="Delete"
-        content={modalContent}
-        handleConfirmation={this.handleConfirmation}
+        onConfirm={this.handleConfirmation}
         modalOpeningComponent={
           <Button compact option="light" glyph="delete" />
         }
-        warning={true}
+        type="negative"
         disabled={!submitEnabled}
         onShow={() => LuigiClient.uxManager().addBackdrop()}
         onHide={() => LuigiClient.uxManager().removeBackdrop()}
-      />
+      >
+        {modalContent}
+      </NewModal>
     );
   }
 }
