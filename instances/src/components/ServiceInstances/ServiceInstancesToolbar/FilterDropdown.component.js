@@ -1,38 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import {
   Dropdown,
-  Text,
-  MenuList,
-  MenuItem,
-  Menu,
-  CheckBox,
   FormSet,
   FormInput,
-  FormLabel as UnstyledFormLabel,
   FormItem,
-  Panel as UnstyledPanel,
-  PanelBody as UnstyledPanelBody,
 } from '@kyma-project/react-components';
-import { List, Item, Checkmark } from './styled';
 
-const FormLabel = styled(UnstyledFormLabel)`
-  &&& {
-    padding-right: 10px;
-    font-size: 16px;
-  }
-`;
-const PanelBody = styled(UnstyledPanelBody)`
-  && {
-    padding: 12px;
-  }
-`;
-const Panel = styled(UnstyledPanel)`
-  && {
-    min-width: 200px;
-  }
-`;
+import { FormLabel, Panel, PanelBody } from './styled';
+
 const FilterDropdown = ({ filter, activeValues = [], onChange }) =>
   !filter ? null : (
     <Dropdown name="Filter" enabled={filter.values && filter.values.length > 0}>
@@ -61,24 +37,6 @@ const FilterDropdown = ({ filter, activeValues = [], onChange }) =>
           </FormSet>
         </PanelBody>
       </Panel>
-      {/* <MenuList>
-        {filter.values.map(item => {
-          const count = item.count !== null ? ` (${item.count})` : '';
-          const active = activeValues.some(value => value === item.value);
-
-          return (
-            <MenuItem
-              key={item.name}
-              onClick={() => onChange(filter.name, item.value)}
-            >
-              <Checkmark checked={active} />
-
-              {item.name}
-              {count}
-            </MenuItem>
-          );
-        })}
-      </MenuList> */}
     </Dropdown>
   );
 

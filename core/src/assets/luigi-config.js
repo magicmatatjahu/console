@@ -590,7 +590,7 @@ Luigi.setConfig({
         context: {
           idToken: token
         },
-        icon: 'sys-help'
+        icon: 'sap-box'
       }
     ],
     contextSwitcher: {

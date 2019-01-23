@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Header, Separator, Text } from '@kyma-project/react-components';
+import { Text } from '@kyma-project/react-components';
 
 import {
   ServiceClassDescriptionContentWrapper,

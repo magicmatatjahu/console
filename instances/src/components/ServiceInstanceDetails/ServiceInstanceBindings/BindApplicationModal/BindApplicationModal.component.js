@@ -3,7 +3,6 @@ import dcopy from 'deep-copy';
 
 import {
   Button,
-  Icon,
   NewModal,
   Tooltip,
   Separator,
@@ -16,7 +15,7 @@ import SchemaData from './SchemaData.component';
 import { bindingVariables } from '../InfoButton/variables';
 import InfoButton from '../InfoButton/InfoButton.component';
 
-import { BindApplicationButton, SubSectionTitle } from './styled';
+import { SubSectionTitle } from './styled';
 
 import builder from '../../../../commons/builder';
 import { clearEmptyPropertiesInObject } from '../../../../commons/helpers';
