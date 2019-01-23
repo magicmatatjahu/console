@@ -19,6 +19,7 @@ class Modal extends Component {
         confirmText: PropTypes.string,
         cancelText: PropTypes.string,
         type: PropTypes.string,
+        disabledConfirm: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -27,6 +28,7 @@ class Modal extends Component {
         cancelText: "Cancel",
         actions: null,
         type: "default",
+        disabledConfirm: false,
     };
 
     onOpen = () => {
@@ -54,21 +56,21 @@ class Modal extends Component {
     }
 
     confirmActions = () => {
-        const { props: { confirmText, cancelText, type } } = this;
+        const { props: { confirmText, cancelText, type, disabledConfirm } } = this;
 
         return (
             <Fragment>
                 <Button
                     style={{ marginRight: "12px" }}
                     option="light"
-                    onclick={this.onClose}
+                    onClick={this.onClose}
                 >
                     {cancelText}
                 </Button>
                 <Button
-                    option="emphasized"
                     type={type}
-                    onclick={this.onConfirmation}
+                    onClick={this.onConfirmation}
+                    disabled={disabledConfirm}
                 >
                     {confirmText}
                 </Button>
