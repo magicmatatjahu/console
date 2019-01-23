@@ -13,7 +13,7 @@ const InfoButton = ({ content }) => {
         minWidth={'320px'}
         type="light"
       >
-        <Icon icon={'\ue1c4'} />
+        <Icon glyph="sys-help" />
       </Tooltip>
     </InfoButtonWrapper>
   );
