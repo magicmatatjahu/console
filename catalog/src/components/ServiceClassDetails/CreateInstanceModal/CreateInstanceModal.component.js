@@ -28,7 +28,6 @@ class CreateInstanceModal extends React.Component {
 
   constructor(props) {
     super(props);
-    this.child = React.createRef();
     this.state = this.getInitialState();
   }
 
@@ -196,7 +195,6 @@ class CreateInstanceModal extends React.Component {
     });
     if (success) {
       this.clearState();
-      this.child.child.setState({ showModal: false });
       LuigiClient.uxManager().removeBackdrop();
     }
   };
@@ -274,9 +272,7 @@ class CreateInstanceModal extends React.Component {
 
     return (
       <NewModal
-        ref={modal => {
-          this.child = modal;
-        }}
+        width={'681px'}
         title={
           <p style={{ marginRight: '25px' }}>
             Provision{' '}
@@ -287,15 +283,14 @@ class CreateInstanceModal extends React.Component {
             <Bold>{environment}</Bold>
           </p>
         }
+        type={'emphasized'}
         modalOpeningComponent={modalOpeningComponent}
-        content={content}
         confirmText="Create Instance"
         cancelText="Cancel"
-        tooltipData={tooltipData}
+        //tooltipData={tooltipData}
         disabledConfirm={disabled}
         onConfirm={this.handleConfirmation}
         handleClose={this.clearState}
-        borderFooter={true}
         waiting={creatingInstance}
         onShow={this.onShow}
         onHide={this.onHide}
