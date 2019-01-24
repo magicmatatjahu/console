@@ -6,6 +6,7 @@
     "instances",
     "brokers",
     "content",
+    "components/react",
     "lambda",
     "tests"
   ],
