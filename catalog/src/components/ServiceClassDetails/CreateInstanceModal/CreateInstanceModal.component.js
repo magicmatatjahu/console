@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import dcopy from 'deep-copy';
 
-import { ConfirmationModal, Separator } from '@kyma-project/react-components';
+import {
+  ConfirmationModal,
+  Separator,
+  NewModal,
+} from '@kyma-project/react-components';
 import LuigiClient from '@kyma-project/luigi-client';
 
 import BasicData from './BasicData.component';
@@ -269,7 +273,7 @@ class CreateInstanceModal extends React.Component {
     );
 
     return (
-      <ConfirmationModal
+      <NewModal
         ref={modal => {
           this.child = modal;
         }}
@@ -288,14 +292,16 @@ class CreateInstanceModal extends React.Component {
         confirmText="Create Instance"
         cancelText="Cancel"
         tooltipData={tooltipData}
-        disabled={disabled}
-        handleConfirmation={this.handleConfirmation}
+        disabledConfirm={disabled}
+        onConfirm={this.handleConfirmation}
         handleClose={this.clearState}
         borderFooter={true}
         waiting={creatingInstance}
         onShow={this.onShow}
         onHide={this.onHide}
-      />
+      >
+        {content}
+      </NewModal>
     );
   }
 }
