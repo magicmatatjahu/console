@@ -35,7 +35,7 @@ import {
   PanelFooter,
 } from './Panel';
 import Paragraph from './Paragraph';
-// import Search from './Search';
+import Search from './Search';
 import Separator from './Separator';
 import Spinner from './Spinner';
 import Tabs from './Tabs';
@@ -48,7 +48,6 @@ import Token from './Token';
 import Toolbar from './Toolbar';
 import Tooltip from './Tooltip';
 import { MenuItem, MenuList, Menu } from '../fundamentals-react/Menu/Menu';
-import { SearchInput as Search } from '../fundamentals-react/SearchInput/SearchInput';
 import NewModal from './NewModal';
 import {
   FormFieldset,
