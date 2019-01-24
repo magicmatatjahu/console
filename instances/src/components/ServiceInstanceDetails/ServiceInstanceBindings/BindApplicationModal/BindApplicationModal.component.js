@@ -24,7 +24,6 @@ import LuigiClient from '@kyma-project/luigi-client';
 class BindApplicationModal extends React.Component {
   constructor(props) {
     super(props);
-    this.child = React.createRef();
     this.state = this.getInitialState();
   }
 
@@ -319,19 +318,19 @@ class BindApplicationModal extends React.Component {
     const title = (
       <>
         <span>{'Bind Application'}</span>
-        <InfoButton content={bindingVariables.serviceBingingUsage} orientation="bottom" />
+        <InfoButton
+          content={bindingVariables.serviceBingingUsage}
+          orientation="bottom"
+        />
       </>
-    )
+    );
 
     return (
       <NewModal
-        ref={modal => {
-          this.child = modal;
-        }}
+        width={'681px'}
         key={serviceInstance.name}
         title={title}
         confirmText="Create"
-        content={content}
         onConfirm={this.handleConfirmation}
         modalOpeningComponent={bindApplicationButton}
         disabledConfirm={disabled}
