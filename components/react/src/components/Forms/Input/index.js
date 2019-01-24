@@ -1,13 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-  FieldWrapper,
-  FieldLabel,
-  FieldIcon,
-  FieldMessage,
-  FieldRequired,
-} from '../field-components';
+
 import {
   FormSet as UnstyledFormSet,
   FormItem,
@@ -123,11 +117,11 @@ class Input extends React.Component {
       label,
       placeholder,
       handleChange,
-      validFunctions,
+
       name,
       required,
       message = '',
-      onBlur,
+
       isSuccess,
       isWarning,
       isError,
@@ -163,9 +157,8 @@ class Input extends React.Component {
       <FormSet marginTop={marginTop}>
         <FormItem>
           {label && (
-            <FormLabel htmlFor={randomId} /*required={required}*/>
+            <FormLabel htmlFor={randomId} required={required}>
               {label}
-              {required ? <FieldRequired>*</FieldRequired> : ''}
             </FormLabel>
           )}
           <FormInput
