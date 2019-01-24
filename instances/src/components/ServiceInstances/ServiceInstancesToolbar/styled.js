@@ -6,9 +6,27 @@ import {
   PanelBody as UnstyledPanelBody,
 } from '@kyma-project/react-components';
 
+export const FiltersDropdownWrapper = styled.div`
+  .fd-popover__body--right {
+    &:after {
+      right: 22px;
+    }
+  }
+
+  .fd-popover__body--right {
+    margin-top: 5px;
+    right: 0px;
+
+    &:before {
+      right: 22px;
+    }
+  }
+`;
+
 export const FormLabel = styled(UnstyledFormLabel)`
   &&& {
-    padding-right: 10px;
+    position: relative;
+    top: -2px;
     font-size: 16px;
   }
 `;
