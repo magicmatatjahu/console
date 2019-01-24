@@ -1,16 +1,20 @@
 import React from 'react';
 
-import { InformationModal } from '@kyma-project/react-components';
+import LuigiClient from '@kyma-project/luigi-client';
+import { NewModal, Button } from '@kyma-project/react-components';
 
 import { JSONCode } from './styled';
 
-const ParametersDataModal = ({ title, data, modalOpeningComponent }) => {
+const ParametersDataModal = ({ title, data }) => {
   return (
-    <InformationModal
+    <NewModal
       title={title}
-      content={<JSONCode>{JSON.stringify(data, undefined, 2)}</JSONCode>}
-      modalOpeningComponent={modalOpeningComponent}
-    />
+      modalOpeningComponent={<Button compact option="light" glyph="syntax" />}
+      onShow={() => LuigiClient.uxManager().addBackdrop()}
+      onHide={() => LuigiClient.uxManager().removeBackdrop()}
+    >
+      <JSONCode>{JSON.stringify(data, undefined, 2)}</JSONCode>
+    </NewModal>
   );
 };
 

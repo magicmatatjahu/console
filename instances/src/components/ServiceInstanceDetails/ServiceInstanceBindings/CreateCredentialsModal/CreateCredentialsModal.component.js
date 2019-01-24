@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import dcopy from 'deep-copy';
 
-import { Button, ConfirmationModal, Tooltip } from '@kyma-project/react-components';
+import { Button, NewModal, Tooltip } from '@kyma-project/react-components';
 
 import SchemaData from './SchemaData.component';
 import { bindingVariables } from '../InfoButton/variables';
+import InfoButton from '../InfoButton/InfoButton.component';
 
 import { clearEmptyPropertiesInObject } from '../../../../commons/helpers';
 import LuigiClient from '@kyma-project/luigi-client';
@@ -196,7 +197,9 @@ class CreateCredentialsModal extends React.Component {
 
     if (!bindingCreateParameterSchemaExists) {
       return (
-        <Button compact option="light"
+        <Button
+          compact
+          option="light"
           data-e2e-id={id}
           onClick={this.createWithoutOpening}
         >
@@ -205,26 +208,34 @@ class CreateCredentialsModal extends React.Component {
       );
     }
 
+    const title = (
+      <>
+        <span>{'Bind Application'}</span>
+        <InfoButton
+          content={bindingVariables.serviceBinding}
+          orientation="bottom"
+        />
+      </>
+    );
+
     return (
-      <ConfirmationModal
+      <NewModal
         ref={modal => {
           this.child = modal;
         }}
         key={serviceInstance.name}
-        title={'Bind Application'}
+        title={title}
         confirmText="Create"
-        cancelText="Cancel"
-        content={content}
-        handleConfirmation={this.handleConfirmation}
+        onConfirm={this.handleConfirmation}
         modalOpeningComponent={createCredentialsButton}
-        disabled={disabled}
+        disabledConfirm={disabled}
         tooltipData={tooltipData}
-        borderFooter={true}
         handleClose={this.clearState}
-        headerAdditionalInfo={bindingVariables.serviceBinding}
         onShow={() => LuigiClient.uxManager().addBackdrop()}
         onHide={() => LuigiClient.uxManager().removeBackdrop()}
-      />
+      >
+        {content}
+      </NewModal>
     );
   }
 }
