@@ -188,7 +188,7 @@ class ServiceClassList extends React.Component {
           description="Enrich your experience with additional services"
         >
           <SearchWrapper>
-            <Search noSearchBtn placeholder="Search" onChange={searchFn} />
+            <Search noSearchBtn placeholder="Search" onChange={searchFn} data-e2e-id='search' />
           </SearchWrapper>
 
           {!classFilters.loading && (
