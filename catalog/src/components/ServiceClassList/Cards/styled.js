@@ -11,7 +11,11 @@ export const CardWrapper = styled.div`
 
 export const CardContent = styled(Panel)`
   && {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     box-sizing: border-box;
+    height: 100%;
     padding: 20px;
     transition: 0.125s box-shadow ease-in-out;
 
@@ -80,8 +84,8 @@ export const CardHeaderContent = styled(TileContent)`
 
 export const CardDescription = styled(PanelBody)`
   && {
+    flex: 1;
     border-top: none;
-    justify-content: flex-start;
     padding: 0;
     text-align: left;
     margin-bottom: 20px;
