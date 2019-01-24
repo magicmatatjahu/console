@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { RelativeWrapper, DropdownWrapper } from './components';
-import { Dropdown as Drpd } from '../../fundamentals-react/Dropdown/Dropdown';
-import { Button } from '../../fundamentals-react/Button/Button';
-import { Popover } from '../../fundamentals-react/Popover/Popover';
-import { Menu, MenuList } from '../../fundamentals-react/Menu/Menu';
+
+import {
+  DropDown as DropDownWrapper,
+  Popover,
+} from './styled';
 
 class Dropdown extends React.Component {
   static propTypes = {
@@ -81,14 +81,14 @@ class Dropdown extends React.Component {
       : '';
 
     return (
-      <Drpd>
+      <DropDownWrapper>
         <Popover
           noArrow={noArrow}
           alignment="right"
           control={control}
           body={children}
         />
-      </Drpd>
+      </DropDownWrapper>
     );
   }
 }

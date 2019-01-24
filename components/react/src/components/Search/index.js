@@ -1,23 +1,25 @@
-import React from 'react';
+export { SearchInput as default } from '../../fundamentals-react';
 
-import { SearchBox, SearchInput, SearchIcon } from './components';
+// import React from 'react';
 
-const Search = ({
-  darkBorder,
-  backgroundColor,
-  noIcon,
-  placeholder,
-  onChange,
-  id,
-}) => (
-  <SearchBox darkBorder={darkBorder} backgroundColor={backgroundColor}>
-    <SearchInput
-      placeholder={placeholder}
-      onChange={onChange}
-      data-e2e-id={id || 'search'}
-    />
-    <SearchIcon noIcon={noIcon} />
-  </SearchBox>
-);
+// import { SearchBox, SearchInput, SearchIcon } from './components';
 
-export default Search;
+// const Search = ({
+//   darkBorder,
+//   backgroundColor,
+//   noIcon,
+//   placeholder,
+//   onChange,
+//   id,
+// }) => (
+//   <SearchBox darkBorder={darkBorder} backgroundColor={backgroundColor}>
+//     <SearchInput
+//       placeholder={placeholder}
+//       onChange={onChange}
+//       data-e2e-id={id || 'search'}
+//     />
+//     <SearchIcon noIcon={noIcon} />
+//   </SearchBox>
+// );
+
+// export default Search;
