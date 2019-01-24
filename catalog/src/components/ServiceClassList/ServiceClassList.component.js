@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import {
   NotificationMessage,
-  Paragraph,
   Search,
   Spinner,
   Toolbar,
@@ -167,7 +166,7 @@ class ServiceClassList extends React.Component {
       if (items) {
         return items.length === 0 ? (
           <EmptyServiceListMessageWrapper>
-            <Paragraph>No Service Classes found</Paragraph>
+            No Service Classes found
           </EmptyServiceListMessageWrapper>
         ) : (
           <Cards data-e2e-id="cards" items={items} history={history} />
