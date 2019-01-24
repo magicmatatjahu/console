@@ -17,7 +17,7 @@ export const NavigationHeader = styled.div`
   background: #fafafa;
   font-weight: 500;
   text-align: left;
-  color: rgba(63, 80, 96, 0.6);
+  color: rgba(63, 80, 96, 0.8);
   padding: 10px 20px 10px 16px;
   font-size: 14px;
   line-height: 20px;
