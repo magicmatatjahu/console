@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Button,
   Dropdown,
-  FormSet,
+  FormFieldset,
   FormInput,
   FormItem,
 } from '@kyma-project/react-components';
@@ -21,7 +21,7 @@ const FilterDropdown = ({ filter, activeValues = [], onChange }) => {
       >
         <Panel>
           <PanelBody>
-            <FormSet>
+            <FormFieldset>
               {filter.values.map((item, index) => {
                 const count = item.count !== null ? ` (${item.count})` : '';
                 // const active = activeValues.some(value => value === item.value);
@@ -41,7 +41,7 @@ const FilterDropdown = ({ filter, activeValues = [], onChange }) => {
                   </FormItem>
                 );
               })}
-            </FormSet>
+            </FormFieldset>
           </PanelBody>
         </Panel>
       </Dropdown>

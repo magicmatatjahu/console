@@ -28,6 +28,7 @@ export const FormLabel = styled(UnstyledFormLabel)`
     position: relative;
     top: -2px;
     font-size: 16px;
+    padding-right: 20px;
   }
 `;
 
