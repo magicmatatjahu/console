@@ -83,6 +83,7 @@ class Modal extends Component {
           type={type}
           onClick={this.onConfirmation}
           disabled={disabledConfirm}
+          data-e2e-id="modal-confirmation-button"
         >
           {confirmMessage}
         </Button>

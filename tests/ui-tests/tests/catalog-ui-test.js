@@ -90,49 +90,49 @@ describeIf(dex.isStaticUser(), 'Catalog basic tests', () => {
     await searchInput.press('Backspace');
   });
 
-  // test('Check filters', async () => {
-  //   // consts
-  //   const filterDropdownButton = catalog.prepareSelector('toggle-filter');
-  //   const filterWrapper = catalog.prepareSelector('wrapper-filter');
-  //   const activeFiltersWrapper = catalog.prepareSelector(
-  //     'active-filters-wrapper'
-  //   );
-  //   const clearAllFiltersButton = catalog.prepareSelector('clear-all-filters');
-  //   const providerBitnami = catalog.prepareSelector(
-  //     'filter-item-provider-bitnami'
-  //   );
-  //   const searchBySth = 'lololo';
-  //   const searchByDatabase = 'database';
-  //   const searchID = 'search-filter';
+  test('Check filters', async () => {
+    // consts
+    const filterDropdownButton = catalog.prepareSelector('toggle-filter');
+    const filterWrapper = catalog.prepareSelector('wrapper-filter');
+    const activeFiltersWrapper = catalog.prepareSelector(
+      'active-filters-wrapper'
+    );
+    const clearAllFiltersButton = catalog.prepareSelector('clear-all-filters');
+    const providerBitnami = catalog.prepareSelector(
+      'filter-item-provider-bitnami'
+    );
+    const searchBySth = 'lololo';
+    const searchByDatabase = 'database';
+    const searchID = 'search-filter';
 
-  //   const frame = await kymaConsole.getFrame(page);
-  //   await frame.click(filterDropdownButton);
+    const frame = await kymaConsole.getFrame(page);
+    await frame.click(filterDropdownButton);
 
-  //   await frame.waitFor(filterWrapper);
-  //   await catalog.feelInInput(frame, searchByDatabase, searchID);
-  //   const searchedFilters = await catalog.getFilters(frame);
-  //   expect(searchedFilters).toContain(searchByDatabase);
-  //   expect(searchedFilters.length).toBeGreaterThan(2);
+    await frame.waitFor(filterWrapper);
+    await catalog.feelInInput(frame, searchByDatabase, searchID);
+    const searchedFilters = await catalog.getFilters(frame);
+    expect(searchedFilters).toContain(searchByDatabase);
+    expect(searchedFilters.length).toBeGreaterThan(2);
 
-  //   await catalog.feelInInput(frame, searchBySth, searchID);
-  //   const searchedFiltersNew = await catalog.getFilters(frame);
-  //   expect(searchedFiltersNew).not.toContain(searchBySth);
+    await catalog.feelInInput(frame, searchBySth, searchID);
+    const searchedFiltersNew = await catalog.getFilters(frame);
+    expect(searchedFiltersNew).not.toContain(searchBySth);
 
-  //   await catalog.feelInInput(frame, '', searchID);
-  //   const searchedFiltersAfterClearSearch = await catalog.getFilters(frame);
-  //   expect(searchedFiltersAfterClearSearch.length).toBeGreaterThan(2);
+    await catalog.feelInInput(frame, '', searchID);
+    const searchedFiltersAfterClearSearch = await catalog.getFilters(frame);
+    expect(searchedFiltersAfterClearSearch.length).toBeGreaterThan(2);
 
-  //   await frame.click(providerBitnami);
-  //   await frame.waitFor(activeFiltersWrapper);
-  //   const currectActiveFilters = await catalog.getActiveFilters(frame);
-  //   expect(currectActiveFilters.length).toEqual(1);
+    await frame.click(providerBitnami);
+    await frame.waitFor(activeFiltersWrapper);
+    const currectActiveFilters = await catalog.getActiveFilters(frame);
+    expect(currectActiveFilters.length).toEqual(1);
 
-  //   await frame.click(clearAllFiltersButton);
-  //   const currectActiveFiltersAfterClear = await catalog.getActiveFilters(
-  //     frame
-  //   );
-  //   expect(currectActiveFiltersAfterClear.length).toEqual(0);
-  // });
+    await frame.click(clearAllFiltersButton);
+    const currectActiveFiltersAfterClear = await catalog.getActiveFilters(
+      frame
+    );
+    expect(currectActiveFiltersAfterClear.length).toEqual(0);
+  });
 
   test('Check details', async () => {
     // Hardcodes for specific service class
@@ -200,100 +200,97 @@ describeIf(dex.isStaticUser(), 'Catalog basic tests', () => {
     });
   });
 
-  // test('Check instances list', async () => {
-  //   // Hardcodes for specific service class / page
-  //   const exampleInstanceName = serviceClassConfig.instanceTitle;
-  //   const instancesUrl = address.console.getInstancesList(
-  //     config.catalogTestEnv
-  //   );
-  //   // consts
-  //   const instancesHeaderSelector = catalog.prepareSelector('toolbar-headline');
-  //   const instancesExpectedHeader = 'Service Instances';
-  //   const searchSelector = catalog.prepareSelector('search');
-  //   const toggleSearchSelector = catalog.prepareSelector('toggle-search');
-  //   const searchBySth = 'lololo';
+  test('Check instances list', async () => {
+    // Hardcodes for specific service class / page
+    const exampleInstanceName = serviceClassConfig.instanceTitle;
+    const instancesUrl = address.console.getInstancesList(
+      config.catalogTestEnv
+    );
+    // consts
+    const instancesHeaderSelector = catalog.prepareSelector('toolbar-header');
+    const instancesExpectedHeader = 'Service Instances';
+    const searchSelector = catalog.prepareSelector('search');
+    const searchBySth = 'lololo';
 
-  //   await Promise.all([
-  //     page.goto(instancesUrl),
-  //     page.waitForNavigation({
-  //       waitUntil: ['domcontentloaded', 'networkidle0']
-  //     })
-  //   ]);
+    await Promise.all([
+      page.goto(instancesUrl),
+      page.waitForNavigation({
+        waitUntil: ['domcontentloaded', 'networkidle0']
+      })
+    ]);
 
-  //   const frame = await kymaConsole.getFrame(page);
-  //   await frame.waitForSelector(instancesHeaderSelector);
-  //   const instancesHeader = await frame.$eval(
-  //     instancesHeaderSelector,
-  //     item => item.innerHTML
-  //   );
-  //   expect(instancesHeader).toContain(instancesExpectedHeader);
+    const frame = await kymaConsole.getFrame(page);
+    await frame.waitForSelector(instancesHeaderSelector);
+    const instancesHeader = await frame.$eval(
+      instancesHeaderSelector,
+      item => item.innerHTML
+    );
+    expect(instancesHeader).toContain(instancesExpectedHeader);
 
-  //   const currentInstances = await catalog.getInstances(frame);
-  //   expect(currentInstances.length).toBeGreaterThan(0);
+    const currentInstances = await catalog.getInstances(frame);
+    expect(currentInstances.length).toBeGreaterThan(0);
 
-  //   const toggleSearch = await frame.$(toggleSearchSelector);
-  //   await toggleSearch.click();
-  //   const searchInput = await frame.$(searchSelector);
+    const searchInput = await frame.$(searchSelector);
 
-  //   await catalog.feelInInput(frame, exampleInstanceName, 'search');
-  //   const searchedInstances = await catalog.getInstances(frame);
-  //   expect(searchedInstances).toContain(exampleInstanceName);
+    await catalog.feelInInput(frame, exampleInstanceName, 'search');
+    const searchedInstances = await catalog.getInstances(frame);
+    expect(searchedInstances).toContain(exampleInstanceName);
 
-  //   await catalog.feelInInput(frame, searchBySth, 'search');
-  //   const newSearchedInstances = await catalog.getInstances(frame);
-  //   expect(newSearchedInstances).not.toContain(exampleInstanceName);
+    await catalog.feelInInput(frame, searchBySth, 'search');
+    const newSearchedInstances = await catalog.getInstances(frame);
+    expect(newSearchedInstances).not.toContain(exampleInstanceName);
 
-  //   await searchInput.click({ clickCount: 3 });
-  //   await searchInput.press('Backspace');
-  // });
+    await searchInput.click({ clickCount: 3 });
+    await searchInput.press('Backspace');
+  });
 
-  // test('Check details', async () => {
-  //   // Hardcodes for specific service class
-  //   const exampleInstanceLink = catalog.prepareSelector(
-  //     `instance-name-${serviceClassConfig.instanceTitle}`
-  //   );
+  test('Check details', async () => {
+    // Hardcodes for specific service class
+    const exampleInstanceLink = catalog.prepareSelector(
+      `instance-name-${serviceClassConfig.instanceTitle}`
+    );
 
-  //   // consts
-  //   const exampleInstanceServiceClass = catalog.prepareSelector(
-  //     'instance-service-class'
-  //   );
-  //   const exampleInstanceServicePlan = catalog.prepareSelector(
-  //     'instance-service-plan'
-  //   );
-  //   const exampleInstanceServiceDocumentationLink = catalog.prepareSelector(
-  //     'instance-service-documentation-link'
-  //   );
-  //   const exampleInstanceServiceSupportLink = catalog.prepareSelector(
-  //     'instance-service-support-link'
-  //   );
-  //   const exampleInstanceStatusType = catalog.prepareSelector(
-  //     'instance-status-type'
-  //   );
+    // consts
+    const exampleInstanceServiceClass = catalog.prepareSelector(
+      'instance-service-class'
+    );
+    const exampleInstanceServicePlan = catalog.prepareSelector(
+      'instance-service-plan'
+    );
+    const exampleInstanceServiceDocumentationLink = catalog.prepareSelector(
+      'instance-service-documentation-link'
+    );
+    const exampleInstanceServiceSupportLink = catalog.prepareSelector(
+      'instance-service-support-link'
+    );
+    const exampleInstanceStatusType = catalog.prepareSelector(
+      'instance-status-type'
+    );
 
-  //   const frame = await kymaConsole.getFrame(page);
-  //   const redis = await frame.waitForSelector(exampleInstanceLink, {
-  //     visible: true
-  //   });
-  //   await Promise.all([
-  //     redis.click(),
-  //     frame.waitForNavigation({
-  //       waitUntil: ['domcontentloaded', 'networkidle0']
-  //     })
-  //   ]);
+    const frame = await kymaConsole.getFrame(page);
+    const redis = await frame.waitForSelector(exampleInstanceLink, {
+      visible: true
+    });
+    await Promise.all([
+      redis.click(),
+      frame.waitForNavigation({
+        waitUntil: ['domcontentloaded', 'networkidle0']
+      })
+    ]);
 
-  //   await frame.waitForSelector(exampleInstanceServiceClass);
-  //   const serviceClass = await frame.$(exampleInstanceServiceClass);
-  //   const servicePlan = await frame.$(exampleInstanceServicePlan);
-  //   const documentationLink = await frame.$(
-  //     exampleInstanceServiceDocumentationLink
-  //   );
-  //   const supportLink = await frame.$(exampleInstanceServiceSupportLink);
-  //   const statusType = await frame.$(exampleInstanceStatusType);
+    await frame.waitForSelector(exampleInstanceServiceClass);
+    const serviceClass = await frame.$(exampleInstanceServiceClass);
+    const servicePlan = await frame.$(exampleInstanceServicePlan);
+    const documentationLink = await frame.$(
+      exampleInstanceServiceDocumentationLink
+    );
+    const supportLink = await frame.$(exampleInstanceServiceSupportLink);
+    const statusType = await frame.$(exampleInstanceStatusType);
 
-  //   expect(serviceClass.toString()).not.toBeNull();
-  //   expect(servicePlan.toString()).not.toBeNull();
-  //   expect(documentationLink.toString()).not.toBeNull();
-  //   expect(supportLink.toString()).not.toBeNull();
-  //   expect(statusType.toString()).not.toBeNull();
-  // });
+    expect(serviceClass.toString()).not.toBeNull();
+    expect(servicePlan.toString()).not.toBeNull();
+    expect(documentationLink.toString()).not.toBeNull();
+    expect(supportLink.toString()).not.toBeNull();
+    expect(statusType.toString()).not.toBeNull();
+  });
 });
