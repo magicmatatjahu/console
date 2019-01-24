@@ -65,6 +65,16 @@ class BasicData extends React.Component {
 
   componentDidMount() {
     clearTimeout(this.timer);
+    const {
+      formData,
+      invalidInstanceName,
+      instanceWithNameAlreadyExists,
+    } = this.state;
+    const stepFilled =
+      formData.name && !invalidInstanceName && !instanceWithNameAlreadyExists;
+    this.setState({
+      stepFilled,
+    });
   }
 
   componentDidUpdate(nextProps, nextState) {

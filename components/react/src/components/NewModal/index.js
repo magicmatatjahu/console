@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import { FdModal } from './styled';
-
+import Spinner from '../Spinner';
 class Modal extends Component {
   state = {
     show: false,
@@ -99,6 +99,7 @@ class Modal extends Component {
         actions,
         onConfirm,
         type,
+        width,
       },
       state: { show },
     } = this;
@@ -112,6 +113,7 @@ class Modal extends Component {
       <Fragment>
         <div onClick={this.onOpen}>{modalOpeningComponent}</div>
         <FdModal
+          width={width}
           type={type}
           title={title}
           show={show}
