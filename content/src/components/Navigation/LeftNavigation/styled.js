@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const GoBack = styled.div`
   margin: 18px 0 20px 0;
@@ -11,7 +11,7 @@ export const GoBack = styled.div`
   text-transform: inherit;
   transition: all 125ms ease-in;
 
-  [class^="sap-icon--"] {
+  [class^='sap-icon--'] {
     display: inline-block;
     position: relative;
     top: 2px;

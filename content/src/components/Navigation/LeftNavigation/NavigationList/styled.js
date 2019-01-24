@@ -1,8 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { ACTIVE_COLOR } from '../../../../commons/variables';
 
-export const Wrapper = styled.div`
-`;
+export const Wrapper = styled.div``;
 
 export const NavigationContainer = styled.div`
   box-sizing: border-box;
@@ -23,7 +22,7 @@ export const NavigationHeader = styled.div`
   line-height: 20px;
   text-transform: inherit;
 
-  [class^="sap-icon--"] {
+  [class^='sap-icon--'] {
     display: inline-block;
     position: relative;
     top: 2px;
@@ -37,7 +36,7 @@ export const NavigationItems = styled.ul`
     margin-top: ${props => (props.marginTop ? '10px' : '0')};
     margin-bottom: ${props => (props.marginTop ? '-10px' : '0')};
     margin-left: ${props => (props.secondary ? '10px' : '0')};
-    padding: ${props => props.showAll ? "0 34px 20px 34px" : "0"};
+    padding: ${props => (props.showAll ? '0 34px 20px 34px' : '0')};
     max-height: ${props =>
       (props.show && '9000px') || (props.showAll && 'auto') || '0'};
     overflow: ${props => (props.show ? 'auto' : 'hidden')};
