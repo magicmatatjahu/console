@@ -4,13 +4,13 @@ import { Panel, PanelHeader, PanelBody, PanelFooter, Tile, TileMedia, TileConten
 export const CardWrapper = styled.div`
   box-sizing: border-box;
   padding: 10px 0;
-  margin: 10px;
   width: 100%;
   flex: 0 1 33.33%;
 `;
 
 export const CardContent = styled(Panel)`
   && {
+    margin: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
