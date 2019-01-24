@@ -93,11 +93,10 @@ class CreateInstanceModal extends React.Component {
   };
 
   handleConfirmation = () => {
-    if (this.submitBtn) {
-      this.submitBtn.click();
-    } else {
-      this.onSubmitSchemaForm();
-    }
+    // if (this.submitBtn) {
+    //   this.submitBtn.click();
+    // } else {
+    this.onSubmitSchemaForm();
   };
 
   prepareDataToCreateServiceInstance = params => {
@@ -256,14 +255,14 @@ class CreateInstanceModal extends React.Component {
               planName={schema.displayName}
               callback={this.callback}
             >
-              {/* Styled components don't work here */}
+              {/* Styled components don't work here
               <button
                 className="hidden"
                 type="submit"
                 ref={submitBtn => (this.submitBtn = submitBtn)}
               >
                 Submit
-              </button>
+              </button> */}
             </SchemaData>
           </div>
         )}
