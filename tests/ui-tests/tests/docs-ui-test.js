@@ -96,17 +96,27 @@ describeIf(dex.isStaticUser(), 'Docs basic tests', () => {
     );
     expect(kymaDetailsItemsStyles).toEqual(expectedCollapsedHeight);
 
-    // await frame.click(kymaDetailsArrow);
-    // await frame.waitForSelector(kymaDetailsItems, { timeout: 10000 });
+    await frame.click(kymaDetailsArrow);
+    await frame.waitForSelector(kymaDetailsItems, { timeout: 10000 });
 
-    // const kymaDetailsItemsStylesAfterClick = await docs.getStyles(
-    //   frame,
-    //   kymaDetailsItems,
-    //   'maxHeight'
-    // );
-    // expect(kymaDetailsItemsStylesAfterClick).not.toEqual(
-    //   expectedCollapsedHeight
-    // );
+    const kymaDetailsItemsStylesAfterClick = await docs.getStyles(
+      frame,
+      kymaDetailsItems,
+      'maxHeight'
+    );
+    expect(kymaDetailsItemsStylesAfterClick).not.toEqual(
+      expectedCollapsedHeight
+    );
+
+    await frame.click(kymaDetailsArrow);
+    await frame.waitForSelector(kymaDetailsItems, { timeout: 10000 });
+
+    const kymaDetailsItemsStylesAfterSecondClick = await docs.getStyles(
+      frame,
+      kymaDetailsItems,
+      'maxHeight'
+    );
+    expect(kymaDetailsItemsStylesAfterSecondClick).toEqual(expectedCollapsedHeight);
 
     await Promise.all([
       frame.click(serviceCatalogLink),
