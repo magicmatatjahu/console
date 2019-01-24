@@ -1,6 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-<<<<<<< HEAD
 export const GoBack = styled.div`
   margin: 18px 0 20px 0;
   color: #51555a;
@@ -11,22 +10,15 @@ export const GoBack = styled.div`
   line-height: 20px;
   text-transform: inherit;
   transition: all 125ms ease-in;
-
-  [class^="sap-icon--"] {
+  [class^='sap-icon--'] {
     display: inline-block;
     position: relative;
     top: 2px;
     margin-right: 10px;
   }
-
   &:hover {
     cursor: pointer;
     background-color: #fafafa;
     color: #085caf;
-=======
-export const ToolbarWrapper = styled.div`
-  > .fd-action-bar {
-    padding: 20px 12px 0 12px;
->>>>>>> Remove warnings
   }
 `;
