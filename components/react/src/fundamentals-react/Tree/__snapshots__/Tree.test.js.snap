@@ -38,7 +38,6 @@ exports[`<Tree /> create tree component 1`] = `
   </div>
   <ul
     className="fd-tree"
-    id=""
     role="tree"
   >
     <li
@@ -238,7 +237,6 @@ exports[`<Tree /> create tree component 2`] = `
   </div>
   <ul
     className="fd-tree"
-    id=""
     role="tree"
   >
     <li

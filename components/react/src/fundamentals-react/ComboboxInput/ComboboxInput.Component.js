@@ -1,9 +1,16 @@
 import React from 'react';
 import { ComboboxInput, Menu, MenuItem, MenuList } from '../';
-import { DocsText, DocsTile, Header, Import, Properties, Separator } from '../_playground';
+import {
+  DocsText,
+  DocsTile,
+  Header,
+  Import,
+  Properties,
+  Separator,
+} from '../_playground';
 
 export const ComboboxInputComponent = () => {
-    const comboboxInputCode = `<ComboboxInput
+  const comboboxInputCode = `<ComboboxInput
     placeholder="Select Fruit"
     menu={
         <Menu>
@@ -36,62 +43,94 @@ export const ComboboxInputComponent = () => {
     }
 />`;
 
-    return (
-        <div>
-            <Header>Combobox Input</Header>
+  return (
+    <div>
+      <Header>Combobox Input</Header>
 
-            <Import module='ComboboxInput, Menu, MenuItem, MenuList' path='/fundamental-react/src/' />
+      <Import sourceModule={require('./ComboboxInput')} />
 
-            <Separator />
+      <Separator />
 
-            <Properties
-                properties={[
-                    { name: 'menu', description: 'object (required) - An object containing a Menu component. ' },
-                    { name: 'id', description: 'string (optional) - The id of the component.' },
-                    { name: 'placeholder', description: 'string (optional) - Input \'placeholder\' attribute. ' },
-                    { name: 'compact', description: 'bool (optional) - Set to true to enable compact mode.' }
-                ]}
-                type='Inputs' />
+      <Properties
+        properties={[
+          {
+            name: 'menu',
+            description:
+              'object (required) - An object containing a Menu component. ',
+          },
+          {
+            name: 'id',
+            description: 'string (optional) - The id of the component.',
+          },
+          {
+            name: 'placeholder',
+            description: "string (optional) - Input 'placeholder' attribute. ",
+          },
+          {
+            name: 'compact',
+            description:
+              'bool (optional) - Set to true to enable compact mode.',
+          },
+          {
+            name: 'popoverProps',
+            description:
+              'object (optional) - additional props to be spread to the Popover component.',
+          },
+          {
+            name: 'inputProps',
+            description:
+              'object (optional) - additional props to be spread to the input element.',
+          },
+          {
+            name: 'buttonProps',
+            description:
+              'object (optional) - additional props to be spread to the button element.',
+          },
+        ]}
+        type="Inputs"
+      />
 
-            <Separator />
+      <Separator />
 
-            <h2>Combobox Input</h2>
-            <DocsTile>
-                <ComboboxInput
-                    menu={
-                        <Menu>
-                            <MenuList>
-                                <MenuItem url='/'>Pear</MenuItem>
-                                <MenuItem url='/'>Strawberry</MenuItem>
-                                <MenuItem url='/'>Raspberry</MenuItem>
-                                <MenuItem isLink url='/'>
-                                    + New Item
-                                </MenuItem>
-                            </MenuList>
-                        </Menu>
-                    }
-                    placeholder='Select Fruit' />
+      <h2>Combobox Input</h2>
+      <DocsTile>
+        <ComboboxInput
+          menu={
+            <Menu>
+              <MenuList>
+                <MenuItem url="/">Pear</MenuItem>
+                <MenuItem url="/">Strawberry</MenuItem>
+                <MenuItem url="/">Raspberry</MenuItem>
+                <MenuItem isLink url="/">
+                  + New Item
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          }
+          placeholder="Select Fruit"
+        />
 
-                <br />
+        <br />
 
-                <ComboboxInput
-                    compact
-                    menu={
-                        <Menu>
-                            <MenuList>
-                                <MenuItem url='/'>Pear</MenuItem>
-                                <MenuItem url='/'>Strawberry</MenuItem>
-                                <MenuItem url='/'>Raspberry</MenuItem>
-                                <MenuItem isLink url='/'>
-                                    + New Item
-                                </MenuItem>
-                            </MenuList>
-                        </Menu>
-                    }
-                    placeholder='Select Fruit' />
-            </DocsTile>
-            <DocsText>{comboboxInputCode}</DocsText>
-            <Separator />
-        </div>
-    );
+        <ComboboxInput
+          compact
+          menu={
+            <Menu>
+              <MenuList>
+                <MenuItem url="/">Pear</MenuItem>
+                <MenuItem url="/">Strawberry</MenuItem>
+                <MenuItem url="/">Raspberry</MenuItem>
+                <MenuItem isLink url="/">
+                  + New Item
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          }
+          placeholder="Select Fruit"
+        />
+      </DocsTile>
+      <DocsText>{comboboxInputCode}</DocsText>
+      <Separator />
+    </div>
+  );
 };
