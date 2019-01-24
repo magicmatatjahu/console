@@ -18,7 +18,7 @@ const DocsContent = ({ content, docsTypesLength }) => {
   let lastType = "";
 
   return (
-    <div>
+    <>
       {content && (
         <DocsWrapper>
           <Toolbar title={content.displayName} customPadding={'28px 0'} />
@@ -56,7 +56,7 @@ const DocsContent = ({ content, docsTypesLength }) => {
             })}
         </DocsWrapper>
       )}
-    </div>
+    </>
   );
 };
 
