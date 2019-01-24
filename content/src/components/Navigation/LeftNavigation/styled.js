@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Toolbar = styled.div`
+export const GoBack = styled.div`
   margin: 18px 0 20px 0;
   color: #51555a;
   display: block;

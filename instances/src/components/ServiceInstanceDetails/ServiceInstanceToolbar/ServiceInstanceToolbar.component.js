@@ -54,7 +54,7 @@ const ServiceInstanceToolbar = ({
         cancelText="Cancel"
         onConfirm={handleDelete}
         modalOpeningComponent={
-          <Button option="light" type="negative">
+          <Button type="negative">
             Delete
           </Button>
         }
