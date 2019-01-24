@@ -1,12 +1,6 @@
 import React, { Fragment } from 'react';
 
-import {
-  Icon,
-  Table,
-  Tabs,
-  Tab,
-  Tooltip,
-} from '@kyma-project/react-components';
+import { Table, Tabs, Tab, Tooltip } from '@kyma-project/react-components';
 
 import BindApplicationModal from './BindApplicationModal/BindApplicationModal.container';
 import CreateCredentialsModal from './CreateCredentialsModal/CreateCredentialsModal.container';
@@ -21,7 +15,6 @@ import {
   Bold,
   ServiceInstanceBindingsWrapper,
   SecretModalButton,
-  ParametersModalButton,
   ActionsWrapper,
 } from './styled';
 
@@ -131,11 +124,9 @@ class ServiceInstanceBindings extends React.Component {
                       Secret <Bold>{secret.name}</Bold>
                     </span>
                   }
-                  modalOpeningComponent={(
-                    <SecretModalButton>
-                      {secret.name}
-                    </SecretModalButton>
-                  )}
+                  modalOpeningComponent={
+                    <SecretModalButton>{secret.name}</SecretModalButton>
+                  }
                   data={secret.data}
                   prefix={prefix}
                 />
@@ -144,33 +135,29 @@ class ServiceInstanceBindings extends React.Component {
               '-'
             );
           })(),
-          (
-            <Tooltip
-              type={this.getStatusType(bindingUsage.status.type)}
-              content={bindingUsage.status.message}
-              minWidth="250px"
+          <Tooltip
+            type={this.getStatusType(bindingUsage.status.type)}
+            content={bindingUsage.status.message}
+            minWidth="250px"
+          >
+            <span
+              style={{
+                color: statusColor(bindingUsage.status.type),
+                cursor: `${bindingUsage.status.message ? 'help' : 'default'}`,
+              }}
+              title={bindingUsage.status.type}
             >
-              <span
-                style={{
-                  color: statusColor(bindingUsage.status.type),
-                  cursor: `${bindingUsage.status.message ? 'help' : 'default'}`,
-                }}
-                title={bindingUsage.status.type}
-              >
-                {bindingUsage.status.type}
-              </span>
-            </Tooltip>
-          ),
-          (
-            <ActionsWrapper>
-              <DeleteBindingModal
-                deleteBindingUsage={this.props.deleteBindingUsage}
-                bindingUsageName={bindingUsage.name}
-                bindingUsageCount={this.countBindingUsage(bindingUsage)}
-                id={`service-binding-delete-${bindingUsage.name}`}
-              />
-            </ActionsWrapper>
-          )
+              {bindingUsage.status.type}
+            </span>
+          </Tooltip>,
+          <ActionsWrapper>
+            <DeleteBindingModal
+              deleteBindingUsage={this.props.deleteBindingUsage}
+              bindingUsageName={bindingUsage.name}
+              bindingUsageCount={this.countBindingUsage(bindingUsage)}
+              id={`service-binding-delete-${bindingUsage.name}`}
+            />
+          </ActionsWrapper>,
         ],
       };
     });
@@ -195,11 +182,9 @@ class ServiceInstanceBindings extends React.Component {
                       Secret <Bold>{secret.name}</Bold>
                     </span>
                   }
-                  modalOpeningComponent={(
-                    <SecretModalButton>
-                      {secret.name}
-                    </SecretModalButton>
-                  )}
+                  modalOpeningComponent={
+                    <SecretModalButton>{secret.name}</SecretModalButton>
+                  }
                   data={secret.data}
                 />
               </TextOverflowWrapper>
@@ -242,14 +227,6 @@ class ServiceInstanceBindings extends React.Component {
                             </Fragment>
                           }
                           data={parameters}
-                          modalOpeningComponent={
-                            <ParametersModalButton
-                              id={`service-binding-parameters-${binding.name}`}
-                              margin={'0 8px'}
-                            >
-                              <Icon icon={'\uE139'} />
-                            </ParametersModalButton>
-                          }
                         />
                       </span>
                     </Tooltip>
