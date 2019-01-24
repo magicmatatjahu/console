@@ -84,7 +84,7 @@ const ServiceClassInfo = ({
         </ImagePlaceholder>
         <ServiceClassInfoContent
           title={serviceClassDisplayName}
-          data-e2e-id="service-title"
+          data-e2e-id="service-title-and-provider"
         >
           {providerDisplayName || ''}
         </ServiceClassInfoContent>
