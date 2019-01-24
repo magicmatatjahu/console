@@ -10,12 +10,14 @@ export const GoBack = styled.div`
   line-height: 20px;
   text-transform: inherit;
   transition: all 125ms ease-in;
+
   [class^='sap-icon--'] {
     display: inline-block;
     position: relative;
     top: 2px;
     margin-right: 10px;
   }
+
   &:hover {
     cursor: pointer;
     background-color: #fafafa;
