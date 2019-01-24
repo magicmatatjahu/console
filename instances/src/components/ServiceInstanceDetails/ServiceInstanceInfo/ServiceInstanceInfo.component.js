@@ -89,14 +89,14 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
               <Element>Plan</Element>
             </Grid.Unit>
             <Grid.Unit size={INFORMATION_VALUE_SIZE}>
-              <Element>
+              <Element data-e2e-id="instance-service-plan">
                 {serviceInstance.planSpec &&
                 serviceInstance.planSpec !== null &&
                 typeof serviceInstance.planSpec === 'object' &&
                 Object.keys(serviceInstance.planSpec).length ? (
                   <NewModal
                     modalOpeningComponent={
-                      <PlanModalButton data-e2e-id="instance-service-plan">
+                      <PlanModalButton>
                         {getResourceDisplayName(instancePlan)}
                       </PlanModalButton>
                     }
