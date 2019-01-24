@@ -684,7 +684,7 @@ getBackendModules()
         context: {
           idToken: token
         },
-        icon: 'sap-box'
+        icon: 'documents'
       }
     ],
     contextSwitcher: {
