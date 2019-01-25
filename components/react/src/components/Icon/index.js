@@ -1,1 +1,1 @@
-export { Icon as default } from '../../fundamentals-react';
+export { Icon as default } from 'fundamental-react';

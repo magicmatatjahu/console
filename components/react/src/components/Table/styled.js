@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Panel, PanelHeader, PanelHead, PanelActions, PanelBody, Table } from '../../fundamentals-react';
+import { Panel, PanelHeader, PanelHead, PanelActions, PanelBody, Table } from 'fundamental-react';
 
 export const TableWrapper = styled(Panel)`
 `;

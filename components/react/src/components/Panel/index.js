@@ -8,4 +8,4 @@ export {
     PanelFilters, 
     PanelContent, 
     PanelFooter 
-} from '../../fundamentals-react';
+} from 'fundamental-react';

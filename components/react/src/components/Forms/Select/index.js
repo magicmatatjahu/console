@@ -6,7 +6,7 @@ import {
   FormItem,
   FormLabel,
   FormSelect,
-} from '../../../fundamentals-react/Forms/Forms';
+} from 'fundamental-react';
 
 const Select = ({
   label,

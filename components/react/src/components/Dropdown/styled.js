@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Dropdown as D, Popover as P } from '../../fundamentals-react';
+import { Dropdown as D, Popover as P } from 'fundamental-react';
 
 export const DropDown = styled(D)`
   && {

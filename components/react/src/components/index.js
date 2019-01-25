@@ -43,7 +43,7 @@ import { Tile, TileMedia, TileContent } from './Tile';
 import Token from './Token';
 import Toolbar from './Toolbar';
 import Tooltip from './Tooltip';
-import { MenuItem, MenuList, Menu } from '../fundamentals-react/Menu/Menu';
+import { MenuItem, MenuList, Menu } from 'fundamental-react';
 import Modal from './Modal';
 import {
   FormFieldset,
@@ -52,7 +52,7 @@ import {
   FormLabel,
   FormSelect,
   FormSet,
-} from '../fundamentals-react/Forms/Forms';
+} from 'fundamental-react';
 
 import 'fiori-fundamentals/dist/fiori-fundamentals.min.css';
 

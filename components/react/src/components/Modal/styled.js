@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Modal } from '../../fundamentals-react';
+import { Modal } from 'fundamental-react';
 
 export const FdModal = styled(Modal)`
   && {
@@ -9,7 +9,7 @@ export const FdModal = styled(Modal)`
 
     .fd-modal__content {
       min-width: 320px;
-      width: ${props => props.width || 'unset'}
+      width: ${props => props.width || 'unset'};
       border-left: ${props =>
         props.type === 'negative' ? '6px solid #ee0000' : ''}
     }

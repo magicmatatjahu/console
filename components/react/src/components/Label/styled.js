@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Token } from '../../fundamentals-react';
+import { Token } from 'fundamental-react';
 
 export const LabelWrapper = styled.div`
     cursor: ${props => props.cursorType ? props.cursorType : "auto"};

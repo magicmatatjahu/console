@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ActionBar as AB, ActionBarBack as ABBack, ActionBarHeader as ABHeader, ActionBarActions as ABActions } from '../../fundamentals-react';
+import { ActionBar as AB, ActionBarBack as ABBack, ActionBarHeader as ABHeader, ActionBarActions as ABActions } from 'fundamental-react';
 
 export const ActionBar = styled(AB)`
     && {

@@ -2,4 +2,4 @@ export {
     Tile,
     TileMedia,
     TileContent,
-} from '../../fundamentals-react';
+} from 'fundamental-react';

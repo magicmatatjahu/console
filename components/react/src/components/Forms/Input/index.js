@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import {
-  FormSet as UnstyledFormSet,
+  FormSet,
   FormItem,
   FormLabel,
   FormInput,
   FormMessage,
-} from '../../../fundamentals-react/Forms/Forms';
+} from 'fundamental-react';
 
-const FormSet = styled(UnstyledFormSet)`
+const FormSetWrapper = styled.div`
   padding-top: ${props => props.marginTop || '0'}px;
 `;
+
 class Input extends React.Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
@@ -143,83 +144,37 @@ class Input extends React.Component {
 
     const randomId = `input-${(Math.random() + 1).toString(36).substring(7)}`;
     return (
-      <FormSet marginTop={marginTop}>
-        <FormItem>
-          {label && (
-            <FormLabel htmlFor={randomId} required={required}>
-              {label}
-            </FormLabel>
-          )}
-          <FormInput
-            id={randomId}
-            type={typeField ? typeField : 'text'}
-            placeholder={placeholder}
-            name={name}
-            value={value}
-            state={error ? 'invalid' : '' || warning || valid}
-            onChange={e => {
-              const value = e.target.value;
-              this.setState({ value: value });
-              this.validate(value);
-              handleChange(value);
-            }}
-          />
-          {!noMessageField &&
-            finalMessage && (
-              <FormMessage type={error || warning || valid}>
-                {finalMessage}
-              </FormMessage>
+      <FormSetWrapper marginTop={marginTop}>
+        <FormSet>
+          <FormItem>
+            {label && (
+              <FormLabel htmlFor={randomId} required={required}>
+                {label}
+              </FormLabel>
             )}
-        </FormItem>
-      </FormSet>
-      // {/* <FieldWrapper noBottomMargin={noBottomMargin}>
-      //   <FieldLabel>
-      //     {label}
-      //     {required ? <FieldRequired>*</FieldRequired> : ''}
-      //   </FieldLabel>
-      //   <InputWrapper>
-      //     <InputField
-      //       type={typeField ? typeField : 'text'}
-      //       placeholder={placeholder}
-      //       value={value}
-      //       name={name}
-      //       onChange={e => {
-      //         const value = e.target.value;
-      //         this.setState({ value: value });
-      //         this.validate(value);
-      //         handleChange(value);
-      //       }}
-      //       isSuccess={success}
-      //       isWarning={warning}
-      //       isError={error}
-      //       required={required}
-      //     />
-      //     <FieldIcon
-      //       visible={success || warning || error}
-      //       isSuccess={success}
-      //       isWarning={warning}
-      //       isError={error}
-      //       isPassword={isPassword}
-      //     >
-      //       {this.extractIcon(success, warning, error)}
-      //     </FieldIcon>
-      //     {isPassword && (
-      //       <InputPasswordField onClick={this.handleClickEyeIcon}>
-      //         {showPassword ? '\uE1EA' : '\uE1E9'}
-      //       </InputPasswordField>
-      //     )}
-      //   </InputWrapper>
-      //   {noMessageField ? null : (
-      //     <FieldMessage
-      //       visible={finalMessage}
-      //       isSuccess={success}
-      //       isWarning={warning}
-      //       isError={error}
-      //     >
-      //       {finalMessage}
-      //     </FieldMessage>
-      //   )}
-      // </FieldWrapper> */}
+            <FormInput
+              id={randomId}
+              type={typeField ? typeField : 'text'}
+              placeholder={placeholder}
+              name={name}
+              value={value}
+              state={error ? 'invalid' : '' || warning || valid}
+              onChange={e => {
+                const value = e.target.value;
+                this.setState({ value: value });
+                this.validate(value);
+                handleChange(value);
+              }}
+            />
+            {!noMessageField &&
+              finalMessage && (
+                <FormMessage type={error || warning || valid}>
+                  {finalMessage}
+                </FormMessage>
+              )}
+          </FormItem>
+        </FormSet>
+      </FormSetWrapper>
     );
   }
 }

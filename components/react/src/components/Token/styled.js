@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Token as T } from '../../fundamentals-react';
+import { Token as T } from 'fundamental-react';
 
 export const Token = styled(T)`
     && {

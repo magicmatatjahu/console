@@ -1,1 +1,1 @@
-export { Image as default } from '../../fundamentals-react';
+export { Image as default } from 'fundamental-react';
