@@ -99,12 +99,14 @@ class BindApplicationModal extends React.Component {
       sendNotification,
     } = this.props;
 
+    let success = true;
+
     try {
       let createdBindingName, createdBindingUsageName;
       if (checkbox) {
         let bindingCreateParameters;
-        if (params && params.formData) {
-          bindingCreateParameters = dcopy(params.formData);
+        if (this.state.bindingCreateParameters) {
+          bindingCreateParameters = dcopy(this.state.bindingCreateParameters);
           clearEmptyPropertiesInObject(bindingCreateParameters);
         } else {
           bindingCreateParameters = {};
@@ -147,6 +149,7 @@ class BindApplicationModal extends React.Component {
         });
       }
     } catch (e) {
+      success = false;
       this.setState({
         tooltipData: {
           type: 'error',
@@ -157,14 +160,14 @@ class BindApplicationModal extends React.Component {
         },
       });
     }
+    if (success) {
+      this.clearState();
+      LuigiClient.uxManager().removeBackdrop();
+    }
   };
 
   handleConfirmation = () => {
-    if (this.submitBtn) {
-      this.submitBtn.click();
-    } else {
-      this.create();
-    }
+    this.create();
   };
 
   handleOpen = () => {
@@ -250,16 +253,7 @@ class BindApplicationModal extends React.Component {
                 bindingCreateParameterSchema={bindingCreateParameterSchema}
                 onSubmitSchemaForm={this.create}
                 callback={this.callback}
-              >
-                {/* Styled components don't work here */}
-                <button
-                  className="hidden"
-                  type="submit"
-                  ref={submitBtn => (this.submitBtn = submitBtn)}
-                >
-                  Submit
-                </button>
-              </SchemaData>
+              />
             )}
           </Fragment>
         )}

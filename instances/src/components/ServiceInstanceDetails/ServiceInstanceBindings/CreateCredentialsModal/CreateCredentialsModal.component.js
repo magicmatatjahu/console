@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import dcopy from 'deep-copy';
 
 import { Button, NewModal, Tooltip } from '@kyma-project/react-components';
 
@@ -54,17 +53,14 @@ class CreateCredentialsModal extends React.Component {
     this.setState({ ...data });
   };
 
-  create = async (params, isOpenedModal) => {
+  create = async isOpenedModal => {
     const { serviceInstance, createBinding, sendNotification } = this.props;
+    const { bindingCreateParameters } = this.state;
+
+    let success = true;
 
     try {
-      let bindingCreateParameters;
-      if (params && params.formData) {
-        bindingCreateParameters = dcopy(params.formData);
-        clearEmptyPropertiesInObject(bindingCreateParameters);
-      } else {
-        bindingCreateParameters = {};
-      }
+      clearEmptyPropertiesInObject(bindingCreateParameters);
       const createdBinding = await createBinding(
         serviceInstance.name,
         bindingCreateParameters,
@@ -96,6 +92,7 @@ class CreateCredentialsModal extends React.Component {
         });
       }
     } catch (e) {
+      success = false;
       this.setState({
         tooltipData: {
           type: 'error',
@@ -106,26 +103,26 @@ class CreateCredentialsModal extends React.Component {
         },
       });
     }
+    if (success) {
+      this.clearState();
+      LuigiClient.uxManager().removeBackdrop();
+    }
   };
 
   handleConfirmation = () => {
-    if (this.submitBtn) {
-      this.submitBtn.click();
-    } else {
-      this.create(null, true);
-    }
+    this.create();
   };
 
   handleOpen = () => {
     const { bindingCreateParameterSchema } = this.state;
     if (!bindingCreateParameterSchema) {
-      this.create(null, true);
+      this.create(true);
     }
   };
   createWithoutOpening = () => {
     const { bindingCreateParameterSchema } = this.state;
     if (!bindingCreateParameterSchema) {
-      this.create(null);
+      this.create();
     }
   };
 
@@ -155,19 +152,10 @@ class CreateCredentialsModal extends React.Component {
         <SchemaData
           data={schemaData}
           bindingCreateParameterSchema={bindingCreateParameterSchema}
-          onSubmitSchemaForm={el => this.create(el, true)}
+          onSubmitSchemaForm={el => this.create(true)}
           planName={servicePlan.displayName}
           callback={this.callback}
-        >
-          {/* Styled components don't work here */}
-          <button
-            className="hidden"
-            type="submit"
-            ref={submitBtn => (this.submitBtn = submitBtn)}
-          >
-            Submit
-          </button>
-        </SchemaData>
+        />
       </Fragment>,
     ];
 
