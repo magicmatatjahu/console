@@ -4,6 +4,7 @@ import {
   FormLabel as UnstyledFormLabel,
   Panel as UnstyledPanel,
   PanelBody as UnstyledPanelBody,
+  FormItem as UnstyledFormItem,
 } from '@kyma-project/react-components';
 
 export const FiltersDropdownWrapper = styled.div`
@@ -23,12 +24,17 @@ export const FiltersDropdownWrapper = styled.div`
   }
 `;
 
+export const FormItem = styled(UnstyledFormItem)`
+  display: flex;
+`;
+
 export const FormLabel = styled(UnstyledFormLabel)`
   &&& {
     position: relative;
     top: -2px;
     font-size: 16px;
     padding-right: 20px;
+    white-space: nowrap;
   }
 `;
 

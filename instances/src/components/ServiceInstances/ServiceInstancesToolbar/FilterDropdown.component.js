@@ -5,10 +5,15 @@ import {
   Dropdown,
   FormFieldset,
   FormInput,
-  FormItem,
 } from '@kyma-project/react-components';
 
-import { FiltersDropdownWrapper, FormLabel, Panel, PanelBody } from './styled';
+import {
+  FiltersDropdownWrapper,
+  FormLabel,
+  FormItem,
+  Panel,
+  PanelBody,
+} from './styled';
 
 const FilterDropdown = ({ filter, activeValues = [], onChange }) => {
   const control = <Button option="emphasized">Filter</Button>;
@@ -24,7 +29,6 @@ const FilterDropdown = ({ filter, activeValues = [], onChange }) => {
             <FormFieldset>
               {filter.values.map((item, index) => {
                 const count = item.count !== null ? ` (${item.count})` : '';
-                // const active = activeValues.some(value => value === item.value);
 
                 return (
                   <FormItem isCheck key={index}>
@@ -34,7 +38,7 @@ const FilterDropdown = ({ filter, activeValues = [], onChange }) => {
                       name={`checkbox-name-${index}`}
                       onClick={() => onChange(filter.name, item.value)}
                     />
-                    <FormLabel>
+                    <FormLabel htmlFor={`checkbox-${index}`}>
                       {item.name}
                       {count}
                     </FormLabel>
