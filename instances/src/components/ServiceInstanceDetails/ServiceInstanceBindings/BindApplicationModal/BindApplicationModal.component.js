@@ -135,7 +135,6 @@ class BindApplicationModal extends React.Component {
           createdBindingUsage.data.createServiceBindingUsage.name;
       }
 
-      this.child.child.handleCloseModal();
       if (typeof sendNotification === 'function') {
         sendNotification({
           variables: {
@@ -318,16 +317,13 @@ class BindApplicationModal extends React.Component {
     const title = (
       <>
         <span>{'Bind Application'}</span>
-        <InfoButton
-          content={bindingVariables.serviceBingingUsage}
-          orientation="bottom"
-        />
+        <InfoButton content={bindingVariables.serviceBingingUsage} orientation="bottom" />
       </>
-    );
+    )
 
     return (
       <Modal
-        width={'681px'}
+        width="681px"
         key={serviceInstance.name}
         title={title}
         confirmText="Create"
@@ -337,7 +333,10 @@ class BindApplicationModal extends React.Component {
         tooltipData={tooltipData}
         handleClose={this.clearState}
         onShow={() => LuigiClient.uxManager().addBackdrop()}
-        onHide={() => LuigiClient.uxManager().removeBackdrop()}
+        onHide={() => {
+          this.clearState();
+          LuigiClient.uxManager().removeBackdrop();
+        }}
       >
         {content}
       </Modal>

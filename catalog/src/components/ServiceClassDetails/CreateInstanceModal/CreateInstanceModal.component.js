@@ -265,10 +265,12 @@ class CreateInstanceModal extends Component {
         tooltipData={tooltipData}
         disabledConfirm={disabled}
         onConfirm={this.handleConfirmation}
-        handleClose={this.clearState}
         waiting={creatingInstance}
         onShow={this.onShow}
-        onHide={this.onHide}
+        onHide={() => {
+          this.clearState();
+          this.onHide();
+        }}
       >
         {content}
       </Modal>
