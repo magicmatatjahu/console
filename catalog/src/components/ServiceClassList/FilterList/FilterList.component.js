@@ -1,7 +1,12 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Dropdown, Search, Separator } from '@kyma-project/react-components';
+import {
+  Button,
+  Dropdown,
+  Search,
+  Separator,
+} from '@kyma-project/react-components';
 
 import Filter from './Filter.component';
 
@@ -25,17 +30,13 @@ const FilterList = ({
 }) => (
   <FiltersDropdown>
     <Dropdown
-      id="dupa"
-      name={activeFiltersCount ? `Filter (${activeFiltersCount})` : 'Filter'}
       enabled={filters && filters.length > 0}
-      buttonWidth="97px"
-      marginTop="0"
-      lastButton
-      primary
-      arrowTop
-      arrowTopRight="41px"
-      control= {
-        <Button option="emphasized" disabled={!(filters && filters.length > 0)} data-e2e-id="toggle-filter">
+      control={
+        <Button
+          option="emphasized"
+          disabled={!(filters && filters.length > 0)}
+          data-e2e-id="toggle-filter"
+        >
           {activeFiltersCount ? `Filter (${activeFiltersCount})` : 'Filter'}
         </Button>
       }
@@ -75,7 +76,7 @@ const FilterList = ({
                         isMore={filter.isMore}
                       />
                       {idx < filters.length - 1 && (
-                        <Separator margin="0 -10px 0"  />
+                        <Separator margin="0 -10px 0" />
                       )}
                     </Fragment>
                   )}

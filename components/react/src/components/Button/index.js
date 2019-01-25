@@ -1,4 +1,3 @@
-import styled from 'styled-components';
-import { Button } from 'fundamental-react';
+import { Button } from '../../fundamentals-react';
 
-export default styled(Button)``;
+export default Button;

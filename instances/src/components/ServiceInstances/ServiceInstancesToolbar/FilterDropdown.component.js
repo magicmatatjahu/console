@@ -29,7 +29,6 @@ const FilterDropdown = ({ filter, activeValues = [], onChange }) => {
             <FormFieldset>
               {filter.values.map((item, index) => {
                 const count = item.count !== null ? ` (${item.count})` : '';
-                // const active = activeValues.some(value => value === item.value);
 
                 return (
                   <FormItem isCheck key={index}>
@@ -39,7 +38,7 @@ const FilterDropdown = ({ filter, activeValues = [], onChange }) => {
                       name={`checkbox-name-${index}`}
                       onClick={() => onChange(filter.name, item.value)}
                     />
-                    <FormLabel>
+                    <FormLabel htmlFor={`checkbox-${index}`}>
                       {item.name}
                       {count}
                     </FormLabel>
