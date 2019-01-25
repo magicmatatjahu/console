@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { Button, NewModal, Tooltip } from '@kyma-project/react-components';
+import { Button, Modal, Tooltip } from '@kyma-project/react-components';
 
 import SchemaData from './SchemaData.component';
 import { bindingVariables } from '../InfoButton/variables';
@@ -207,7 +207,7 @@ class CreateCredentialsModal extends React.Component {
     );
 
     return (
-      <NewModal
+      <Modal
         ref={modal => {
           this.child = modal;
         }}
@@ -223,7 +223,7 @@ class CreateCredentialsModal extends React.Component {
         onHide={() => LuigiClient.uxManager().removeBackdrop()}
       >
         {content}
-      </NewModal>
+      </Modal>
     );
   }
 }
