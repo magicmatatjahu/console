@@ -31,29 +31,12 @@ class ServiceInstanceDetails extends React.Component {
       );
     }
 
-    let instance =
+    const instance =
       serviceInstance &&
       transformDataScalarStringsToObjects(serviceInstance.serviceInstance);
     const serviceClass =
       instance && (instance.serviceClass || instance.clusterServiceClass);
-    instance.servicePlan = {
-      bindingCreateParameterSchema: {
-        $schema: 'http://json-schema.org/draft-04/schema#',
-        type: 'object',
-        properties: {
-          redisPassword: {
-            type: 'string',
-            description: 'Redis password.',
-            default: 'Defaults to a random 10-character alphanumeric string',
-          },
-          imagePullPolicy: {
-            type: 'string',
-            enum: ['Always', 'IfNotPresent', 'Never'],
-            default: 'IfNotPresent',
-          },
-        },
-      },
-    };
+
     if (!serviceInstance.loading && !instance) {
       return <EmptyList>Service Instance doesn't exist</EmptyList>;
     }
