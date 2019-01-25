@@ -328,10 +328,7 @@ class BindApplicationModal extends React.Component {
         tooltipData={tooltipData}
         handleClose={this.clearState}
         onShow={() => LuigiClient.uxManager().addBackdrop()}
-        onHide={() => {
-          this.clearState();
-          LuigiClient.uxManager().removeBackdrop();
-        }}
+        onHide={() => LuigiClient.uxManager().removeBackdrop()}
       >
         {content}
       </Modal>
