@@ -1,3 +1,3 @@
-import { Button } from '../../fundamentals-react';
+import { Button } from 'fundamental-react';
 
 export default Button;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Popover as P } from '../../fundamentals-react';
+import { Popover as P } from 'fundamental-react';
 
 export const Popover = styled(P)`
   && {

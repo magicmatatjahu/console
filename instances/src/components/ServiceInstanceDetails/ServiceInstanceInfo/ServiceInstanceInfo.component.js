@@ -61,9 +61,7 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
   return (
     <ServiceInstanceInfoWrapper cols={3}>
       <CenterSideWrapper colSpan={2}>
-        <ContentHeader>
-          General Information
-        </ContentHeader>
+        <ContentHeader>General Information</ContentHeader>
 
         <ContentDescription>
           <Grid>
@@ -74,9 +72,7 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
               <Element margin="0" data-e2e-id="instance-service-class">
                 {instanceClass && instanceClass.name ? (
                   <ServiceClassButton
-                    onClick={() =>
-                      goToServiceClassDetails(instanceClass.name)
-                    }
+                    onClick={() => goToServiceClassDetails(instanceClass.name)}
                   >
                     {getResourceDisplayName(instanceClass)}
                   </ServiceClassButton>
@@ -105,11 +101,7 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
                     onHide={() => LuigiClient.uxManager().removeBackdrop()}
                   >
                     <JSONCode>
-                      {JSON.stringify(
-                        serviceInstance.planSpec,
-                        undefined,
-                        2,
-                      )}
+                      {JSON.stringify(serviceInstance.planSpec, undefined, 2)}
                     </JSONCode>
                   </Modal>
                 ) : (
@@ -126,8 +118,8 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
                 </Grid.Unit>
                 <Grid.Unit size={INFORMATION_VALUE_SIZE}>
                   <Element margin="1px 0 0 0">
-                    {serviceInstance.labels.map(label => (
-                      <LabelWrapper>
+                    {serviceInstance.labels.map((label, index) => (
+                      <LabelWrapper key={`${label}-${index}`}>
                         <Label key={label}>{label}</Label>
                       </LabelWrapper>
                     ))}
@@ -140,8 +132,7 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
               <Grid.Unit size={INFORMATION_KEY_SIZE}>
                 <Element
                   margin={
-                    serviceInstance.labels &&
-                    serviceInstance.labels.length > 0
+                    serviceInstance.labels && serviceInstance.labels.length > 0
                       ? '11px 0 0 0'
                       : '16px 0 0 0'
                   }
@@ -152,8 +143,7 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
               <Grid.Unit size={INFORMATION_VALUE_SIZE}>
                 <Element
                   margin={
-                    serviceInstance.labels &&
-                    serviceInstance.labels.length > 0
+                    serviceInstance.labels && serviceInstance.labels.length > 0
                       ? '11px 0 0 0'
                       : '16px 0 0 0'
                   }
@@ -189,11 +179,17 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
           ) : null}
         </ContentDescription>
       </CenterSideWrapper>
-      <CenterSideWrapper colSpan={1} color={statusColor(serviceInstance.status.type)}>
+      <CenterSideWrapper
+        colSpan={1}
+        color={statusColor(serviceInstance.status.type)}
+      >
         <ContentHeader>
           Status
           <PanelActions>
-            <Icon glyph={statusIcon(serviceInstance.status.type)} style={{ color: statusColor(serviceInstance.status.type) }} />
+            <Icon
+              glyph={statusIcon(serviceInstance.status.type)}
+              style={{ color: statusColor(serviceInstance.status.type) }}
+            />
           </PanelActions>
         </ContentHeader>
 

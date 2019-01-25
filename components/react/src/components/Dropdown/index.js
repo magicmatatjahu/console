@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Popover } from './styled';
-import { Dropdown as DropDownWrapper } from '../../fundamentals-react';
+import { Dropdown as DropDownWrapper } from 'fundamental-react';
 class Dropdown extends React.Component {
   static propTypes = {
     children: PropTypes.any.isRequired,
