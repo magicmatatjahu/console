@@ -319,8 +319,9 @@ class BindApplicationModal extends React.Component {
       <Modal
         width="681px"
         key={serviceInstance.name}
+        type={'emphasized'}
         title={title}
-        confirmText="Create"
+        confirmText="Bind Application"
         onConfirm={this.handleConfirmation}
         modalOpeningComponent={bindApplicationButton}
         disabledConfirm={disabled}
