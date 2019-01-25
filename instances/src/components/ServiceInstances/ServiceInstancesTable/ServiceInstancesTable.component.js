@@ -5,7 +5,7 @@ import {
   Button,
   Table,
   Tooltip,
-  NewModal,
+  Modal,
 } from '@kyma-project/react-components';
 
 import {
@@ -113,7 +113,7 @@ export class ServiceInstancesTable extends Component {
               ) {
                 return (
                   <TextOverflowWrapper>
-                    <NewModal
+                    <Modal
                       title="Instance's Parameters"
                       modalOpeningComponent={(
                         <ServicePlanButton>
@@ -126,7 +126,7 @@ export class ServiceInstancesTable extends Component {
                       <JSONCode>
                         {JSON.stringify(instance.planSpec, null, 2)}
                       </JSONCode>
-                    </NewModal>
+                    </Modal>
                   </TextOverflowWrapper>
                 );
               }
@@ -180,7 +180,7 @@ export class ServiceInstancesTable extends Component {
                 </Tooltip>
               );
             })(),
-            <NewModal
+            <Modal
               title="Warning"
               content={`Are you sure you want to delete instance "${
                 instance.name
@@ -193,7 +193,7 @@ export class ServiceInstancesTable extends Component {
               onHide={() => LuigiClient.uxManager().removeBackdrop()}
             >
               {`Are you sure you want to delete instance "${instance.name}"?`}
-            </NewModal>
+            </Modal>
           ],
         };
       });

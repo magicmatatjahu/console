@@ -17,10 +17,6 @@ import Label from './Label';
 import Image from './Image';
 import Icon from './Icon';
 import Markdown from './Markdown';
-import Modal from './Modal';
-import InformationModal from './Modal/Information';
-import ConfirmationModal from './Modal/Confirmation';
-import StepsModal from './Modal/Steps';
 import Notification from './Notification';
 import NotificationMessage from './NotificationMessage';
 import {
@@ -48,7 +44,7 @@ import Token from './Token';
 import Toolbar from './Toolbar';
 import Tooltip from './Tooltip';
 import { MenuItem, MenuList, Menu } from '../fundamentals-react/Menu/Menu';
-import NewModal from './NewModal';
+import Modal from './Modal';
 import {
   FormFieldset,
   FormItem,
@@ -77,10 +73,6 @@ module.exports = {
   Image,
   Icon,
   Markdown,
-  Modal,
-  InformationModal,
-  ConfirmationModal,
-  StepsModal,
   Notification,
   NotificationMessage,
   Panel,
@@ -117,5 +109,5 @@ module.exports = {
   Panel,
   PanelBody,
   FormSet,
-  NewModal,
+  Modal,
 };

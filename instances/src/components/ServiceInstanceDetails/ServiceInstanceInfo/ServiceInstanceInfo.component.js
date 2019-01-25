@@ -5,7 +5,7 @@ import LuigiClient from '@kyma-project/luigi-client';
 import {
   Label,
   Icon,
-  NewModal,
+  Modal,
   PanelActions,
 } from '@kyma-project/react-components';
 
@@ -94,7 +94,7 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
                 serviceInstance.planSpec !== null &&
                 typeof serviceInstance.planSpec === 'object' &&
                 Object.keys(serviceInstance.planSpec).length ? (
-                  <NewModal
+                  <Modal
                     modalOpeningComponent={
                       <PlanModalButton>
                         {getResourceDisplayName(instancePlan)}
@@ -111,7 +111,7 @@ const ServiceInstanceInfo = ({ serviceInstance }) => {
                         2,
                       )}
                     </JSONCode>
-                  </NewModal>
+                  </Modal>
                 ) : (
                   `${getResourceDisplayName(instancePlan) || '-'}`
                 )}
