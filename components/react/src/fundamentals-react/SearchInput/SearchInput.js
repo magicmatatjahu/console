@@ -1,5 +1,3 @@
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 export class SearchInput extends Component {
@@ -132,43 +130,20 @@ export class SearchInput extends Component {
       noSearchBtn,
       compact,
       className,
-      inputProps,
-      listProps,
-      searchBtnProps,
       ...rest
     } = this.props;
 
-    const searchInputClasses = classnames(
-      'fd-search-input',
-      {
-        'fd-search-input--closed': inShellbar,
-      },
-      className,
-    );
-
-    const inputGroupClasses = classnames(
-      'fd-input-group',
-      'fd-input-group--after',
-      {
-        'fd-input-group--compact': compact,
-      },
-    );
-
-    const inputClasses = classnames('fd-input', {
-      'fd-input--compact': compact,
-    });
-
-    const bodyClasses = classnames({
-      'fd-search-input__body': inShellbar,
-    });
-
     return (
-      <div {...rest} className={searchInputClasses}>
+      <div
+        className={`fd-search-input${
+          inShellbar ? ' fd-search-input--closed' : ''
+        }${className ? ' ' + className : ''}`}
+        {...rest}
+      >
         <div className="fd-popover">
           {inShellbar ? (
             <div className="fd-popover__control fd-search-input__control">
               <button
-                {...searchBtnProps}
                 aria-expanded={this.state.searchExpanded}
                 aria-haspopup="true"
                 className="sap-icon--search fd-button--shell"
@@ -184,7 +159,6 @@ export class SearchInput extends Component {
                   className="fd-search-input__controlinput"
                 >
                   <input
-                    {...inputProps}
                     className="fd-input"
                     onChange={this.onChangeHandler}
                     onClick={() => this.onClickHandler()}
@@ -205,12 +179,13 @@ export class SearchInput extends Component {
                 className="fd-combobox-control"
               >
                 <div
-                  className={inputGroupClasses}
+                  className={`fd-input-group fd-input-group--after${
+                    compact ? ' fd-input-group--compact' : ''
+                  }`}
                   ref={node => (this.node = node)}
                 >
                   <input
-                    {...inputProps}
-                    className={inputClasses}
+                    className={`fd-input${compact ? ' fd-input--compact' : ''}`}
                     onChange={this.onChangeHandler}
                     onClick={() => this.onClickHandler()}
                     onKeyPress={this.onKeyPressHandler}
@@ -223,7 +198,6 @@ export class SearchInput extends Component {
                   {!noSearchBtn && (
                     <span className="fd-input-group__addon fd-input-group__addon--after fd-input-group__addon--button">
                       <button
-                        {...searchBtnProps}
                         className=" fd-button--light sap-icon--search"
                         onClick={() => this.onClickHandler()}
                       />
@@ -238,9 +212,9 @@ export class SearchInput extends Component {
               aria-hidden={!this.state.isExpanded}
               className="fd-popover__body fd-popover__body--no-arrow"
             >
-              <div className={bodyClasses}>
+              <div className={inShellbar ? 'fd-search-input__body' : ''}>
                 <nav className="fd-menu">
-                  <ul {...listProps} className="fd-menu__list">
+                  <ul className="fd-menu__list">
                     {this.state.filteredResult.length > 0 ? (
                       this.state.filteredResult.map((item, index) => {
                         return (
@@ -269,9 +243,3 @@ export class SearchInput extends Component {
     );
   }
 }
-
-SearchInput.propTypes = {
-  inputProps: PropTypes.object,
-  listProps: PropTypes.object,
-  searchBtnProps: PropTypes.object,
-};
