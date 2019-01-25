@@ -15,7 +15,7 @@ import {
   PanelBody,
 } from './styled';
 
-const FilterDropdown = ({ filter, activeValues = [], onChange }) => {
+const FilterDropdown = ({ filter, onChange }) => {
   const control = <Button option="emphasized">Filter</Button>;
 
   return !filter ? null : (

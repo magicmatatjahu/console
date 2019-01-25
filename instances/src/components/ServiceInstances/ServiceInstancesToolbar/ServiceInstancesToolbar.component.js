@@ -8,7 +8,6 @@ import FilterDropdown from './FilterDropdown.component';
 const ServiceInstancesToolbar = ({
   filterClassesAndSetActiveFilters,
   labelFilter,
-  allActiveFilters,
   serviceInstancesExists,
 }) => {
   return (
@@ -26,7 +25,6 @@ const ServiceInstancesToolbar = ({
           <FilterDropdown
             onChange={filterClassesAndSetActiveFilters}
             filter={labelFilter}
-            activeValues={allActiveFilters.labels}
           />
         </>
       ) : null}
