@@ -5,10 +5,15 @@ import {
   Dropdown,
   FormFieldset,
   FormInput,
-  FormItem,
 } from '@kyma-project/react-components';
 
-import { FiltersDropdownWrapper, FormLabel, Panel, PanelBody } from './styled';
+import {
+  FiltersDropdownWrapper,
+  FormLabel,
+  FormItem,
+  Panel,
+  PanelBody,
+} from './styled';
 
 const FilterDropdown = ({ filter, activeValues = [], onChange }) => {
   const control = <Button option="emphasized">Filter</Button>;
