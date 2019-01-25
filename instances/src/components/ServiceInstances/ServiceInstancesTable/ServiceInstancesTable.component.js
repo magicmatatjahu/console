@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import LuigiClient from '@kyma-project/luigi-client';
 
-import {
-  Button,
-  Table,
-  Tooltip,
-  Modal,
-} from '@kyma-project/react-components';
+import { Button, Table, Tooltip, Modal } from '@kyma-project/react-components';
 
 import {
   LinkButton,
@@ -22,10 +17,6 @@ import { getResourceDisplayName, statusColor } from '../../../commons/helpers';
 const deleteButton = <Button compact option="light" glyph="delete" />;
 
 export class ServiceInstancesTable extends Component {
-  state = {
-    showModal: Array(this.props.data.length).fill(false),
-  };
-
   displayBindingsUsages = (bindings = []) => {
     switch (bindings.length) {
       case 0:
@@ -62,7 +53,7 @@ export class ServiceInstancesTable extends Component {
     };
 
     const createTableData = () => {
-      return data.map((instance, index) => {
+      return data.map(instance => {
         return {
           rowData: [
             <TextOverflowWrapper>
@@ -115,11 +106,9 @@ export class ServiceInstancesTable extends Component {
                   <TextOverflowWrapper>
                     <Modal
                       title="Instance's Parameters"
-                      modalOpeningComponent={(
-                        <ServicePlanButton>
-                          {planDisplayName}
-                        </ServicePlanButton>
-                      )}
+                      modalOpeningComponent={
+                        <ServicePlanButton>{planDisplayName}</ServicePlanButton>
+                      }
                       onShow={() => LuigiClient.uxManager().addBackdrop()}
                       onHide={() => LuigiClient.uxManager().removeBackdrop()}
                     >
@@ -193,7 +182,7 @@ export class ServiceInstancesTable extends Component {
               onHide={() => LuigiClient.uxManager().removeBackdrop()}
             >
               {`Are you sure you want to delete instance "${instance.name}"?`}
-            </Modal>
+            </Modal>,
           ],
         };
       });
