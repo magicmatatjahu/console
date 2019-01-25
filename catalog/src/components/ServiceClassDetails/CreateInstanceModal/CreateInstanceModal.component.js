@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Separator,
-  Modal,
-} from '@kyma-project/react-components';
+import { Separator, Modal } from '@kyma-project/react-components';
 import LuigiClient from '@kyma-project/luigi-client';
 
 import BasicData from './BasicData.component';
@@ -15,7 +12,7 @@ import { Bold } from './styled';
 import builder from '../../../commons/builder';
 import { clearEmptyPropertiesInObject } from '../../../commons/helpers';
 
-class CreateInstanceModal extends React.Component {
+class CreateInstanceModal extends Component {
   static propTypes = {
     serviceClass: PropTypes.object.isRequired,
     createServiceInstance: PropTypes.func.isRequired,
@@ -192,8 +189,8 @@ class CreateInstanceModal extends React.Component {
     const {
       formData,
       firstStepFilled,
-      // tooltipData,
       creatingInstance,
+      tooltipData,
       instanceCreateParameters,
     } = this.state;
 
@@ -224,7 +221,7 @@ class CreateInstanceModal extends React.Component {
     };
 
     const content = (
-      <div>
+      <Fragment>
         <BasicData
           data={firstStepData}
           serviceClassExternalName={externalName}
@@ -235,7 +232,7 @@ class CreateInstanceModal extends React.Component {
           callback={this.callback}
         />
         {instanceCreateParameterSchemaExists && (
-          <div>
+          <Fragment>
             <Separator margin="16px -16px" />
             <SchemaData
               data={SecondStepData}
@@ -243,11 +240,10 @@ class CreateInstanceModal extends React.Component {
               onSubmitSchemaForm={this.onSubmitSchemaForm}
               planName={schema.displayName}
               callback={this.callback}
-            >
-            </SchemaData>
-          </div>
+            />
+          </Fragment>
         )}
-      </div>
+      </Fragment>
     );
 
     return (
@@ -255,21 +251,18 @@ class CreateInstanceModal extends React.Component {
         width={'681px'}
         title={
           <p style={{ marginRight: '25px' }}>
-           Provision the{' '}
-           <Bold>{serviceClass.displayName}</Bold>{' '}
-           {serviceClass.__typename === 'ClusterServiceClass'
-             ? 'Cluster Service Class'
-             : 'Service Class'}{' '}
-           in the{' '}
-           <Bold>{environment}</Bold>
-           {' '}Namespace
-         </p>
+            Provision the <Bold>{serviceClass.displayName}</Bold>{' '}
+            {serviceClass.__typename === 'ClusterServiceClass'
+              ? 'Cluster Service Class'
+              : 'Service Class'}{' '}
+            in the <Bold>{environment}</Bold> Namespace
+          </p>
         }
         type={'emphasized'}
         modalOpeningComponent={modalOpeningComponent}
         confirmText="Create Instance"
         cancelText="Cancel"
-        //tooltipData={tooltipData}
+        tooltipData={tooltipData}
         disabledConfirm={disabled}
         onConfirm={this.handleConfirmation}
         waiting={creatingInstance}

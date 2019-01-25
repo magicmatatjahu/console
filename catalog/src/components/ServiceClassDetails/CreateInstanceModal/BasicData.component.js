@@ -77,7 +77,7 @@ class BasicData extends React.Component {
     });
   }
 
-  componentDidUpdate(nextProps, nextState) {
+  componentDidUpdate(prevProps, prevState) {
     const {
       formData,
       invalidInstanceName,
@@ -85,7 +85,7 @@ class BasicData extends React.Component {
       enableCheckNameExists,
     } = this.state;
 
-    if (compareTwoObjects(this.state, nextState)) return;
+    if (compareTwoObjects(this.state, prevState)) return;
 
     const stepFilled =
       formData.name && !invalidInstanceName && !instanceWithNameAlreadyExists;
