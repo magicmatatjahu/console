@@ -9,7 +9,6 @@ import {
   FormInput,
   FormMessage,
 } from '../../../fundamentals-react/Forms/Forms';
-import { InputWrapper, InputField, InputPasswordField } from './components';
 
 const FormSet = styled(UnstyledFormSet)`
   padding-top: ${props => props.marginTop || '0'}px;
@@ -117,27 +116,17 @@ class Input extends React.Component {
       label,
       placeholder,
       handleChange,
-
       name,
       required,
       message = '',
-
       isSuccess,
       isWarning,
       isError,
-      type,
-      noBottomMargin,
       noMessageField,
       marginTop,
     } = this.props;
 
-    const {
-      value,
-      showPassword,
-      typeField,
-      validationType,
-      validationMessage,
-    } = this.state;
+    const { value, typeField, validationType, validationMessage } = this.state;
 
     // const finalMessage = validationMessage ? validationMessage : message;
     // const success = validationType === 'success' ? true : isSuccess;

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 import { FdModal } from './styled';
 import Spinner from '../Spinner';
+import Tooltip from '../Tooltip';
 class Modal extends Component {
   state = {
     show: false,
@@ -59,8 +60,13 @@ class Modal extends Component {
 
   confirmActions = () => {
     const {
-      props: { confirmText, cancelText, type, disabledConfirm, waiting },
-    } = this;
+      confirmText,
+      cancelText,
+      type,
+      disabledConfirm,
+      waiting,
+      tooltipData,
+    } = this.props;
 
     const confirmMessage = waiting ? (
       <div style={{ width: '97px', height: '16px' }}>
@@ -68,6 +74,17 @@ class Modal extends Component {
       </div>
     ) : (
       confirmText
+    );
+
+    const confirmButton = (
+      <Button
+        type={type}
+        onClick={this.onConfirmation}
+        disabled={disabledConfirm}
+        data-e2e-id="modal-confirmation-button"
+      >
+        {confirmMessage}
+      </Button>
     );
 
     return (
@@ -79,14 +96,17 @@ class Modal extends Component {
         >
           {cancelText}
         </Button>
-        <Button
-          type={type}
-          onClick={this.onConfirmation}
-          disabled={disabledConfirm}
-          data-e2e-id="modal-confirmation-button"
-        >
-          {confirmMessage}
-        </Button>
+
+        {tooltipData ? (
+          <Tooltip
+            {...tooltipData}
+            minWidth={tooltipData.minWidth ? tooltipData.minWidth : '191px'}
+          >
+            {confirmButton}
+          </Tooltip>
+        ) : (
+          confirmButton
+        )}
       </Fragment>
     );
   };
