@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Grid from 'styled-components-grid';
 import LuigiClient from '@kyma-project/luigi-client';
-import { Button, NewModal } from '@kyma-project/react-components';
+import { Button, Modal } from '@kyma-project/react-components';
 import { List, Item, Bold, Text } from './styled';
 
 class SecretDataModal extends React.Component {
@@ -59,7 +59,7 @@ class SecretDataModal extends React.Component {
     );
 
     return (
-      <NewModal
+      <Modal
         width={'681px'}
         title={title}
         modalOpeningComponent={modalOpeningComponent}
@@ -68,7 +68,7 @@ class SecretDataModal extends React.Component {
         actions={actions}
       >
         {content}
-      </NewModal>
+      </Modal>
     );
   }
 }

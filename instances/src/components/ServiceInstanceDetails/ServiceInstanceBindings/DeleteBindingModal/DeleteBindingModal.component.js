@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 import {
-  NewModal,
+  Modal,
   Button,
   Separator,
 } from '@kyma-project/react-components';
@@ -112,7 +112,7 @@ class DeleteBindingModal extends React.Component {
     );
 
     return (
-      <NewModal
+      <Modal
         ref={modal => (this.child = modal)}
         title='Warning'
         confirmText="Delete"
@@ -126,7 +126,7 @@ class DeleteBindingModal extends React.Component {
         onHide={() => LuigiClient.uxManager().removeBackdrop()}
       >
         {modalContent}
-      </NewModal>
+      </Modal>
     );
   }
 }

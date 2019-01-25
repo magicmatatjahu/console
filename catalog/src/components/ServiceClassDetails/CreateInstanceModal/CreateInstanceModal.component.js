@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import dcopy from 'deep-copy';
 
 import {
-  ConfirmationModal,
   Separator,
-  NewModal,
+  Modal,
 } from '@kyma-project/react-components';
 import LuigiClient from '@kyma-project/luigi-client';
 
@@ -194,7 +192,7 @@ class CreateInstanceModal extends React.Component {
     const {
       formData,
       firstStepFilled,
-      tooltipData,
+      // tooltipData,
       creatingInstance,
       instanceCreateParameters,
     } = this.state;
@@ -253,7 +251,7 @@ class CreateInstanceModal extends React.Component {
     );
 
     return (
-      <NewModal
+      <Modal
         width={'681px'}
         title={
           <p style={{ marginRight: '25px' }}>
@@ -280,7 +278,7 @@ class CreateInstanceModal extends React.Component {
         onHide={this.onHide}
       >
         {content}
-      </NewModal>
+      </Modal>
     );
   }
 }

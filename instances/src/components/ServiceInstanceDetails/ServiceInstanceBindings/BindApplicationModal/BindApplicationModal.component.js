@@ -3,7 +3,7 @@ import dcopy from 'deep-copy';
 
 import {
   Button,
-  NewModal,
+  Modal,
   Tooltip,
   Separator,
 } from '@kyma-project/react-components';
@@ -326,7 +326,7 @@ class BindApplicationModal extends React.Component {
     );
 
     return (
-      <NewModal
+      <Modal
         width={'681px'}
         key={serviceInstance.name}
         title={title}
@@ -340,7 +340,7 @@ class BindApplicationModal extends React.Component {
         onHide={() => LuigiClient.uxManager().removeBackdrop()}
       >
         {content}
-      </NewModal>
+      </Modal>
     );
   }
 }

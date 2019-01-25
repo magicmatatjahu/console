@@ -3,7 +3,7 @@ import LuigiClient from '@kyma-project/luigi-client';
 
 import {
   Button,
-  NewModal,
+  Modal,
   Toolbar,
 } from '@kyma-project/react-components';
 
@@ -48,7 +48,7 @@ const ServiceInstanceToolbar = ({
       }
       description={instanceClass && instanceClass.description}
     >
-      <NewModal
+      <Modal
         title="Delete"
         confirmText="Delete"
         cancelText="Cancel"
@@ -65,7 +65,7 @@ const ServiceInstanceToolbar = ({
         {`Are you sure you want to delete instance "${
           serviceInstance.name
         }"?`}
-      </NewModal>
+      </Modal>
     </Toolbar>
   );
 };
