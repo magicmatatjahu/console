@@ -93,15 +93,12 @@ class CreateInstanceModal extends React.Component {
   };
 
   handleConfirmation = () => {
-    // if (this.submitBtn) {
-    //   this.submitBtn.click();
-    // } else {
     this.onSubmitSchemaForm();
   };
 
   prepareDataToCreateServiceInstance = params => {
     const { serviceClass } = this.props;
-    const { formData } = this.state;
+    const { formData, instanceCreateParameters } = this.state;
 
     const instanceName = formData.name;
     const currentPlan =
@@ -115,13 +112,7 @@ class CreateInstanceModal extends React.Component {
             .toLowerCase()
             .split(',');
 
-    let instanceCreateParameters;
-    if (params.formData) {
-      instanceCreateParameters = dcopy(params.formData);
-      clearEmptyPropertiesInObject(instanceCreateParameters);
-    } else {
-      instanceCreateParameters = {};
-    }
+    clearEmptyPropertiesInObject(instanceCreateParameters);
 
     const isClusterServiceClass =
       serviceClass.__typename === 'ClusterServiceClass';
@@ -255,14 +246,6 @@ class CreateInstanceModal extends React.Component {
               planName={schema.displayName}
               callback={this.callback}
             >
-              {/* Styled components don't work here
-              <button
-                className="hidden"
-                type="submit"
-                ref={submitBtn => (this.submitBtn = submitBtn)}
-              >
-                Submit
-              </button> */}
             </SchemaData>
           </div>
         )}
