@@ -24,7 +24,9 @@ export const CardsWrapper = styled.div`
   padding: 0 20px;
 `;
 
-export const EmptyServiceListMessageWrapper = styled.div`
+export const EmptyServiceListMessageWrapper = styled.p`
+  text-align: center;
+  font-size: 18px;
   padding: 20px 0;
   margin: 0 auto;
 `;
