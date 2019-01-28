@@ -587,7 +587,7 @@ getBackendModules()
             context: {
               idToken: token
             },
-            icon: 'sys-help'
+            icon: 'documents'
           }
         ],
         contextSwitcher: {
