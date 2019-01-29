@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import { Popover } from './styled';
 import { Dropdown as DropDownWrapper } from 'fundamental-react';
 
-const Dropdown = ({ enabled = true, children, control, noArrow }) => (
-  <DropDownWrapper disabled={!enabled}>
+const Dropdown = ({ disabled = false, children, control, noArrow }) => (
+  <DropDownWrapper>
     <Popover
+      disabled={disabled}
       noArrow={noArrow}
       alignment="right"
       control={control}

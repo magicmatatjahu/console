@@ -16,14 +16,16 @@ import {
 } from './styled';
 
 const FilterDropdown = ({ filter, onChange }) => {
-  const control = <Button option="emphasized">Filter</Button>;
+  const disabled = !(filter && filter.values && filter.values.length > 0);
+  const control = (
+    <Button option="emphasized" disabled={disabled}>
+      Filter
+    </Button>
+  );
 
   return !filter ? null : (
     <FiltersDropdownWrapper>
-      <Dropdown
-        control={control}
-        enabled={filter.values && filter.values.length > 0}
-      >
+      <Dropdown control={control} disabled={disabled}>
         <Panel>
           <PanelBody>
             <FormFieldset>
