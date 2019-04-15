@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import LuigiClient from '@kyma-project/luigi-client';
 import { Button, Modal } from 'fundamental-react';
 
 import {
-  ActionsWrapper
+  ModalWrapper,
+  ActionsWrapper,
+  OpeningComponentWrapper,
 } from "./styled";
 
 interface ModalProps {
@@ -10,41 +13,71 @@ interface ModalProps {
   confirmText?: string;
   closeText?: string;
   openingComponent: React.ReactNode;
+  type?: "info" | "warning";
+  onSubmit?: (event?: any) => void;
+  onOpen?: () => void;
+  onClose?: () => void;
+  onSubmitDisabled?: boolean;
 }
 
 export const ModalComponent: React.FunctionComponent<ModalProps> = ({
+  title,
   confirmText,
   closeText,
   openingComponent,
+  type = "info",
+  onSubmit,
+  onOpen,
+  onClose,
+  onSubmitDisabled = false,
   children
 }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
+  const setTrueShowModal = () => {
+    onOpen && onOpen();
+    setShowModal(true)
+    LuigiClient.uxManager().addBackdrop()
+  }
+
+  const setFalseShowModal = () => {
+    onClose && onClose();
+    setShowModal(false)
+    LuigiClient.uxManager().removeBackdrop();
+  }
+
   const actions = (
     <ActionsWrapper>
-      <Button onClick={() => setShowModal(false)} type="light">
+      <Button onClick={setFalseShowModal} option="light">
         {closeText ? closeText : "Cancel"}
       </Button>
-      <Button onClick={() => setShowModal(false)}>
+      <Button 
+        onClick={() => {
+          onSubmit && onSubmit();
+          setFalseShowModal();
+        }} 
+        option="emphasized"
+        disabled={Boolean(onSubmitDisabled)}
+      >
         {confirmText ? confirmText : "Create"}
       </Button>
     </ActionsWrapper>
   )
 
   return (
-    <div>
-      <div onClick={() => setShowModal(true)}>
+    <ModalWrapper>
+      <OpeningComponentWrapper onClick={setTrueShowModal}>
         {openingComponent}
-      </div>
+      </OpeningComponentWrapper>
       <Modal
         show={showModal}
-        onClose={() => setShowModal(false)}
-        title="New Configuration"
+        onClose={setFalseShowModal}
+        title={title}
         actions={actions}
       >
         {children}
       </Modal>
-    </div>
+    </ModalWrapper>
   )
 }
 

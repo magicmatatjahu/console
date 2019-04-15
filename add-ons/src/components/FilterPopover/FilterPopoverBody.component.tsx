@@ -1,46 +1,49 @@
 import React from 'react';
 import { FormFieldset, FormLegend, FormItem, FormInput, FormLabel } from 'fundamental-react';
 
-import { ConfigurationLabel, FiltersLabelsInterface, Filters } from "../../types";
+import { FiltersLabelsInterface, Filters } from "../../types";
 
 import {
   FormFieldsetWrapper,
 } from "./styled";
 
-interface FilterPopoverBodyProps {
+interface Props {
   activeFilters: Filters;
 }
 
-export const FilterPopoverBody: React.FunctionComponent<FilterPopoverBodyProps & FiltersLabelsInterface> = ({
+export const FilterPopoverBody: React.FunctionComponent<Props & FiltersLabelsInterface> = ({
   activeFilters,
-  getConfigurationsLabels,
+  uniqueLabels,
   setFilterLabel,
+  hasActiveLabel,
 }) => {
-  const labels = getConfigurationsLabels();
-
   return (
     <FormFieldsetWrapper>
-    <FormFieldset>
-      <FormLegend>
-        Labels
-      </FormLegend>
-      {labels.map((label, idx) => (
-        <FormItem isCheck key={idx}>
-          <FormInput
-            id={`checkbox-${idx}`}
-            name={`checkbox-name-${idx}`}
-            type="checkbox"
-            value={label}
-            checked={activeFilters.labels.includes(label)}
-            onChange={() => {}}
-            onClick={() => setFilterLabel(label)}
-          />
-          <FormLabel htmlFor={`checkbox-${idx}`}>
-            {label}
-          </FormLabel>
-        </FormItem>
-      ))}
-    </FormFieldset>
+      <FormFieldset>
+        {Object.keys(uniqueLabels).map(key => (
+          <div key={key}>
+            <FormLegend>
+              {key}
+            </FormLegend>
+            {uniqueLabels[key].map((label, idx) => (
+              <FormItem isCheck key={idx}>
+                <FormInput
+                  id={`checkbox-${idx}`}
+                  name={`checkbox-name-${idx}`}
+                  type="checkbox"
+                  value={label}
+                  checked={hasActiveLabel(key, label)}
+                  onChange={() => {}}
+                  onClick={() => setFilterLabel(key, label)}
+                />
+                <FormLabel htmlFor={`checkbox-${idx}`}>
+                  {label}
+                </FormLabel>
+              </FormItem>
+            ))}
+          </div>
+        ))}
+      </FormFieldset>
     </FormFieldsetWrapper>
   )
 }

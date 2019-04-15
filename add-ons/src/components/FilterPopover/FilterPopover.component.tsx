@@ -3,17 +3,17 @@ import { Popover, Button, Counter } from 'fundamental-react';
 
 import FilterPopoverBody from "./FilterPopoverBody.component";
 
-interface FilterPopoverProps {
+interface Props {
   body: React.ReactNode;
   activeFiltersLength: number;
 }
 
-export const FilterPopover: React.FunctionComponent<FilterPopoverProps> = ({
+export const FilterPopover: React.FunctionComponent<Props> = ({
   body,
   activeFiltersLength,
 }) => {
   const control = (
-    <Button glyph="filter" option="light">
+    <Button glyph="filter" option="light" compact>
       {activeFiltersLength > 0 && (
         <Counter notification>
           {activeFiltersLength}

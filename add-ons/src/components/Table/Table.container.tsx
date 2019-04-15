@@ -9,11 +9,11 @@ import { Configuration } from "../../types";
 
 const ToolbarContainer: React.FunctionComponent = () => {
   const contentHeaders: string[] = ["Name / URL", "Labels", ""]
-  const { configs, removeFilterLabel } = useContext(ConfigurationsService.Context);
+  const { filteredConfigs } = useContext(ConfigurationsService.Context);
 
   return (
     <TableComponent>
-      <TableContentComponent headers={contentHeaders} configurations={configs} />
+      <TableContentComponent headers={contentHeaders} configs={filteredConfigs} />
     </TableComponent>
   )
 }

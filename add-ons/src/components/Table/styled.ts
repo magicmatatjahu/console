@@ -52,6 +52,10 @@ export const PanelWrapper = styled.div`
     .fd-tree__row--header .fd-tree__col--control > div {
       font-weight: 400;
     } 
+
+    .add-ons-url {
+      padding: 3px 0;
+    }
   }
 `;
 
@@ -76,4 +80,10 @@ export const Label = styled(Token)`
 
 export const TreeViewColActions = styled.div`
   float: right;
+
+  > .sap-icon--delete {
+    cursor: pointer;
+    color: #bb0000;
+    margin-left: 6px;
+  }
 `;

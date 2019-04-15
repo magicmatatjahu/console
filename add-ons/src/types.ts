@@ -2,19 +2,24 @@ export type BackendModule = string;
 
 export interface Configuration {
   name: string;
-  labels: ConfigurationLabel[];
+  labels: ConfigurationLabels;
   urls: ConfigurationURL[];
 };
 
-export type ConfigurationLabel = string;
+export type ConfigurationLabels = { [key: string]: string };
 export type ConfigurationURL = string;
 
+export type FilterLabels = { [key: string]: string[] }
+
 export interface Filters {
-  labels: ConfigurationLabel[];
+  labels: FilterLabels;
 };
 
 export interface ActiveFiltersAction {
-  payload: string,
+  payload: {
+    key: string,
+    value: string,
+  },
   type: ActiveFiltersActionType,
 }
 
@@ -25,13 +30,14 @@ export enum ActiveFiltersActionType {
 }
 
 export interface RemoveFiltersInterface {
-  removeFilterLabel: (label: string) => void;
+  removeFilterLabel: (key: string, value: string) => void;
   removeAllFilters: () => void;
 }
 
 export interface FiltersLabelsInterface {
-  getConfigurationsLabels: () => ConfigurationLabel[];
-  setFilterLabel: (label: string) => void;
+  uniqueLabels: FilterLabels;
+  setFilterLabel: (key: string, value: string) => void;
+  hasActiveLabel: (key: string, value: string) => boolean;
 }
 
 export interface ConfigurationsService extends FiltersLabelsInterface, RemoveFiltersInterface {}

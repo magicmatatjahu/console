@@ -1,86 +1,65 @@
-import { useState, useEffect, useReducer, Reducer } from "react";
+import { useState, useEffect, useContext } from "react";
 import createContainer from "constate";
 
-import { Configuration, ConfigurationLabel, Filters, ActiveFiltersAction, ActiveFiltersActionType } from '../types';
-import { fileURLToPath } from "url";
+import QueriesService from "./Queries.service";
+import FiltersService from "./Filters.service";
+
+import { Configuration } from '../types';
+import { DEFAULT_CONFIGURATION } from "../constants";
 
 const useConfigurations = () => {
-  const [originalConfigs, setOriginalConfigs] = useState<Configuration[]>([
-    {
-        name: "dupa1",
-        labels: ["dupa2"],
-        urls: ["lol2x"],
-      },
-      {
-        name: "dupa2",
-        labels: ["dupa3"],
-        urls: ["lol"],
-      },
-  ]);
+  const { configs } = useContext(QueriesService.Context);
+  const { activeFilters } = useContext(FiltersService.Context);
 
-  // Filters
-  const initialActiveFilters: Filters = {
-    labels: [],
-  }
-  
-  function activeFiltersReducer(state: Filters, action: ActiveFiltersAction) {
-    switch (action.type) {
-      case ActiveFiltersActionType.SET_LABEL:
-        return { ...state, labels: [...state.labels, action.payload] };
-      case ActiveFiltersActionType.REMOVE_LABEL:
-        return { ...state, labels: state.labels.filter(label => label !== action.payload) };
-      case ActiveFiltersActionType.REMOVE_ALL_FILTERS: 
-        return initialActiveFilters;
-      default:
-        return state;
-    }
-  }
+  const [originalConfigs, setOriginalConfigs] = useState<Configuration[]>(() => configs);
+  const [configurationNames, setConfigurationNames] = useState<string[]>([])
 
-  const [activeFilters, dispatchActiveFilters] = useReducer(activeFiltersReducer, initialActiveFilters);
+  const sortConfigByName = (configs: Configuration[]): Configuration[] => {
+    return configs.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
 
-  const getConfigurationsLabels = (): ConfigurationLabel[] => {
-    let labels: ConfigurationLabel[] = []
-    originalConfigs.forEach(config => {
-      labels = [...labels, ...config.labels];
+      if (nameA === DEFAULT_CONFIGURATION) return -1;
+      return nameA.localeCompare(nameB);
     });
-    return labels.filter((v, i, a) => a.indexOf(v) === i)
   }
 
-  const setFilterLabel = (label: string) => {
-    if (activeFilters.labels.includes(label)) {
-      removeFilterLabel(label);
-    } else {
-      dispatchActiveFilters({ type: ActiveFiltersActionType.SET_LABEL, payload: label });
-    }
+  const getConfigurationsName = (configs: Configuration[]): string[] => {
+    return configs.map(config => config.name);
   }
 
-  const removeFilterLabel = (label: string) => {
-    dispatchActiveFilters({ type: ActiveFiltersActionType.REMOVE_LABEL, payload: label });
-  }
+  useEffect(() => {
+    if (!configs) return;
 
-  const removeAllFilters = () => {
-    dispatchActiveFilters({ type: ActiveFiltersActionType.REMOVE_ALL_FILTERS, payload: "" });
-  }
+    setOriginalConfigs(sortConfigByName(configs))
+    setConfigurationNames(getConfigurationsName(configs))
+  }, [configs]);
 
-  // Configurations
   const [filteredConfigs, setFilteredConfigs] = useState(originalConfigs);
+  useEffect(() => {
+    originalConfigs && setFilteredConfigs(originalConfigs)
+  }, [originalConfigs]);
   useEffect(() => {
     if (!activeFilters.labels.length) {
       setFilteredConfigs(originalConfigs)
       return;
     }
 
-    const newFilteredConfigs = originalConfigs.filter(config => !config.labels.some(label => activeFilters.labels.includes(label)));
-    setFilteredConfigs(newFilteredConfigs)
+    const newFilteredConfigs = originalConfigs.filter(config => {
+      const labels = config.labels;
+      return true;
+      // Object.keys(labels).some()
+
+      // config.labels.some(label => activeFilters.labels.includes(label))
+    });
+    const sortedConfigs = sortConfigByName(newFilteredConfigs);
+    setFilteredConfigs(sortedConfigs);
   }, [activeFilters]);
 
   return { 
-    configs: filteredConfigs, 
-    getConfigurationsLabels, 
-    activeFilters, 
-    setFilterLabel,
-    removeFilterLabel,
-    removeAllFilters,
+    originalConfigs,
+    configurationNames,
+    filteredConfigs, 
   };
 };
 

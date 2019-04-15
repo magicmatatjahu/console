@@ -7,24 +7,25 @@ import {
   StyledToken,
 } from "./styled";
 
-interface ActiveFiltersProps {
+interface Props {
   activeFilters: Filters;
+  hasActiveLabel: (key: string, value: string) => boolean;
 }
 
-export const ActiveFiltersComponent: React.FunctionComponent<ActiveFiltersProps & RemoveFiltersInterface> = ({
+export const ActiveFiltersComponent: React.FunctionComponent<Props & RemoveFiltersInterface> = ({
   activeFilters,
   removeFilterLabel,
   removeAllFilters,
 }) => {
   return (
     <>
-      {activeFilters.labels.length ? (
+      {/* {activeFilters.labels.length ? (
         <Panel.Filters>
           {activeFilters.labels.map(label => (
             <StyledToken key={label} onClick={() => removeFilterLabel(label)}>{label}</StyledToken>
           ))}
         </Panel.Filters>
-      ) : null}
+      ) : null} */}
     </>
   )
 }

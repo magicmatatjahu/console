@@ -1,20 +1,19 @@
 import React, { useContext } from 'react';
     
 import ActiveFiltersComponent from "./ActiveFilters.component";
-import ConfigurationsService from "../../services/Configurations.service";
-
-import { Filters, RemoveFiltersInterface } from "../../types";
+import FiltersService from "../../services/Filters.service";
 
 interface ActiveFiltersProps {}
 
 export const ActiveFiltersContainer: React.FunctionComponent<ActiveFiltersProps> = () => {
-  const { activeFilters, removeFilterLabel, removeAllFilters } = useContext(ConfigurationsService.Context);
+  const { activeFilters, removeFilterLabel, removeAllFilters, hasActiveLabel } = useContext(FiltersService.Context);
 
   return (
     <ActiveFiltersComponent
       activeFilters={activeFilters}
       removeFilterLabel={removeFilterLabel}
       removeAllFilters={removeAllFilters}
+      hasActiveLabel={hasActiveLabel}
     />
   )
 }

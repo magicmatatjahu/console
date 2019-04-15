@@ -2,29 +2,36 @@ import React, { useContext } from 'react';
 
 import FilterPopoverComponent from "./FilterPopover.component";
 import FilterPopoverBody from "./FilterPopoverBody.component";
-import ConfigurationsService from "../../services/Configurations.service";
 
-import { ConfigurationLabel } from "../../types";
+import FiltersService from "../../services/Filters.service";
+import LabelsService from "../../services/Labels.service";
 
-interface FilterPopoverBodyProps {}
+interface Props {}
 
-export const FilterPopover: React.FunctionComponent<FilterPopoverBodyProps> = () => {
-  const { activeFilters, getConfigurationsLabels, setFilterLabel } = useContext(ConfigurationsService.Context);
+export const FilterPopoverContainer: React.FunctionComponent<Props> = () => {
+  const { activeFilters, setFilterLabel, hasActiveLabel } = useContext(FiltersService.Context);
+  const { uniqueLabels } = useContext(LabelsService.Context);
 
   const filterPopoverBody = (
     <FilterPopoverBody
       activeFilters={activeFilters}
-      getConfigurationsLabels={getConfigurationsLabels}
+      uniqueLabels={uniqueLabels}
       setFilterLabel={setFilterLabel}
+      hasActiveLabel={hasActiveLabel}
     />
   )
 
+  let activeFiltersLength: number = 0;
+  Object.keys(activeFilters.labels).map(key => {
+    activeFiltersLength += activeFilters.labels[key].length;
+  })
+
   return (
     <FilterPopoverComponent 
-      activeFiltersLength={activeFilters.labels.length}
+      activeFiltersLength={activeFiltersLength}
       body={filterPopoverBody}
     />
   )
 }
 
-export default FilterPopover;
+export default FilterPopoverContainer;

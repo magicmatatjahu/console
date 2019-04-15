@@ -3,6 +3,7 @@ import { Panel, Button, Popover } from 'fundamental-react';
 
 import FilterPopover from "../FilterPopover/FilterPopover.container";
 import ActiveFilters from "./ActiveFilters.container";
+import AddUrlModal from "../Modals/AddUrlModal/AddUrlModal.container";
 
 import { Filters } from "../../types";
 
@@ -27,11 +28,10 @@ const TableComponent: React.FunctionComponent<TableComponentProps> = ({
             <Button
               glyph="search"
               option="light"
+              compact
             />
             <FilterPopover />
-            <Button glyph="add" compact option="light">
-              Add URL
-            </Button>
+            <AddUrlModal />
           </Panel.Actions>
         </Panel.Header>
         {/* <ActiveFilters /> */}

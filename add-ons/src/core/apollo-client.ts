@@ -5,6 +5,7 @@ import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createTransformerLink } from 'apollo-client-transform';
 import { onError } from 'apollo-link-error';
+import { getLinkTransformers } from "./apollo-client-transform";
 
 import appInitializer from "./app-initializer";
 
@@ -53,7 +54,7 @@ export function createApolloClient() {
   // const enhancedAuthHttpLink = transformerLink.concat(authHttpLink);
 
   const client = new ApolloClient({
-    link: ApolloLink.from([errorLink]),
+    link: ApolloLink.from([errorLink, authHttpLink]),
     cache: cache,
     connectToDevTools: true,
   });
