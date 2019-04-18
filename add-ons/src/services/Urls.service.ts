@@ -3,7 +3,7 @@ import createContainer from "constate";
 
 import ConfigurationsService from "./Configurations.service";
 
-import { ERRORS } from "../constants";
+import { HELM_BROKER_IS_DEVELOPMENT_MODE, ERRORS } from "../constants";
 const URL_ERRORS = ERRORS.URL;
 
 const useUrls = () => {
@@ -19,36 +19,17 @@ const useUrls = () => {
     if (existingUrls.includes(url)) {
       return URL_ERRORS.ALREADY_EXISTS;
     }
-    if (!(url.startsWith("https://") || url.startsWith("http://"))) {
-      return URL_ERRORS.STARTS_WITH_HTTP;
+    if (HELM_BROKER_IS_DEVELOPMENT_MODE) {
+      if (!(url.startsWith("https://") || url.startsWith("http://"))) {
+        return URL_ERRORS.STARTS_WITH_HTTP;
+      }
+    } else {
+      if (!(url.startsWith("https://"))) {
+        return URL_ERRORS.STARTS_WITH_HTTP;
+      }
     }
-    // validateExistsUrl(url, setExistsResource);
     return "";
   }
-
-  // const validateExistsUrl = (url: string, setExistsResource: any) => {
-  //   clearTimeout(timer);
-  //   timer = setTimeout(() => {
-  //     checkExistsResource(url, setExistsResource);
-  //   }, 500);
-  // }
-
-  // const checkExistsResource = async (url: string, setExistsResource: any) => {
-  //   const data = await fetchUrl(url);
-  //   return;
-  // }
-
-  // const fetchUrl = async (url: string) => {
-  //   try {
-  //     const request = await fetch(url, { mode: 'cors' });
-  //     console.log(request)
-  //     const data = await request.json();
-  //     return data;
-  //   } catch (e) {
-  //     console.log(e)
-  //     return;
-  //   }
-  // }
 
   return {
     getUrlsFromConfigByName,

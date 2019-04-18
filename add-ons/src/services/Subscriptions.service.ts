@@ -9,7 +9,12 @@ import ConfigurationsService from "./Configurations.service";
 import appInitializer from "../core//app-initializer";
 import { Configuration, Notification } from '../types';
 import { SubscriptionType } from './types';
-import { KYMA_SYSTEM_ENV, NOTIFICATION, CONFIGURATION_VARIABLE } from "../constants";
+import { 
+  KYMA_SYSTEM_ENV, 
+  NOTIFICATION, 
+  CONFIGURATION_VARIABLE,
+  ERRORS,
+} from "../constants";
 
 export const ADDONS_CONFIGURATION_EVENT_SUBSCRIPTION = gql`
   subscription addonsConfigurationEvent {
@@ -25,47 +30,44 @@ export const ADDONS_CONFIGURATION_EVENT_SUBSCRIPTION = gql`
 `;
 
 const useSubscriptions = () => {
-  const { setNotification } = useContext(NotificationsService.Context);
-  const { setOriginalConfigs } = useContext(ConfigurationsService.Context);
+  const { successNotification, errorNotification } = useContext(NotificationsService.Context);
+  const { configurationsExist, setOriginalConfigs } = useContext(ConfigurationsService.Context);
 
   const onAdd = (config: Configuration) => {
-    setNotification({
-      title: NOTIFICATION.ADD_CONFIGURATION.TITLE,
-      content: NOTIFICATION.ADD_CONFIGURATION.CONTENT.replace(CONFIGURATION_VARIABLE, config.name),
-      color: '#359c46',
-      icon: 'accept',
-    })
+    const title = NOTIFICATION.ADD_CONFIGURATION.TITLE;
+    const content = NOTIFICATION.ADD_CONFIGURATION.CONTENT.replace(CONFIGURATION_VARIABLE, config.name);
+
+    successNotification(title, content);
     setOriginalConfigs(configs => [...configs, config]);
   }
 
   const onUpdate = (config: Configuration) => {
-    setNotification({
-      title: NOTIFICATION.UPDATE_CONFIGURATION.TITLE,
-      content: NOTIFICATION.UPDATE_CONFIGURATION.CONTENT.replace(CONFIGURATION_VARIABLE, config.name),
-      color: '#359c46',
-      icon: 'accept',
-    })
+    const title = NOTIFICATION.UPDATE_CONFIGURATION.TITLE;
+    const content = NOTIFICATION.UPDATE_CONFIGURATION.CONTENT.replace(CONFIGURATION_VARIABLE, config.name);
+
+    successNotification(title, content);
     setOriginalConfigs(configs => configs.map(c => c.name === config.name ? { ...c, ...config } : c ));
   }
 
   const onDelete = (config: Configuration) => {
-    setNotification({
-      title: NOTIFICATION.DELETE_CONFIGURATION.TITLE,
-      content: NOTIFICATION.DELETE_CONFIGURATION.CONTENT.replace(CONFIGURATION_VARIABLE, config.name),
-      color: '#359c46',
-      icon: 'accept',
-    })
+    const title = NOTIFICATION.DELETE_CONFIGURATION.TITLE;
+    const content = NOTIFICATION.DELETE_CONFIGURATION.CONTENT.replace(CONFIGURATION_VARIABLE, config.name);
+
+    successNotification(title, content);
     setOriginalConfigs(configs => configs.filter(c => c.name !== config.name));
   }
 
-  const { data, error, loading } = useSubscription(
+  const _ = useSubscription(
     ADDONS_CONFIGURATION_EVENT_SUBSCRIPTION,
     {
       onSubscriptionData: ({ subscriptionData }) => {
+        if (!configurationsExist()) {
+          return;
+        }
         const { data: { addonsConfigurationEvent: { type, addonsConfiguration } }, error } = subscriptionData;
 
         if (error) {
-          console.error(error);
+          errorNotification("Error", ERRORS.SERVER);
           return;
         }
 

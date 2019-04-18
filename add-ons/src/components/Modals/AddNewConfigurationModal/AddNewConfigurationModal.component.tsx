@@ -4,7 +4,7 @@ import { Modal } from "@kyma-project/react-components";
 
 import InlineHelp from "../../Atoms/InlineHelp";
 
-import { HELP, PLACEHOLDERS, TOOLTIP_DATA } from "../../../constants";
+import { HELP, PLACEHOLDERS, TOOLTIP_DATA_ERROR } from "../../../constants";
 
 import {
   AddedUrl,
@@ -27,6 +27,7 @@ interface Props {
   handleEnterDownOnUrlField: (e: any) => void;
   onShowModal: () => void;
   onHideModal: () => void;
+  configurationsExist: boolean;
 }
 
 export const AddNewConfigurationModal: React.FunctionComponent<Props> = ({
@@ -44,9 +45,10 @@ export const AddNewConfigurationModal: React.FunctionComponent<Props> = ({
   handleEnterDownOnUrlField,
   onShowModal,
   onHideModal,
+  configurationsExist,
 }) => {
   const modalOpeningComponent = (
-    <Button glyph="add">
+    <Button glyph="add" disabled={!configurationsExist}>
       Add New Configuration
     </Button>
   )
@@ -73,7 +75,7 @@ export const AddNewConfigurationModal: React.FunctionComponent<Props> = ({
       disabledConfirm={disabledConfirm}
       onShow={onShowModal}
       onHide={onHideModal}
-      tooltipData={disabledConfirm ? TOOLTIP_DATA : null}
+      tooltipData={disabledConfirm ? TOOLTIP_DATA_ERROR : null}
     >
           <FormSet>
             <FormItem key="name">
@@ -115,7 +117,7 @@ export const AddNewConfigurationModal: React.FunctionComponent<Props> = ({
               {addedLabels()}
             </FormItem>
             <AddLabelButtonWrapper>
-              <Button type="button" glyph="add" onClick={addLabel} option="light" compact disabled={Boolean(labelsField.error || !labelsField.value)}>
+              <Button glyph="add" onClick={addLabel} option="light" compact disabled={Boolean(labelsField.error || !labelsField.value)}>
                 Add Label
               </Button>
             </AddLabelButtonWrapper>
@@ -139,7 +141,7 @@ export const AddNewConfigurationModal: React.FunctionComponent<Props> = ({
                 </FormMessage>
               ) : null}
             </FormItem>
-            <Button type="button" glyph="add" onClick={addUrl} option="light" compact disabled={Boolean(urlField.error || !urlField.value)}>
+            <Button glyph="add" onClick={addUrl} option="light" compact disabled={Boolean(urlField.error || !urlField.value)}>
               Add URL
             </Button>
           </FormSet>

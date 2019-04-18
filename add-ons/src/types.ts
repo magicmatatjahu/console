@@ -35,7 +35,7 @@ export enum ActiveFiltersActionType {
 
 export interface RemoveFiltersInterface {
   removeFilterLabel: (key: string, value: string) => void;
-  removeAllFilters: () => void;
+  removeAllFiltersLabels: () => void;
 }
 
 export interface FiltersLabelsInterface {

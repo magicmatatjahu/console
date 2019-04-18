@@ -5,7 +5,7 @@ import { Modal } from "@kyma-project/react-components";
 
 import InlineHelp from "../../Atoms/InlineHelp";
 
-import { HELP, PLACEHOLDERS, TOOLTIP_DATA } from "../../../constants";
+import { HELP, PLACEHOLDERS, TOOLTIP_DATA_ERROR } from "../../../constants";
 
 import {
   AddedUrl,
@@ -62,7 +62,7 @@ export const Component: React.FunctionComponent<Props> = ({
         disabledConfirm={disabledConfirm}
         onShow={onShowModal}
         onHide={onHideModal}
-        tooltipData={disabledConfirm ? TOOLTIP_DATA : null}
+        tooltipData={disabledConfirm ? TOOLTIP_DATA_ERROR : null}
       >
           <FormSet>
             <FormItem key="configurationName">

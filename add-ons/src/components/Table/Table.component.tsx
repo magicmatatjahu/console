@@ -1,6 +1,7 @@
 import React from 'react';
 import { Panel, Button, Popover } from 'fundamental-react';
 
+import Search from "./Search/container";
 import FilterPopover from "./FilterPopover/FilterPopover.container";
 import ActiveFilters from "./ActiveFilters.container";
 import AddUrlModal from "../Modals/AddUrlModal/AddUrlModal.container";
@@ -12,9 +13,12 @@ import {
   StyledToken,
 } from "./styled";
 
-interface TableComponentProps {}
+interface TableComponentProps {
+  configurationsExist: boolean;
+}
 
 const TableComponent: React.FunctionComponent<TableComponentProps> = ({
+  configurationsExist,
   children,
 }) => {
   return (
@@ -25,11 +29,7 @@ const TableComponent: React.FunctionComponent<TableComponentProps> = ({
             title="Repository URLs"
           />
           <Panel.Actions>
-            <Button
-              glyph="search"
-              option="light"
-              compact
-            />
+            <Search />
             <FilterPopover />
           </Panel.Actions>
         </Panel.Header>

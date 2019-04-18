@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import { Token, Panel } from 'fundamental-react';
 
+export const ErrorWrapper = styled.div`
+  padding: 16px;
+  font-size: 22px;
+  font-weight: 500;
+  text-align: center;
+`;
+
 export const PanelWrapper = styled.div`
   margin: 32px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
@@ -35,8 +42,14 @@ export const PanelWrapper = styled.div`
 
       .fd-tree__col--control {
         line-height: 26px;
+
         button {
           top: 12px;
+        }
+
+        .fd-tree__col--control--default-config {
+          display: inline-block;
+          margin-right: 9px;
         }
       }
     }

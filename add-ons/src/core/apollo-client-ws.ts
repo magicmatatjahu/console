@@ -24,10 +24,6 @@ export class WebSocketLink extends ApolloLink {
   }
 }
 
-/**
- * TODO: Remove this function once the PR is merged
- * https://github.com/apollographql/subscriptions-transport-ws/pull/477
- */
 function getWrappedWebsocket() {
   const w = (window as any);
   const NativeWebSocket = w["WebSocket"] || w["MozWebSocket"];

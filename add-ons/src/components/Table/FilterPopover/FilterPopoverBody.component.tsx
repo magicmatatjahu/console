@@ -10,7 +10,6 @@ import {
 
 interface Props {
   activeFilters: Filters;
-  removeAllFilters: () => void;
 }
 
 export const FilterPopoverBody: React.FunctionComponent<Props & FiltersLabelsInterface> = ({
@@ -18,33 +17,33 @@ export const FilterPopoverBody: React.FunctionComponent<Props & FiltersLabelsInt
   uniqueLabels,
   setFilterLabel,
   hasActiveLabel,
-  removeAllFilters,
 }) => {
   return (
     <FormFieldsetWrapper>
       <FormFieldset>
-        {Object.keys(uniqueLabels).map(key => (
-          <StyledGroup key={key}>
-            <FormLegend>
-              {key}
-            </FormLegend>
-            {uniqueLabels[key].map((label, idx) => (
+        <StyledGroup>
+          <FormLegend>
+            Labels
+          </FormLegend>
+          {Object.keys(uniqueLabels).map(key => {
+            return uniqueLabels[key].map((value, idx) => (
               <FormItem isCheck key={idx}>
                 <FormInput
                   id={`checkbox-${idx}`}
                   name={`checkbox-name-${idx}`}
                   type="checkbox"
-                  value={label}
-                  checked={hasActiveLabel(key, label)}
-                  onClick={() => setFilterLabel(key, label)}
+                  value={value}
+                  checked={hasActiveLabel(key, value) || false}
+                  onClick={() => setFilterLabel(key, value)}
+                  onChange={() => null}
                 />
                 <FormLabel htmlFor={`checkbox-${idx}`}>
-                  {label}
+                  {`${key}=${value}`}
                 </FormLabel>
               </FormItem>
-            ))}
-          </StyledGroup>
-        ))}
+            ));
+          })}
+        </StyledGroup>
       </FormFieldset>
     </FormFieldsetWrapper>
   )

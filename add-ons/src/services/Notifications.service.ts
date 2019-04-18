@@ -28,11 +28,31 @@ const useNotifications = () => {
     clearTimeout(timer);
   }
 
+  const successNotification = (title: string, content: string | React.ReactNode) => {
+    setNotification({
+      title: title,
+      content: content,
+      color: '#359c46',
+      icon: 'accept',
+    })
+  }
+
+  const errorNotification = (title: string, content: string | React.ReactNode) => {
+    setNotification({
+      title: title,
+      content: content,
+      color: '#359c46',
+      icon: 'accept',
+    })
+  }
+
+
   return {
     notification,
     showNotification,
-    setNotification,
     hideNotification,
+    successNotification,
+    errorNotification,
   }
 }
 

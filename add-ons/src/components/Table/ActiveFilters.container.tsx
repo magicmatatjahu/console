@@ -6,13 +6,13 @@ import FiltersService from "../../services/Filters.service";
 interface ActiveFiltersProps {}
 
 export const ActiveFiltersContainer: React.FunctionComponent<ActiveFiltersProps> = () => {
-  const { activeFilters, removeFilterLabel, removeAllFilters, hasActiveLabel } = useContext(FiltersService.Context);
+  const { activeFilters, removeFilterLabel, removeAllFiltersLabels, hasActiveLabel } = useContext(FiltersService.Context);
 
   return (
     <ActiveFiltersComponent
       activeFilters={activeFilters}
       removeFilterLabel={removeFilterLabel}
-      removeAllFilters={removeAllFilters}
+      removeAllFiltersLabels={removeAllFiltersLabels}
       hasActiveLabel={hasActiveLabel}
     />
   )

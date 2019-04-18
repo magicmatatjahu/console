@@ -16,9 +16,8 @@ interface Props {
 export const ActiveFiltersComponent: React.FunctionComponent<Props & RemoveFiltersInterface> = ({
   activeFilters,
   removeFilterLabel,
-  removeAllFilters,
+  removeAllFiltersLabels,
 }) => {
-  console.log(activeFilters)
   return (
     <>
       {Object.keys(activeFilters.labels).length && Object.keys(activeFilters.labels).some(key => Boolean(activeFilters.labels[key].length)) ? (
@@ -27,7 +26,7 @@ export const ActiveFiltersComponent: React.FunctionComponent<Props & RemoveFilte
             {Object.keys(activeFilters.labels).map(key => activeFilters.labels[key].map(value => (
               <StyledToken key={key} onClick={() => removeFilterLabel(key, value)}>{`${key}=${value}`}</StyledToken>
             )))}
-            <Button onClick={removeAllFilters} compact type="light">Clear All</Button>
+            <Button onClick={removeAllFiltersLabels} compact option="light">Clear All</Button>
           </Panel.Filters>
         </StyledTokensWrapper>
       ) : null}

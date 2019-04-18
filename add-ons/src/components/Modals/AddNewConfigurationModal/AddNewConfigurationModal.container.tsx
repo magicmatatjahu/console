@@ -17,7 +17,7 @@ interface Props {}
 export const Container: React.FunctionComponent<Props> = () => {
   // Services
   const { createAddonsConfiguration } = useContext(MutationsService.Context);
-  const { validateName, configNameGenerator } = useContext(ConfigurationsService.Context);
+  const { configurationsExist, originalConfigs, validateName, configNameGenerator } = useContext(ConfigurationsService.Context);
   const { validateLabel } = useContext(LabelsService.Context);
   const { validateUrl } = useContext(UrlsService.Context);
 
@@ -43,7 +43,7 @@ export const Container: React.FunctionComponent<Props> = () => {
   }
   const validateUrlField = (url: string): string => {
     if (urls.length && !url) {
-      labelsField.cleanUpField();
+      urlField.cleanUpField();
       return "";
     }
 
@@ -152,6 +152,7 @@ export const Container: React.FunctionComponent<Props> = () => {
       handleEnterDownOnUrlField={handleEnterDownOnUrlField}
       onShowModal={onShowModal}
       onHideModal={onHideModal}
+      configurationsExist={configurationsExist()}
     />
   )
 }

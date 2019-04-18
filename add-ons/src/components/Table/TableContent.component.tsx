@@ -1,5 +1,5 @@
 import React from 'react';
-import { TreeView, Popover, Button } from 'fundamental-react';
+import { TreeView, Popover, Button, InlineHelp } from 'fundamental-react';
 
 import DeleteConfigurationModal from "../Modals/DeleteConfigurationModal/DeleteConfigurationModal.container";
 import AddUrlModal from "../Modals/AddUrlModal/AddUrlModal.container";
@@ -12,6 +12,7 @@ import {
 } from "./styled";
 
 import { Configuration } from "../../types";
+import { DEFAULT_CONFIGURATION, DEFAULT_CONFIGURATION_DESCRIPTION } from "../../constants";
 
 interface TableContentProps {
   headers: string[];
@@ -38,7 +39,15 @@ const TableContent: React.FunctionComponent<TableContentProps> = ({
             <TreeView.Item key={idx}>
               <TreeView.Row>
                 <TreeView.Col>
-                  <div>{config.name}</div>
+                  <div>
+                    <span className={config.name === DEFAULT_CONFIGURATION ? "fd-tree__col--control--default-config" : ""}>{config.name}</span>
+                    {config.name === DEFAULT_CONFIGURATION ? (
+                      <InlineHelp
+                        placement="bottom-right"
+                        text={DEFAULT_CONFIGURATION_DESCRIPTION}
+                      />
+                    ) : null}
+                  </div>
                 </TreeView.Col>
                 <TreeView.Col>
                   <Labels>
@@ -54,7 +63,7 @@ const TableContent: React.FunctionComponent<TableContentProps> = ({
                 </TreeView.Col>
                 <TreeView.Col>
                   <TreeViewColActions>
-                    <AddUrlModal configurationName={config.name} />
+                    {config.name !== DEFAULT_CONFIGURATION ? <AddUrlModal configurationName={config.name} /> : null}
                     <DeleteConfigurationModal configurationName={config.name} />
                   </TreeViewColActions>
                 </TreeView.Col>

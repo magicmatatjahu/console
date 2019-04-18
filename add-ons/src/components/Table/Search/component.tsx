@@ -1,15 +1,53 @@
 import React from "react";
+import { FormGroup, FormItem, InputGroup, Button } from 'fundamental-react';
+
+import {
+  SearchWrapper,
+} from "./styled";
+
+import { PLACEHOLDERS } from "../../../constants";
 
 interface Props {
-  text: string
+  searchField: any;
+  configurationsExist: boolean;
+  showSearchIcon: boolean;
+  setShowSearchIcon: any;
+  reference: any;
 }
 
-const Component: React.FunctionComponent<Props> = () => (
-  <span className="fd-inline-help fd-has-float-right">
-    <span className="fd-inline-help__content fd-inline-help__content--bottom-left">
-      dupa
-    </span>
-  </span>
+const Component: React.FunctionComponent<Props> = ({
+  searchField,
+  configurationsExist,
+  showSearchIcon,
+  setShowSearchIcon,
+  reference,
+}) => (
+  <SearchWrapper>
+    <div
+      ref={reference}
+    >
+      {showSearchIcon ? (
+        <Button
+          glyph="search"
+          option="light"
+          disabled={!configurationsExist}
+          compact
+          onClick={() => { setShowSearchIcon(false) }}
+        />
+      ) : (
+        <FormGroup>
+          <FormItem>
+            <InputGroup
+              compact
+              inputPlaceholder={PLACEHOLDERS.SEARCH_FIELD}
+              inputType="search"
+              {...searchField.bind}
+            />
+          </FormItem>
+        </FormGroup>
+      )}
+    </div>
+  </SearchWrapper>
 );
 
 export default Component;

@@ -24,7 +24,7 @@ const useFilters = () => {
           [action.payload.key]: state.labels[action.payload.key].filter(label => label !== action.payload.value) 
         }};
       case ActiveFiltersActionType.REMOVE_ALL_FILTERS: 
-        return initialActiveFilters;
+        return { ...initialActiveFilters, search: state.search };
       default:
         return state;
     }
@@ -53,7 +53,7 @@ const useFilters = () => {
     dispatchActiveFilters({ type: ActiveFiltersActionType.REMOVE_LABEL, payload: { key, value } });
   }
 
-  const removeAllFilters = () => {
+  const removeAllFiltersLabels = () => {
     dispatchActiveFilters({ type: ActiveFiltersActionType.REMOVE_ALL_FILTERS, payload: { key: "", value: "" } });
   }
 
@@ -63,9 +63,10 @@ const useFilters = () => {
 
   return {
     activeFilters, 
+    setSearchFilter,
     setFilterLabel,
     removeFilterLabel,
-    removeAllFilters,
+    removeAllFiltersLabels,
     hasActiveLabel,
   }
 }

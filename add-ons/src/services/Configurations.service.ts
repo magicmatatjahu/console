@@ -75,6 +75,18 @@ const useConfigurations = () => {
     return configs.map(config => config.name);
   }
 
+  const configurationsExist = (): boolean => {
+    const length = originalConfigs && originalConfigs.length;
+    return Boolean(length);
+  }
+
+  const filterBySearch = (configs: Configuration[]): Configuration[] => {
+    if (activeFilters.search) {
+       return configs.filter(config => config.name.includes(activeFilters.search))
+    }
+    return configs;
+  }
+
   useEffect(() => {
     if (!addonsConfigurations) return;
 
@@ -86,11 +98,12 @@ const useConfigurations = () => {
   const [filteredConfigs, setFilteredConfigs] = useState(originalConfigs);
   useEffect(() => {
     if (!originalConfigs) return
+
     if (
       !Object.keys(activeFilters.labels).length ||
       !Object.keys(activeFilters.labels).some(key => Boolean(activeFilters.labels[key].length))
     ) {
-      setFilteredConfigs(originalConfigs)
+      setFilteredConfigs(filterBySearch(originalConfigs))
       return;
     }
 
@@ -104,8 +117,8 @@ const useConfigurations = () => {
       }
       return false;
     });
-    newFilteredConfigs = newFilteredConfigs.filter(config => config.name.includes(activeFilters.search))
-    const sortedConfigs = sortConfigByName(newFilteredConfigs);
+
+    const sortedConfigs = sortConfigByName(filterBySearch(newFilteredConfigs));
     setFilteredConfigs(sortedConfigs);
   }, [originalConfigs, activeFilters]);
 
@@ -115,7 +128,8 @@ const useConfigurations = () => {
     validateName,
     configNameGenerator,
     configurationNames,
-    filteredConfigs, 
+    filteredConfigs,
+    configurationsExist,
   };
 };
 
