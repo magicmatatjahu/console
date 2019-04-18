@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import createContainer from "constate";
 
 import ConfigurationsService from "./Configurations.service";
@@ -8,6 +8,7 @@ const URL_ERRORS = ERRORS.URL;
 
 const useUrls = () => {
   const { originalConfigs } = useContext(ConfigurationsService.Context);
+  let timer: number = 0;
 
   const getUrlsFromConfigByName = (configName: string): string[] => {
     const config = originalConfigs.find(config => config.name === configName);
@@ -21,11 +22,33 @@ const useUrls = () => {
     if (!(url.startsWith("https://") || url.startsWith("http://"))) {
       return URL_ERRORS.STARTS_WITH_HTTP;
     }
-    if (!(url.endsWith("yaml") || url.endsWith("yml"))) {
-      return URL_ERRORS.YAML_EXTENSION; 
-    }
+    // validateExistsUrl(url, setExistsResource);
     return "";
   }
+
+  // const validateExistsUrl = (url: string, setExistsResource: any) => {
+  //   clearTimeout(timer);
+  //   timer = setTimeout(() => {
+  //     checkExistsResource(url, setExistsResource);
+  //   }, 500);
+  // }
+
+  // const checkExistsResource = async (url: string, setExistsResource: any) => {
+  //   const data = await fetchUrl(url);
+  //   return;
+  // }
+
+  // const fetchUrl = async (url: string) => {
+  //   try {
+  //     const request = await fetch(url, { mode: 'cors' });
+  //     console.log(request)
+  //     const data = await request.json();
+  //     return data;
+  //   } catch (e) {
+  //     console.log(e)
+  //     return;
+  //   }
+  // }
 
   return {
     getUrlsFromConfigByName,

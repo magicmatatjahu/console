@@ -42,7 +42,7 @@ export const Container: React.FunctionComponent<Props> = () => {
     setUrls([]);
   }
   const validateUrlField = (url: string): string => {
-    if (!url) {
+    if (urls.length && !url) {
       labelsField.cleanUpField();
       return "";
     }

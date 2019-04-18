@@ -3,6 +3,10 @@ import React, { useContext } from 'react';
 import MutationsService from "../../../services/Mutations.service";
 import DeleteConfigurationModal from "./DeleteUrlModal.component";
 
+import {
+  DeleteUrlModalWrapper,
+} from "./styled";
+
 interface Props {
   configurationName: string;
   url: string;
@@ -22,11 +26,13 @@ export const DeleteUrlModalContainer: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <DeleteConfigurationModal 
-      configurationName={configurationName}
-      url={url}
-      handleDelete={handleDelete}
-    />
+    <DeleteUrlModalWrapper>
+      <DeleteConfigurationModal 
+        configurationName={configurationName}
+        url={url}
+        handleDelete={handleDelete}
+      />
+    </DeleteUrlModalWrapper>
   )
 }
 

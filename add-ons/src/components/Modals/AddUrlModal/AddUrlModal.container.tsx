@@ -49,7 +49,12 @@ export const Container: React.FunctionComponent<Props> = ({
     setUrls([]);
   }
   const validateUrlField = (url: string): string => {
-    const existingUrls = getUrlsFromConfigByName(getConfigName());
+    if (!url) {
+      urlField.cleanUpField();
+      return "";
+    }
+
+    const existingUrls = [...getUrlsFromConfigByName(getConfigName()), ...urls];
     return validateUrl(url, existingUrls)
   }
   const handleEnterDownOnUrlField = (event: any) => {
@@ -95,6 +100,7 @@ export const Container: React.FunctionComponent<Props> = ({
       onSubmit={onSubmit}
       addUrl={addUrl}
       removeUrl={removeUrl}
+      handleEnterDownOnUrlField={handleEnterDownOnUrlField}
       onShowModal={onShowModal}
       onHideModal={onHideModal}
     />

@@ -5,7 +5,7 @@ import { Notification } from "../types";
 import { NOTIFICATION_SHOW_TIME } from "../constants";
 
 const useNotifications = () => {
-  const [notification, setNotification] = useState<Notification | null>(null);
+  const [notification, setNotification] = useState<Notification>({} as Notification);
   const [showNotification, setShowNotification] = useState<boolean>(false)
   let timer: number = 0;
 

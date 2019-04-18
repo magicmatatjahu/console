@@ -44,6 +44,7 @@ export const ERRORS = {
     ALREADY_EXISTS: "Url already exists in config.",
     STARTS_WITH_HTTP: "Url must starts with http(s) protocol.",
     YAML_EXTENSION: "Url must have .yaml or .yml extension.",
+    RESOURCE_NOT_EXISTS: "Url not exists.",
   }
 };
 

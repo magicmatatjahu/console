@@ -1,9 +1,10 @@
 import React from 'react';
-import { Panel } from 'fundamental-react';
+import { Panel, Button } from 'fundamental-react';
 
 import { Filters, RemoveFiltersInterface } from "../../types";
 
 import {
+  StyledTokensWrapper,
   StyledToken,
 } from "./styled";
 
@@ -17,15 +18,19 @@ export const ActiveFiltersComponent: React.FunctionComponent<Props & RemoveFilte
   removeFilterLabel,
   removeAllFilters,
 }) => {
+  console.log(activeFilters)
   return (
     <>
-      {/* {activeFilters.labels.length ? (
-        <Panel.Filters>
-          {activeFilters.labels.map(label => (
-            <StyledToken key={label} onClick={() => removeFilterLabel(label)}>{label}</StyledToken>
-          ))}
-        </Panel.Filters>
-      ) : null} */}
+      {Object.keys(activeFilters.labels).length && Object.keys(activeFilters.labels).some(key => Boolean(activeFilters.labels[key].length)) ? (
+        <StyledTokensWrapper>
+          <Panel.Filters>
+            {Object.keys(activeFilters.labels).map(key => activeFilters.labels[key].map(value => (
+              <StyledToken key={key} onClick={() => removeFilterLabel(key, value)}>{`${key}=${value}`}</StyledToken>
+            )))}
+            <Button onClick={removeAllFilters} compact type="light">Clear All</Button>
+          </Panel.Filters>
+        </StyledTokensWrapper>
+      ) : null}
     </>
   )
 }

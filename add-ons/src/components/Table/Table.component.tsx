@@ -31,10 +31,9 @@ const TableComponent: React.FunctionComponent<TableComponentProps> = ({
               compact
             />
             <FilterPopover />
-            {/* <AddUrlModal /> */}
           </Panel.Actions>
         </Panel.Header>
-        {/* <ActiveFilters /> */}
+        <ActiveFilters />
         <Panel.Body>
           {children}
         </Panel.Body>

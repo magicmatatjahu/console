@@ -9,7 +9,7 @@ import LabelsService from "../../../services/Labels.service";
 interface Props {}
 
 export const FilterPopoverContainer: React.FunctionComponent<Props> = () => {
-  const { activeFilters, setFilterLabel, hasActiveLabel } = useContext(FiltersService.Context);
+  const { activeFilters, setFilterLabel, hasActiveLabel, removeAllFilters } = useContext(FiltersService.Context);
   const { uniqueLabels } = useContext(LabelsService.Context);
 
   const filterPopoverBody = (
@@ -18,6 +18,7 @@ export const FilterPopoverContainer: React.FunctionComponent<Props> = () => {
       uniqueLabels={uniqueLabels}
       setFilterLabel={setFilterLabel}
       hasActiveLabel={hasActiveLabel}
+      removeAllFilters={removeAllFilters}
     />
   )
 

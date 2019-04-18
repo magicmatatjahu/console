@@ -20,6 +20,7 @@ interface Props {
   onSubmit: (event: any) => void;
   addUrl: () => void;
   removeUrl: (url: string) => void;
+  handleEnterDownOnUrlField: (e: any) => void;
   onShowModal: () => void;
   onHideModal: () => void;
 }
@@ -33,6 +34,7 @@ export const Component: React.FunctionComponent<Props> = ({
   onSubmit,
   addUrl,
   removeUrl,
+  handleEnterDownOnUrlField,
   onShowModal,
   onHideModal,
 }) => {
@@ -94,6 +96,7 @@ export const Component: React.FunctionComponent<Props> = ({
                 placeholder={PLACEHOLDERS.URL_FIELD}
                 state={urlField.checkState()}
                 {...urlField.bind}
+                onKeyDown={handleEnterDownOnUrlField}
               />
               {urlField.error ? (
                 <FormMessage type="error">

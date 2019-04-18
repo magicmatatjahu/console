@@ -28,6 +28,19 @@ export const PanelWrapper = styled.div`
       padding: 0;
     }
 
+    .fd-tree > .fd-tree__item > .fd-tree__row > {
+      .fd-tree__col {
+        align-self: flex-start;
+      }
+
+      .fd-tree__col--control {
+        line-height: 26px;
+        button {
+          top: 12px;
+        }
+      }
+    }
+
     .fd-tree__group--sublevel-1 .fd-tree__col--control {
       padding-left: 30px;
     }
@@ -59,10 +72,18 @@ export const PanelWrapper = styled.div`
   }
 `;
 
+export const StyledTokensWrapper = styled.div`
+  margin-top: -6px;
+
+  button {
+    margin-top: 6px;
+  }
+`;
+
 export const StyledToken = styled(Token)`
   &&& {
     background: #eef5fc;
-    margin-right: 12px;
+    margin: 6px 6px 0 0;
   } 
 `;
 
@@ -70,7 +91,7 @@ export const Label = styled(Token)`
   &&& {
     background: #eef5fc;
     cursor: pointer;
-    margin: 0 6px 6px 0;
+    margin: 6px 6px 0 0;
 
     &:after {
       content: "";
@@ -80,8 +101,7 @@ export const Label = styled(Token)`
 `;
 
 export const Labels = styled.div`
-  position: relative;
-  top: 3px;
+  margin-top: -6px;
 `;
 
 export const TreeViewColActions = styled.div`
