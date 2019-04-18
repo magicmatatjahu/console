@@ -1,3 +1,5 @@
+import React from "react";
+
 export type BackendModule = string;
 
 export interface Configuration {
@@ -12,6 +14,7 @@ export type ConfigurationURL = string;
 export type FilterLabels = { [key: string]: string[] }
 
 export interface Filters {
+  search: string;
   labels: FilterLabels;
 };
 
@@ -24,6 +27,7 @@ export interface ActiveFiltersAction {
 }
 
 export enum ActiveFiltersActionType {
+  SET_SEARCH = "SET_SEARCH",
   SET_LABEL = "SET_LABEL",
   REMOVE_LABEL = "REMOVE_LABEL",
   REMOVE_ALL_FILTERS = "REMOVE_ALL_FILTERS",
@@ -41,3 +45,10 @@ export interface FiltersLabelsInterface {
 }
 
 export interface ConfigurationsService extends FiltersLabelsInterface, RemoveFiltersInterface {}
+
+export interface Notification {
+  title: string;
+  content: string | React.ReactNode; 
+  color?: string;
+  icon?: string;
+}

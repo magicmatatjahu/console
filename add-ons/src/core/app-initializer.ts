@@ -37,6 +37,10 @@ class AppInitializer {
   getBackendModules(): BackendModule[] {
     return this.backendModules;
   }
+
+  backendModuleExists = (name: string) => {
+    return this.backendModules.includes(name);
+  };
 }
 
 export default new AppInitializer();

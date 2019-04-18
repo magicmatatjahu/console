@@ -16,7 +16,7 @@ const useQueries = () => {
   const { data, error, loading } = useQuery(ADDONS_CONFIGURATIONS_QUERY);
 
   return {
-    configs: data.addonsConfigurations,
+    addonsConfigurations: data.addonsConfigurations,
     error,
     loading
   }

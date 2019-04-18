@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormFieldset, FormLegend, FormItem, FormInput, FormLabel } from 'fundamental-react';
 
-import { FiltersLabelsInterface, Filters } from "../../types";
+import { FiltersLabelsInterface, Filters } from "../../../types";
 
 import {
   FormFieldsetWrapper,
@@ -33,7 +33,6 @@ export const FilterPopoverBody: React.FunctionComponent<Props & FiltersLabelsInt
                   type="checkbox"
                   value={label}
                   checked={hasActiveLabel(key, label)}
-                  onChange={() => {}}
                   onClick={() => setFilterLabel(key, label)}
                 />
                 <FormLabel htmlFor={`checkbox-${idx}`}>

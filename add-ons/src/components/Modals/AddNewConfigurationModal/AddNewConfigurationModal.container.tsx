@@ -1,58 +1,139 @@
 import React, { useState, useEffect, useContext } from 'react';
+import LuigiClient from '@kyma-project/luigi-client';
 
 import { useInput } from "../../../services/Forms";
 import MutationsService from "../../../services/Mutations.service";
+import ConfigurationsService from "../../../services/Configurations.service";
+import LabelsService from "../../../services/Labels.service";
+import UrlsService from "../../../services/Urls.service";
 
 import Component from "./AddNewConfigurationModal.component";
+
+import { ConfigurationLabels } from "../../../types";
+import { CONFIGURATION_NAME_PREFIX, ERRORS } from "../../../constants";
 
 interface Props {}
 
 export const Container: React.FunctionComponent<Props> = () => {
+  // Services
   const { createAddonsConfiguration } = useContext(MutationsService.Context);
+  const { validateName, configNameGenerator } = useContext(ConfigurationsService.Context);
+  const { validateLabel } = useContext(LabelsService.Context);
+  const { validateUrl } = useContext(UrlsService.Context);
+
+  // Name
+  const validateNameField = (name: string): string => {
+    return validateName(name);
+  }
+  const nameField = useInput("", validateNameField);
 
   // Urls
-  const [urls, setUrls] = useState<string[]>(["dupa.yaml"]);
+  const [urls, setUrls] = useState<string[]>([]);
   const addUrl = () => {
-    setUrls(urls => [...urls, urlField.value])
-    urlField.resetValue();
+    if (urlField.value) {
+      setUrls(urls => [...urls, urlField.value])
+      urlField.cleanUpField();
+    }
   }
   const removeUrl = (url: string) => {
     setUrls(urls => urls.filter(u => u !== url))
   }
-
-  // Form
-  const validateName = (value: string): string => {
-    return !value || value.length < 4 ? "Name field cannot be empty" : "";
-  }
-
-  const validateLabels = (value: string): string => {
-    return !value || value.length < 4 ? "Name field cannot be empty" : "";
-  }
-
-  const validateUrl = (value: string): string => {
-    if (urls.includes(value)) return "Url already exists";
-
-    if (!(value.endsWith("yaml") || value.endsWith("yml"))) return "Url must have yaml or yml extension"
-    return "";
-  }
-  
-  const nameField = useInput("", validateName);
-  const labelsField = useInput("", validateLabels);
-  const urlField = useInput("", validateUrl);
-
-  const onSubmit = () => {
-    let urlsToCreated: string[] = [...urls];
-    if (urlField.value) urlsToCreated.push(urlField.value);
-
-    createAddonsConfiguration({ variables: { 
-      name: nameField.value, 
-      urls: urlsToCreated,
-      labels: { dupa: "lol" }
-    } })
-  }
-
   const setEmptyUrls = () => {
     setUrls([]);
+  }
+  const validateUrlField = (url: string): string => {
+    if (!url) {
+      labelsField.cleanUpField();
+      return "";
+    }
+
+    const existingUrls = [...urls];
+    return validateUrl(url, existingUrls);
+  }
+  const handleEnterDownOnUrlField = (event: any) => {
+    if (event.key === 'Enter' && !urlField.error) {
+      addUrl()
+    }
+  }
+  const urlField = useInput("", validateUrlField);
+
+  // Labels
+  const [labels, setLabel] = useState<string[]>([]);
+  const addLabel = () => {
+    if (labelsField.value) {
+      setLabel(labels => [...labels, labelsField.value.trim()])
+      labelsField.cleanUpField();
+    }
+  }
+  const removeLabel = (label: string) => {
+    setLabel(labels => labels.filter(l => l !== label))
+  }
+  const setEmptyLabels = () => {
+    setLabel([]);
+  }
+  const validateLabelsField = (label: string): string => {
+    if (!label) {
+      labelsField.cleanUpField();
+      return "";
+    }
+
+    removeWhiteSpacesFromLabelsField();
+    return validateLabel(label, labels);
+  }
+  const removeWhiteSpacesFromLabelsField = () => {
+    if ((/\s/.test(labelsField.value))) {
+      labelsField.setValue(labelsField.value.trim())
+    }
+  }
+  const handleEnterDownOnLabelsField = (event: any) => {
+    if (event.key === 'Enter' && !labelsField.error) {
+      addLabel()
+    }
+  }
+  const extractLabels = (): ConfigurationLabels => {
+    const extractedLabels: ConfigurationLabels = {};
+    if (!labels.length) return extractedLabels;
+    
+    labels.map(label => {
+      const splitedLabel = label.split("=");
+      extractedLabels[splitedLabel[0]] = splitedLabel[1];
+    })
+    return extractedLabels;
+  }
+  const labelsField = useInput("", validateLabelsField);
+
+  // Form
+  const onSubmit = () => {
+    let urlsToCreated: string[] = [...urls];
+    const extractedLabels = extractLabels();
+
+    createAddonsConfiguration({ 
+      variables: { 
+        name: nameField.value, 
+        urls: urlsToCreated,
+        labels: extractedLabels,
+      } 
+    })
+  }
+
+  const resetFields = (): void => {
+    nameField.cleanUpField()
+
+    labelsField.cleanUpField();
+    setEmptyLabels();
+
+    urlField.cleanUpField();
+    setEmptyUrls();
+  }
+
+  const onShowModal = () => {
+    resetFields();
+    LuigiClient.uxManager().addBackdrop();
+    nameField.setValue(configNameGenerator());
+  }
+
+  const onHideModal = () => {
+    LuigiClient.uxManager().removeBackdrop();
   }
 
   return (
@@ -61,10 +142,16 @@ export const Container: React.FunctionComponent<Props> = () => {
       labelsField={labelsField}
       urlField={urlField}
       onSubmit={onSubmit}
+      labels={labels}
       urls={urls}
       addUrl={addUrl}
       removeUrl={removeUrl}
-      setEmptyUrls={setEmptyUrls}
+      addLabel={addLabel}
+      removeLabel={removeLabel}
+      handleEnterDownOnLabelsField={handleEnterDownOnLabelsField}
+      handleEnterDownOnUrlField={handleEnterDownOnUrlField}
+      onShowModal={onShowModal}
+      onHideModal={onHideModal}
     />
   )
 }

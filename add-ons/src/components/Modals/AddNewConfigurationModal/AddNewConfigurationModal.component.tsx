@@ -1,82 +1,91 @@
 import React, { useState } from 'react';
 import { Button, FormSet, FormItem, FormInput, FormLabel, FormMessage, Icon } from 'fundamental-react';
+import { Modal } from "@kyma-project/react-components";
 
-import Modal from "../Modal.component";
+import InlineHelp from "../../Atoms/InlineHelp";
+
+import { HELP, PLACEHOLDERS, TOOLTIP_DATA } from "../../../constants";
 
 import {
   AddedUrl,
+  StyledToken,
+  AddLabelButtonWrapper,
 } from "./styled";
 
 interface Props {
   nameField: any;
   labelsField: any;
   urlField: any;
+  labels: string[];
   urls: string[];
   onSubmit: (event: any) => void;
   addUrl: () => void;
   removeUrl: (url: string) => void;
-  setEmptyUrls: () => void;
+  addLabel: () => void;
+  removeLabel: (label: string) => void;
+  handleEnterDownOnLabelsField: (e: any) => void;
+  handleEnterDownOnUrlField: (e: any) => void;
+  onShowModal: () => void;
+  onHideModal: () => void;
 }
 
 export const AddNewConfigurationModal: React.FunctionComponent<Props> = ({
   nameField,
   labelsField,
   urlField,
+  labels,
   urls,
   onSubmit,
   addUrl,
   removeUrl,
-  setEmptyUrls,
+  addLabel,
+  removeLabel,
+  handleEnterDownOnLabelsField,
+  handleEnterDownOnUrlField,
+  onShowModal,
+  onHideModal,
 }) => {
-  const openingComponent = (
+  const modalOpeningComponent = (
     <Button glyph="add">
       Add New Configuration
     </Button>
   )
 
-  const inlineHelp = (
-    <span className="fd-inline-help fd-has-float-right">
-      <span className="fd-inline-help__content fd-inline-help__content--bottom-left">
-        Lorem ipsum dolor sit amet, consectetur adipiscing.
-      </span>
-    </span>
-  )
+  const addedLabels = () => {
+    return labels.length ? labels.map(label => <StyledToken onClick={() => removeLabel(label)} key={label}>{label}</StyledToken>) : null
+  }
 
   const addedUrls = () => {
     return urls.length ? urls.map(url => <AddedUrl onClick={() => removeUrl(url)} key={url}>{url}<Icon glyph="decline" /></AddedUrl>) : null
   }
 
-  const onSubmitDisabled = !urls.length || nameField.error || !nameField.value || labelsField.error || urlField.error;
+  const disabledConfirm = !urls.length || nameField.error || !nameField.value || labelsField.error || urlField.error;
 
   return (
-<Modal
-        title="New Configuration"
-        openingComponent={openingComponent}
-        onSubmit={onSubmit}
-        onSubmitDisabled={onSubmitDisabled}
-        onOpen={() => {
-          nameField.resetValue();
-          nameField.resetError();
-
-          labelsField.resetValue();
-          labelsField.resetError();
-
-          urlField.resetValue();
-          urlField.resetError();
-          
-          setEmptyUrls();
-        }}
-      >
+    <Modal
+      width='681px'
+      title='New Configuration'
+      type='emphasized'
+      confirmText="Add"
+      cancelText="Cancel"
+      modalOpeningComponent={modalOpeningComponent}
+      onConfirm={onSubmit}
+      disabledConfirm={disabledConfirm}
+      onShow={onShowModal}
+      onHide={onHideModal}
+      tooltipData={disabledConfirm ? TOOLTIP_DATA : null}
+    >
           <FormSet>
             <FormItem key="name">
               <FormLabel htmlFor="name" required>
                 Name
+                <InlineHelp text={HELP.NAME_FIELD} />
               </FormLabel>
               <FormInput
                 id="name"
                 type="text"
-                placeholder="Insert name"
-                state={nameField.error ? "invalid" : "normal"}
+                placeholder={PLACEHOLDERS.NAME_FIELD}
+                state={nameField.checkState()}
                 {...nameField.bind}
               />
               {nameField.error ? (
@@ -88,31 +97,41 @@ export const AddNewConfigurationModal: React.FunctionComponent<Props> = ({
             <FormItem key="labels">
               <FormLabel htmlFor="labels">
                 Labels
+                <InlineHelp text={HELP.LABELS_FIELD} />
               </FormLabel>
               <FormInput
                 id="labels"
                 type="text"
-                placeholder="Insert labels (optionally)"
-                state={labelsField.error ? "invalid" : "normal"}
+                placeholder={PLACEHOLDERS.LABELS_FIELD}
+                state={labelsField.checkState()}
                 {...labelsField.bind}
+                onKeyDown={handleEnterDownOnLabelsField}
               />
               {labelsField.error ? (
                 <FormMessage type="error">
                   {labelsField.error}
                 </FormMessage>
               ) : null}
+              {addedLabels()}
             </FormItem>
+            <AddLabelButtonWrapper>
+              <Button type="button" glyph="add" onClick={addLabel} option="light" compact disabled={Boolean(labelsField.error || !labelsField.value)}>
+                Add Label
+              </Button>
+            </AddLabelButtonWrapper>
             <FormItem key="url">
               <FormLabel htmlFor="url" required>
-                Url{inlineHelp}
+                Url
+                <InlineHelp text={HELP.URL_FIELD} />
               </FormLabel>
               {addedUrls()}
               <FormInput
                 id="url"
                 type="text"
-                placeholder="Insert repository URL"
-                state={urlField.error ? "invalid" : "normal"}
+                placeholder={PLACEHOLDERS.URL_FIELD}
+                state={urlField.checkState()}
                 {...urlField.bind}
+                onKeyDown={handleEnterDownOnUrlField}
               />
               {urlField.error ? (
                 <FormMessage type="error">
@@ -120,11 +139,11 @@ export const AddNewConfigurationModal: React.FunctionComponent<Props> = ({
                 </FormMessage>
               ) : null}
             </FormItem>
+            <Button type="button" glyph="add" onClick={addUrl} option="light" compact disabled={Boolean(urlField.error || !urlField.value)}>
+              Add URL
+            </Button>
           </FormSet>
-          <Button glyph="add" onClick={addUrl} option="light" compact disabled={Boolean(urlField.error || !urlField.value)}>
-            Add URL
-          </Button>
-      </Modal>
+    </Modal>
   )
 }
 

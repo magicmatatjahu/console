@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel, Button, Popover } from 'fundamental-react';
 
-import FilterPopover from "../FilterPopover/FilterPopover.container";
+import FilterPopover from "./FilterPopover/FilterPopover.container";
 import ActiveFilters from "./ActiveFilters.container";
 import AddUrlModal from "../Modals/AddUrlModal/AddUrlModal.container";
 
@@ -31,7 +31,7 @@ const TableComponent: React.FunctionComponent<TableComponentProps> = ({
               compact
             />
             <FilterPopover />
-            <AddUrlModal />
+            {/* <AddUrlModal /> */}
           </Panel.Actions>
         </Panel.Header>
         {/* <ActiveFilters /> */}

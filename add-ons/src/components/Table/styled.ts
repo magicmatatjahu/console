@@ -69,13 +69,19 @@ export const StyledToken = styled(Token)`
 export const Label = styled(Token)`
   &&& {
     background: #eef5fc;
-    cursor: default;
+    cursor: pointer;
+    margin: 0 6px 6px 0;
 
     &:after {
       content: "";
       margin-left: 0;
     }
   } 
+`;
+
+export const Labels = styled.div`
+  position: relative;
+  top: 3px;
 `;
 
 export const TreeViewColActions = styled.div`

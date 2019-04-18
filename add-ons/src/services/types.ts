@@ -16,3 +16,9 @@ export interface IConfigurationsService {
   originalConfigs: Configuration[];
   filteredConfigs: Configuration[];
 }
+
+export enum SubscriptionType {
+  ADD = "ADD",
+  UPDATE = "UPDATE",
+  DELETE = "DELETE",
+}

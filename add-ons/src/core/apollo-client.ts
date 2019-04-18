@@ -1,21 +1,23 @@
 import ApolloClient from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
-import { ApolloLink } from 'apollo-link';
+import { ApolloLink, split } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { getMainDefinition } from 'apollo-utilities';
 import { createTransformerLink } from 'apollo-client-transform';
 import { onError } from 'apollo-link-error';
-import { getLinkTransformers } from "./apollo-client-transform";
+import { WebSocketLink } from './apollo-client-ws';
 
 import appInitializer from "./app-initializer";
 
 function getGraphQLEndpoint(endpoint: string): string {
   let config = {
-    graphqlApiUrl: 'http://localhost:3000/graphql',
+    graphqlApiUrlLocal: 'http://localhost:3000/graphql',
+    subscriptionsApiUrlLocal: 'ws://localhost:3000/graphql',
   };
 
   const clusterConfig = (window as any)["clusterConfig"];
-  return { ...config, ...clusterConfig }[endpoint];
+  return { ...clusterConfig, ...config }[endpoint];
 }
 
 export function createApolloClient() {
@@ -32,7 +34,18 @@ export function createApolloClient() {
       },
     };
   });
+
+  const subscriptionsApiUrl = getGraphQLEndpoint(
+    process.env.REACT_APP_LOCAL_API ? 'subscriptionsApiUrlLocal' : 'subscriptionsApiUrl',
+  );
+  const wsLink = new WebSocketLink({
+    uri: subscriptionsApiUrl,
+    options: {
+      reconnect: true,
+    },
+  });
   const cache = new InMemoryCache();
+  
   const authHttpLink = authLink.concat(httpLink);
   const errorLink = onError(
     ({ operation, response, graphQLErrors, networkError }) => {
@@ -49,12 +62,17 @@ export function createApolloClient() {
       }
     },
   );
-  // const linkTransformers = getLinkTransformers();
-  // const transformerLink = createTransformerLink(linkTransformers);
-  // const enhancedAuthHttpLink = transformerLink.concat(authHttpLink);
+  const link = split(
+    ({ query }) => {
+      const { kind, operation } = getMainDefinition(query);
+      return kind === 'OperationDefinition' && operation === 'subscription';
+    },
+    wsLink,
+    authHttpLink,
+  );
 
   const client = new ApolloClient({
-    link: ApolloLink.from([errorLink, authHttpLink]),
+    link: ApolloLink.from([errorLink, link]),
     cache: cache,
     connectToDevTools: true,
   });

@@ -1,13 +1,13 @@
 import React from 'react';
 import { TreeView, Popover, Button } from 'fundamental-react';
 
-import FilterPopover from "../FilterPopover/FilterPopover.container";
 import DeleteConfigurationModal from "../Modals/DeleteConfigurationModal/DeleteConfigurationModal.container";
 import AddUrlModal from "../Modals/AddUrlModal/AddUrlModal.container";
 import DeleteUrlModal from "../Modals/DeleteUrlModal/DeleteUrlModal.container";
 
 import {
   Label,
+  Labels,
   TreeViewColActions,
 } from "./styled";
 
@@ -16,11 +16,13 @@ import { Configuration } from "../../types";
 interface TableContentProps {
   headers: string[];
   configs: Configuration[];
+  setFilterLabel: (key: string, value: string) => void;
 }
 
 const TableContent: React.FunctionComponent<TableContentProps> = ({
   headers,
   configs,
+  setFilterLabel,
 }) => {
   return (
     <TreeView>
@@ -36,10 +38,19 @@ const TableContent: React.FunctionComponent<TableContentProps> = ({
             <TreeView.Item key={idx}>
               <TreeView.Row>
                 <TreeView.Col>
-                  {config.name}
+                  <div>{config.name}</div>
                 </TreeView.Col>
                 <TreeView.Col>
-                  {/* {config.labels.map(label => <Label key={label}>{label}</Label>)} */}
+                  <Labels>
+                    {Object.keys(config.labels).map(key => (
+                      <Label 
+                        key={key}
+                        onClick={() => setFilterLabel(key, config.labels[key])}
+                      >
+                        {`${key}=${config.labels[key]}`}
+                      </Label>
+                    ))}
+                  </Labels>
                 </TreeView.Col>
                 <TreeView.Col>
                   <TreeViewColActions>

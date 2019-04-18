@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
+import LuigiClient from '@kyma-project/luigi-client';
 
 import { useInput } from "../../../services/Forms";
 import MutationsService from "../../../services/Mutations.service";
 import ConfigurationsService from "../../../services/Configurations.service";
+import UrlsService from "../../../services/Urls.service";
 
 import Component from "./AddUrlModal.component";
-import { DEFAULT_CONFIGURATION } from "../../../constants";
+import { DEFAULT_CONFIGURATION, ERRORS } from "../../../constants";
 
 interface Props {
   configurationName?: string;
@@ -16,31 +18,9 @@ export const Container: React.FunctionComponent<Props> = ({
 }) => {
   const { addAddonsConfigurationUrls } = useContext(MutationsService.Context);
   const { configurationNames } = useContext(ConfigurationsService.Context);
+  const { getUrlsFromConfigByName, validateUrl } = useContext(UrlsService.Context);
 
-  // Urls
-  const [urls, setUrls] = useState<string[]>(["dupa.yaml"]);
-  const addUrl = () => {
-    setUrls(urls => [...urls, urlField.value])
-    urlField.resetValue();
-  }
-  const removeUrl = (url: string) => {
-    setUrls(urls => urls.filter(u => u !== url))
-  }
-
-  const validateUrl = (value: string): string => {
-    if (urls.includes(value)) return "Url already exists";
-
-    if (!(value.endsWith("yaml") || value.endsWith("yml"))) return "Url must have yaml or yml extension"
-    return "";
-  }
-  
-  const urlField = useInput("", validateUrl);
-  const configurationNameField = useInput("", validateUrl);
-
-  const onSubmit = () => {
-    let urlsToCreated: string[] = [...urls];
-    if (urlField.value) urlsToCreated.push(urlField.value);
-
+  const getConfigName = (): string => {
     let name: string;
     if (!configurationNameField.value) {
       name = configurationName ? configurationName : configurationNames[0];
@@ -48,11 +28,59 @@ export const Container: React.FunctionComponent<Props> = ({
       name = configurationNameField.value;
     }
 
-    addAddonsConfigurationUrls({ variables: { name, urls: urlsToCreated } });
+    return name;
   }
+  const configurationNameField = useInput("");
 
+  // Urls
+  const [urls, setUrls] = useState<string[]>([]);
+  const addUrl = () => {
+    if (urlField.value) {
+      setUrls(urls => [...urls, urlField.value])
+      urlField.cleanUpField();
+    }
+  }
+  const removeUrl = (url: string) => {
+    if (url) {
+      setUrls(urls => urls.filter(u => u !== url))
+    }
+  }
   const setEmptyUrls = () => {
     setUrls([]);
+  }
+  const validateUrlField = (url: string): string => {
+    const existingUrls = getUrlsFromConfigByName(getConfigName());
+    return validateUrl(url, existingUrls)
+  }
+  const handleEnterDownOnUrlField = (event: any) => {
+    if (event.key === 'Enter' && !urlField.error) {
+      addUrl()
+    }
+  }
+  const urlField = useInput("", validateUrlField);
+
+  const onSubmit = () => {
+    let urlsToCreated: string[] = [...urls];
+    addAddonsConfigurationUrls({ 
+      variables: { 
+        name: getConfigName(), 
+        urls: urlsToCreated 
+      }
+    });
+  }
+
+  const resetFields = (): void => {
+    urlField.cleanUpField();
+    setEmptyUrls();
+  }
+
+  const onShowModal = () => {
+    resetFields();
+    LuigiClient.uxManager().addBackdrop();
+  }
+
+  const onHideModal = () => {
+    LuigiClient.uxManager().removeBackdrop();
   }
 
   const configs = configurationName ? [configurationName] : configurationNames;
@@ -67,7 +95,8 @@ export const Container: React.FunctionComponent<Props> = ({
       onSubmit={onSubmit}
       addUrl={addUrl}
       removeUrl={removeUrl}
-      setEmptyUrls={setEmptyUrls}
+      onShowModal={onShowModal}
+      onHideModal={onHideModal}
     />
   )
 }

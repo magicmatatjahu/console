@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Button, FormSet, FormItem, FormInput, FormLabel, FormMessage, Icon, FormSelect } from 'fundamental-react';
+import LuigiClient from '@kyma-project/luigi-client';
+import { Modal } from "@kyma-project/react-components";
 
-import Modal from "../Modal.component";
+import InlineHelp from "../../Atoms/InlineHelp";
+
+import { HELP, PLACEHOLDERS, TOOLTIP_DATA } from "../../../constants";
 
 import {
   AddedUrl,
@@ -16,7 +20,8 @@ interface Props {
   onSubmit: (event: any) => void;
   addUrl: () => void;
   removeUrl: (url: string) => void;
-  setEmptyUrls: () => void;
+  onShowModal: () => void;
+  onHideModal: () => void;
 }
 
 export const Component: React.FunctionComponent<Props> = ({
@@ -28,9 +33,10 @@ export const Component: React.FunctionComponent<Props> = ({
   onSubmit,
   addUrl,
   removeUrl,
-  setEmptyUrls,
+  onShowModal,
+  onHideModal,
 }) => {
-  const openingComponent = (
+  const modalOpeningComponent = (
     <Button glyph="add" option="light" compact>
       Add URL
     </Button>
@@ -40,23 +46,21 @@ export const Component: React.FunctionComponent<Props> = ({
     return urls.length ? urls.map(url => <AddedUrl onClick={() => removeUrl(url)} key={url}>{url}<Icon glyph="decline" /></AddedUrl>) : null
   }
 
-  const onSubmitDisabled = !urls.length || urlField.error;
+  const disabledConfirm = !urls.length || urlField.error;
 
   return (
       <Modal
-        title="Add URL"
-        openingComponent={openingComponent}
-        onSubmit={onSubmit}
-        onSubmitDisabled={onSubmitDisabled}
+        width='681px'
+        title='Add URL'
+        type='emphasized'
         confirmText="Add"
-        onOpen={() => {
-          urlField.resetValue();
-          urlField.resetError();
-
-          configurationNameField.resetValue();
-          
-          setEmptyUrls();
-        }}
+        cancelText="Cancel"
+        modalOpeningComponent={modalOpeningComponent}
+        onConfirm={onSubmit}
+        disabledConfirm={disabledConfirm}
+        onShow={onShowModal}
+        onHide={onHideModal}
+        tooltipData={disabledConfirm ? TOOLTIP_DATA : null}
       >
           <FormSet>
             <FormItem key="configurationName">
@@ -79,15 +83,16 @@ export const Component: React.FunctionComponent<Props> = ({
               </FormSelect>
             </FormItem>
             <FormItem key="url">
-              <FormLabel htmlFor="url">
+              <FormLabel htmlFor="url" required>
                 Url
+                <InlineHelp text={HELP.URL_FIELD} />
               </FormLabel>
               {addedUrls()}
               <FormInput
                 id="url"
                 type="text"
-                placeholder="Insert repository URL"
-                state={urlField.error ? "invalid" : "normal"}
+                placeholder={PLACEHOLDERS.URL_FIELD}
+                state={urlField.checkState()}
                 {...urlField.bind}
               />
               {urlField.error ? (

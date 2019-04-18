@@ -5,11 +5,14 @@ import { Filters, ActiveFiltersAction, ActiveFiltersActionType } from '../types'
 
 const useFilters = () => {
   const initialActiveFilters: Filters = {
+    search: "",
     labels: {},
   }
   
   function activeFiltersReducer(state: Filters, action: ActiveFiltersAction) {
     switch (action.type) {
+      case ActiveFiltersActionType.SET_SEARCH:
+        return { ...state, search: action.payload };
       case ActiveFiltersActionType.SET_LABEL:
         return { ...state, labels: {
           ...state.labels,
@@ -29,6 +32,10 @@ const useFilters = () => {
 
   // @ts-ignore
   const [activeFilters, dispatchActiveFilters] = useReducer(activeFiltersReducer, initialActiveFilters);
+
+  const setSearchFilter = (search: string) => {
+    dispatchActiveFilters({ type: ActiveFiltersActionType.SET_SEARCH, payload: search });
+  }
 
   const setFilterLabel = (key: string, value: string) => {
     if (!activeFilters.labels[key]) {

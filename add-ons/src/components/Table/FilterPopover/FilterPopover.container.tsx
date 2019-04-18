@@ -3,8 +3,8 @@ import React, { useContext } from 'react';
 import FilterPopoverComponent from "./FilterPopover.component";
 import FilterPopoverBody from "./FilterPopoverBody.component";
 
-import FiltersService from "../../services/Filters.service";
-import LabelsService from "../../services/Labels.service";
+import FiltersService from "../../../services/Filters.service";
+import LabelsService from "../../../services/Labels.service";
 
 interface Props {}
 

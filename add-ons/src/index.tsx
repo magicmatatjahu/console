@@ -7,10 +7,10 @@ import 'fiori-fundamentals/dist/fiori-fundamentals.min.css';
 
 import appInitializer from "./core/app-initializer";
 import { createApolloClient } from './core/apollo-client';
-const client = createApolloClient();
 
 (async () => {
   await appInitializer.init();
+  const client = createApolloClient();
   ReactDOM.render(
     (
       <ApolloProvider client={client}>
