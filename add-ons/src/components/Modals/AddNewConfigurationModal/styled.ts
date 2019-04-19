@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Token } from 'fundamental-react';
 
 export const AddedUrl = styled.div`
@@ -16,7 +16,7 @@ export const StyledToken = styled(Token)`
     background: #eef5fc;
     margin-right: 12px;
     margin-top: 12px;
-  } 
+  }
 `;
 
 export const AddLabelButtonWrapper = styled.div`

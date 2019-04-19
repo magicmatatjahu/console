@@ -1,11 +1,11 @@
 import LuigiClient from '@kyma-project/luigi-client';
-import { BackendModule } from "../types";
+import { BackendModule } from '../types';
 
 const DEFAULT_ENVIRONMENT_ID = 'production';
 
 class AppInitializer {
   currentEnvironmentId: string = DEFAULT_ENVIRONMENT_ID;
-  token: string | null = "";
+  token: string | null = '';
   backendModules: BackendModule[] = [];
 
   init() {

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Notification } from "@kyma-project/react-components";
+import { Notification } from '@kyma-project/react-components';
 
-import { Notification as NotificationType } from "../../types";
+import { Notification as NotificationType } from '../../types';
 
 interface Props {
   notification: NotificationType;
@@ -15,13 +15,13 @@ export const Component: React.FunctionComponent<Props> = ({
   hideNotification,
 }) => {
   return (
-    <Notification 
+    <Notification
       {...notification}
       orientation="bottom"
       visible={showNotification}
-      onClick={hideNotification} 
+      onClick={hideNotification}
     />
-  )
-}
+  );
+};
 
 export default Component;

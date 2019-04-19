@@ -1,6 +1,6 @@
 import React from 'react';
 import LuigiClient from '@kyma-project/luigi-client';
-import { Modal, Button } from "@kyma-project/react-components";
+import { Modal, Button } from '@kyma-project/react-components';
 
 interface Props {
   configurationName: string;
@@ -15,7 +15,7 @@ export const DeleteUrlModal: React.FunctionComponent<Props> = ({
 }) => {
   const openingComponentModal = (
     <Button glyph="decline" option="light" type="negative" compact />
-  )
+  );
 
   return (
     <Modal
@@ -29,7 +29,7 @@ export const DeleteUrlModal: React.FunctionComponent<Props> = ({
     >
       {`Are you sure you want to delete url of configuration "${configurationName}"?`}
     </Modal>
-  )
-}
+  );
+};
 
 export default DeleteUrlModal;

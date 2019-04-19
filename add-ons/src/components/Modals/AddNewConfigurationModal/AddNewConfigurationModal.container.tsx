@@ -1,143 +1,148 @@
 import React, { useState, useEffect, useContext } from 'react';
 import LuigiClient from '@kyma-project/luigi-client';
 
-import { useInput } from "../../../services/Forms";
-import MutationsService from "../../../services/Mutations.service";
-import ConfigurationsService from "../../../services/Configurations.service";
-import LabelsService from "../../../services/Labels.service";
-import UrlsService from "../../../services/Urls.service";
+import { useInput } from '../../../services/Forms';
+import MutationsService from '../../../services/Mutations.service';
+import ConfigurationsService from '../../../services/Configurations.service';
+import LabelsService from '../../../services/Labels.service';
+import UrlsService from '../../../services/Urls.service';
 
-import Component from "./AddNewConfigurationModal.component";
+import Component from './AddNewConfigurationModal.component';
 
-import { ConfigurationLabels } from "../../../types";
-import { CONFIGURATION_NAME_PREFIX, ERRORS } from "../../../constants";
+import { ConfigurationLabels } from '../../../types';
+import { CONFIGURATION_NAME_PREFIX, ERRORS } from '../../../constants';
 
 interface Props {}
 
 export const Container: React.FunctionComponent<Props> = () => {
   // Services
   const { createAddonsConfiguration } = useContext(MutationsService.Context);
-  const { configurationsExist, originalConfigs, validateName, configNameGenerator } = useContext(ConfigurationsService.Context);
+  const {
+    configurationsExist,
+    originalConfigs,
+    validateName,
+    configNameGenerator,
+  } = useContext(ConfigurationsService.Context);
   const { validateLabel } = useContext(LabelsService.Context);
   const { validateUrl } = useContext(UrlsService.Context);
 
   // Name
   const validateNameField = (name: string): string => {
     return validateName(name);
-  }
-  const nameField = useInput("", validateNameField);
+  };
+  const nameField = useInput('', validateNameField);
 
   // Urls
   const [urls, setUrls] = useState<string[]>([]);
   const addUrl = () => {
     if (urlField.value) {
-      setUrls(urls => [...urls, urlField.value])
+      setUrls(urls => [...urls, urlField.value]);
       urlField.cleanUpField();
     }
-  }
+  };
   const removeUrl = (url: string) => {
-    setUrls(urls => urls.filter(u => u !== url))
-  }
+    setUrls(urls => urls.filter(u => u !== url));
+  };
   const setEmptyUrls = () => {
     setUrls([]);
-  }
+  };
   const validateUrlField = (url: string): string => {
     if (urls.length && !url) {
       urlField.cleanUpField();
-      return "";
+      return '';
     }
 
     const existingUrls = [...urls];
     return validateUrl(url, existingUrls);
-  }
+  };
   const handleEnterDownOnUrlField = (event: any) => {
     if (event.key === 'Enter' && !urlField.error) {
-      addUrl()
+      addUrl();
     }
-  }
-  const urlField = useInput("", validateUrlField);
+  };
+  const urlField = useInput('', validateUrlField);
 
   // Labels
   const [labels, setLabel] = useState<string[]>([]);
   const addLabel = () => {
     if (labelsField.value) {
-      setLabel(labels => [...labels, labelsField.value.trim()])
+      setLabel(labels => [...labels, labelsField.value.trim()]);
       labelsField.cleanUpField();
     }
-  }
+  };
   const removeLabel = (label: string) => {
-    setLabel(labels => labels.filter(l => l !== label))
-  }
+    setLabel(labels => labels.filter(l => l !== label));
+  };
   const setEmptyLabels = () => {
     setLabel([]);
-  }
+  };
   const validateLabelsField = (label: string): string => {
     if (!label) {
       labelsField.cleanUpField();
-      return "";
+      return '';
     }
 
     removeWhiteSpacesFromLabelsField();
     return validateLabel(label, labels);
-  }
+  };
   const removeWhiteSpacesFromLabelsField = () => {
-    if ((/\s/.test(labelsField.value))) {
-      labelsField.setValue(labelsField.value.trim())
+    if (/\s/.test(labelsField.value)) {
+      labelsField.setValue(labelsField.value.trim());
     }
-  }
+  };
   const handleEnterDownOnLabelsField = (event: any) => {
     if (event.key === 'Enter' && !labelsField.error) {
-      addLabel()
+      addLabel();
     }
-  }
+  };
   const extractLabels = (): ConfigurationLabels => {
     const extractedLabels: ConfigurationLabels = {};
     if (!labels.length) return extractedLabels;
-    
+
     labels.map(label => {
-      const splitedLabel = label.split("=");
+      const splitedLabel = label.split('=');
       extractedLabels[splitedLabel[0]] = splitedLabel[1];
-    })
+    });
     return extractedLabels;
-  }
-  const labelsField = useInput("", validateLabelsField);
+  };
+  const labelsField = useInput('', validateLabelsField);
 
   // Form
   const onSubmit = () => {
     let urlsToCreated: string[] = [...urls];
     const extractedLabels = extractLabels();
 
-    createAddonsConfiguration({ 
-      variables: { 
-        name: nameField.value, 
+    createAddonsConfiguration({
+      variables: {
+        name: nameField.value,
         urls: urlsToCreated,
         labels: extractedLabels,
-      } 
-    })
-  }
+      },
+    });
+  };
 
   const resetFields = (): void => {
-    nameField.cleanUpField()
+    nameField.cleanUpField();
 
     labelsField.cleanUpField();
     setEmptyLabels();
 
     urlField.cleanUpField();
     setEmptyUrls();
-  }
+  };
 
   const onShowModal = () => {
     resetFields();
     LuigiClient.uxManager().addBackdrop();
     nameField.setValue(configNameGenerator());
-  }
+  };
 
   const onHideModal = () => {
     LuigiClient.uxManager().removeBackdrop();
-  }
+  };
 
   return (
-    <Component 
+    <Component
       nameField={nameField}
       labelsField={labelsField}
       urlField={urlField}
@@ -154,7 +159,7 @@ export const Container: React.FunctionComponent<Props> = () => {
       onHideModal={onHideModal}
       configurationsExist={configurationsExist()}
     />
-  )
-}
+  );
+};
 
 export default Container;

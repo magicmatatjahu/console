@@ -1,14 +1,14 @@
-import { useContext, useEffect, useState } from "react";
-import createContainer from "constate";
+import { useContext, useEffect, useState } from 'react';
+import createContainer from 'constate';
 
-import ConfigurationsService from "./Configurations.service";
+import ConfigurationsService from './Configurations.service';
 
 import { Configuration, ConfigurationLabels, FilterLabels } from '../types';
 
 const useLabels = () => {
   const { originalConfigs } = useContext(ConfigurationsService.Context);
-  
-  const [uniqueLabels, setUniqueLabels] = useState<FilterLabels>({})
+
+  const [uniqueLabels, setUniqueLabels] = useState<FilterLabels>({});
 
   const getFiltersLabels = (configs: Configuration[]): FilterLabels => {
     let labels: FilterLabels = {};
@@ -18,32 +18,32 @@ const useLabels = () => {
         if (!labels[key]) {
           labels[key] = [label];
         } else {
-          labels[key].push(label)
-        } 
+          labels[key].push(label);
+        }
       });
-    })
-
-    return labels;
-  }
-
-  const getUniqueLabels = (labels: FilterLabels): FilterLabels => {
-    Object.keys(labels).forEach(key => {
-      labels[key] = labels[key].filter((v, i, a) => a.indexOf(v) === i)
     });
 
     return labels;
-  }
+  };
+
+  const getUniqueLabels = (labels: FilterLabels): FilterLabels => {
+    Object.keys(labels).forEach(key => {
+      labels[key] = labels[key].filter((v, i, a) => a.indexOf(v) === i);
+    });
+
+    return labels;
+  };
 
   const sortLabels = (labels: FilterLabels): FilterLabels => {
     Object.keys(labels).map(key => {
       labels[key] = labels[key].sort((a, b) => a.localeCompare(b));
-    })
+    });
     return labels;
-  }
+  };
 
   const validateLabel = (label: string, existingLabels: string[]): string => {
     if (!label) {
-      return "";
+      return '';
     }
 
     if (!(label.split('=').length === 2)) {
@@ -73,17 +73,20 @@ const useLabels = () => {
       return `Invalid label ${key}=${value}! Keys cannot be reused!`;
     }
 
-    return "";
-  }
+    return '';
+  };
 
   useEffect(() => {
-    originalConfigs && setUniqueLabels(sortLabels(getUniqueLabels(getFiltersLabels(originalConfigs))));
+    originalConfigs &&
+      setUniqueLabels(
+        sortLabels(getUniqueLabels(getFiltersLabels(originalConfigs))),
+      );
   }, [originalConfigs]);
 
   return {
     uniqueLabels,
     validateLabel,
-  }
-}
+  };
+};
 
 export default createContainer(useLabels);

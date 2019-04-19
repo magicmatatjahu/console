@@ -8,7 +8,7 @@ import { createTransformerLink } from 'apollo-client-transform';
 import { onError } from 'apollo-link-error';
 import { WebSocketLink } from './apollo-client-ws';
 
-import appInitializer from "./app-initializer";
+import appInitializer from './app-initializer';
 
 function getGraphQLEndpoint(endpoint: string): string {
   let config = {
@@ -16,7 +16,7 @@ function getGraphQLEndpoint(endpoint: string): string {
     subscriptionsApiUrlLocal: 'ws://localhost:3000/graphql',
   };
 
-  const clusterConfig = (window as any)["clusterConfig"];
+  const clusterConfig = (window as any)['clusterConfig'];
   return { ...clusterConfig, ...config }[endpoint];
 }
 
@@ -36,7 +36,9 @@ export function createApolloClient() {
   });
 
   const subscriptionsApiUrl = getGraphQLEndpoint(
-    process.env.REACT_APP_LOCAL_API ? 'subscriptionsApiUrlLocal' : 'subscriptionsApiUrl',
+    process.env.REACT_APP_LOCAL_API
+      ? 'subscriptionsApiUrlLocal'
+      : 'subscriptionsApiUrl',
   );
   const wsLink = new WebSocketLink({
     uri: subscriptionsApiUrl,
@@ -45,7 +47,7 @@ export function createApolloClient() {
     },
   });
   const cache = new InMemoryCache();
-  
+
   const authHttpLink = authLink.concat(httpLink);
   const errorLink = onError(
     ({ operation, response, graphQLErrors, networkError }) => {

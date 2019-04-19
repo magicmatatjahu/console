@@ -6,14 +6,14 @@ import {
   ModalWrapper,
   ActionsWrapper,
   OpeningComponentWrapper,
-} from "./styled";
+} from './styled';
 
 interface ModalProps {
-  title: string
+  title: string;
   confirmText?: string;
   closeText?: string;
   openingComponent: React.ReactNode;
-  type?: "info" | "warning";
+  type?: 'info' | 'warning';
   onSubmit?: (event?: any) => void;
   onOpen?: () => void;
   onClose?: () => void;
@@ -25,44 +25,44 @@ export const ModalComponent: React.FunctionComponent<ModalProps> = ({
   confirmText,
   closeText,
   openingComponent,
-  type = "info",
+  type = 'info',
   onSubmit,
   onOpen,
   onClose,
   onSubmitDisabled = false,
-  children
+  children,
 }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const setTrueShowModal = () => {
     onOpen && onOpen();
-    setShowModal(true)
-    LuigiClient.uxManager().addBackdrop()
-  }
+    setShowModal(true);
+    LuigiClient.uxManager().addBackdrop();
+  };
 
   const setFalseShowModal = () => {
     onClose && onClose();
-    setShowModal(false)
+    setShowModal(false);
     LuigiClient.uxManager().removeBackdrop();
-  }
+  };
 
   const actions = (
     <ActionsWrapper>
       <Button onClick={setFalseShowModal} option="light">
-        {closeText ? closeText : "Cancel"}
+        {closeText ? closeText : 'Cancel'}
       </Button>
-      <Button 
+      <Button
         onClick={() => {
           onSubmit && onSubmit();
           setFalseShowModal();
-        }} 
+        }}
         option="emphasized"
         disabled={Boolean(onSubmitDisabled)}
       >
-        {confirmText ? confirmText : "Create"}
+        {confirmText ? confirmText : 'Create'}
       </Button>
     </ActionsWrapper>
-  )
+  );
 
   return (
     <ModalWrapper>
@@ -78,7 +78,7 @@ export const ModalComponent: React.FunctionComponent<ModalProps> = ({
         {children}
       </Modal>
     </ModalWrapper>
-  )
-}
+  );
+};
 
 export default ModalComponent;

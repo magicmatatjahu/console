@@ -1,12 +1,16 @@
-import { useState, useEffect, useContext } from "react";
-import createContainer from "constate";
+import { useState, useEffect, useContext } from 'react';
+import createContainer from 'constate';
 
-import QueriesService from "./Queries.service";
-import FiltersService from "./Filters.service";
+import QueriesService from './Queries.service';
+import FiltersService from './Filters.service';
 
-import { randomNameGenerator } from "../helpers/random-names-generator";
+import { randomNameGenerator } from '../helpers/random-names-generator';
 import { Configuration } from '../types';
-import { DEFAULT_CONFIGURATION, ERRORS, CONFIGURATION_NAME_PREFIX } from "../constants";
+import {
+  DEFAULT_CONFIGURATION,
+  ERRORS,
+  CONFIGURATION_NAME_PREFIX,
+} from '../constants';
 const NAME_ERRORS = ERRORS.NAME;
 
 const useConfigurations = () => {
@@ -14,8 +18,10 @@ const useConfigurations = () => {
   const { activeFilters } = useContext(FiltersService.Context);
 
   // Configs
-  const [originalConfigs, setOriginalConfigs] = useState<Configuration[]>(() => addonsConfigurations);
-  const [configurationNames, setConfigurationNames] = useState<string[]>([])
+  const [originalConfigs, setOriginalConfigs] = useState<Configuration[]>(
+    () => addonsConfigurations,
+  );
+  const [configurationNames, setConfigurationNames] = useState<string[]>([]);
 
   const validateName = (name: string): string => {
     if (getConfigurationsName(originalConfigs).includes(name)) {
@@ -27,10 +33,9 @@ const useConfigurations = () => {
         /^[a-z0-9-_.]+$/.test(name) &&
         /[a-z0-9]/.test(name[0]) &&
         /[a-z0-9]/.test(name[name.length - 1]);
-  
-      const checkLength =
-        name.length > 63 || !name.length;
-  
+
+      const checkLength = name.length > 63 || !name.length;
+
       return !format || checkLength;
     };
 
@@ -47,18 +52,19 @@ const useConfigurations = () => {
       return NAME_ERRORS.SHORT;
     }
 
-    return "";
-  }
+    return '';
+  };
 
   const configNameGenerator = (): string => {
-    let name: string = "";
-    const condition = (name: string) => originalConfigs.some(config => config.name === name)
+    let name: string = '';
+    const condition = (name: string) =>
+      originalConfigs.some(config => config.name === name);
     do {
       name = `${CONFIGURATION_NAME_PREFIX}-${randomNameGenerator()}`;
-    } while(condition(name))
+    } while (condition(name));
 
     return name;
-  }
+  };
 
   const sortConfigByName = (configs: Configuration[]): Configuration[] => {
     return configs.sort((a, b) => {
@@ -69,48 +75,56 @@ const useConfigurations = () => {
       if (nameB === DEFAULT_CONFIGURATION) return 1;
       return nameA.localeCompare(nameB);
     });
-  }
+  };
 
   const getConfigurationsName = (configs: Configuration[]): string[] => {
     return configs.map(config => config.name);
-  }
+  };
 
   const configurationsExist = (): boolean => {
     const length = originalConfigs && originalConfigs.length;
     return Boolean(length);
-  }
+  };
 
   const filterBySearch = (configs: Configuration[]): Configuration[] => {
     if (activeFilters.search) {
-       return configs.filter(config => config.name.includes(activeFilters.search))
+      return configs.filter(config =>
+        config.name.includes(activeFilters.search),
+      );
     }
     return configs;
-  }
+  };
 
   useEffect(() => {
     if (!addonsConfigurations) return;
 
-    setOriginalConfigs(sortConfigByName(addonsConfigurations))
-    setConfigurationNames(getConfigurationsName(addonsConfigurations))
+    setOriginalConfigs(sortConfigByName(addonsConfigurations));
+    setConfigurationNames(getConfigurationsName(addonsConfigurations));
   }, [addonsConfigurations]);
 
   // Filtered Configs
   const [filteredConfigs, setFilteredConfigs] = useState(originalConfigs);
   useEffect(() => {
-    if (!originalConfigs) return
+    if (!originalConfigs) return;
 
     if (
       !Object.keys(activeFilters.labels).length ||
-      !Object.keys(activeFilters.labels).some(key => Boolean(activeFilters.labels[key].length))
+      !Object.keys(activeFilters.labels).some(key =>
+        Boolean(activeFilters.labels[key].length),
+      )
     ) {
-      setFilteredConfigs(filterBySearch(originalConfigs))
+      setFilteredConfigs(filterBySearch(originalConfigs));
       return;
     }
 
     let newFilteredConfigs = originalConfigs.filter(config => {
-      for(const labelKey in config.labels) {
-        for(const activeFilterKey in activeFilters.labels) {
-          if (activeFilters.labels[activeFilterKey].includes(config.labels[labelKey])) {
+      for (const labelKey in config.labels) {
+        for (const activeFilterKey in activeFilters.labels) {
+          if (
+            activeFilters.labels[activeFilterKey].includes(
+              config.labels[labelKey],
+            )
+          ) {
             return true;
           }
         }
@@ -122,7 +136,7 @@ const useConfigurations = () => {
     setFilteredConfigs(sortedConfigs);
   }, [originalConfigs, activeFilters]);
 
-  return { 
+  return {
     originalConfigs,
     setOriginalConfigs,
     validateName,

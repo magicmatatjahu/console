@@ -1,4 +1,4 @@
-import { adjectives, nouns } from "./random-names-data";
+import { adjectives, nouns } from './random-names-data';
 
 export function randomNameGenerator() {
   function getRandomInt(min: number, max: number) {

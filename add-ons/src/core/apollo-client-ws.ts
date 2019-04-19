@@ -3,7 +3,7 @@ import { SubscriptionClient } from 'subscriptions-transport-ws';
 import appInitializer from './app-initializer';
 
 export class WebSocketLink extends ApolloLink {
-  subscriptionClient: SubscriptionClient
+  subscriptionClient: SubscriptionClient;
 
   constructor(paramsOrClient: SubscriptionClient | any) {
     super();
@@ -20,13 +20,15 @@ export class WebSocketLink extends ApolloLink {
   }
 
   request(operation: Operation): Observable<FetchResult> | null {
-    return this.subscriptionClient.request(operation) as Observable<FetchResult>;
+    return this.subscriptionClient.request(operation) as Observable<
+      FetchResult
+    >;
   }
 }
 
 function getWrappedWebsocket() {
-  const w = (window as any);
-  const NativeWebSocket = w["WebSocket"] || w["MozWebSocket"];
+  const w = window as any;
+  const NativeWebSocket = w['WebSocket'] || w['MozWebSocket'];
   const customWs: any = (url: string) => {
     const bearerToken = appInitializer.getBearerToken();
     const token = bearerToken ? bearerToken.split(' ')[1] : null;

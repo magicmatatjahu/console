@@ -1,30 +1,29 @@
 import React from 'react';
-import { FormFieldset, FormLegend, FormItem, FormInput, FormLabel, Button } from 'fundamental-react';
-
-import { FiltersLabelsInterface, Filters } from "../../../types";
-
 import {
-  FormFieldsetWrapper,
-  StyledGroup,
-} from "./styled";
+  FormFieldset,
+  FormLegend,
+  FormItem,
+  FormInput,
+  FormLabel,
+  Button,
+} from 'fundamental-react';
+
+import { FiltersLabelsInterface, Filters } from '../../../types';
+
+import { FormFieldsetWrapper, StyledGroup } from './styled';
 
 interface Props {
   activeFilters: Filters;
 }
 
-export const FilterPopoverBody: React.FunctionComponent<Props & FiltersLabelsInterface> = ({
-  activeFilters,
-  uniqueLabels,
-  setFilterLabel,
-  hasActiveLabel,
-}) => {
+export const FilterPopoverBody: React.FunctionComponent<
+  Props & FiltersLabelsInterface
+> = ({ activeFilters, uniqueLabels, setFilterLabel, hasActiveLabel }) => {
   return (
     <FormFieldsetWrapper>
       <FormFieldset>
         <StyledGroup>
-          <FormLegend>
-            Labels
-          </FormLegend>
+          <FormLegend>Labels</FormLegend>
           {Object.keys(uniqueLabels).map(key => {
             return uniqueLabels[key].map((value, idx) => (
               <FormItem isCheck key={idx}>
@@ -46,7 +45,7 @@ export const FilterPopoverBody: React.FunctionComponent<Props & FiltersLabelsInt
         </StyledGroup>
       </FormFieldset>
     </FormFieldsetWrapper>
-  )
-}
+  );
+};
 
 export default FilterPopoverBody;

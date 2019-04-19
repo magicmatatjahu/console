@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Token, Panel } from 'fundamental-react';
 
 export const ErrorWrapper = styled.div`
@@ -77,7 +77,7 @@ export const PanelWrapper = styled.div`
 
     .fd-tree__row--header .fd-tree__col--control > div {
       font-weight: 400;
-    } 
+    }
 
     .add-ons-url {
       padding: 3px 0;
@@ -97,7 +97,7 @@ export const StyledToken = styled(Token)`
   &&& {
     background: #eef5fc;
     margin: 6px 6px 0 0;
-  } 
+  }
 `;
 
 export const Label = styled(Token)`
@@ -107,10 +107,10 @@ export const Label = styled(Token)`
     margin: 6px 6px 0 0;
 
     &:after {
-      content: "";
+      content: '';
       margin-left: 0;
     }
-  } 
+  }
 `;
 
 export const Labels = styled.div`

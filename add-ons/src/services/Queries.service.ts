@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import createContainer from "constate";
+import createContainer from 'constate';
 import { useQuery } from 'react-apollo-hooks';
 
 export const ADDONS_CONFIGURATIONS_QUERY = gql`
@@ -18,8 +18,8 @@ const useQueries = () => {
   return {
     addonsConfigurations: data.addonsConfigurations,
     error,
-    loading
-  }
-}
+    loading,
+  };
+};
 
 export default createContainer(useQueries);

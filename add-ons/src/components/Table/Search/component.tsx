@@ -1,11 +1,9 @@
-import React from "react";
+import React from 'react';
 import { FormGroup, FormItem, InputGroup, Button } from 'fundamental-react';
 
-import {
-  SearchWrapper,
-} from "./styled";
+import { SearchWrapper } from './styled';
 
-import { PLACEHOLDERS } from "../../../constants";
+import { PLACEHOLDERS } from '../../../constants';
 
 interface Props {
   searchField: any;
@@ -23,16 +21,16 @@ const Component: React.FunctionComponent<Props> = ({
   reference,
 }) => (
   <SearchWrapper>
-    <div
-      ref={reference}
-    >
+    <div ref={reference}>
       {showSearchIcon ? (
         <Button
           glyph="search"
           option="light"
           disabled={!configurationsExist}
           compact
-          onClick={() => { setShowSearchIcon(false) }}
+          onClick={() => {
+            setShowSearchIcon(false);
+          }}
         />
       ) : (
         <FormGroup>
