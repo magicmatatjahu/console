@@ -20,7 +20,7 @@ const TableContainer: React.FunctionComponent = () => {
   const { configurationsExist, filteredConfigs } = useContext(
     ConfigurationsService.Context,
   );
-  const { setFilterLabel } = useContext(FiltersService.Context);
+  const { setFilterLabel, activeFilters: { search } } = useContext(FiltersService.Context);
 
   const content = () => {
     if (loading) {
@@ -32,7 +32,7 @@ const TableContainer: React.FunctionComponent = () => {
     if (error) {
       return <ErrorWrapper>{ERRORS.SERVER}</ErrorWrapper>;
     }
-    if (!(filteredConfigs && filteredConfigs.length)) {
+    if (!(filteredConfigs && filteredConfigs.length) && search) {
       return <ErrorWrapper>{ERRORS.NOT_MATCHING_FILTERS}</ErrorWrapper>;
     }
     return (
