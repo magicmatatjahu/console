@@ -83,7 +83,7 @@ class Tabs extends React.Component {
       .filter(child => child !== null && child !== undefined && child);
 
     const props = this.getPropsFromActiveTab(children);
-    
+
     return (
       <TabsWrapper border={this.props.border} noBorder={this.props.noBorder}>
         <TabsHeader
