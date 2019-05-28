@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import deepEqual from 'deep-equal';
 import AsyncApi from '@kyma-project/asyncapi-react';
 import ODataReact from '@kyma-project/odata-react';
-import { ReactMarkdown, Tabs, Tab } from '@kyma-project/react-components';
+import { NotificationMessage, ReactMarkdown, Tabs, Tab } from '@kyma-project/react-components';
 
 import ApiConsole from '../SwaggerApi/SwaggerApiConsole.component';
 
-import { ServiceInstanceTabsContentWrapper } from './styled';
+import { 
+  ServiceInstanceTabsContentWrapper,
+  TabErrorMessageWrapper 
+} from './styled';
 
 import { processDocFilename, DocsProcessor } from '../../../commons/helpers';
 
@@ -19,7 +22,12 @@ class ServiceInstanceTabs extends Component {
     openApiSpec: null,
     asyncapi: null,
     odata: null,
-    error: null,
+    fetchError: {
+      docsData: null,
+      openApiSpec: null,
+      asyncapi: null,
+      odata: null,
+    },
   };
 
   async componentDidMount() {
@@ -77,7 +85,7 @@ class ServiceInstanceTabs extends Component {
 
     if (data) {
       this.setState({
-        docsData: await this.getAllUrls(data),
+        docsData: await this.getDocsUrls(data),
       });
     }
   }
@@ -144,14 +152,18 @@ class ServiceInstanceTabs extends Component {
           };
         })
         .catch(err => {
-          this.setState({
-            error: err,
-          });
+          this.setState(previousState => ({
+            ...previousState,
+            fetchError: {
+              ...previousState.fetchError,
+              openApiSpec: err,
+            }
+          }));
         });
     return data;
   }
 
-  async getAsyncApiOrOdataSpec(link) {
+  async getAsyncApiOrOdataSpec(link, spec) {
     const data =
       link &&
       fetch(link)
@@ -164,14 +176,18 @@ class ServiceInstanceTabs extends Component {
           };
         })
         .catch(err => {
-          this.setState({
-            error: err,
-          });
+          this.setState(previousState => ({
+            ...previousState,
+            fetchError: {
+              ...previousState.fetchError,
+              [spec]: err,
+            }
+          }));
         });
     return data;
   }
 
-  async getAllUrls(docs) {
+  async getDocsUrls(docs) {
     const data = await Promise.all(
       docs.map(doc =>
         fetch(doc.url)
@@ -190,21 +206,20 @@ class ServiceInstanceTabs extends Component {
           }),
       ),
     ).catch(err => {
-      this.setState({
-        error: err,
-      });
+      this.setState(previousState => ({
+        ...previousState,
+        fetchError: {
+          ...previousState.fetchError,
+          docsData: err,
+        }
+      }));
     });
     return data;
   }
 
   render() {
-    const { docsData, openApiSpec, asyncapi, odata, error } = this.state;
-
-    if (error) {
-      console.error(error);
-      return <div>{`${error.name}: ${error.message}`}</div>;
-    }
-
+    const { docsData, openApiSpec, asyncapi, odata, fetchError } = this.state;
+    
     if (
       (docsData && docsData.length) ||
       (openApiSpec && openApiSpec.source) ||
@@ -231,11 +246,27 @@ class ServiceInstanceTabs extends Component {
               {type && type.source && <ReactMarkdown source={type.source} />}
             </Tab>
           ));
+
+      let error = Object.keys(fetchError).filter(key => fetchError[key]);
+      error = error.length ? fetchError[error[0]] : null;
+
       return (
-        <ServiceInstanceTabsContentWrapper>
-          <Tabs>
-            {docsData && docsData.length && docsFromNewApi}
-            {openApiSpec && openApiSpec.source ? (
+        <>
+          {error && (
+            <TabErrorMessageWrapper>
+              <NotificationMessage
+                customMargin={'0'}
+                type="error"
+                title={error.name}
+                message={error.message}
+              />
+            </TabErrorMessageWrapper>
+          )}
+                  
+          <ServiceInstanceTabsContentWrapper>
+            <Tabs>
+            {!fetchError.docsData && docsData && docsData.length ? docsFromNewApi : null}
+            {!fetchError.openApiSpec && openApiSpec && openApiSpec.source ? (
               <Tab title={'Console'}>
                 <ApiConsole
                   url="http://petstore.swagger.io/v1/swagger.json"
@@ -243,7 +274,7 @@ class ServiceInstanceTabs extends Component {
                 />
               </Tab>
             ) : null}
-            {asyncapi && asyncapi.source ? (
+            {!fetchError.asyncapi && asyncapi && asyncapi.source ? (
               <Tab title={'Events'} margin="0" background="inherit">
                 <AsyncApi
                   schema={asyncapi && asyncapi.source}
@@ -252,13 +283,14 @@ class ServiceInstanceTabs extends Component {
                 />
               </Tab>
             ) : null}
-            {odata && odata.source ? (
+            {!fetchError.odata && odata && odata.source ? (
               <Tab title={'OData'} margin="0" background="inherit">
                 <ODataReact schema={odata.source} />
               </Tab>
             ) : null}
-          </Tabs>
-        </ServiceInstanceTabsContentWrapper>
+            </Tabs>
+          </ServiceInstanceTabsContentWrapper>
+        </>
       );
     }
 

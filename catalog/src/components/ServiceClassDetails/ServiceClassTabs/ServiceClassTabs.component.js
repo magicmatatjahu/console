@@ -30,7 +30,12 @@ class ServiceClassTabs extends Component {
     openApiSpec: null,
     asyncapi: null,
     odata: null,
-    fetchError: null,
+    fetchError: {
+      docsData: null,
+      openApiSpec: null,
+      asyncapi: null,
+      odata: null,
+    },
   };
 
   async componentDidMount() {
@@ -88,7 +93,7 @@ class ServiceClassTabs extends Component {
 
     if (data) {
       this.setState({
-        docsData: await this.getAllUrls(data),
+        docsData: await this.getDocsUrls(data),
       });
     }
   }
@@ -118,17 +123,18 @@ class ServiceClassTabs extends Component {
     }
 
     this.setState({
-      [spec]: await this.getAsyncApiOrOdataSpec(urlToSpecFile),
+      [spec]: await this.getAsyncApiOrOdataSpec(urlToSpecFile, spec),
     });
   }
 
   async setOpenApiSpec(data) {
     const properDocsTopic = data && (data.docsTopic || data.clusterDocsTopic);
-    const specFile =
+    let specFile =
       properDocsTopic &&
       properDocsTopic.assets &&
       Array.isArray(properDocsTopic.assets) &&
-      properDocsTopic.assets.filter(elem => elem.type === 'openapi');
+      properDocsTopic.assets.filter(elem => elem.type === 'openapi')
+
     if (
       specFile &&
       specFile[0] &&
@@ -155,14 +161,18 @@ class ServiceClassTabs extends Component {
           };
         })
         .catch(err => {
-          this.setState({
-            fetchError: err,
-          });
+          this.setState(previousState => ({
+            ...previousState,
+            fetchError: {
+              ...previousState.fetchError,
+              openApiSpec: err,
+            }
+          }));
         });
     return data;
   }
 
-  async getAsyncApiOrOdataSpec(link) {
+  async getAsyncApiOrOdataSpec(link, spec) {
     const data =
       link &&
       fetch(link)
@@ -175,14 +185,18 @@ class ServiceClassTabs extends Component {
           };
         })
         .catch(err => {
-          this.setState({
-            fetchError: err,
-          });
+          this.setState(previousState => ({
+            ...previousState,
+            fetchError: {
+              ...previousState.fetchError,
+              [spec]: err,
+            }
+          }));
         });
     return data;
   }
 
-  async getAllUrls(docs) {
+  async getDocsUrls(docs) {
     const data = await Promise.all(
       docs.map(doc =>
         fetch(doc.url)
@@ -201,9 +215,13 @@ class ServiceClassTabs extends Component {
           }),
       ),
     ).catch(err => {
-      this.setState({
-        fetchError: err,
-      });
+      this.setState(previousState => ({
+        ...previousState,
+        fetchError: {
+          ...previousState.fetchError,
+          docsData: err,
+        }
+      }));
     });
     return data;
   }
@@ -217,13 +235,17 @@ class ServiceClassTabs extends Component {
   }
 
   render() {
+    const { serviceClass } = this.props;
     const { docsData, openApiSpec, asyncapi, odata, fetchError } = this.state;
+
+    console.log(serviceClass)
 
     if (
       (docsData && docsData.length) ||
       (openApiSpec && openApiSpec.source) ||
       (odata && odata.source) ||
-      (asyncapi && asyncapi.source)
+      (asyncapi && asyncapi.source) ||
+      (serviceClass.instances && serviceClass.instances.length)
     ) {
       const newDocs = docsData
         ? new DocsProcessor(docsData)
@@ -235,34 +257,37 @@ class ServiceClassTabs extends Component {
       const docsFromNewApi = !newDocs
         ? null
         : newDocs.map(type => (
-            <Tab
-              title={
-                (type.metadata && type.metadata.title) ||
-                processDocFilename(type.url)
-              }
-              key={type.url}
-            >
-              {type && type.source && <ReactMarkdown source={type.source} />}
-            </Tab>
-          ));
+          <Tab
+            title={
+              (type.metadata && type.metadata.title) ||
+              processDocFilename(type.url)
+            }
+            key={type.url}
+          >
+            {type && type.source && <ReactMarkdown source={type.source} />}
+          </Tab>
+        ));
+
+      let error = Object.keys(fetchError).filter(key => fetchError[key]);
+      error = error.length ? fetchError[error[0]] : null;
 
       return (
         <>
-          {fetchError && (
+          {error && (
             <TabErrorMessageWrapper>
               <NotificationMessage
                 customMargin={'0'}
                 type="error"
-                title={fetchError.name}
-                message={fetchError.message}
+                title={error.name}
+                message={error.message}
               />
             </TabErrorMessageWrapper>
           )}
 
           <ServiceClassTabsContentWrapper>
             <Tabs>
-              {!fetchError && docsData && docsData.length && docsFromNewApi}
-              {!fetchError && openApiSpec && openApiSpec.source ? (
+              {!fetchError.docsData && docsData && docsData.length ? docsFromNewApi : null}
+              {!fetchError.openApiSpec && openApiSpec && openApiSpec.source ? (
                 <Tab title={'Console'}>
                   <ApiReference
                     url="http://petstore.swagger.io/v1/swagger.json"
@@ -270,7 +295,7 @@ class ServiceClassTabs extends Component {
                   />
                 </Tab>
               ) : null}
-              {!fetchError && asyncapi && asyncapi.source ? (
+              {!fetchError.asyncapi && asyncapi && asyncapi.source ? (
                 <Tab title={'Events'} margin="0" background="inherit">
                   <AsyncApi
                     schema={asyncapi && asyncapi.source}
@@ -279,21 +304,24 @@ class ServiceClassTabs extends Component {
                   />
                 </Tab>
               ) : null}
-              {!fetchError && odata && odata.source ? (
+              {!fetchError.odata && odata && odata.source ? (
                 <Tab title={'OData'} margin="0" background="inherit">
                   <ODataReact schema={odata.source} />
                 </Tab>
               ) : null}
-              <Tab
-                aditionalStatus={this.getTabElementsIndicator(
-                  this.props.serviceClass.instances.length,
-                )}
-                title={serviceClassConstants.instancesTabText}
-              >
-                <ServiceClassInstancesTable
-                  tableData={this.props.serviceClass.instances}
-                />
-              </Tab>
+              {serviceClass.instances && serviceClass.instances.length ? (
+                <Tab
+                  aditionalStatus={this.getTabElementsIndicator(
+                    this.props.serviceClass.instances.length,
+                  )}
+                  title={serviceClassConstants.instancesTabText}
+                  noMargin
+                >
+                  <ServiceClassInstancesTable
+                    tableData={this.props.serviceClass.instances}
+                  />
+                </Tab>
+              ) : null}
             </Tabs>
           </ServiceClassTabsContentWrapper>
         </>
