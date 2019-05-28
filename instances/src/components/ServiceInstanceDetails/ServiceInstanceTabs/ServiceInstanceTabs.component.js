@@ -3,13 +3,18 @@ import PropTypes from 'prop-types';
 import deepEqual from 'deep-equal';
 import AsyncApi from '@kyma-project/asyncapi-react';
 import ODataReact from '@kyma-project/odata-react';
-import { NotificationMessage, ReactMarkdown, Tabs, Tab } from '@kyma-project/react-components';
+import {
+  NotificationMessage,
+  ReactMarkdown,
+  Tabs,
+  Tab,
+} from '@kyma-project/react-components';
 
 import ApiConsole from '../SwaggerApi/SwaggerApiConsole.component';
 
-import { 
+import {
   ServiceInstanceTabsContentWrapper,
-  TabErrorMessageWrapper 
+  TabErrorMessageWrapper,
 } from './styled';
 
 import { processDocFilename, DocsProcessor } from '../../../commons/helpers';
@@ -157,7 +162,7 @@ class ServiceInstanceTabs extends Component {
             fetchError: {
               ...previousState.fetchError,
               openApiSpec: err,
-            }
+            },
           }));
         });
     return data;
@@ -181,7 +186,7 @@ class ServiceInstanceTabs extends Component {
             fetchError: {
               ...previousState.fetchError,
               [spec]: err,
-            }
+            },
           }));
         });
     return data;
@@ -211,7 +216,7 @@ class ServiceInstanceTabs extends Component {
         fetchError: {
           ...previousState.fetchError,
           docsData: err,
-        }
+        },
       }));
     });
     return data;
@@ -219,7 +224,7 @@ class ServiceInstanceTabs extends Component {
 
   render() {
     const { docsData, openApiSpec, asyncapi, odata, fetchError } = this.state;
-    
+
     if (
       (docsData && docsData.length) ||
       (openApiSpec && openApiSpec.source) ||
@@ -262,32 +267,34 @@ class ServiceInstanceTabs extends Component {
               />
             </TabErrorMessageWrapper>
           )}
-                  
+
           <ServiceInstanceTabsContentWrapper>
             <Tabs>
-            {!fetchError.docsData && docsData && docsData.length ? docsFromNewApi : null}
-            {!fetchError.openApiSpec && openApiSpec && openApiSpec.source ? (
-              <Tab title={'Console'}>
-                <ApiConsole
-                  url="http://petstore.swagger.io/v1/swagger.json"
-                  schema={openApiSpec.source}
-                />
-              </Tab>
-            ) : null}
-            {!fetchError.asyncapi && asyncapi && asyncapi.source ? (
-              <Tab title={'Events'} margin="0" background="inherit">
-                <AsyncApi
-                  schema={asyncapi && asyncapi.source}
-                  theme={asyncApiTheme}
-                  config={asyncApiConfig}
-                />
-              </Tab>
-            ) : null}
-            {!fetchError.odata && odata && odata.source ? (
-              <Tab title={'OData'} margin="0" background="inherit">
-                <ODataReact schema={odata.source} />
-              </Tab>
-            ) : null}
+              {!fetchError.docsData && docsData && docsData.length
+                ? docsFromNewApi
+                : null}
+              {!fetchError.openApiSpec && openApiSpec && openApiSpec.source ? (
+                <Tab title={'Console'}>
+                  <ApiConsole
+                    url="http://petstore.swagger.io/v1/swagger.json"
+                    schema={openApiSpec.source}
+                  />
+                </Tab>
+              ) : null}
+              {!fetchError.asyncapi && asyncapi && asyncapi.source ? (
+                <Tab title={'Events'} margin="0" background="inherit">
+                  <AsyncApi
+                    schema={asyncapi && asyncapi.source}
+                    theme={asyncApiTheme}
+                    config={asyncApiConfig}
+                  />
+                </Tab>
+              ) : null}
+              {!fetchError.odata && odata && odata.source ? (
+                <Tab title={'OData'} margin="0" background="inherit">
+                  <ODataReact schema={odata.source} />
+                </Tab>
+              ) : null}
             </Tabs>
           </ServiceInstanceTabsContentWrapper>
         </>

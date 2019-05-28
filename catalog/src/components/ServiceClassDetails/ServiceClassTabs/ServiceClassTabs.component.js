@@ -133,7 +133,7 @@ class ServiceClassTabs extends Component {
       properDocsTopic &&
       properDocsTopic.assets &&
       Array.isArray(properDocsTopic.assets) &&
-      properDocsTopic.assets.filter(elem => elem.type === 'openapi')
+      properDocsTopic.assets.filter(elem => elem.type === 'openapi');
 
     if (
       specFile &&
@@ -166,7 +166,7 @@ class ServiceClassTabs extends Component {
             fetchError: {
               ...previousState.fetchError,
               openApiSpec: err,
-            }
+            },
           }));
         });
     return data;
@@ -190,7 +190,7 @@ class ServiceClassTabs extends Component {
             fetchError: {
               ...previousState.fetchError,
               [spec]: err,
-            }
+            },
           }));
         });
     return data;
@@ -220,7 +220,7 @@ class ServiceClassTabs extends Component {
         fetchError: {
           ...previousState.fetchError,
           docsData: err,
-        }
+        },
       }));
     });
     return data;
@@ -238,7 +238,7 @@ class ServiceClassTabs extends Component {
     const { serviceClass } = this.props;
     const { docsData, openApiSpec, asyncapi, odata, fetchError } = this.state;
 
-    console.log(serviceClass)
+    console.log(serviceClass);
 
     if (
       (docsData && docsData.length) ||
@@ -257,16 +257,16 @@ class ServiceClassTabs extends Component {
       const docsFromNewApi = !newDocs
         ? null
         : newDocs.map(type => (
-          <Tab
-            title={
-              (type.metadata && type.metadata.title) ||
-              processDocFilename(type.url)
-            }
-            key={type.url}
-          >
-            {type && type.source && <ReactMarkdown source={type.source} />}
-          </Tab>
-        ));
+            <Tab
+              title={
+                (type.metadata && type.metadata.title) ||
+                processDocFilename(type.url)
+              }
+              key={type.url}
+            >
+              {type && type.source && <ReactMarkdown source={type.source} />}
+            </Tab>
+          ));
 
       let error = Object.keys(fetchError).filter(key => fetchError[key]);
       error = error.length ? fetchError[error[0]] : null;
@@ -286,7 +286,9 @@ class ServiceClassTabs extends Component {
 
           <ServiceClassTabsContentWrapper>
             <Tabs>
-              {!fetchError.docsData && docsData && docsData.length ? docsFromNewApi : null}
+              {!fetchError.docsData && docsData && docsData.length
+                ? docsFromNewApi
+                : null}
               {!fetchError.openApiSpec && openApiSpec && openApiSpec.source ? (
                 <Tab title={'Console'}>
                   <ApiReference
