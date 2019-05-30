@@ -20,7 +20,7 @@ import {
   TabErrorMessageWrapper,
 } from './styled';
 
-import { serviceClassConstants } from '../../../variables';
+import { serviceClassConstants, serviceClassTabs } from '../../../variables';
 import { processDocFilename, DocsProcessor } from '../../../commons/helpers';
 import { asyncApiConfig, asyncApiTheme } from '../../../commons/asyncapi';
 
@@ -238,8 +238,6 @@ class ServiceClassTabs extends Component {
     const { serviceClass } = this.props;
     const { docsData, openApiSpec, asyncapi, odata, fetchError } = this.state;
 
-    console.log(serviceClass);
-
     if (
       (docsData && docsData.length) ||
       (openApiSpec && openApiSpec.source) ||
@@ -290,7 +288,7 @@ class ServiceClassTabs extends Component {
                 ? docsFromNewApi
                 : null}
               {!fetchError.openApiSpec && openApiSpec && openApiSpec.source ? (
-                <Tab title={'Console'}>
+                <Tab title={serviceClassTabs.openApi}>
                   <ApiReference
                     url="http://petstore.swagger.io/v1/swagger.json"
                     schema={openApiSpec.source}
@@ -298,7 +296,11 @@ class ServiceClassTabs extends Component {
                 </Tab>
               ) : null}
               {!fetchError.asyncapi && asyncapi && asyncapi.source ? (
-                <Tab title={'Events'} margin="0" background="inherit">
+                <Tab
+                  title={serviceClassTabs.asyncApi}
+                  margin="0"
+                  background="inherit"
+                >
                   <AsyncApi
                     schema={asyncapi && asyncapi.source}
                     theme={asyncApiTheme}
@@ -307,7 +309,11 @@ class ServiceClassTabs extends Component {
                 </Tab>
               ) : null}
               {!fetchError.odata && odata && odata.source ? (
-                <Tab title={'OData'} margin="0" background="inherit">
+                <Tab
+                  title={serviceClassTabs.odata}
+                  margin="0"
+                  background="inherit"
+                >
                   <ODataReact schema={odata.source} />
                 </Tab>
               ) : null}
