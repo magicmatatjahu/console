@@ -17,7 +17,7 @@ import {
   TabErrorMessageWrapper,
 } from './styled';
 
-import { serviceClassTabs } from '../../../variables';
+import { serviceInstanceTabs } from '../../../variables';
 import { processDocFilename, DocsProcessor } from '../../../commons/helpers';
 
 import { asyncApiConfig, asyncApiTheme } from '../../../commons/asyncapi';
@@ -275,7 +275,7 @@ class ServiceInstanceTabs extends Component {
                 ? docsFromNewApi
                 : null}
               {!fetchError.openApiSpec && openApiSpec && openApiSpec.source ? (
-                <Tab title={serviceClassTabs.openApi}>
+                <Tab title={serviceInstanceTabs.openApi}>
                   <ApiConsole
                     url="http://petstore.swagger.io/v1/swagger.json"
                     schema={openApiSpec.source}
@@ -284,7 +284,7 @@ class ServiceInstanceTabs extends Component {
               ) : null}
               {!fetchError.asyncapi && asyncapi && asyncapi.source ? (
                 <Tab
-                  title={serviceClassTabs.asyncApi}
+                  title={serviceInstanceTabs.asyncApi}
                   margin="0"
                   background="inherit"
                 >
@@ -297,7 +297,7 @@ class ServiceInstanceTabs extends Component {
               ) : null}
               {!fetchError.odata && odata && odata.source ? (
                 <Tab
-                  title={serviceClassTabs.odata}
+                  title={serviceInstanceTabs.odata}
                   margin="0"
                   background="inherit"
                 >
