@@ -1,0 +1,112 @@
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const tslib_1 = require('tslib');
+const styled_components_1 = tslib_1.__importDefault(
+  require('styled-components'),
+);
+const react_components_1 = require('@kyma-project/react-components');
+exports.HeadersNavigationsWrapper = styled_components_1.default.div`
+  position: relative;
+  padding-left: 30px;
+`;
+exports.StyledHeadersNavigation = styled_components_1.default.div`
+  border-radius: 4px;
+  background-color: rgb(255,255,255);
+  box-shadow: rgba(50,54,58,0.08) 0px 5px 20px 0px;
+
+  > div {
+    overflow-y: scroll;
+    position: absolute;
+    height: 100%;
+  }
+
+  &&& {
+    .cms__toc-list-item {
+      width: 280px;
+      max-width: 280px;
+      position: relative;
+      border-top: 1px solid #eeeeef;
+
+      a {
+        width: 100%;
+        font-size: 13px;
+        padding: 4px 24px;
+        color: #32363a;
+        font-weight: normal;
+
+        &.active {
+          color: #0b74de;
+          font-weight: bold;
+          border-left: 2px solid #0b74de;
+        }
+      }
+
+      ul {
+        display: none;
+      }
+    }
+
+    .cms__toc-list-item--level-1 {
+      span {
+        left: 17px !important;
+      }
+
+      a {
+        padding-left: 36px;
+      }
+    }
+
+    .cms__toc-list-item--level-2 {
+      span {
+        left: 29px !important;
+      }
+
+      a {
+        padding-left: 48px;
+      }
+    }
+
+    .cms__toc-list-item--level-3 {
+      span {
+        left: 41px !important;
+      }
+    
+      a {
+        padding-left: 60px;
+      }
+    }
+
+    .cms__toc-list-item--level-4 {
+      span {
+        left: 53px !important;
+      }
+
+      a {
+        padding-left: 72px;
+      }
+    }
+
+    .cms__toc-list-item--show,
+    .cms__toc-list-item--show > ul {
+      display: block !important;
+    }
+  }
+`;
+exports.CollapseArrow = styled_components_1.default(react_components_1.Icon)`
+  &&&&& {
+    display: block;
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    color: #0b74de;
+
+    &:before {
+      font-size: .65rem;
+      line-height: 1;
+      transition: 0.3s ease;
+      ${({ open = false }) => open && 'transform: rotate(90deg);'};
+    }
+  }
+`;

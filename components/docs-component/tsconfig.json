@@ -1,0 +1,18 @@
+{
+  "exclude": ["./node_modules/**/*"],
+  "compilerOptions": {
+    "outDir": "lib",
+    "target": "esnext",
+    "module": "commonjs",
+    "lib": ["dom", "es2017"],
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "declaration": true
+  }
+}

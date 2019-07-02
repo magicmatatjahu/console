@@ -1,0 +1,1 @@
+export { headingPrefix } from "./headingPrefix";

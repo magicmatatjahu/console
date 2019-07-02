@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-import ScrollSpy from '../../ScrollSpy/ScrollSpy.component';
 import NavigationGroup from './NavigationGroup';
 import { Wrapper } from './styled';
 
-import { SCROLL_SPY_ROOT_ELEMENT } from '../../../../commons/variables';
 import { tokenize, makeUnique } from '../../../../commons/helpers';
 
 class Navigation extends Component {
@@ -24,16 +22,11 @@ class Navigation extends Component {
     })();
 
     const {
-      activeNav,
-      activeContent,
       chooseActive,
-      setActiveNav,
-      history,
       rootItems,
       externalItems,
       docsLoaded,
     } = this.props;
-    const { activeNodes } = this.state;
 
     if (!docsLoaded) {
       return null;
@@ -45,32 +38,15 @@ class Navigation extends Component {
       .sort();
 
     return (
-      <ScrollSpy
-        rootElement={`#${SCROLL_SPY_ROOT_ELEMENT}`}
-        nodeTypes={['groupOfDocuments', 'document', 'header']}
-        offset={{
-          groupOfDocuments: 10,
-          document: 10,
-          header: 5,
-        }}
-        onUpdate={activeNodes => this.setState({ activeNodes })}
-        activeContent={activeContent}
-        docsLoadingStatus={{ docsLoadingStatus: docsLoaded }}
-      >
         <Wrapper>
           <NavigationGroup
             data-e2e-id="navigation-root"
             title="Root"
-            icon={'database'}
+            icon="database"
             items={rootItems}
             groupType="root"
             isLinkActive={isLinkActive}
-            activeContent={activeContent}
-            activeNav={activeNav}
-            activeNodes={activeNodes}
-            setActiveNav={setActiveNav}
             chooseActive={chooseActive}
-            history={history}
           />
           {externalNavigationSections &&
             externalNavigationSections.map(sectionName => {
@@ -89,17 +65,11 @@ class Navigation extends Component {
                   items={dataForSection}
                   groupType={sectionName}
                   isLinkActive={isLinkActive}
-                  activeContent={activeContent}
-                  activeNav={activeNav}
-                  activeNodes={activeNodes}
-                  setActiveNav={setActiveNav}
                   chooseActive={chooseActive}
-                  history={history}
                 />
               );
             })}
         </Wrapper>
-      </ScrollSpy>
     );
   }
 }
