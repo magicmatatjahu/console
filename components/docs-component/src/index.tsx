@@ -53,7 +53,7 @@ export const DocsComponent: React.FunctionComponent<DocsComponentProps> = ({
             {
               name: MARKDOWN_HEADER_EXTRACTOR_PLUGIN,
               options: {
-                headerPrefix: headingPrefix,
+                headerPrefix,
                 customNodes,
               },
             },
