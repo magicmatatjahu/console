@@ -22,14 +22,14 @@ while test $# -gt 0; do
     esac
 done
 
-# prepare react-components
+# prepare react-odata
 cd ../${REACT_COMPONENTS_FOLDER}
 npm install
 npm run build
 
 cd $CWD
 
-# copy lib index.js for DOCKERFILE
+# copy lib for DOCKERFILE
 mkdir $TEMP_FOLDER
 cp -a ../${REACT_COMPONENTS_FOLDER}/lib ./${TEMP_FOLDER}
 rm -rf ./node_modules/@kyma-project/odata-react/lib
