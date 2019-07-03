@@ -4,18 +4,14 @@ import { Icon } from '@kyma-project/react-components';
 export const HeadersNavigationsWrapper = styled.div`
   position: relative;
   padding-left: 30px;
+  overflow-y: auto;
+  max-height: 100vh;
 `;
 
 export const StyledHeadersNavigation = styled.div`
   border-radius: 4px;
   background-color: rgb(255, 255, 255);
   box-shadow: rgba(50, 54, 58, 0.08) 0px 5px 20px 0px;
-
-  > div {
-    overflow-y: scroll;
-    position: absolute;
-    height: 100%;
-  }
 
   &&& {
     .cms__toc-list-item {

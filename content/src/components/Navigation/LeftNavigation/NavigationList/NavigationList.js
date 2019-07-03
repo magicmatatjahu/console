@@ -21,12 +21,7 @@ class Navigation extends Component {
       };
     })();
 
-    const {
-      chooseActive,
-      rootItems,
-      externalItems,
-      docsLoaded,
-    } = this.props;
+    const { chooseActive, rootItems, externalItems, docsLoaded } = this.props;
 
     if (!docsLoaded) {
       return null;
@@ -38,38 +33,38 @@ class Navigation extends Component {
       .sort();
 
     return (
-        <Wrapper>
-          <NavigationGroup
-            data-e2e-id="navigation-root"
-            title="Root"
-            icon="database"
-            items={rootItems}
-            groupType="root"
-            isLinkActive={isLinkActive}
-            chooseActive={chooseActive}
-          />
-          {externalNavigationSections &&
-            externalNavigationSections.map(sectionName => {
-              const dataForSection = externalItems.filter(
-                elem => elem.groupName === sectionName,
-              );
-              const capitalizedName =
-                sectionName[0].toUpperCase() + sectionName.slice(1);
+      <Wrapper>
+        <NavigationGroup
+          data-e2e-id="navigation-root"
+          title="Root"
+          icon="database"
+          items={rootItems}
+          groupType="root"
+          isLinkActive={isLinkActive}
+          chooseActive={chooseActive}
+        />
+        {externalNavigationSections &&
+          externalNavigationSections.map(sectionName => {
+            const dataForSection = externalItems.filter(
+              elem => elem.groupName === sectionName,
+            );
+            const capitalizedName =
+              sectionName[0].toUpperCase() + sectionName.slice(1);
 
-              return (
-                <NavigationGroup
-                  key={sectionName}
-                  data-e2e-id={`navigation-${sectionName}`}
-                  title={capitalizedName}
-                  icon={'Chart-Tree-Map'}
-                  items={dataForSection}
-                  groupType={sectionName}
-                  isLinkActive={isLinkActive}
-                  chooseActive={chooseActive}
-                />
-              );
-            })}
-        </Wrapper>
+            return (
+              <NavigationGroup
+                key={sectionName}
+                data-e2e-id={`navigation-${sectionName}`}
+                title={capitalizedName}
+                icon={'Chart-Tree-Map'}
+                items={dataForSection}
+                groupType={sectionName}
+                isLinkActive={isLinkActive}
+                chooseActive={chooseActive}
+              />
+            );
+          })}
+      </Wrapper>
     );
   }
 }

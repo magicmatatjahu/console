@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import {
-  NotificationMessage,
-  Spinner,
-} from '@kyma-project/react-components';
-import {
-  DocsComponent,
-} from '@kyma-project/docs-component';
+import { NotificationMessage, Spinner } from '@kyma-project/react-components';
+import { DocsComponent } from '@kyma-project/docs-component';
 
 import {
   Wrapper,
@@ -66,9 +61,7 @@ class DocsContent extends Component {
       return null;
     }
 
-    return (
-      <DocsComponent sources={docs} navigation={true} />
-    )
+    return <DocsComponent sources={docs} navigation={true} />;
 
     // return (
     //   <>

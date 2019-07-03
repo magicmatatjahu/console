@@ -45,13 +45,13 @@ export default class DocsContentContainer extends Component {
           .then(text => {
             return {
               source: {
-                type: "md",
+                type: 'md',
                 rawContent: text,
                 data: {
                   frontmatter: doc.metadata,
                   url: doc.url,
-                }
-              }
+                },
+              },
             };
           })
           .catch(err => {
@@ -65,8 +65,6 @@ export default class DocsContentContainer extends Component {
     });
     return data;
   }
-
-
 
   render() {
     const { docs } = this.props;
