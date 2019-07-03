@@ -11,7 +11,6 @@ import {
   replaceAllLessThanCharsMutationPlugin,
   Tabs,
   Tab,
-  disableInternalLinksMutationPlugin,
   MARKDOWN_HEADER_EXTRACTOR_PLUGIN,
   Sources,
   Source,
@@ -26,7 +25,11 @@ import {
   CopyButton,
   HeadersNavigation,
 } from './render-engines';
-import { replaceImagePathsMutationPlugin } from './plugins';
+import {
+  replaceImagePathsMutationPlugin,
+  disableInternalLinksMutationPlugin,
+  disableInternalLinksParserPlugin,
+} from './plugins';
 import { headingPrefix, customNodes } from './helpers';
 import { MarkdownSingleRenderer } from './renderers';
 import { ContentWrapper } from './styled';
@@ -65,8 +68,8 @@ export const DocsComponent: React.FunctionComponent<DocsComponentProps> = ({
         replaceImagePathsMutationPlugin,
         replaceAllLessThanCharsMutationPlugin,
         markdownTabsMutationPlugin,
-        disableInternalLinksMutationPlugin,
         markdownHeadersPlugin,
+        // disableInternalLinksMutationPlugin,
       ]}
       renderEngines={[
         {
@@ -75,7 +78,10 @@ export const DocsComponent: React.FunctionComponent<DocsComponentProps> = ({
             customRenderers: {
               link: MarkdownLink,
             },
-            parsers: [markdownTabsParserPlugin],
+            parsers: [
+              markdownTabsParserPlugin,
+              disableInternalLinksParserPlugin,
+            ],
             headingPrefix,
             highlightTheme,
             copyButton: CopyButton,

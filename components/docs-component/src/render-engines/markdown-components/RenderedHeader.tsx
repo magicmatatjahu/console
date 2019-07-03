@@ -42,6 +42,7 @@ const HeaderItem: React.FunctionComponent<HeaderItemProps> = ({
     >
       {header.children ? (
         <CollapseArrow
+          root={Boolean(!header.level)}
           size="s"
           glyph="feeder-arrow"
           open={showNode || collapse}

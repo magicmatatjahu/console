@@ -18,7 +18,6 @@ export const StyledHeadersNavigation = styled.div`
       width: 280px;
       max-width: 280px;
       position: relative;
-      border-top: 1px solid #eeeeef;
 
       a {
         width: 100%;
@@ -88,15 +87,18 @@ export const StyledHeadersNavigation = styled.div`
 
 interface CollapseArrowProps {
   open: boolean;
+  root: boolean;
 }
 
 export const CollapseArrow = styled(Icon)`
   &&&&& {
     display: block;
     position: absolute;
+    width: 18px;
+    ${({ root = false }: CollapseArrowProps) =>
+      root ? `margin-left: 5px;` : ''}
     top: 1px;
-    left: 5px;
-    margin-left: 5px;
+    text-align: center;
     cursor: pointer;
     color: #0b74de;
 
