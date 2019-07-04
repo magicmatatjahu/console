@@ -9,8 +9,6 @@ WORKDIR /app
 RUN apk update && apk upgrade && \
     apk add --no-cache curl
 
-COPY licenses/ /app/licenses/
-
 # Install app dependencies
 COPY package.json package-lock.json config-overrides.js /app/
 RUN npm install --no-optional
@@ -21,6 +19,9 @@ COPY public /app/public
 
 # Copy local changes from react-components package
 COPY react-components/index.js /app/node_modules/@kyma-project/react-components/lib/index.js
+
+# Copy local changes from docs-component package
+COPY docs-component/lib /app/node_modules/@kyma-project/docs-component/lib
 
 # Set env variables 
 ENV PRODUCTION true
@@ -35,7 +36,6 @@ LABEL source git@github.com:kyma-project/console.git
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=ui-generator /app/build var/public
-COPY --from=ui-generator /app/licenses/ /app/licenses/
 
 EXPOSE 80
 
