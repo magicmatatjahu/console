@@ -7,7 +7,7 @@ export const HeadersNavigationsWrapper = styled.div`
   overflow-y: auto;
   max-height: 100vh;
   box-shadow: rgba(50, 54, 58, 0.08) 0px 5px 20px 0px;
-  border-radius: 4px;  
+  border-radius: 4px;
 `;
 
 export const StyledHeadersNavigation = styled.div`
