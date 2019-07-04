@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  HeadlessCMS,
+  DC,
   Content,
   markdownTabsMutationPlugin,
   markdownTabsParserPlugin,
@@ -48,7 +48,7 @@ export const DocsComponent: React.FunctionComponent<DocsComponentProps> = ({
   }
 
   return (
-    <HeadlessCMS.Provider
+    <DC.Provider
       sources={[
         {
           sources,
@@ -113,6 +113,6 @@ export const DocsComponent: React.FunctionComponent<DocsComponentProps> = ({
           </Sticky>
         </StickyContainer>
       </ContentWrapper>
-    </HeadlessCMS.Provider>
+    </DC.Provider>
   );
 };
