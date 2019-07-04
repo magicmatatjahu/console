@@ -3,9 +3,11 @@ import { Icon } from '@kyma-project/react-components';
 
 export const HeadersNavigationsWrapper = styled.div`
   position: relative;
-  padding-left: 30px;
+  margin-left: 30px;
   overflow-y: auto;
   max-height: 100vh;
+  box-shadow: rgba(50, 54, 58, 0.08) 0px 5px 20px 0px;
+  border-radius: 4px;  
 `;
 
 export const StyledHeadersNavigation = styled.div`

@@ -11,7 +11,7 @@ resolve:
 
 build:
 	../scripts/prepare-react-components.sh -d react-components
-	../scripts/prepare-docs-component.sh -d docs-component
+	../scripts/prepare-docs-component.sh
 	npm run build
 
 validate:

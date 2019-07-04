@@ -10,7 +10,6 @@
     "add-ons",
     "components/react",
     "components/react-odata",
-    "components/docs-component",
     "components/angular/generic-list/dist",
     "lambda",
     "logging",

@@ -19,7 +19,6 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import {
   asyncApiRenderEngine,
   asyncApiOptions,
-  odataRenderEngine,
   MarkdownLink,
   highlightTheme,
   CopyButton,
