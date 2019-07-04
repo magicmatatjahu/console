@@ -6,7 +6,7 @@ import {
 
 const LINKS_MD_REGEX = /\[([^\[]+)\]\(([^\)]+)\)/g;
 
-function fun(str: string): string {
+function fn(str: string): string {
   return str.replace(LINKS_MD_REGEX, (substring: string) => {
     LINKS_MD_REGEX.lastIndex = 0;
     const matched = LINKS_MD_REGEX.exec(substring);
@@ -20,4 +20,4 @@ function fun(str: string): string {
 export const disableInternalLinks = ({
   source,
 }: MutationPluginArgs): MutationPluginReturnType =>
-  source.content ? fun(source.content) : fun(source.rawContent);
+  source.content ? fn(source.content) : fn(source.rawContent);

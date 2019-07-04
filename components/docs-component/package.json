@@ -27,6 +27,7 @@
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.0.0",
+    "tslint-react-hooks": "^2.1.0",
     "typescript": "^3.5.2"
   },
   "peerDependencies": {
@@ -63,9 +64,6 @@
       "package.json",
       "package-lock.json"
     ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",

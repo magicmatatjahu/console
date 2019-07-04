@@ -3,7 +3,7 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "outDir": "lib",
-    "target": "esnext",
+    "target": "es5",
     "module": "commonjs",
     "lib": ["dom", "es2017"],
     "jsx": "react",
