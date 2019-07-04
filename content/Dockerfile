@@ -20,9 +20,6 @@ COPY public /app/public
 # Copy local changes from react-components package
 COPY react-components/index.js /app/node_modules/@kyma-project/react-components/lib/index.js
 
-# Copy local changes from docs-component package
-COPY docs-component/lib /app/node_modules/@kyma-project/docs-component/lib
-
 # Set env variables 
 ENV PRODUCTION true
 
