@@ -13,7 +13,7 @@ import {
   markdownTypes,
   openApiTypes,
   asyncApiTypes,
-  odata,
+  odataTypes,
 } from '../constants';
 import { StyledAsyncApi } from './styled';
 import { StyledSwagger } from '../render-engines/open-api/styles';
@@ -26,7 +26,6 @@ export interface GroupRendererProps extends GroupRendererComponent {
   additionalTabs?: Array<{
     label: string;
     content: React.ReactNode;
-    additionalContent: React.ReactNode;
   }>;
 }
 
@@ -41,7 +40,7 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
   const markdownsExists = existsFiles(sources, markdownTypes);
   const openApiExists = existsFiles(sources, openApiTypes);
   const asyncApiExists = existsFiles(sources, asyncApiTypes);
-  const odataExists = existsFiles(sources, odata);
+  const odataExists = existsFiles(sources, odataTypes);
 
   const tabs =
     additionalTabs &&
@@ -83,6 +82,11 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
           <StyledAsyncApi className="custom-async-api-styling">
             <RenderedContent sourceTypes={asyncApiTypes} />
           </StyledAsyncApi>
+        </Tab>
+      )}
+      {odataExists && (
+        <Tab label="OData">
+          <RenderedContent sourceTypes={odataTypes} />
         </Tab>
       )}
       {tabs}

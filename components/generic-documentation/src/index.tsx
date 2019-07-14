@@ -8,7 +8,7 @@ import {
 } from '@kyma-project/documentation-component';
 import { plugins as markdownPlugins } from '@kyma-project/dc-markdown-render-engine';
 
-import { markdownRE, openApiRE, asyncApiRE } from './render-engines';
+import { markdownRE, openApiRE, asyncApiRE, odataRE } from './render-engines';
 import { ContentUILayout, CatalogUILayout, InstancesUILayout } from './layouts';
 import { MarkdownSingleRenderer } from './renderers';
 import { replaceImagePathsMutationPlugin } from './plugins';
@@ -33,7 +33,12 @@ const PLUGINS: Plugins = [
   replaceImagePathsMutationPlugin,
 ];
 
-const RENDER_ENGINES: RenderEngines = [markdownRE, openApiRE, asyncApiRE];
+const RENDER_ENGINES: RenderEngines = [
+  markdownRE,
+  openApiRE,
+  asyncApiRE,
+  odataRE,
+];
 
 const RENDERERS: Renderers = {
   single: [MarkdownSingleRenderer],
@@ -67,7 +72,6 @@ export interface GenericComponentProps {
   additionalTabs?: Array<{
     label: string;
     content: React.ReactNode;
-    additionalContent: React.ReactNode;
   }>;
 }
 

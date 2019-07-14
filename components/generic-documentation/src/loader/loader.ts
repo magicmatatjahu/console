@@ -7,7 +7,7 @@ import {
   markdownTypes,
   openApiTypes,
   asyncApiTypes,
-  odata,
+  odataTypes,
 } from '../constants';
 
 export class DocsLoader {
@@ -29,7 +29,7 @@ export class DocsLoader {
       await this.setDocumentation(),
       await this.setSpecification(openApiTypes),
       await this.setSpecification(asyncApiTypes),
-      await this.setSpecification(odata),
+      await this.setSpecification(odataTypes),
     ]);
   }
 

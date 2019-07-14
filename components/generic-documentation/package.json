@@ -6,8 +6,9 @@
   "dependencies": {
     "@kyma-project/documentation-component": "../../../documentation-component/packages/documentation-component",
     "@kyma-project/dc-markdown-render-engine": "../../../documentation-component/packages/markdown-render-engine",
-    "@kyma-project/dc-async-api-render-engine": "../../../documentation-component/packages/async-api-render-engine",
     "@kyma-project/dc-open-api-render-engine": "../../../documentation-component/packages/open-api-render-engine",
+    "@kyma-project/dc-async-api-render-engine": "../../../documentation-component/packages/async-api-render-engine",
+    "@kyma-project/dc-odata-render-engine": "../../../documentation-component/packages/odata-render-engine",
     "@braintree/sanitize-url": "^3.1.0",
     "fundamental-react": "0.6.1",
     "css.escape": "^1.5.1",
