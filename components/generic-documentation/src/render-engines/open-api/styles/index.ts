@@ -1,4 +1,4 @@
-import styled, { css, StyledComponentBase } from 'styled-components';
+import styled, { css } from 'styled-components';
 import contentTypeSelect from './content-type-select-background-image.png';
 import schemesSelect from './schemes-background-image.png';
 import responsesSelect from './responsesSelect.png';

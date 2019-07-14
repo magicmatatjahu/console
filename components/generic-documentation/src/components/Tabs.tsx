@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createElementClass } from '../helpers';
-import { Tab, TabProps } from './Tab';
+import { TabProps } from './Tab';
 
 export interface TabsProps {
   className?: string;

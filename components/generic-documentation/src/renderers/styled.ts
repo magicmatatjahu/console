@@ -1,4 +1,4 @@
-import styled, { css, StyledComponentBase } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { customScrollBar } from '../helpers';
 
 export const tabsStyling = css`
@@ -100,10 +100,6 @@ export const Header = styled.h2`
     margin: 0px 0px 26px;
   }
 `;
-
-interface StyledMarkdownProps {
-  isGroup: boolean;
-}
 
 export const StyledMarkdown = styled.div`
   max-width: 899px;

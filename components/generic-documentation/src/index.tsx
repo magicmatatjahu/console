@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   DC,
   Sources,
-  Source,
   Plugins,
   RenderEngines,
   Renderers,

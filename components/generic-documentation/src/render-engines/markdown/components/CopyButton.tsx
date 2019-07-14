@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import CopyToClipboard, { Options } from 'react-copy-to-clipboard';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { Icon, Tooltip } from '@kyma-project/react-components';
 
 const CopyButtonWrapper = styled.div`

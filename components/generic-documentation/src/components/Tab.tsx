@@ -4,7 +4,7 @@ import { createElementClass, createModifierClass } from '../helpers';
 export interface TabProps {
   children: React.ReactNode;
   label: React.ReactNode;
-  tabIndex: number;
+  tabIndex?: number;
   isActive?: boolean;
   parentCallback?: (value: number) => void;
 }
@@ -26,7 +26,7 @@ export const Tab: React.FunctionComponent<TabProps> = ({
       onClick={(event: any) => {
         event.preventDefault();
         if (parentCallback) {
-          parentCallback(tabIndex);
+          parentCallback(tabIndex ? tabIndex : 0);
         }
       }}
     >

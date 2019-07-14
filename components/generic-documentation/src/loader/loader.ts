@@ -2,14 +2,7 @@ import {
   SourceWithOptions,
   Sources,
 } from '@kyma-project/documentation-component';
-import {
-  ServiceClass,
-  ClusterDocsTopic,
-  DocsTopic,
-  Asset,
-  File,
-  DT,
-} from './types';
+import { Asset, File, DT } from './types';
 import {
   markdownTypes,
   openApiTypes,
@@ -164,14 +157,6 @@ export class DocsLoader {
 
   private clear(): void {
     this.sources = [];
-  }
-
-  private isDocsTopic(docsTopic: DT): docsTopic is DocsTopic {
-    return Boolean((this.docsTopic as DocsTopic).namespace);
-  }
-
-  private isClusterDocsTopic(docsTopic: DT): docsTopic is ClusterDocsTopic {
-    return !Boolean((this.docsTopic as DocsTopic).namespace);
   }
 }
 

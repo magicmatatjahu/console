@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import styled, { StyledComponentBase } from 'styled-components';
+import React, { useState } from 'react';
 import { plugins } from '@kyma-project/dc-markdown-render-engine';
 
 export type Header = plugins.Header;
@@ -25,7 +24,7 @@ const HeaderItem: React.FunctionComponent<HeaderItemProps> = ({
   className,
   activeAnchors,
 }) => {
-  const [collapse, setCollapse] = useState<boolean>(false);
+  const [collapse /*setCollapse*/] = useState<boolean>(false);
   const showNode =
     activeAnchors && (activeAnchors as any)[header.level] === header.id;
 

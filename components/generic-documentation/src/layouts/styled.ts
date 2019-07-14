@@ -1,4 +1,4 @@
-import styled, { StyledComponentBase } from 'styled-components';
+import styled from 'styled-components';
 import { tabsStyling } from '../renderers/styled';
 
 export const CatalogUIWrapper = styled.div`
