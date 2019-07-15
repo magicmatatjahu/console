@@ -96,6 +96,7 @@ export class DocsLoader {
             data: {
               frontmatter: file.metadata,
               url: file.url,
+              disableRelativeLinks: true,
             },
           },
         };

@@ -1,17 +1,25 @@
 import React from 'react';
+import styled from 'styled-components';
 import {
   MarkdownRenderEngineOptions,
   MarkdownParserPluginReturnType,
 } from '@kyma-project/dc-markdown-render-engine';
-// import { Tooltip } from "@kyma-project/react-components";
-import styled from 'styled-components';
+import { InlineHelp } from 'fundamental-react/InlineHelp';
 
-const GreyedText = styled.span`
-  color: #959697;
-  cursor: info;
-  font-family: '72';
-  font-size: 16px;
-  line-height: 1.57;
+const GreyedText = styled.div`
+  display: inline;
+
+  .disabled-internal-link {
+    color: #959697;
+    cursor: info;
+    font-family: '72';
+    font-size: 16px;
+    line-height: 1.57;
+  }
+
+  .fd-inline-help {
+    margin-left: 8px;
+  }
 `;
 
 export const disabledInternalLinkParser = (
@@ -31,13 +39,13 @@ export const disabledInternalLinkParser = (
     ) {
       return null;
     }
+    const content = 'Placeholder';
 
-    return <GreyedText>{node.children[0].data}</GreyedText>;
-
-    // return (
-    //   <Tooltip content={content} orientation={"top"}>
-    //     <GreyedText>{node.children[0].data}</GreyedText>
-    //   </Tooltip>
-    // );
+    return (
+      <GreyedText>
+        <span className="disabled-internal-link">{node.children[0].data}</span>
+        <InlineHelp placement="right" text={content} />
+      </GreyedText>
+    );
   },
 });

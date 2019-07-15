@@ -11,7 +11,10 @@ import { plugins as markdownPlugins } from '@kyma-project/dc-markdown-render-eng
 import { markdownRE, openApiRE, asyncApiRE, odataRE } from './render-engines';
 import { ContentUILayout, CatalogUILayout, InstancesUILayout } from './layouts';
 import { MarkdownSingleRenderer } from './renderers';
-import { replaceImagePathsMutationPlugin } from './plugins';
+import {
+  disableInternalLinksMutationPlugin,
+  replaceImagePathsMutationPlugin,
+} from './plugins';
 import { loader, ClusterDocsTopic, DocsTopic } from './loader';
 import {
   headingPrefix,
@@ -31,6 +34,7 @@ const PLUGINS: Plugins = [
   },
   markdownPlugins.tabsMutationPlugin,
   replaceImagePathsMutationPlugin,
+  disableInternalLinksMutationPlugin,
 ];
 
 const RENDER_ENGINES: RenderEngines = [

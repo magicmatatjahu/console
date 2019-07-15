@@ -2,7 +2,11 @@ import { MutationPluginArgs } from '@kyma-project/documentation-component';
 
 const LINKS_MD_REGEX = /\[([^\[]+)\]\(([^\)]+)\)/g;
 
-function fn(str: string): string {
+function fn(str: string, disableRelativeLinks: boolean): string {
+  if (!disableRelativeLinks) {
+    return str;
+  }
+
   return str.replace(LINKS_MD_REGEX, (substring: string) => {
     LINKS_MD_REGEX.lastIndex = 0;
     const matched = LINKS_MD_REGEX.exec(substring);
@@ -14,4 +18,7 @@ function fn(str: string): string {
 }
 
 export const disableInternalLinks = ({ source }: MutationPluginArgs): string =>
-  fn((source.content || source.rawContent) as string);
+  fn(
+    (source.content || source.rawContent) as string,
+    Boolean(source.data && source.data.disableRelativeLinks),
+  );
