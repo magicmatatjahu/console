@@ -96,7 +96,7 @@ export const InstancesUIWrapper = styled.div`
 
     .headers-navigation-wrapper {
       margin-top: 16px;
-      border: none;
+      margin-right: 16px;
     }
   }
 `;

@@ -5,8 +5,8 @@ import { media } from '../../../components';
 
 export const HeadersNavigationsWrapper = styled.div`
   position: relative;
-  overflow-x: hidden;
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: 100vh;
   border-width: 1px;
   border-style: solid;
