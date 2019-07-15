@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { plugins } from '@kyma-project/dc-markdown-render-engine';
+import { CollapseArrow } from './styled';
 
 export type Header = plugins.Header;
 export type ActiveAnchors = plugins.ActiveAnchors;
@@ -24,7 +25,7 @@ const HeaderItem: React.FunctionComponent<HeaderItemProps> = ({
   className,
   activeAnchors,
 }) => {
-  const [collapse /*setCollapse*/] = useState<boolean>(false);
+  const [collapse, setCollapse] = useState<boolean>(false);
   const showNode =
     activeAnchors && (activeAnchors as any)[header.level] === header.id;
 
@@ -37,7 +38,7 @@ const HeaderItem: React.FunctionComponent<HeaderItemProps> = ({
         `${className}-list-item`,
       )}`}
     >
-      {/* {header.children ? (
+      {header.children ? (
         <CollapseArrow
           root={Boolean(!header.level) ? 1 : 0}
           size="s"
@@ -47,7 +48,7 @@ const HeaderItem: React.FunctionComponent<HeaderItemProps> = ({
             setCollapse(c => !c);
           }}
         />
-      ) : null} */}
+      ) : null}
       <a href={`#${header.id}`}>{header.title}</a>
       {header.children && (
         <RenderedHeader

@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
-export const ContentWrapper = styled.div`
+export const MarkdownWrapper = styled.div`
   &&&&& {
     > div {
       display: flex;
       align-items: stretch;
+    }
+
+    .grid-container > div {
+      width: 100%;
     }
   }
 `;

@@ -1,14 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
-  RenderedContent,
   SingleRenderer,
   SingleRendererComponent,
 } from '@kyma-project/documentation-component';
 import { headingPrefix, toKebabCase } from '../helpers';
 import { StyledMarkdown, Header } from './styled';
-
-const types: Set<string> = new Set<string>();
 
 const Renderer: React.FunctionComponent<SingleRendererComponent> = ({
   source,

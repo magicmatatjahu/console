@@ -7,15 +7,15 @@ import {
 
 import { StickyContainer, Sticky } from 'react-sticky';
 import { HeadersNavigation } from '../render-engines/markdown/headers-toc';
-import { Tabs, Tab } from '../components';
-import { ContentWrapper } from '../styled';
+import { Grid, Tabs, Tab } from '../components';
+import { MarkdownWrapper } from '../styled';
 import {
   markdownTypes,
   openApiTypes,
   asyncApiTypes,
   odataTypes,
 } from '../constants';
-import { StyledAsyncApi } from './styled';
+import { StyledAsyncApi, StyledOData } from './styled';
 import { StyledSwagger } from '../render-engines/open-api/styles';
 
 function existsFiles(sources: Source[], types: string[]) {
@@ -54,20 +54,26 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
     <Tabs>
       {markdownsExists && (
         <Tab label="Documentation">
-          <ContentWrapper>
-            <StickyContainer>
-              <div>
-                <RenderedContent sourceTypes={markdownTypes} />
-              </div>
-              <Sticky>
-                {({ style }: any) => (
-                  <div style={{ ...style, zIndex: 200, width: '310px' }}>
-                    <HeadersNavigation enableSmoothScroll={true} />
-                  </div>
-                )}
-              </Sticky>
-            </StickyContainer>
-          </ContentWrapper>
+          <MarkdownWrapper className="custom-markdown-styling">
+            <Grid.Container className="grid-container">
+              <StickyContainer>
+                <Grid.Row>
+                  <Grid.Unit df={9} sm={12} className="grid-unit-content">
+                    <RenderedContent sourceTypes={markdownTypes} />
+                  </Grid.Unit>
+                  <Grid.Unit df={3} sm={0} className="grid-unit-navigation">
+                    <Sticky>
+                      {({ style }: any) => (
+                        <div style={{ ...style, zIndex: 200 }}>
+                          <HeadersNavigation enableSmoothScroll={true} />
+                        </div>
+                      )}
+                    </Sticky>
+                  </Grid.Unit>
+                </Grid.Row>
+              </StickyContainer>
+            </Grid.Container>
+          </MarkdownWrapper>
         </Tab>
       )}
       {openApiExists && (
@@ -86,7 +92,9 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
       )}
       {odataExists && (
         <Tab label="OData">
-          <RenderedContent sourceTypes={odataTypes} />
+          <StyledOData className="custom-odata-styling">
+            <RenderedContent sourceTypes={odataTypes} />
+          </StyledOData>
         </Tab>
       )}
       {tabs}

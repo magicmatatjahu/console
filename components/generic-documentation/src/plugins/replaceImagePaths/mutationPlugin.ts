@@ -1,7 +1,4 @@
-import {
-  MutationPluginReturnType,
-  MutationPluginArgs,
-} from '@kyma-project/documentation-component';
+import { MutationPluginArgs } from '@kyma-project/documentation-component';
 
 const ASSETS_REGEXP = /(?=]\()]\(\s*(\.\/)?assets/g;
 

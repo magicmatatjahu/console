@@ -1,5 +1,6 @@
 declare module '@kyma-project/react-components';
 declare module '@kyma-project/odata-react';
+declare module 'fundamental-react/Icon';
 declare module '@braintree/sanitize-url';
 declare module 'css.escape';
 

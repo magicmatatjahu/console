@@ -1,6 +1,16 @@
 import styled from 'styled-components';
 import { tabsStyling } from '../renderers/styled';
 
+export const ContentUIWrapper = styled.div`
+  width: 100%;
+
+  &&& {
+    .grid-container {
+      padding: 15px;
+    }
+  }
+`;
+
 export const CatalogUIWrapper = styled.div`
   width: 100%;
 
@@ -19,11 +29,13 @@ export const CatalogUIWrapper = styled.div`
     }
 
     .cms__tab {
-      padding: 16px 0;
-
       &:first-child {
         margin-left: 32px;
       }
+    }
+
+    .grid-container {
+      padding: 0;
     }
   }
 `;
@@ -31,11 +43,11 @@ export const CatalogUIWrapper = styled.div`
 export const InstancesUIWrapper = styled.div`
   width: 100%;
 
-  &&& {
+  &&&&&&&& {
     ${tabsStyling}
 
     .cms__tabs {
-      border: 0;
+      border: none;
     }
 
     .cms__tabs-header {
@@ -45,11 +57,10 @@ export const InstancesUIWrapper = styled.div`
 
     .cms__tabs-content {
       margin: 0;
+      background: #fff;
     }
 
     .cms__tab {
-      padding: 16px 0;
-
       &:first-child {
         margin-left: 16px;
       }
@@ -60,9 +71,32 @@ export const InstancesUIWrapper = styled.div`
       border-top-left-radius: 0;
     }
 
-    .custom-async-api-styling > div > div:first-child {
-      border-top-right-radius: 0;
-      border-top-left-radius: 0;
+    .custom-async-api-styling > div > div {
+      border: none;
+
+      &:first-child {
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+      }
+    }
+
+    .custom-odata-styling {
+      button {
+        margin: 16px;
+      }
+    }
+
+    .grid-container {
+      padding: 0;
+    }
+
+    .grid-unit-content > div {
+      border: none;
+    }
+
+    .headers-navigation-wrapper {
+      margin-top: 16px;
+      border: none;
     }
   }
 `;

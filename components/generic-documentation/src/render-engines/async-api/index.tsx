@@ -3,7 +3,6 @@ import {
   asyncApiRenderEngine,
   AsyncApiProps,
   ConfigInterface,
-  ThemeInterface,
 } from '@kyma-project/dc-async-api-render-engine';
 import { asyncApiTheme } from './theme';
 

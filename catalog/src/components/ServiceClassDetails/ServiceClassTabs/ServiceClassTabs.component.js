@@ -1,50 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Status,
-  StatusWrapper,
-} from '@kyma-project/react-components';
+import { Status, StatusWrapper } from '@kyma-project/react-components';
 import { GenericComponent } from '@kyma-project/generic-documentation';
+
+import { ServiceClassInstancesTable } from '../ServiceClassInstancesTable/ServiceClassInstancesTable.component';
 import { serviceClassConstants } from '../../../variables';
 
 function getTabElementsIndicator(instancesCount) {
   return (
-    <StatusWrapper key="instances-no">
+    <StatusWrapper
+      key="instances-no"
+      style={{
+        float: 'right',
+      }}
+    >
       <Status>{instancesCount}</Status>
     </StatusWrapper>
   );
 }
 
-const ServiceClassTabs = ({
-  serviceClass,
-}) => {
+const ServiceClassTabs = ({ serviceClass }) => {
   const docsTopic =
     serviceClass && (serviceClass.docsTopic || serviceClass.clusterDocsTopic);
 
-  const additionalTabs = [{
-    label: (
-      <>
-        <span>{serviceClassConstants.instancesTabText}</span>
-        {this.getTabElementsIndicator(
-          this.props.serviceClass.instances.length,
-        )}
-      </>
-    ),
-    content: (
-      <ServiceClassInstancesTable
-        tableData={serviceClass.instances}
-      />
-    )
-  }];
+  const additionalTabs = serviceClass.instances.length
+    ? [
+        {
+          label: (
+            <>
+              <span>{serviceClassConstants.instancesTabText}</span>
+              {getTabElementsIndicator(serviceClass.instances.length)}
+            </>
+          ),
+          content: (
+            <ServiceClassInstancesTable tableData={serviceClass.instances} />
+          ),
+        },
+      ]
+    : [];
 
   return (
-    <GenericComponent 
-      docsTopic={docsTopic} 
+    <GenericComponent
+      docsTopic={docsTopic}
       additionalTabs={additionalTabs}
-      layout="catalog-ui" 
+      layout="catalog-ui"
     />
   );
-}
+};
 
 ServiceClassTabs.propTypes = {
   serviceClass: PropTypes.object.isRequired,

@@ -43,7 +43,6 @@ export const tabsStyling = css`
     display: flex;
     align-items: center;
     margin: 0 16px;
-    padding: 16px 0 10px;
     border: none;
     position: relative;
     color: #32363b;
@@ -80,6 +79,10 @@ export const tabsStyling = css`
         background-color: #0b74de;
       }
     }
+
+    .cms__tab-label {
+      padding: 16px 0;
+    }
   }
 
   .cms__tab--active {
@@ -102,18 +105,20 @@ export const Header = styled.h2`
 `;
 
 export const StyledMarkdown = styled.div`
-  max-width: 899px;
   width: 100%;
 
   &&& {
     box-sizing: border-box;
     text-align: left;
     background-color: rgb(255, 255, 255);
-    box-shadow: rgba(50, 54, 58, 0.08) 0px 5px 20px 0px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(151, 151, 151, 0.26);
+    border-image: initial;
+    border-radius: 4px;
     font-family: '72';
     font-weight: normal;
     margin: 0px 0px 16px;
-    border-radius: 4px;
     padding: 16px;
 
     &:last-child {
@@ -178,6 +183,8 @@ export const StyledMarkdown = styled.div`
       border-collapse: collapse;
       width: 100%;
       margin: 30px 0;
+      display: block;
+      overflow: auto;
     }
     thead {
       background-color: rgba(243, 244, 245, 0.45);
@@ -350,8 +357,11 @@ export const StyledAsyncApi = styled.div`
   &&&&& {
     > div > div {
       padding: 16px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgba(151, 151, 151, 0.26);
+      border-image: initial;
       border-radius: 4px;
-      box-shadow: rgba(50, 54, 58, 0.08) 0px 5px 20px 0px;
       margin-bottom: 20px;
 
       &:last-child {
@@ -360,3 +370,5 @@ export const StyledAsyncApi = styled.div`
     }
   }
 `;
+
+export const StyledOData = styled.div``;

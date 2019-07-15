@@ -13,7 +13,7 @@ export interface HeadersNavigationProps {
 export const HeadersNavigation: React.FunctionComponent<
   HeadersNavigationProps
 > = ({ enableSmoothScroll = false }) => (
-  <HeadersNavigationsWrapper>
+  <HeadersNavigationsWrapper className="headers-navigation-wrapper">
     <div>
       <HN
         postProcessing={postProcessingHeaders}

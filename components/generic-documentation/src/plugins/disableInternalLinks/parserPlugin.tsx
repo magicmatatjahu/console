@@ -8,11 +8,10 @@ import styled from 'styled-components';
 
 const GreyedText = styled.span`
   color: #959697;
-  cursor: pointer;
+  cursor: info;
   font-family: '72';
   font-size: 16px;
   line-height: 1.57;
-}
 `;
 
 export const disabledInternalLinkParser = (
@@ -32,7 +31,6 @@ export const disabledInternalLinkParser = (
     ) {
       return null;
     }
-    const content = 'Placeholder';
 
     return <GreyedText>{node.children[0].data}</GreyedText>;
 

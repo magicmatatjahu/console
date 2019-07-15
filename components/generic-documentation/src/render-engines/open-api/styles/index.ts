@@ -523,7 +523,9 @@ const modelSectionStyles = css`
 export const StyledSwagger = styled.section`
   background: #fff;
   padding: 16px 0;
-  box-shadow: rgba(50, 54, 58, 0.08) 0px 5px 20px 0px;
+  border-style: solid;
+  border-color: rgba(151, 151, 151, 0.26);
+  border-image: initial;
   border-radius: 4px;
 
   && {

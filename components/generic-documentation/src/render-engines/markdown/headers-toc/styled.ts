@@ -1,18 +1,27 @@
 import styled from 'styled-components';
+import { Icon } from 'fundamental-react/Icon';
+
+import { media } from '../../../components';
 
 export const HeadersNavigationsWrapper = styled.div`
   position: relative;
-  margin-left: 30px;
+  overflow-x: hidden;
   overflow-y: auto;
   max-height: 100vh;
-  box-shadow: rgba(50, 54, 58, 0.08) 0px 5px 20px 0px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(151, 151, 151, 0.26);
+  border-image: initial;
   border-radius: 4px;
+
+  ${media.phone`
+    display: none;
+  `}
 `;
 
 export const StyledHeadersNavigation = styled.div`
   border-radius: 4px;
   background-color: rgb(255, 255, 255);
-  box-shadow: rgba(50, 54, 58, 0.08) 0px 5px 20px 0px;
 
   &&& {
     .cms__toc-list-item {
@@ -82,6 +91,32 @@ export const StyledHeadersNavigation = styled.div`
     .cms__toc-list-item--show,
     .cms__toc-list-item--show > ul {
       display: block !important;
+    }
+  }
+`;
+
+interface CollapseArrowProps {
+  open: boolean;
+  root: boolean;
+}
+
+export const CollapseArrow = styled(Icon)`
+  &&&&& {
+    display: block;
+    position: absolute;
+    width: 18px;
+    ${({ root = false }: CollapseArrowProps) =>
+      root ? `margin-left: 5px;` : ''}
+    top: 1px;
+    text-align: center;
+    cursor: pointer;
+    color: #0b74de;
+    &:before {
+      font-size: 0.65rem;
+      line-height: 1;
+      transition: 0.3s ease;
+      ${({ open = false }: CollapseArrowProps) =>
+        open && 'transform: rotate(90deg);'};
     }
   }
 `;

@@ -9,7 +9,7 @@ import { Link } from './custom-renderers';
 import { CopyButton } from './components';
 import { highlightTheme } from './highlightTheme';
 import { headingPrefix } from './helpers';
-import { disableInternalLinksParserPlugin } from './plugins';
+import { disableInternalLinksParserPlugin } from '../../plugins';
 
 export const markdownRE: RenderEngineWithOptions<
   MarkdownRenderEngineOptions

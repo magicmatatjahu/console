@@ -1,8 +1,4 @@
-import {
-  Source,
-  MutationPluginReturnType,
-  MutationPluginArgs,
-} from '@kyma-project/documentation-component';
+import { MutationPluginArgs } from '@kyma-project/documentation-component';
 
 const LINKS_MD_REGEX = /\[([^\[]+)\]\(([^\)]+)\)/g;
 
