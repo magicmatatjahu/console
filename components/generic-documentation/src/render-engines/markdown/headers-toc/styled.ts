@@ -25,8 +25,8 @@ export const StyledHeadersNavigation = styled.div`
 
   &&& {
     .cms__toc-list-item {
-      width: 280px;
-      max-width: 280px;
+      width: 100%;
+      max-width: 100%;
       position: relative;
 
       a {

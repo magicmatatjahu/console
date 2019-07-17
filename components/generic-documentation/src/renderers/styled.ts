@@ -134,23 +134,24 @@ export const StyledMarkdown = styled.div`
       font-family: '72';
       color: #32363a;
       font-weight: bold;
+      margin: 0;
     }
     h1 {
-      margin: 26px 0;
+      margin-bottom: 26px;
 
       .cms__text {
         font-size: 22px !important;
       }
     }
     h2 {
-      margin: 16px 0;
+      margin-bottom: 16px;
 
       .cms__text {
         font-size: 16px !important;
       }
     }
     h3 {
-      margin: 8px 0;
+      margin-bottom: 8px;
 
       .cms__text {
         font-size: 14px !important;

@@ -36,6 +36,7 @@ export const CatalogUIWrapper = styled.div`
 
     .grid-container {
       padding: 0;
+      margin: 0;
     }
   }
 `;
@@ -58,6 +59,8 @@ export const InstancesUIWrapper = styled.div`
     .cms__tabs-content {
       margin: 0;
       background: #fff;
+      border-bottom-right-radius: 4px;
+      border-bottom-left-radius: 4px;
     }
 
     .cms__tab {
@@ -88,6 +91,7 @@ export const InstancesUIWrapper = styled.div`
 
     .grid-container {
       padding: 0;
+      margin: 0;
     }
 
     .grid-unit-content > div {
