@@ -144,7 +144,6 @@ export class DocsLoader {
       openApiAsset &&
       openApiAsset[0] &&
       openApiAsset[0].files &&
-      openApiAsset[0].files[0] &&
       openApiAsset[0].files[0];
 
     return file;

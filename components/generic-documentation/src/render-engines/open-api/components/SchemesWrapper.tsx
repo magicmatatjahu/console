@@ -48,13 +48,13 @@ interface TextProps {
   light?: boolean;
 }
 
-const Text = styled.p`
+const Text = styled.p<TextProps>`
   align-self: flex-start;
   font-family: 72;
   margin: 0;
   align-self: center;
-  color: ${(props: TextProps) => (props.light ? '#6a6d70' : '#32363a')};
-  font-size: ${(props: TextProps) => (props.light ? '14px' : '16px')};
+  color: ${props => (props.light ? '#6a6d70' : '#32363a')};
+  font-size: ${props => (props.light ? '14px' : '16px')};
 
   font-weight: normal;
   font-style: normal;

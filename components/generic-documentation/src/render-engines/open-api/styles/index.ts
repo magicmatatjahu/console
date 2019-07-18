@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import contentTypeSelect from './content-type-select-background-image.png';
-import schemesSelect from './schemes-background-image.png';
-import responsesSelect from './responsesSelect.png';
+import contentTypeSelect from './assets/content-type-select-background-image.png';
+import schemesSelect from './assets/schemes-background-image.png';
+import responsesSelect from './assets/responsesSelect.png';
 
 const summaries = css`
   && {

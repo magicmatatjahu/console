@@ -12,8 +12,9 @@ npm-debug.log*
 lerna-debug.log*
 yarn-debug.log*
 yarn-error.log*
-yarn.lock
 .idea
 .vscode
+
+**/lib/**/*
 
 /**/whitesource.config.json

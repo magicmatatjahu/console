@@ -14,15 +14,13 @@ export const HeadersNavigation: React.FunctionComponent<
   HeadersNavigationProps
 > = ({ enableSmoothScroll = false }) => (
   <HeadersNavigationsWrapper className="headers-navigation-wrapper">
-    <div>
-      <HN
-        postProcessing={postProcessingHeaders}
-        enableSmoothScroll={enableSmoothScroll}
-      >
-        <StyledHeadersNavigation className="cms__toc-wrapper">
-          <RenderedHeader />
-        </StyledHeadersNavigation>
-      </HN>
-    </div>
+    <HN
+      postProcessing={postProcessingHeaders}
+      enableSmoothScroll={enableSmoothScroll}
+    >
+      <StyledHeadersNavigation className="cms__toc-wrapper">
+        <RenderedHeader />
+      </StyledHeadersNavigation>
+    </HN>
   </HeadersNavigationsWrapper>
 );

@@ -40,13 +40,13 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "start": "react-scripts start",
-    "build": "tsc && npm run copy-images",
+    "build": "tsc && npm run copy-assets-open-api",
     "test": "react-scripts test; exit 0",
     "eject": "react-scripts eject",
     "lint-check": "tslint -c tslint.json --project tsconfig.json 'src/**/*.{ts,tsx}' --format verbose && prettier --config ../../.prettierrc --check 'src/**/*.{ts,tsx,js,jsx,json,html,css,yaml}'",
     "lint-fix": "tslint -c tslint.json --project tsconfig.json 'src/**/*.{ts,tsx}' --format verbose --fix && prettier --config ../../.prettierrc --write 'src/**/*.{ts,tsx,js,jsx,json,html,css,yaml}'",
     "conflict-check": "tslint-config-prettier-check ./tslint.json",
-    "copy-images": "cp -r ./src/render-engines/open-api/styles/ ./lib/render-engines/open-api/styles/"
+    "copy-assets-open-api": "cp -r ./src/render-engines/open-api/styles/assets ./lib/render-engines/open-api/styles/assets"
   },
   "husky": {
     "hooks": {

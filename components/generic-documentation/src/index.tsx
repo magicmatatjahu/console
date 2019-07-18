@@ -81,26 +81,6 @@ export interface GenericComponentProps {
   }>;
 }
 
-// const md1 = `
-// | Test | Table |
-// | ---- | ----- |
-// | Test | Value |
-
-// ## Other
-
-// <div>dupa</div>
-// `;
-
-// const md2 = `
-// # First Header
-
-// Some text
-
-// ### Next Header
-
-// Some additional text
-// `;
-
 export const GenericComponent: React.FunctionComponent<
   GenericComponentProps
 > = ({ docsTopic, layout = LayoutType.CONTENT_UI, ...others }) => {
@@ -125,25 +105,6 @@ export const GenericComponent: React.FunctionComponent<
   if (!sources || !sources.length) {
     return null;
   }
-
-  // const s: Sources = [
-  //   {
-  //     sources: [
-  //       {
-  //         source: {
-  //           type: "md",
-  //           rawContent: md1
-  //         },
-  //       },
-  //       {
-  //         source: {
-  //           type: "md",
-  //           rawContent: md2
-  //         },
-  //       }
-  //     ]
-  //   }
-  // ]
 
   return (
     <DC.Provider
