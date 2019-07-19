@@ -33,7 +33,7 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
   sources,
   additionalTabs,
 }) => {
-  if (!sources || !sources.length) {
+  if ((!sources || !sources.length) && (!additionalTabs || !additionalTabs.length)) {
     return null;
   }
 
