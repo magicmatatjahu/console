@@ -96,6 +96,7 @@ export const GenericComponent: React.FunctionComponent<
   useEffect(() => {
     const fetchAssets = async () => {
       loader.setDocsTopic(docsTopic);
+      loader.setSortServiceClassDocumentation(layout !== LayoutType.CONTENT_UI);
       await loader.fetchAssets();
       setSources(loader.getSources(layout !== LayoutType.CONTENT_UI));
     };

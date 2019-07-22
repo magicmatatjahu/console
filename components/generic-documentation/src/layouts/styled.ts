@@ -26,6 +26,8 @@ export const CatalogUIWrapper = styled.div`
 
     .cms__tabs-content {
       margin: 32px;
+      background: #fff;
+      border-radius: 4px;
     }
 
     .cms__tab {
@@ -34,9 +36,19 @@ export const CatalogUIWrapper = styled.div`
       }
     }
 
+    .grid-unit-content > div {
+      border: none;
+      margin: 0;
+    }
+
     .grid-container {
       padding: 0;
       margin: 0;
+    }
+
+    .headers-navigation-wrapper {
+      margin-top: 16px;
+      margin-right: 16px;
     }
   }
 `;
@@ -96,6 +108,7 @@ export const InstancesUIWrapper = styled.div`
 
     .grid-unit-content > div {
       border: none;
+      margin: 0;
     }
 
     .headers-navigation-wrapper {

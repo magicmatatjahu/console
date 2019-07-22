@@ -4,7 +4,7 @@
   "version": "0.7.0",
   "private": true,
   "dependencies": {
-    "@kyma-project/generic-documentation": "https://github.com/magicmatatjahu/console/raw/integrate-docs-component-2/components/generic-documentation/kyma-project-generic-documentation-0.1.0.tgz",
+    "@kyma-project/generic-documentation": "../components/generic-documentation",
     "@kyma-project/luigi-client": "0.4.9",
     "@kyma-project/react-components": "0.0.43",
     "ajv": "^6.0.0",
