@@ -89,6 +89,10 @@ export class DocsLoader {
         return response.text();
       })
       .then(text => {
+        if (markdownTypes.includes(type)) {
+          return this.serializeMarkdownFile(file, text);
+        }
+
         const source: SourceWithOptions = {
           source: {
             type,
@@ -96,7 +100,6 @@ export class DocsLoader {
             data: {
               frontmatter: file.metadata,
               url: file.url,
-              disableRelativeLinks: true,
             },
           },
         };
@@ -108,29 +111,92 @@ export class DocsLoader {
       });
   }
 
-  private extractDocumentation() {
+  private serializeMarkdownFile(
+    file: File,
+    rawContent: any,
+  ): SourceWithOptions {
+    const source: SourceWithOptions = {
+      source: {
+        type: 'md',
+        rawContent,
+        data: {
+          frontmatter: file.metadata,
+          url: file.url,
+          disableRelativeLinks: this.isTrue(
+            file.parameters && file.parameters.disableRelativeLinks,
+          ),
+        },
+      },
+    };
+
+    const fileName = file.url
+      .split('/')
+      .reverse()[0]
+      .replace('.md', '');
+    let frontmatter = source.source.data!.frontmatter;
+
+    if (!frontmatter) {
+      frontmatter = {};
+    }
+
+    if (!frontmatter.title) {
+      frontmatter.title = fileName;
+      if (!frontmatter.type) {
+        frontmatter.type = fileName;
+      }
+    }
+    source.source.data!.frontmatter = frontmatter;
+
+    return source;
+  }
+
+  private extractDocumentation(): File[] {
     const markdownAssets = this.extractAssets(markdownTypes);
 
-    let data =
-      markdownAssets &&
-      markdownAssets.length &&
-      markdownAssets[0] &&
-      markdownAssets[0].files.filter(el => el.url.endsWith('.md'));
+    let data: File[] = [];
+    if (markdownAssets) {
+      markdownAssets.map(asset => {
+        if (asset.files) {
+          const files = asset.files
+            .filter(el => el.url.endsWith('.md'))
+            .map(
+              el =>
+                ({
+                  ...el,
+                  parameters: {
+                    disableRelativeLinks:
+                      asset.metadata && asset.metadata.disableRelativeLinks,
+                  },
+                } as File),
+            );
+
+          data = [...data, ...files];
+        }
+      });
+    }
 
     if (data && this.sortServiceClassDocumentation) {
       data = data.sort((first, sec) => {
-        const firstData = (
-          first.metadata.title || first.metadata.type
-        ).toLowerCase();
-        const secondData = (
-          sec.metadata.title || sec.metadata.type
-        ).toLowerCase();
+        const nameA =
+          first.metadata &&
+          (first.metadata.title || first.metadata.type || '').toLowerCase();
+        const nameB =
+          first.metadata &&
+          (sec.metadata.title || sec.metadata.type || '').toLowerCase();
 
-        return firstData === 'overview'
-          ? -1
-          : secondData === 'overview'
-          ? 1
-          : 0;
+        if (nameA === 'overview') {
+          return -1;
+        }
+        if (nameB === 'overview') {
+          return 1;
+        }
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
       });
     }
 
@@ -157,6 +223,19 @@ export class DocsLoader {
 
   private clear(): void {
     this.sources = [];
+  }
+
+  private isTrue(value: any): boolean {
+    if (!value) {
+      return false;
+    }
+    if (typeof value === 'boolean') {
+      return value;
+    }
+    if (typeof value === 'string') {
+      return value.toLowerCase() === 'true';
+    }
+    return !!value;
   }
 }
 

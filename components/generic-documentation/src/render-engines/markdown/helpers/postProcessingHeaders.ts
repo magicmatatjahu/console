@@ -1,18 +1,13 @@
 import { Source } from '@kyma-project/documentation-component';
 import { plugins } from '@kyma-project/dc-markdown-render-engine';
-import { toKebabCase } from '../../../helpers';
+import { toKebabCase } from '../../../helpers/toKebabCase';
 
 type Header = plugins.Header;
 
-function decrementLevels(headers: Header[], level: number = 0): Header[] {
-  for (const header of headers) {
-    const firstLevel = level ? level : header.level;
-    header.level -= firstLevel;
-    if (firstLevel && header.children && header.children.length) {
-      header.children = decrementLevels(header.children, firstLevel);
-    }
+function hoistingParents(headers: Header[]): Header[] {
+  if (headers.length === 1 && headers[0].children) {
+    return hoistingParents(headers[0].children);
   }
-
   return headers;
 }
 
@@ -42,14 +37,18 @@ export const postProcessingHeaders = (
   headers: Header[],
 ): Header[] => {
   if (!sources.length) {
-    return headers;
+    return hoistingParents(headers);
+  }
+
+  if (headers.length === 1 && !headers[0].children) {
+    return [];
   }
 
   const [types, numberOfTypes] = getTypes(sources);
   if (!types.length) {
-    return decrementLevels(headers, 0);
+    return headers;
   }
-  let processedHeaders: Header[] = [];
+  const processedHeaders: Header[] = [];
 
   for (const type of types) {
     if (numberOfTypes[type] === 1 && headers.find(h => h.title === type)) {
@@ -58,10 +57,14 @@ export const postProcessingHeaders = (
 
     processedHeaders.push({
       title: type,
-      id: toKebabCase(type),
-      level: 0,
+      id: toKebabCase(`${type}-${type}`),
+      level: 'doc-type',
       children: [],
     });
+  }
+
+  if (!processedHeaders.length) {
+    return hoistingParents(headers);
   }
 
   headers.map(h => {
@@ -80,13 +83,13 @@ export const postProcessingHeaders = (
     }
   });
 
-  processedHeaders = processedHeaders.sort((first, sec) =>
-    first.title.toLowerCase() === 'overview'
-      ? -1
-      : sec.title.toLowerCase() === 'overview'
-      ? 1
-      : 0,
-  );
+  const sortedProcessedHeaders: Header[] = [];
+  for (const type of types) {
+    const newHeaders = processedHeaders.find(h => h.title === type);
+    if (newHeaders) {
+      sortedProcessedHeaders.push(newHeaders);
+    }
+  }
 
-  return decrementLevels(processedHeaders, 0);
+  return hoistingParents(sortedProcessedHeaders);
 };

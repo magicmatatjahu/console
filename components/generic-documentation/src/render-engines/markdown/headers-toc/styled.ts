@@ -1,7 +1,17 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Icon } from 'fundamental-react/Icon';
 
 import { media } from '../../../components';
+
+const navNode = (multiple: number) => css`
+  span {
+    right: 5px !important;
+  }
+
+  a {
+    padding-left: ${`${12 + multiple * 12}px`};
+  }
+`;
 
 export const HeadersNavigationsWrapper = styled.div`
   position: relative;
@@ -49,42 +59,86 @@ export const StyledHeadersNavigation = styled.div`
     }
 
     .cms__toc-list-item--level-1 {
-      span {
-        left: 17px !important;
-      }
-
-      a {
-        padding-left: 36px;
-      }
+      ${navNode(0)}
     }
 
     .cms__toc-list-item--level-2 {
-      span {
-        left: 29px !important;
-      }
-
-      a {
-        padding-left: 48px;
-      }
+      ${navNode(1)}
     }
 
     .cms__toc-list-item--level-3 {
-      span {
-        left: 41px !important;
-      }
-
-      a {
-        padding-left: 60px;
-      }
+      ${navNode(2)}
     }
 
     .cms__toc-list-item--level-4 {
-      span {
-        left: 53px !important;
+      ${navNode(3)}
+    }
+
+    .cms__toc-list-item--level-5 {
+      ${navNode(4)}
+    }
+
+    .cms__toc-list-item--level-6 {
+      ${navNode(5)}
+    }
+
+    .cms__toc-list-item--level-doc-title {
+      ${navNode(0)}
+
+      .cms__toc-list-item--level-1 {
+        ${navNode(1)}
       }
 
-      a {
-        padding-left: 72px;
+      .cms__toc-list-item--level-2 {
+        ${navNode(2)}
+      }
+
+      .cms__toc-list-item--level-3 {
+        ${navNode(3)}
+      }
+
+      .cms__toc-list-item--level-4 {
+        ${navNode(4)}
+      }
+
+      .cms__toc-list-item--level-5 {
+        ${navNode(5)}
+      }
+
+      .cms__toc-list-item--level-6 {
+        ${navNode(6)}
+      }
+    }
+
+    .cms__toc-list-item--level-doc-type {
+      ${navNode(0)}
+
+      .cms__toc-list-item--level-doc-title {
+        ${navNode(1)}
+      }
+
+      .cms__toc-list-item--level-1 {
+        ${navNode(2)}
+      }
+
+      .cms__toc-list-item--level-2 {
+        ${navNode(3)}
+      }
+
+      .cms__toc-list-item--level-3 {
+        ${navNode(4)}
+      }
+
+      .cms__toc-list-item--level-4 {
+        ${navNode(5)}
+      }
+
+      .cms__toc-list-item--level-5 {
+        ${navNode(6)}
+      }
+
+      .cms__toc-list-item--level-6 {
+        ${navNode(7)}
       }
     }
 
@@ -107,7 +161,7 @@ export const CollapseArrow = styled(Icon)`
     width: 18px;
     ${({ root = false }: CollapseArrowProps) =>
       root ? `margin-left: 5px;` : ''}
-    top: 1px;
+    top: 2px;
     text-align: center;
     cursor: pointer;
     color: #0b74de;

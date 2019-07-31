@@ -109,8 +109,8 @@ export const ERRORS = {
   URL: {
     ALREADY_EXISTS: 'This URL already exists in the configuration.',
     STARTS_WITH_HTTP: {
-      DEVELOPMENT_MODE: 'URL must start with the http(s) protocol.',
-      NOT_DEVELOPMENT_MODE: 'URL must start with the https protocol.',
+      DEVELOPMENT_MODE: 'URL must start with the http(s) protocol or git:: prefix.',
+      NOT_DEVELOPMENT_MODE: 'URL must start with the https protocol or git:: prefix.',
     },
     YAML_EXTENSION: 'URL must have .yaml or .yml extension.',
     RESOURCE_NOT_EXISTS: "URL doesn't exist.",

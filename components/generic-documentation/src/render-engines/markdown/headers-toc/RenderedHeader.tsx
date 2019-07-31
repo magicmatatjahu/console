@@ -14,16 +14,26 @@ const createModifierClass = (modifier: string, element?: string) =>
     ? `${CLASS_NAME_PREFIX}${element ? `__${element}` : ''}--${modifier}`
     : '';
 
+const sumNumberOfHeaders = (headers: Header[]): number => {
+  let sum: number = headers.length;
+  for (const header of headers) {
+    sum += sumNumberOfHeaders(header.children || []);
+  }
+  return sum;
+};
+
 interface HeaderItemProps {
   header: Header;
   className?: string;
   activeAnchors?: ActiveAnchors;
+  collapseAlways: boolean;
 }
 
 const HeaderItem: React.FunctionComponent<HeaderItemProps> = ({
   header,
   className,
   activeAnchors,
+  collapseAlways = false,
 }) => {
   const [collapse, setCollapse] = useState<boolean>(false);
   const showNode =
@@ -38,7 +48,7 @@ const HeaderItem: React.FunctionComponent<HeaderItemProps> = ({
         `${className}-list-item`,
       )}`}
     >
-      {header.children ? (
+      {header.children && !collapseAlways ? (
         <CollapseArrow
           root={Boolean(!header.level) ? 1 : 0}
           size="s"
@@ -55,7 +65,7 @@ const HeaderItem: React.FunctionComponent<HeaderItemProps> = ({
           headers={header.children}
           className={className ? className : ''}
           activeAnchors={activeAnchors}
-          showNode={showNode || collapse}
+          showNode={collapseAlways || showNode || collapse}
         />
       )}
     </li>
@@ -88,12 +98,14 @@ export const RenderedHeader: React.FunctionComponent<RenderedHeaderProps> = ({
     activeAnchors = aa;
   }
 
+  const collapseAlways: boolean = !(sumNumberOfHeaders(headers) > 15);
   const anchorsList = headers.map(header => (
     <HeaderItem
       header={header}
       className={className}
       key={`${className}-list-item-${header.id}`}
       activeAnchors={activeAnchors}
+      collapseAlways={collapseAlways}
     />
   ));
 

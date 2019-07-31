@@ -6,6 +6,7 @@ export const ContentUIWrapper = styled.div`
 
   &&& {
     .grid-container {
+      margin-left: 295px;
       padding: 15px;
     }
   }
@@ -26,8 +27,12 @@ export const CatalogUIWrapper = styled.div`
 
     .cms__tabs-content {
       margin: 32px;
-      background: #fff;
       border-radius: 4px;
+
+      .custom-markdown-styling {
+        background: #fff;
+        border-radius: 4px;
+      }
     }
 
     .cms__tab {

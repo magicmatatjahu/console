@@ -6,12 +6,16 @@ export interface ServiceClass {
 
 // Asset Store
 export interface Metadata {
+  disableRelativeLinks?: boolean;
   [key: string]: any;
 }
 
 export interface File {
   url: string;
   metadata: Metadata;
+  parameters?: {
+    disableRelativeLinks?: boolean;
+  };
 }
 
 export interface ClusterAsset {

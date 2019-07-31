@@ -14,14 +14,15 @@ const Renderer: React.FunctionComponent<SingleRendererComponent> = ({
     source.data && source.data.frontmatter && source.data.frontmatter.title;
   let type =
     source.data && source.data.frontmatter && source.data.frontmatter.type;
-  const id = toKebabCase(`${headingPrefix(source)}-${title}`);
 
   type = type || title;
-  const kebabCasedType = toKebabCase(type);
+  const kebabCasedType = toKebabCase(`${type}-${type}`);
 
   return (
     <StyledMarkdown id={kebabCasedType}>
-      {title && <Header id={id}>{title}</Header>}
+      {title && (
+        <Header id={toKebabCase(headingPrefix(source))}>{title}</Header>
+      )}
       {renderedContent}
     </StyledMarkdown>
   );

@@ -4,7 +4,7 @@ import {
   MarkdownRenderEngineOptions,
   MarkdownParserPluginReturnType,
 } from '@kyma-project/dc-markdown-render-engine';
-import { InlineHelp } from 'fundamental-react/InlineHelp';
+import { Tooltip } from '../../components';
 
 const GreyedText = styled.div`
   display: inline;
@@ -39,13 +39,16 @@ export const disabledInternalLinkParser = (
     ) {
       return null;
     }
-    const content = 'Placeholder';
+    const content = 'Relative links is disabled';
 
     return (
-      <GreyedText>
-        <span className="disabled-internal-link">{node.children[0].data}</span>
-        <InlineHelp placement="right" text={content} />
-      </GreyedText>
+      <Tooltip content={content}>
+        <GreyedText>
+          <span className="disabled-internal-link">
+            {node.children[0].data}
+          </span>
+        </GreyedText>
+      </Tooltip>
     );
   },
 });

@@ -19,7 +19,7 @@ import {
 import { loader, ClusterDocsTopic, DocsTopic } from './loader';
 import {
   headingPrefix,
-  customNodes,
+  customFirstNode,
   disableClickEventFromSwagger,
 } from './helpers';
 
@@ -30,7 +30,7 @@ const PLUGINS: Plugins = [
     plugin: markdownPlugins.headersExtractorPlugin,
     options: {
       headerPrefix: headingPrefix,
-      customNodes,
+      customFirstNode,
     },
   },
   markdownPlugins.tabsMutationPlugin,
