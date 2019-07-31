@@ -6,14 +6,25 @@ import { ConfigurationsService } from './index';
 import { HELM_BROKER_IS_DEVELOPMENT_MODE, ERRORS } from '../constants';
 const URL_ERRORS = ERRORS.URL;
 
-const HTTP_PROTOCOL = "http://";
-const HTTPS_PROTOCOL = "https://";
-const GIT_PREFIX = "git::";
-const GITHUB_PREFIX = "github.com/";
-const BITBUCKET_PREFIX = "bitbucket.org/";
+const HTTP_PROTOCOL = 'http://';
+const HTTPS_PROTOCOL = 'https://';
+const GIT_PREFIX = 'git::';
+const GITHUB_PREFIX = 'github.com/';
+const BITBUCKET_PREFIX = 'bitbucket.org/';
 
-const DEVELOPMENT_MODE_PREFIXES = [HTTP_PROTOCOL, HTTPS_PROTOCOL, GIT_PREFIX, GITHUB_PREFIX, BITBUCKET_PREFIX];
-const PRODUCTION_MODE_PREFIXES = [HTTPS_PROTOCOL, GIT_PREFIX, GITHUB_PREFIX, BITBUCKET_PREFIX];
+const DEVELOPMENT_MODE_PREFIXES = [
+  HTTP_PROTOCOL,
+  HTTPS_PROTOCOL,
+  GIT_PREFIX,
+  GITHUB_PREFIX,
+  BITBUCKET_PREFIX,
+];
+const PRODUCTION_MODE_PREFIXES = [
+  HTTPS_PROTOCOL,
+  GIT_PREFIX,
+  GITHUB_PREFIX,
+  BITBUCKET_PREFIX,
+];
 
 const useUrls = () => {
   const { originalConfigs } = useContext(ConfigurationsService);

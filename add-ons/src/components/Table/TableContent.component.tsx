@@ -98,11 +98,13 @@ const TableContentComponent: React.FunctionComponent<TableContentProps> = ({
                   {config.urls.map(url => (
                     <TreeView.Row key={url}>
                       <TreeView.Col className="add-ons-url">
-                        {url.startsWith("http") ? (
+                        {url.startsWith('http') ? (
                           <a href={url} target="_blank">
                             {url}
                           </a>
-                        ): url}
+                        ) : (
+                          url
+                        )}
                         <DeleteUrlModal
                           configurationName={config.name}
                           url={url}

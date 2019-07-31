@@ -109,8 +109,10 @@ export const ERRORS = {
   URL: {
     ALREADY_EXISTS: 'This URL already exists in the configuration.',
     STARTS_WITH_HTTP: {
-      DEVELOPMENT_MODE: 'URL must start with the http(s) protocol or one of the following prefixes: git::, github.com/, bitbucket.org/',
-      PRODUCTION_MODE: 'URL must start with the https protocol or one of the following prefixes: git::, github.com/, bitbucket.org/',
+      DEVELOPMENT_MODE:
+        'URL must start with the http(s) protocol or one of the following prefixes: git::, github.com/, bitbucket.org/',
+      PRODUCTION_MODE:
+        'URL must start with the https protocol or one of the following prefixes: git::, github.com/, bitbucket.org/',
     },
     YAML_EXTENSION: 'URL must have .yaml or .yml extension.',
     RESOURCE_NOT_EXISTS: "URL doesn't exist.",
