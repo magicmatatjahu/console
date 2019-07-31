@@ -33,7 +33,7 @@ const useUrls = () => {
       }
     } else {
       if (!PRODUCTION_MODE_PREFIXES.some(prefix => url.startsWith(prefix))) {
-        return URL_ERRORS.STARTS_WITH_HTTP.NOT_DEVELOPMENT_MODE;
+        return URL_ERRORS.STARTS_WITH_HTTP.PRODUCTION_MODE;
       }
     }
     return '';
