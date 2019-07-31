@@ -6,8 +6,6 @@ export const checkIsInView = (
   const bounding = element.getBoundingClientRect();
   const current = ref && ref.current;
 
-  console.log(current);
-
   if (!current) {
     return;
   }
