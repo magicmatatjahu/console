@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 
-export const TooltipContainer = styled.div<any>`
+interface TooltipContainerProps {
+  minWidth?: string;
+  maxWidth?: string;
+  type?: string;
+  light?: boolean;
+  orientation?: string;
+  show?: boolean;
+}
+
+export const TooltipContainer = styled.div<TooltipContainerProps>`
   position: absolute;
   box-sizing: border-box;
   z-index: 99;
@@ -85,7 +94,12 @@ export const TooltipContainer = styled.div<any>`
   }
 `;
 
-export const TooltipWrapper = styled.div<any>`
+interface TooltipWrapperProps {
+  wrapperStyles?: string;
+  type?: string;
+}
+
+export const TooltipWrapper = styled.div<TooltipWrapperProps>`
   font-family: '72';
   position: relative;
   display: inline-block;
@@ -98,7 +112,11 @@ export const TooltipWrapper = styled.div<any>`
   }
 `;
 
-export const TooltipContent = styled.div<any>`
+interface TooltipContentProps {
+  type?: string;
+}
+
+export const TooltipContent = styled.div<TooltipContentProps>`
   display: block;
   font-weight: normal;
   font-style: normal;
@@ -109,7 +127,11 @@ export const TooltipContent = styled.div<any>`
   padding: ${props => (props.type === 'default' ? '6px 10px' : '12px 14px')};
 `;
 
-export const TooltipHeader = styled.div<any>`
+interface TooltipHeaderProps {
+  type?: string;
+}
+
+export const TooltipHeader = styled.div<TooltipHeaderProps>`
   border-bottom: 1px solid rgba(204, 204, 204, 0.3);
   font-weight: bold;
   text-align: left;

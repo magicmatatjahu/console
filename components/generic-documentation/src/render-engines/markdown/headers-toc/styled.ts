@@ -5,7 +5,7 @@ import { media } from '../../../components';
 
 const navNode = (multiple: number) => css`
   span {
-    right: 5px !important;
+    right: 5px;
   }
 
   a {
@@ -18,6 +18,7 @@ export const HeadersNavigationsWrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 100vh;
+  height: 100%;
   border-width: 1px;
   border-style: solid;
   border-color: rgba(151, 151, 151, 0.26);
@@ -30,10 +31,10 @@ export const HeadersNavigationsWrapper = styled.div`
 `;
 
 export const StyledHeadersNavigation = styled.div`
-  border-radius: 4px;
-  background-color: rgb(255, 255, 255);
-
   &&& {
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+
     .cms__toc-list-item {
       width: 100%;
       max-width: 100%;
@@ -55,6 +56,14 @@ export const StyledHeadersNavigation = styled.div`
 
       ul {
         display: none;
+      }
+    }
+
+    .cms__toc-list-item--active {
+      > a {
+        color: #0b74de;
+        font-weight: bold;
+        border-left: 2px solid #0b74de;
       }
     }
 

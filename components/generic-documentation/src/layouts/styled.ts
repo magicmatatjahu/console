@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { tabsStyling } from '../renderers/styled';
 
 export const ContentUIWrapper = styled.div`
-  width: 100%;
-
   &&& {
+    width: 100%;
+
     .grid-container {
       margin-left: 295px;
       padding: 15px;
@@ -13,9 +13,9 @@ export const ContentUIWrapper = styled.div`
 `;
 
 export const CatalogUIWrapper = styled.div`
-  width: 100%;
-
   &&& {
+    width: 100%;
+
     ${tabsStyling}
 
     .cms__tabs {
@@ -59,9 +59,9 @@ export const CatalogUIWrapper = styled.div`
 `;
 
 export const InstancesUIWrapper = styled.div`
-  width: 100%;
-
   &&&&&&&& {
+    width: 100%;
+
     ${tabsStyling}
 
     .cms__tabs {

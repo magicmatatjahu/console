@@ -19,6 +19,6 @@ function fn(str: string, disableRelativeLinks: boolean): string {
 
 export const disableInternalLinks = ({ source }: MutationPluginArgs): string =>
   fn(
-    (source.content || source.rawContent) as string,
+    source.content || source.rawContent,
     Boolean(source.data && source.data.disableRelativeLinks),
   );

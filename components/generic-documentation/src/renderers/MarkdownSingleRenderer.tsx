@@ -3,7 +3,8 @@ import {
   SingleRenderer,
   SingleRendererComponent,
 } from '@kyma-project/documentation-component';
-import { headingPrefix, toKebabCase } from '../helpers';
+import { toKebabCase } from '../helpers';
+import { headingPrefix } from '../render-engines/markdown/helpers';
 import { StyledMarkdown, Header } from './styled';
 
 const Renderer: React.FunctionComponent<SingleRendererComponent> = ({

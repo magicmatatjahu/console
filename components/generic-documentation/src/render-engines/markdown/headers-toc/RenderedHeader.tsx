@@ -46,7 +46,9 @@ const HeaderItem: React.FunctionComponent<HeaderItemProps> = ({
       )} ${createModifierClass(
         `level-${header.level}`,
         `${className}-list-item`,
-      )}`}
+      )} ${
+        showNode ? createElementClass(`${className}-list-item--active`) : ``
+      }`}
     >
       {header.children && !collapseAlways ? (
         <CollapseArrow
@@ -112,7 +114,7 @@ export const RenderedHeader: React.FunctionComponent<RenderedHeaderProps> = ({
   return (
     <ul
       className={
-        showNode ? createElementClass(`${className}-list-item--show`) : ''
+        showNode ? `${createElementClass(`${className}-list-item--show`)}` : ''
       }
     >
       {anchorsList}

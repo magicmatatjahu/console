@@ -4,9 +4,9 @@ import { toKebabCase } from '../../../helpers/toKebabCase';
 
 type Header = plugins.Header;
 
-function hoistingParents(headers: Header[]): Header[] {
+function hoistParents(headers: Header[]): Header[] {
   if (headers.length === 1 && headers[0].children) {
-    return hoistingParents(headers[0].children);
+    return hoistParents(headers[0].children);
   }
   return headers;
 }
@@ -37,7 +37,7 @@ export const postProcessingHeaders = (
   headers: Header[],
 ): Header[] => {
   if (!sources.length) {
-    return hoistingParents(headers);
+    return hoistParents(headers);
   }
 
   if (headers.length === 1 && !headers[0].children) {
@@ -64,7 +64,7 @@ export const postProcessingHeaders = (
   }
 
   if (!processedHeaders.length) {
-    return hoistingParents(headers);
+    return hoistParents(headers);
   }
 
   headers.map(h => {
@@ -91,5 +91,5 @@ export const postProcessingHeaders = (
     }
   }
 
-  return hoistingParents(sortedProcessedHeaders);
+  return hoistParents(sortedProcessedHeaders);
 };

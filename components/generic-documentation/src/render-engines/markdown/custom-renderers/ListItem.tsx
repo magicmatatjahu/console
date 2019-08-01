@@ -17,17 +17,17 @@ export const ListItem: React.FunctionComponent<ListItemProps> = ({
     newChildren.props.element.props &&
     newChildren.props.element.props.children;
 
-  let isStarAppear = false;
+  let doesStarAppear = false;
   if (newChildren && Array.isArray(newChildren)) {
     newChildren = React.Children.map(newChildren, child => {
       if (
         typeof child === 'string' &&
         (child.trim() === '*' || child.trim() === '-')
       ) {
-        if (isStarAppear) {
+        if (doesStarAppear) {
           return ', ';
         } else {
-          isStarAppear = true;
+          doesStarAppear = true;
           return ': ';
         }
       }
@@ -37,7 +37,7 @@ export const ListItem: React.FunctionComponent<ListItemProps> = ({
 
   return (
     <li className={'cms__list-item'} key={index}>
-      {isStarAppear ? newChildren : children}
+      {doesStarAppear ? newChildren : children}
     </li>
   );
 };

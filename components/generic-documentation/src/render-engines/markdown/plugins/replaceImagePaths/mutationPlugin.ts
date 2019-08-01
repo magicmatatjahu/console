@@ -7,13 +7,13 @@ export function replaceImagePaths({
   options,
 }: MutationPluginArgs): string {
   if (!source.data || !source.data.url) {
-    return source.rawContent as string;
+    return source.rawContent;
   }
   const docsUrl = source.data.url.substring(
     0,
     source.data.url.lastIndexOf('/'),
   );
-  const content = (source.content || source.rawContent) as string;
+  const content = source.content || source.rawContent;
   if (content.search(ASSETS_REGEXP) !== -1) {
     return content.replace(ASSETS_REGEXP, `](${docsUrl}/assets`);
   }

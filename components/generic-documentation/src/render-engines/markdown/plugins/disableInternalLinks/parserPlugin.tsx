@@ -4,7 +4,10 @@ import {
   MarkdownRenderEngineOptions,
   MarkdownParserPluginReturnType,
 } from '@kyma-project/dc-markdown-render-engine';
-import { Tooltip } from '../../components';
+
+import { Tooltip } from '../../../../components';
+
+import { RELATIVE_LINKS_DISABLED } from '../../../../constants';
 
 const GreyedText = styled.div`
   display: inline;
@@ -39,10 +42,9 @@ export const disabledInternalLinkParser = (
     ) {
       return null;
     }
-    const content = 'Relative links is disabled';
 
     return (
-      <Tooltip content={content}>
+      <Tooltip content={RELATIVE_LINKS_DISABLED}>
         <GreyedText>
           <span className="disabled-internal-link">
             {node.children[0].data}

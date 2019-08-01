@@ -15,13 +15,13 @@ import {
   disableInternalLinksMutationPlugin,
   replaceImagePathsMutationPlugin,
   removeHrefFromMarkdown,
-} from './plugins';
+} from './render-engines/markdown/plugins';
 import { loader, ClusterDocsTopic, DocsTopic } from './loader';
+import { disableClickEventFromSwagger } from './helpers';
 import {
   headingPrefix,
   customFirstNode,
-  disableClickEventFromSwagger,
-} from './helpers';
+} from './render-engines/markdown/helpers';
 
 const PLUGINS: Plugins = [
   markdownPlugins.frontmatterMutationPlugin,
@@ -101,7 +101,7 @@ export const GenericComponent: React.FunctionComponent<
       setSources(loader.getSources(layout !== LayoutType.CONTENT_UI));
     };
     fetchAssets();
-  }, [, docsTopic]);
+  }, [docsTopic]);
 
   if (!sources || !sources.length) {
     return null;

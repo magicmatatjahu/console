@@ -7,7 +7,24 @@ import {
   TooltipHeader,
 } from './styled';
 
-export class Tooltip extends React.Component<any, any> {
+interface TooltipProps {
+  title?: any;
+  content: any;
+  minWidth?: string;
+  maxWidth?: string;
+  type?: string;
+  showTooltipTimeout?: number;
+  hideTooltipTimeout?: number;
+  orientation?: string;
+  wrapperStyles?: string;
+}
+
+interface TooltipState {
+  visibleTooltip: boolean;
+  showTooltip: boolean;
+}
+
+export class Tooltip extends React.Component<TooltipProps, TooltipState> {
   static defaultProps = {
     orientation: 'top',
   };
