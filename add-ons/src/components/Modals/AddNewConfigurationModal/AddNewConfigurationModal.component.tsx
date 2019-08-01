@@ -82,12 +82,12 @@ const AddNewConfigurationModalComponent: React.FunctionComponent<Props> = ({
         ))
       : null;
 
-  const disabledConfirm =
+  let disabledConfirm =
     !urls.length ||
     nameField.error ||
     !nameField.value ||
     labelsField.error ||
-    urlField.error;
+    urlField.error;  
 
   return (
     <Modal
