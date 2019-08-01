@@ -102,7 +102,11 @@ export const InstancesUIWrapper = styled.div`
 
     .custom-odata-styling {
       button {
-        margin: 16px;
+        margin: 16px 0;
+      }
+
+      > section {
+        padding: 0 16px;
       }
     }
 
