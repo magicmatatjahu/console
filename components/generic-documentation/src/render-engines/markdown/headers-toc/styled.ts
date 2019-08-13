@@ -1,7 +1,6 @@
-import styled, { css } from 'styled-components';
-import { Icon } from 'fundamental-react/Icon';
-
-import { media } from '../../../components';
+import styled, { css } from "styled-components";
+import { media } from "@kyma-project/components";
+import { Icon } from "fundamental-react/Icon";
 
 const navNode = (multiple: number) => css`
   span {
@@ -169,7 +168,7 @@ export const CollapseArrow = styled(Icon)`
     position: absolute;
     width: 18px;
     ${({ root = false }: CollapseArrowProps) =>
-      root ? `margin-left: 5px;` : ''}
+      root ? `margin-left: 5px;` : ""}
     top: 2px;
     text-align: center;
     cursor: pointer;
@@ -179,7 +178,7 @@ export const CollapseArrow = styled(Icon)`
       line-height: 1;
       transition: 0.3s ease;
       ${({ open = false }: CollapseArrowProps) =>
-        open && 'transform: rotate(90deg);'};
+        open && "transform: rotate(90deg);"};
     }
   }
 `;

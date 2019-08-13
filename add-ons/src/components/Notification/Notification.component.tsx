@@ -1,7 +1,7 @@
-import React from 'react';
-import { Notification } from '@kyma-project/react-components';
+import React from "react";
+import { Notification } from "@kyma-project/react-components";
 
-import { Notification as NotificationType } from '../../types';
+import { Notification as NotificationType } from "../../types";
 
 interface Props {
   notification: NotificationType;

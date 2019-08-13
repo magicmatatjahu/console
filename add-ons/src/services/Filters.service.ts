@@ -1,22 +1,22 @@
-import { useState, useEffect, useReducer } from 'react';
-import createContainer from 'constate';
+import { useReducer } from "react";
+import createContainer from "constate";
 
 import {
   Filters,
   ActiveFiltersAction,
   ActiveFiltersActionType,
-} from '../types';
+} from "../types";
 
 const useFilters = () => {
   const initialActiveFilters: Filters = {
-    search: '',
+    search: "",
     labels: {},
   };
 
   function activeFiltersReducer(state: Filters, action: ActiveFiltersAction) {
     switch (action.type) {
       case ActiveFiltersActionType.SET_SEARCH:
-        return { ...state, search: action.payload };
+        return { ...state, search: action.payload.value };
       case ActiveFiltersActionType.SET_LABEL:
         return {
           ...state,
@@ -54,7 +54,10 @@ const useFilters = () => {
   const setSearchFilter = (search: string) => {
     dispatchActiveFilters({
       type: ActiveFiltersActionType.SET_SEARCH,
-      payload: search,
+      payload: {
+        key: "search",
+        value: search,
+      },
     });
   };
 
@@ -83,7 +86,7 @@ const useFilters = () => {
   const removeAllFiltersLabels = () => {
     dispatchActiveFilters({
       type: ActiveFiltersActionType.REMOVE_ALL_FILTERS,
-      payload: { key: '', value: '' },
+      payload: { key: "", value: "" },
     });
   };
 

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Content, Renderers } from '@kyma-project/documentation-component';
+import React from "react";
+import { Content, Renderers } from "@kyma-project/documentation-component";
 
-import { GroupRenderer } from '../renderers';
-import { CatalogUIWrapper } from './styled';
+import { GroupRenderer } from "../renderers";
+import { CatalogUIWrapper } from "./styled";
 
 export interface CatalogUILayoutProps {
   renderers: Renderers;

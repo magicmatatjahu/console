@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export interface ListItemProps {
   checked: boolean;
@@ -21,14 +21,14 @@ export const ListItem: React.FunctionComponent<ListItemProps> = ({
   if (newChildren && Array.isArray(newChildren)) {
     newChildren = React.Children.map(newChildren, child => {
       if (
-        typeof child === 'string' &&
-        (child.trim() === '*' || child.trim() === '-')
+        typeof child === "string" &&
+        (child.trim() === "*" || child.trim() === "-")
       ) {
         if (doesStarAppear) {
-          return ', ';
+          return ", ";
         } else {
           doesStarAppear = true;
-          return ': ';
+          return ": ";
         }
       }
       return child;
@@ -36,7 +36,7 @@ export const ListItem: React.FunctionComponent<ListItemProps> = ({
   }
 
   return (
-    <li className={'cms__list-item'} key={index}>
+    <li className={"cms__list-item"} key={index}>
       {doesStarAppear ? newChildren : children}
     </li>
   );

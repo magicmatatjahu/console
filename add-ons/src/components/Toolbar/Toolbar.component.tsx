@@ -1,10 +1,9 @@
-import React from 'react';
-import { ActionBar, Button } from 'fundamental-react';
+import React from "react";
+import { ActionBar } from "fundamental-react";
 
-import AddNewConfigurationModal from '../Modals/AddNewConfigurationModal/AddNewConfigurationModal.container';
+import AddNewConfigurationModal from "../Modals/AddNewConfigurationModal/AddNewConfigurationModal.container";
 
-import { CORE } from '../../constants';
-
+import { CORE } from "../../constants";
 import appInitializer from '../../core/app-initializer';
 import { StyledActionBar } from './styled';
 

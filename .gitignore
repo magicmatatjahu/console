@@ -4,7 +4,8 @@
 .env.development.local
 .env.test.local
 .env.production.local
-node_modules
+
+**/node_modules
 .idea/
 .npmrc
 
@@ -14,6 +15,7 @@ yarn-debug.log*
 yarn-error.log*
 .idea
 .vscode
+<<<<<<< HEAD
 
 **/lib/**/*
 
@@ -22,3 +24,8 @@ yarn-error.log*
 catalog/build
 instances/build
 brokers/build
+=======
+**/dist
+**/coverage
+**/build
+>>>>>>> Create gulpfile and rewrite content to ts

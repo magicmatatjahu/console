@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 import {
   TooltipWrapper,
   TooltipContainer,
   TooltipContent,
   TooltipHeader,
-} from './styled';
+} from "./styled";
 
 interface TooltipProps {
   title?: any;
@@ -26,7 +26,7 @@ interface TooltipState {
 
 export class Tooltip extends React.Component<TooltipProps, TooltipState> {
   static defaultProps = {
-    orientation: 'top',
+    orientation: "top",
   };
 
   constructor(props: any) {
@@ -43,7 +43,7 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 
   handleShowTooltip = () => {
     const { showTooltipTimeout } = this.props;
-    if (typeof this.setVisibility === 'function' && !this.state.showTooltip) {
+    if (typeof this.setVisibility === "function" && !this.state.showTooltip) {
       setTimeout(
         () => this.setVisibility(true),
         showTooltipTimeout ? showTooltipTimeout : 100,
@@ -53,7 +53,7 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 
   handleHideTooltip = () => {
     const { hideTooltipTimeout } = this.props;
-    if (typeof this.setVisibility === 'function' && !this.state.showTooltip) {
+    if (typeof this.setVisibility === "function" && !this.state.showTooltip) {
       setTimeout(
         () => this.setVisibility(false),
         hideTooltipTimeout ? hideTooltipTimeout : 100,
@@ -78,7 +78,7 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
       <TooltipWrapper
         onMouseEnter={this.handleShowTooltip}
         onMouseLeave={this.handleHideTooltip}
-        type={type === undefined ? 'default' : type}
+        type={type === undefined ? "default" : type}
         wrapperStyles={wrapperStyles}
       >
         {children}
@@ -86,16 +86,16 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
           <TooltipContainer
             minWidth={minWidth}
             maxWidth={maxWidth}
-            type={type === undefined ? 'default' : type}
+            type={type === undefined ? "default" : type}
             show={showTooltip}
             orientation={orientation}
           >
             {title && (
-              <TooltipHeader type={type === undefined ? 'default' : type}>
+              <TooltipHeader type={type === undefined ? "default" : type}>
                 {title}
               </TooltipHeader>
             )}
-            <TooltipContent type={type === undefined ? 'default' : type}>
+            <TooltipContent type={type === undefined ? "default" : type}>
               {content}
             </TooltipContent>
           </TooltipContainer>

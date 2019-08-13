@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import CopyToClipboard from 'react-copy-to-clipboard';
-import { Icon, Tooltip } from '@kyma-project/react-components';
+import React, { Component } from "react";
+import styled from "styled-components";
+import CopyToClipboard from "react-copy-to-clipboard";
+import { Icon, Tooltip } from "@kyma-project/react-components";
 
 const CopyButtonWrapper = styled.div`
   position: absolute;
@@ -85,16 +85,16 @@ export class CopyButton extends Component<CopyButtonProps, CopyButtonState> {
   }
 
   render() {
-    const { code, className = '' } = this.props;
+    const { code, className = "" } = this.props;
     const showConfirmation = this.state.showConfirmation;
-    const tooltipDescription = 'Click to copy';
-    const copyPopupDescription = 'Copied to clipboard';
+    const tooltipDescription = "Click to copy";
+    const copyPopupDescription = "Copied to clipboard";
     if (showConfirmation) {
       this.scheduleHideConfirmation();
     }
     return (
       <CopyButtonWrapper className={className}>
-        <Tooltip content={tooltipDescription} orientation={'bottom'}>
+        <Tooltip content={tooltipDescription} orientation={"bottom"}>
           <CopyToClipboard
             text={code}
             onCopy={() => {

@@ -3,9 +3,12 @@ import createContainer from 'constate';
 import { FetchResult } from 'apollo-link';
 import {
   useMutation,
-  MutationFn,
-  BaseMutationHookOptions,
-} from 'react-apollo-hooks';
+  MutationHookOptions,
+} from '@apollo/react-hooks';
+import {
+  ExecutionResult,
+  MutationFunctionOptions,
+} from "@apollo/react-common";
 
 import appInitializer from '../core/app-initializer';
 import { ConfigurationLabels } from '../types';
@@ -200,11 +203,13 @@ interface ResyncAddonsConfigurationVariables {
   namespace?: string;
 }
 
+type MutationFn<TData, TVariables> = (options?: MutationFunctionOptions<TData, TVariables>) => Promise<void | ExecutionResult<TData>>;
+ 
 const mutationFactory = (namespace?: string) => <TData, TVariables>(
   fn: MutationFn<TData, TVariables>,
 ) => (
-  options?: BaseMutationHookOptions<TData, TVariables>,
-): Promise<FetchResult<TData>> => {
+  options?: MutationHookOptions<TData, TVariables>,
+): Promise<void | ExecutionResult<TData>> => {
   const opts = options || {};
 
   let variables = options && options.variables;

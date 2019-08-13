@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
-import contentTypeSelect from './assets/content-type-select-background-image.png';
-import schemesSelect from './assets/schemes-background-image.png';
-import responsesSelect from './assets/responsesSelect.png';
+import styled, { css } from "styled-components";
+import contentTypeSelect from "./assets/content-type-select-background-image.png";
+import schemesSelect from "./assets/schemes-background-image.png";
+import responsesSelect from "./assets/responsesSelect.png";
 
 const summaries = css`
   && {
@@ -10,7 +10,7 @@ const summaries = css`
       padding: 4px 16px;
       min-height: 48px;
       & > span.opblock-summary-path > a {
-        font-family: '72';
+        font-family: "72";
         font-size: 14px;
         font-weight: bold;
         font-style: normal;
@@ -20,7 +20,7 @@ const summaries = css`
         color: #32363a;
       }
       & > div.opblock-summary-description {
-        font-family: '72';
+        font-family: "72";
         font-size: 14px;
         font-weight: normal;
         font-style: normal;
@@ -85,7 +85,7 @@ const tagHeader = css`
   h4.opblock-tag {
     border-bottom: none;
     a.nostyle {
-      font-family: '72';
+      font-family: "72";
       font-size: 14px;
       font-weight: bold;
       font-style: normal;
@@ -96,7 +96,7 @@ const tagHeader = css`
       text-transform: capitalize;
     }
     small {
-      font-family: '72';
+      font-family: "72";
       font-size: 14px;
       font-weight: normal;
       font-style: normal;
@@ -110,7 +110,7 @@ const tagHeader = css`
     }
   }
 
-  label[for='schemes'] > select {
+  label[for="schemes"] > select {
     min-width: 100px;
     background-image: url(${schemesSelect});
     background-size: 25px 25px;
@@ -125,7 +125,7 @@ const sectionHeader = css`
     border-top: solid 1px rgba(151, 151, 151, 0.26);
     background-color: #fafafa;
     h4.opblock-title {
-      font-family: '72';
+      font-family: "72";
       font-size: 14px;
       font-weight: bold;
       font-style: normal;
@@ -138,7 +138,7 @@ const sectionHeader = css`
     label {
       div.content-type-wrapper.execute-content-type > select {
         min-width: unset;
-        font-family: '72';
+        font-family: "72";
         font-size: 14px;
         line-height: 1.43;
         letter-spacing: normal;
@@ -152,7 +152,7 @@ const sectionHeader = css`
       }
 
       span {
-        font-family: '72';
+        font-family: "72";
         font-size: 14px;
         font-weight: normal;
         font-style: normal;
@@ -171,7 +171,7 @@ const paramOptions = css`
       display: inline-block;
       margin-top: 8px;
       margin-bottom: 8px;
-      font-family: '72';
+      font-family: "72";
       font-size: 14px;
       font-weight: normal;
       font-style: normal;
@@ -184,7 +184,7 @@ const paramOptions = css`
     }
     div.body-param-content-type > select.content-type {
       width: unset;
-      font-family: '72';
+      font-family: "72";
       font-size: 14px;
       font-weight: normal;
       font-style: normal;
@@ -224,7 +224,7 @@ const modelTableInnerStyling = css`
         display: none;
       }
       a {
-        font-family: '72';
+        font-family: "72";
         font-size: 14px;
 
         line-height: 1.29;
@@ -263,7 +263,7 @@ const paramTable = css`
           padding: 13px 16px;
           border: none;
           opacity: 0.6;
-          font-family: '72';
+          font-family: "72";
           font-size: 11px;
           line-height: 1.18;
           color: #32363a;
@@ -274,7 +274,7 @@ const paramTable = css`
         td {
           div.parameter__name {
             padding-left: 15px;
-            font-family: '72';
+            font-family: "72";
             font-size: 14px;
             font-weight: bold;
             font-style: normal;
@@ -285,7 +285,7 @@ const paramTable = css`
           }
 
           div.parameter__type {
-            font-family: '72';
+            font-family: "72";
             font-size: 14px;
             font-weight: normal;
             font-style: normal;
@@ -304,7 +304,7 @@ const paramTable = css`
     }
 
     td.col.parameters-col_description div.markdown {
-      font-family: '72';
+      font-family: "72";
       font-size: 14px;
 
       line-height: 1.29;
@@ -356,7 +356,7 @@ const responsesTable = css`
             border-bottom: none;
             padding-top: 13px;
             opacity: 0.6;
-            font-family: '72';
+            font-family: "72";
             font-size: 11px;
             font-weight: normal;
             font-style: normal;
@@ -373,7 +373,7 @@ const responsesTable = css`
               padding-left: 16px;
             }
             td.col:first-child {
-              font-family: '72';
+              font-family: "72";
               font-size: 14px;
               font-weight: bold;
               font-style: normal;
@@ -410,7 +410,7 @@ const responsesTable = css`
             }
             table.headers {
               thead > tr.header-row > th.header-col {
-                font-family: '72';
+                font-family: "72";
                 font-size: 14px;
                 font-weight: normal;
                 font-style: normal;
@@ -420,7 +420,7 @@ const responsesTable = css`
                 color: #32363a;
               }
               tbody > tr > td.header-col {
-                font-family: '72';
+                font-family: "72";
                 font-size: 13px;
                 font-weight: normal;
                 font-style: normal;
@@ -454,7 +454,7 @@ const modelSectionStyles = css`
       border-bottom: 1px solid #eeeeef;
     }
     span.model.model-title {
-      font-family: '72';
+      font-family: "72";
       font-size: 14px;
       font-weight: bold;
       font-style: normal;
@@ -482,7 +482,7 @@ const modelSectionStyles = css`
         width: 100%;
         padding: 0 0 10px 10px;
         span.model-title > span.model-title__text {
-          font-family: '72';
+          font-family: "72";
           font-size: 14px;
           font-weight: bold;
           font-style: normal;

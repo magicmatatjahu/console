@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import createContainer from 'constate';
+import { useState, useEffect } from "react";
+import createContainer from "constate";
 
-import { Notification } from '../types';
-import { NOTIFICATION_SHOW_TIME } from '../constants';
+import { Notification } from "../types";
+import { NOTIFICATION_SHOW_TIME } from "../constants";
 
 const useNotifications = () => {
   const [notification, setNotification] = useState<Notification>(
@@ -41,8 +41,8 @@ const useNotifications = () => {
     setNotification({
       title,
       content,
-      color: '#359c46',
-      icon: 'accept',
+      color: "#359c46",
+      icon: "accept",
     });
   };
 
@@ -53,8 +53,8 @@ const useNotifications = () => {
     setNotification({
       title,
       content,
-      color: '#359c46',
-      icon: 'accept',
+      color: "#359c46",
+      icon: "accept",
     });
   };
 

@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import LuigiClient from '@kyma-project/luigi-client';
-import { Button, Modal } from 'fundamental-react';
+import React, { useState } from "react";
+import { luigiClient } from "@kyma-project/common";
+import { Button, Modal } from "fundamental-react";
 
 import {
   ModalWrapper,
   ActionsWrapper,
   OpeningComponentWrapper,
-} from './styled';
+} from "./styled";
 
 interface ModalProps {
   title: string;
   confirmText?: string;
   closeText?: string;
   openingComponent: React.ReactNode;
-  type?: 'info' | 'warning';
+  type?: "info" | "warning";
   onSubmit?: (event?: any) => void;
   onOpen?: () => void;
   onClose?: () => void;
@@ -25,7 +25,7 @@ export const ModalComponent: React.FunctionComponent<ModalProps> = ({
   confirmText,
   closeText,
   openingComponent,
-  type = 'info',
+  type = "info",
   onSubmit,
   onOpen,
   onClose,
@@ -37,19 +37,19 @@ export const ModalComponent: React.FunctionComponent<ModalProps> = ({
   const setTrueShowModal = () => {
     onOpen && onOpen();
     setShowModal(true);
-    LuigiClient.uxManager().addBackdrop();
+    luigiClient.uxManager().addBackdrop();
   };
 
   const setFalseShowModal = () => {
     onClose && onClose();
     setShowModal(false);
-    LuigiClient.uxManager().removeBackdrop();
+    luigiClient.uxManager().removeBackdrop();
   };
 
   const actions = (
     <ActionsWrapper>
       <Button onClick={setFalseShowModal} option="light">
-        {closeText ? closeText : 'Cancel'}
+        {closeText ? closeText : "Cancel"}
       </Button>
       <Button
         onClick={() => {
@@ -59,7 +59,7 @@ export const ModalComponent: React.FunctionComponent<ModalProps> = ({
         option="emphasized"
         disabled={Boolean(onSubmitDisabled)}
       >
-        {confirmText ? confirmText : 'Create'}
+        {confirmText ? confirmText : "Create"}
       </Button>
     </ActionsWrapper>
   );

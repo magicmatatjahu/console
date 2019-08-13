@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Token } from 'fundamental-react';
+import styled from "styled-components";
+import { Token } from "fundamental-react";
 
 export const AddedUrl = styled.div`
   margin: 6px 0;

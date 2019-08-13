@@ -1,6 +1,6 @@
-import { Source } from '@kyma-project/documentation-component';
-import { plugins } from '@kyma-project/dc-markdown-render-engine';
-import { headingPrefix } from './headingPrefix';
+import { Source } from "@kyma-project/documentation-component";
+import { plugins } from "@kyma-project/dc-markdown-render-engine";
+import { headingPrefix } from "./headingPrefix";
 
 type Header = plugins.Header;
 
@@ -18,7 +18,7 @@ export function customFirstNode(
   return {
     title,
     id: toKebabCase(headingPrefix(source)),
-    level: 'doc-title',
+    level: "doc-title",
     source,
   };
 }

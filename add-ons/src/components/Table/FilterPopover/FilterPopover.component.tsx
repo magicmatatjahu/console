@@ -1,7 +1,5 @@
-import React from 'react';
-import { Popover, Button, Counter } from 'fundamental-react';
-
-import FilterPopoverBody from './FilterPopoverBody.component';
+import React from "react";
+import { Popover, Button, Counter } from "fundamental-react";
 
 interface Props {
   body: React.ReactNode;

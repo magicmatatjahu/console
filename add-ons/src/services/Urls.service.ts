@@ -1,16 +1,16 @@
-import { useState, useContext } from 'react';
-import createContainer from 'constate';
+import { useContext } from "react";
+import createContainer from "constate";
 
-import { ConfigurationsService } from './index';
+import { ConfigurationsService } from "./index";
 
-import { HELM_BROKER_IS_DEVELOPMENT_MODE, ERRORS } from '../constants';
+import { HELM_BROKER_IS_DEVELOPMENT_MODE, ERRORS } from "../constants";
 const URL_ERRORS = ERRORS.URL;
 
-const HTTP_PROTOCOL = 'http://';
-const HTTPS_PROTOCOL = 'https://';
-const GIT_PREFIX = 'git::';
-const GITHUB_PREFIX = 'github.com/';
-const BITBUCKET_PREFIX = 'bitbucket.org/';
+const HTTP_PROTOCOL = "http://";
+const HTTPS_PROTOCOL = "https://";
+const GIT_PREFIX = "git::";
+const GITHUB_PREFIX = "github.com/";
+const BITBUCKET_PREFIX = "bitbucket.org/";
 
 const DEVELOPMENT_MODE_PREFIXES = [
   HTTP_PROTOCOL,
@@ -47,7 +47,7 @@ const useUrls = () => {
         return URL_ERRORS.STARTS_WITH_HTTP.PRODUCTION_MODE;
       }
     }
-    return '';
+    return "";
   };
 
   return {

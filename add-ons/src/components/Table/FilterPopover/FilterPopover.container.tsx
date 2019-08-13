@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import FilterPopoverComponent from './FilterPopover.component';
-import FilterPopoverBody from './FilterPopoverBody.component';
+import FilterPopoverComponent from "./FilterPopover.component";
+import FilterPopoverBody from "./FilterPopoverBody.component";
 
 import {
   ConfigurationsService,
   FiltersService,
   LabelsService,
-} from '../../../services';
+} from "../../../services";
 
 const FilterPopoverContainer: React.FunctionComponent = () => {
   const { configurationsExist } = useContext(ConfigurationsService);

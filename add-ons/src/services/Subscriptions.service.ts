@@ -1,19 +1,16 @@
-import { useContext } from 'react';
-import gql from 'graphql-tag';
-import createContainer from 'constate';
-import { useSubscription } from 'react-apollo-hooks';
-
-import { NotificationsService, ConfigurationsService } from './index';
-
-import appInitializer from '../core//app-initializer';
-import { Configuration, Notification } from '../types';
-import { SubscriptionType } from './types';
+import { useContext } from "react";
+import gql from "graphql-tag";
+import createUseContext from "constate";
 import {
-  KYMA_SYSTEM_ENV,
-  NOTIFICATION,
-  CONFIGURATION_VARIABLE,
-  ERRORS,
-} from '../constants';
+  GlobalService,
+  useSubscriptions as us,
+  OnSubscriptionArgs,
+  Subscription,
+} from "@kyma-project/common";
+
+import { ConfigurationsService } from "../services";
+import { Configuration } from "../types";
+import { NOTIFICATION, CONFIGURATION_VARIABLE } from "../constants";
 
 const subscriptionFields = `
   name
@@ -47,123 +44,95 @@ export const ADDONS_CONFIGURATION_EVENT_SUBSCRIPTION = gql`
   }
 `;
 
-interface SubscriptionPayload {
-  clusterAddonsConfigurationEvent?: {
-    type: SubscriptionType;
-    addonsConfiguration: Configuration;
-  };
-  addonsConfigurationEvent?: {
-    type: SubscriptionType;
-    addonsConfiguration: Configuration;
-  };
-}
-
-interface AddonsConfigurationsSubscriptionVariables {
+interface AddonsConfigurationSubscriptionVariables {
   namespace?: string;
 }
 
 const useSubscriptions = () => {
-  const currentNamespace = appInitializer.getCurrentNamespace();
-  const query = currentNamespace
+  const { currentNamespace } = useContext(GlobalService);
+  const { setOriginalConfigs } = useContext(ConfigurationsService);
+
+  const onAdd = ({
+    item,
+    successNotification,
+  }: OnSubscriptionArgs<Configuration>) => {
+    successNotification({
+      title: NOTIFICATION.ADD_CONFIGURATION.TITLE,
+      content: NOTIFICATION.ADD_CONFIGURATION.CONTENT.replace(
+        CONFIGURATION_VARIABLE,
+        item.name,
+      ),
+    });
+    setOriginalConfigs(configs => [...configs, item]);
+  };
+
+  const onUpdate = ({
+    item,
+    successNotification,
+  }: OnSubscriptionArgs<Configuration>) => {
+    successNotification({
+      title: NOTIFICATION.UPDATE_CONFIGURATION.TITLE,
+      content: NOTIFICATION.UPDATE_CONFIGURATION.CONTENT.replace(
+        CONFIGURATION_VARIABLE,
+        item.name,
+      ),
+    });
+    setOriginalConfigs(configs =>
+      configs.map(c => (c.name === item.name ? { ...c, ...item } : c)),
+    );
+  };
+
+  const onDelete = ({
+    item,
+    successNotification,
+  }: OnSubscriptionArgs<Configuration>) => {
+    successNotification({
+      title: NOTIFICATION.DELETE_CONFIGURATION.TITLE,
+      content: NOTIFICATION.DELETE_CONFIGURATION.CONTENT.replace(
+        CONFIGURATION_VARIABLE,
+        item.name,
+      ),
+    });
+    setOriginalConfigs(configs => configs.filter(c => c.name !== item.name));
+  };
+
+  const subscription = currentNamespace
     ? ADDONS_CONFIGURATION_EVENT_SUBSCRIPTION
     : CLUSTER_ADDONS_CONFIGURATION_EVENT_SUBSCRIPTION;
 
-  const { successNotification, errorNotification } = useContext(
-    NotificationsService,
-  );
-  const { configurationsExist, setOriginalConfigs } = useContext(
-    ConfigurationsService,
-  );
+  if (currentNamespace) {
+    us({
+      subscriptions: [
+        {
+          subscription,
+          options: {
+            variables: {
+              namespace: currentNamespace,
+            },
+          },
+          onAdd,
+          onUpdate,
+          onDelete,
+        } as Subscription<
+          Configuration,
+          AddonsConfigurationSubscriptionVariables
+        >,
+      ],
+    });
+    return;
+  }
 
-  const onAdd = (config: Configuration) => {
-    const title = NOTIFICATION.ADD_CONFIGURATION.TITLE;
-    const content = NOTIFICATION.ADD_CONFIGURATION.CONTENT.replace(
-      CONFIGURATION_VARIABLE,
-      config.name,
-    );
-
-    successNotification(title, content);
-    setOriginalConfigs(configs => [...configs, config]);
-  };
-
-  const onUpdate = (config: Configuration) => {
-    const title = NOTIFICATION.UPDATE_CONFIGURATION.TITLE;
-    const content = NOTIFICATION.UPDATE_CONFIGURATION.CONTENT.replace(
-      CONFIGURATION_VARIABLE,
-      config.name,
-    );
-
-    successNotification(title, content);
-    setOriginalConfigs(configs =>
-      configs.map(c => (c.name === config.name ? { ...c, ...config } : c)),
-    );
-  };
-
-  const onDelete = (config: Configuration) => {
-    const title = NOTIFICATION.DELETE_CONFIGURATION.TITLE;
-    const content = NOTIFICATION.DELETE_CONFIGURATION.CONTENT.replace(
-      CONFIGURATION_VARIABLE,
-      config.name,
-    );
-
-    successNotification(title, content);
-    setOriginalConfigs(configs => configs.filter(c => c.name !== config.name));
-  };
-
-  const _ = useSubscription<
-    SubscriptionPayload,
-    AddonsConfigurationsSubscriptionVariables
-  >(query, {
-    variables: {
-      namespace: currentNamespace,
-    },
-    onSubscriptionData: ({ subscriptionData }) => {
-      const { data, error } = subscriptionData;
-
-      if (error) {
-        errorNotification('Error', ERRORS.SERVER);
-        return;
-      }
-      if (!data) {
-        return;
-      }
-
-      const {
-        clusterAddonsConfigurationEvent,
-        addonsConfigurationEvent,
-      } = data;
-      const event = currentNamespace
-        ? addonsConfigurationEvent
-        : clusterAddonsConfigurationEvent;
-      if (!event) {
-        return;
-      }
-      const type = event.type;
-      const addonsConfiguration = event.addonsConfiguration;
-
-      if (!type || !addonsConfiguration) {
-        return;
-      }
-
-      switch (type) {
-        case SubscriptionType.ADD: {
-          onAdd(addonsConfiguration);
-          break;
-        }
-        case SubscriptionType.UPDATE: {
-          onUpdate(addonsConfiguration);
-          break;
-        }
-        case SubscriptionType.DELETE: {
-          onDelete(addonsConfiguration);
-          break;
-        }
-        default:
-          break;
-      }
-    },
+  us({
+    subscriptions: [
+      {
+        subscription,
+        onAdd,
+        onUpdate,
+        onDelete,
+      } as Subscription<Configuration>,
+    ],
   });
 };
 
-const { Provider, Context } = createContainer(useSubscriptions);
-export { Provider as SubscriptionsProvider, Context as SubscriptionsService };
+const { Provider } = createUseContext(useSubscriptions);
+export { Provider as SubscriptionsProvider };

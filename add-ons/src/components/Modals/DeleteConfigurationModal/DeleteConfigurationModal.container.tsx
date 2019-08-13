@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import { MutationsService } from '../../../services';
-import DeleteConfigurationModal from './DeleteConfigurationModal.component';
+import { MutationsService } from "../../../services";
+import DeleteConfigurationModal from "./DeleteConfigurationModal.component";
 
 interface Props {
   configurationName: string;
@@ -10,7 +10,9 @@ interface Props {
 const DeleteConfigurationModalContainer: React.FunctionComponent<Props> = ({
   configurationName,
 }) => {
-  const { deleteAddonsConfiguration } = useContext(MutationsService);
+  const {
+    deleteAddonsConfiguration: [deleteAddonsConfiguration],
+  } = useContext(MutationsService);
 
   const handleDelete = () => {
     deleteAddonsConfiguration({ variables: { name: configurationName } });

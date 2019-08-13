@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from 'react';
-import createContainer from 'constate';
+import { useContext, useEffect, useState } from "react";
+import createContainer from "constate";
 
-import { ConfigurationsService } from './index';
+import { ConfigurationsService } from "./index";
 
-import { Configuration, ConfigurationLabels, FilterLabels } from '../types';
+import { Configuration, FilterLabels } from "../types";
 import {
   ERRORS,
   LABEL_VARIABLE,
   KEY_VARIABLE,
   VALUE_VARIABLE,
-} from '../constants';
+} from "../constants";
 const LABEL_ERRORS = ERRORS.LABEL;
 
 const useLabels = () => {
@@ -54,22 +54,22 @@ const useLabels = () => {
 
   const validateLabel = (label: string, existingLabels: string[]): string => {
     if (!label) {
-      return '';
+      return "";
     }
 
-    if (!(label.split('=').length === 2)) {
+    if (!(label.split("=").length === 2)) {
       return LABEL_ERRORS.INVALID_LABEL.replace(LABEL_VARIABLE, label);
     }
 
-    const key: string = label.split('=')[0];
-    const value: string = label.split('=')[1];
+    const key: string = label.split("=")[0];
+    const value: string = label.split("=")[1];
 
     const regex = /([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]/;
     const foundKey = key.match(regex);
-    const isKeyValid = Boolean(foundKey && foundKey[0] === key && key !== '');
+    const isKeyValid = Boolean(foundKey && foundKey[0] === key && key !== "");
     const foundVal = value.match(regex);
     const isValueValid = Boolean(
-      (foundVal && foundVal[0] === value) || value !== '',
+      (foundVal && foundVal[0] === value) || value !== "",
     );
     if (!isKeyValid || !isValueValid) {
       return LABEL_ERRORS.KEY_OR_VALUE_INVALID.replace(
@@ -80,7 +80,7 @@ const useLabels = () => {
 
     const duplicateKeyExists: boolean = Boolean(
       existingLabels
-        .map(l => l.split('=')[0])
+        .map(l => l.split("=")[0])
         .find((keyFromList: string) => keyFromList === key),
     );
     if (duplicateKeyExists) {
@@ -90,7 +90,7 @@ const useLabels = () => {
       ).replace(VALUE_VARIABLE, value);
     }
 
-    return '';
+    return "";
   };
 
   useEffect(() => {

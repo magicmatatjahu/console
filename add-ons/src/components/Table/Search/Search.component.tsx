@@ -1,9 +1,9 @@
-import React from 'react';
-import { FormGroup, FormItem, InputGroup, Button } from 'fundamental-react';
+import React from "react";
+import { FormGroup, FormItem, InputGroup, Button } from "fundamental-react";
 
-import { SearchWrapper } from './styled';
+import { SearchWrapper } from "./styled";
 
-import { PLACEHOLDERS } from '../../../constants';
+import { PLACEHOLDERS } from "../../../constants";
 
 interface Props {
   searchField: any;

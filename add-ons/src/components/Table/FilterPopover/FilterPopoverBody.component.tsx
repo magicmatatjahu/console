@@ -1,17 +1,16 @@
-import React from 'react';
+import React from "react";
 import {
   FormFieldset,
   FormLegend,
   FormItem,
   FormInput,
   FormLabel,
-  Button,
-} from 'fundamental-react';
+} from "fundamental-react";
 
-import { FiltersLabelsInterface, Filters } from '../../../types';
-import { FILTERS } from '../../../constants';
+import { FiltersLabelsInterface, Filters } from "../../../types";
+import { FILTERS } from "../../../constants";
 
-import { FormFieldsetWrapper, StyledGroup } from './styled';
+import { FormFieldsetWrapper, StyledGroup } from "./styled";
 
 interface Props {
   activeFilters: Filters;
@@ -19,7 +18,7 @@ interface Props {
 
 const FilterPopoverBody: React.FunctionComponent<
   Props & FiltersLabelsInterface
-> = ({ activeFilters, uniqueLabels, setFilterLabel, hasActiveLabel }) => (
+> = ({ uniqueLabels, setFilterLabel, hasActiveLabel }) => (
   <FormFieldsetWrapper>
     <FormFieldset>
       <StyledGroup>

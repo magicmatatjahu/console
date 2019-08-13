@@ -12,9 +12,11 @@ The Console project consists of the following UI projects:
 - [`Catalog`](./service-catalog-ui/catalog) - The UI layer for Service Catalog
 - [`Instances`](./service-catalog-ui/instances) - The view for displaying Service Instances
 - [`Brokers`](./service-catalog-ui/brokers) - The view for displaying Service Brokers
+- [`Addons`](./add-ons) - The view for displaying Namespaced scope and cluster-wide Addons
 - [`Lambda`](./lambda) - The view for lambda functions
 - [`Content`](./content) - The documentation view
 - [`Log UI`](./logging) - The logs view
+- [`Compass`](./logging) - The logs view
 - [`Tests`](./tests) - Acceptance and end-to-end tests
 
 Console also includes the libraries with components for the React and Angular front-end frameworks:
@@ -48,11 +50,12 @@ Once you start Kyma with Console locally, you can start development. All modules
 The `Core` and other UIs run at the following addresses:
 
 - `Core` - [http://console-dev.kyma.local:4200](http://console-dev.kyma.local:4200)
+- `Lambda` - [http://console-dev.kyma.local:4201](http://console-dev.kyma.local:4201)
 - `Catalog` - [http://console-dev.kyma.local:8000](http://console-dev.kyma.local:8000)
 - `Instances` - [http://console-dev.kyma.local:8001](http://console-dev.kyma.local:8001)
 - `Brokers` - [http://console-dev.kyma.local:8002](http://console-dev.kyma.local:8002)
-- `Lambda` - [http://console-dev.kyma.local:4201](http://console-dev.kyma.local:4201)
 - `Content` - [http://console-dev.kyma.local:8003](http://console-dev.kyma.local:8003)
+- `Addons` - [http://console-dev.kyma.local:8004](http://console-dev.kyma.local:8004)
 
 If you want to run only a specific UI, follow the instructions in the appropriate folder.
 

@@ -1,22 +1,22 @@
-import React from 'react';
+import React from "react";
 import {
   Source,
   RenderedContent,
   GroupRendererComponent,
-} from '@kyma-project/documentation-component';
+} from "@kyma-project/documentation-component";
+import { Grid, StickyContainer, Sticky } from "@kyma-project/components";
 
-import { StickyContainer, Sticky } from 'react-sticky';
-import { HeadersNavigation } from '../render-engines/markdown/headers-toc';
-import { Grid, Tabs, Tab } from '../components';
-import { MarkdownWrapper } from '../styled';
+import { HeadersNavigation } from "../render-engines/markdown/headers-toc";
+import { Tabs, Tab } from "../components";
+import { MarkdownWrapper } from "../styled";
 import {
   markdownTypes,
   openApiTypes,
   asyncApiTypes,
   odataTypes,
-} from '../constants';
-import { StyledAsyncApi, StyledOData } from './styled';
-import { StyledSwagger } from '../render-engines/open-api/styles';
+} from "../constants";
+import { StyledAsyncApi, StyledOData } from "./styled";
+import { StyledSwagger } from "../render-engines/open-api/styles";
 
 function existsFiles(sources: Source[], types: string[]) {
   return sources.find(source => types.includes(source.type));

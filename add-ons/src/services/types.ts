@@ -1,4 +1,4 @@
-import { Filters, ConfigurationLabels, Configuration } from '../types';
+import { Filters, ConfigurationLabels, Configuration } from "../types";
 
 export interface FiltersService {
   activeFilters: Filters;
@@ -18,7 +18,7 @@ export interface ConfigurationsService {
 }
 
 export enum SubscriptionType {
-  ADD = 'ADD',
-  UPDATE = 'UPDATE',
-  DELETE = 'DELETE',
+  ADD = "ADD",
+  UPDATE = "UPDATE",
+  DELETE = "DELETE",
 }

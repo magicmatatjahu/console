@@ -6,7 +6,6 @@
     "service-catalog-ui/*",
     "content",
     "add-ons",
-    "components/react",
     "components/angular/generic-list/dist",
     "lambda",
     "logging",

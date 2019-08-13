@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { createElementClass } from '../helpers';
-import { TabProps } from './Tab';
+import React, { useState } from "react";
+import { createElementClass } from "../helpers";
+import { TabProps } from "./Tab";
 
 export interface TabsProps {
   className?: string;
@@ -8,7 +8,7 @@ export interface TabsProps {
   customChangeTabHandler?: (index: number) => void;
 }
 export const Tabs: React.FunctionComponent<TabsProps> = ({
-  className = '',
+  className = "",
   active = 0,
   children,
   customChangeTabHandler,
@@ -42,11 +42,11 @@ export const Tabs: React.FunctionComponent<TabsProps> = ({
     .filter(child => child !== null && child !== undefined);
 
   return (
-    <div className={createElementClass('tabs')}>
-      <ul className={createElementClass('tabs-header')}>
+    <div className={createElementClass("tabs")}>
+      <ul className={createElementClass("tabs-header")}>
         {renderHeader(content)}
       </ul>
-      <div className={createElementClass('tabs-content')}>
+      <div className={createElementClass("tabs-content")}>
         {renderActiveTab(content)}
       </div>
     </div>

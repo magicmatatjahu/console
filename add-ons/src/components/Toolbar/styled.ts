@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { ActionBar } from 'fundamental-react';
+import styled from "styled-components";
+import { ActionBar } from "fundamental-react";
 
 export const StyledActionBar = styled(ActionBar)`
   &&& {

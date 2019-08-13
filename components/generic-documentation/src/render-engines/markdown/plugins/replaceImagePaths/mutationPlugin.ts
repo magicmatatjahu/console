@@ -1,4 +1,4 @@
-import { MutationPluginArgs } from '@kyma-project/documentation-component';
+import { MutationPluginArgs } from "@kyma-project/documentation-component";
 
 const ASSETS_REGEXP = /(?=]\()]\(\s*(\.\/)?assets/g;
 
@@ -11,7 +11,7 @@ export function replaceImagePaths({
   }
   const docsUrl = source.data.url.substring(
     0,
-    source.data.url.lastIndexOf('/'),
+    source.data.url.lastIndexOf("/"),
   );
   const content = source.content || source.rawContent;
   if (content.search(ASSETS_REGEXP) !== -1) {

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Token, Panel } from 'fundamental-react';
+import styled from "styled-components";
+import { Token } from "fundamental-react";
 
 export const ErrorWrapper = styled.div`
   padding: 16px;
@@ -113,7 +113,7 @@ export const Label = styled(Token)`
     margin: 6px 6px 0 0;
 
     &:after {
-      content: '';
+      content: "";
       margin-left: 0;
     }
   }

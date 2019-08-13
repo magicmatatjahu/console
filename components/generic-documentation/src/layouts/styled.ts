@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { tabsStyling } from '../renderers/styled';
+import styled from "styled-components";
+import { tabsStyling } from "../renderers/styled";
 
 export const ContentUIWrapper = styled.div`
   &&& {

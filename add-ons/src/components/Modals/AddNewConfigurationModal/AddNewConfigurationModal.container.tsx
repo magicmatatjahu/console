@@ -1,35 +1,33 @@
-import React, { useState, useEffect, useContext } from 'react';
-import LuigiClient from '@kyma-project/luigi-client';
+import React, { useState, useContext } from "react";
+import { luigiClient } from "@kyma-project/common";
 
-import { useInput } from '../../../services/Forms';
+import { useInput } from "../../../services/Forms";
 import {
   QueriesService,
   MutationsService,
   ConfigurationsService,
   LabelsService,
   UrlsService,
-} from '../../../services';
+} from "../../../services";
+import { ConfigurationLabels } from "../../../types";
 
-import Component from './AddNewConfigurationModal.component';
-
-import { ConfigurationLabels } from '../../../types';
+import Component from "./AddNewConfigurationModal.component";
 
 const AddNewConfigurationModalContainer: React.FunctionComponent = () => {
   // Services
   const { error } = useContext(QueriesService);
-  const { createAddonsConfiguration } = useContext(MutationsService);
   const {
-    configurationsExist,
-    originalConfigs,
-    validateName,
-    configNameGenerator,
-  } = useContext(ConfigurationsService);
+    createAddonsConfiguration: [createAddonsConfiguration],
+  } = useContext(MutationsService);
+  const { validateName, configNameGenerator } = useContext(
+    ConfigurationsService,
+  );
   const { validateLabel } = useContext(LabelsService);
   const { validateUrl } = useContext(UrlsService);
 
   // Name
   const validateNameField = (name: string): string => validateName(name);
-  const nameField = useInput('', validateNameField);
+  const nameField = useInput("", validateNameField);
 
   // Urls
   const [urls, setUrls] = useState<string[]>([]);
@@ -48,18 +46,18 @@ const AddNewConfigurationModalContainer: React.FunctionComponent = () => {
   const validateUrlField = (url: string): string => {
     if (urls.length && !url) {
       urlField.cleanUpField();
-      return '';
+      return "";
     }
 
     const existingUrls = [...urls];
     return validateUrl(url, existingUrls);
   };
   const handleEnterDownOnUrlField = (event: any) => {
-    if (event.key === 'Enter' && !urlField.error) {
+    if (event.key === "Enter" && !urlField.error) {
       addUrl();
     }
   };
-  const urlField = useInput('', validateUrlField);
+  const urlField = useInput("", validateUrlField);
 
   // Labels
   const [labels, setLabel] = useState<string[]>([]);
@@ -78,7 +76,7 @@ const AddNewConfigurationModalContainer: React.FunctionComponent = () => {
   const validateLabelsField = (label: string): string => {
     if (!label) {
       labelsField.cleanUpField();
-      return '';
+      return "";
     }
 
     removeWhiteSpacesFromLabelsField();
@@ -90,7 +88,7 @@ const AddNewConfigurationModalContainer: React.FunctionComponent = () => {
     }
   };
   const handleEnterDownOnLabelsField = (event: any) => {
-    if (event.key === 'Enter' && !labelsField.error) {
+    if (event.key === "Enter" && !labelsField.error) {
       addLabel();
     }
   };
@@ -101,12 +99,12 @@ const AddNewConfigurationModalContainer: React.FunctionComponent = () => {
     }
 
     labels.map(label => {
-      const splitedLabel = label.split('=');
+      const splitedLabel = label.split("=");
       extractedLabels[splitedLabel[0]] = splitedLabel[1];
     });
     return extractedLabels;
   };
-  const labelsField = useInput('', validateLabelsField);
+  const labelsField = useInput("", validateLabelsField);
 
   // Form
   const onSubmit = () => {
@@ -137,12 +135,12 @@ const AddNewConfigurationModalContainer: React.FunctionComponent = () => {
 
   const onShowModal = () => {
     resetFields();
-    LuigiClient.uxManager().addBackdrop();
+    luigiClient.uxManager().addBackdrop();
     nameField.setValue(configNameGenerator());
   };
 
   const onHideModal = () => {
-    LuigiClient.uxManager().removeBackdrop();
+    luigiClient.uxManager().removeBackdrop();
   };
 
   return (

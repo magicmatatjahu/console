@@ -1,10 +1,10 @@
-import { Plugin, PluginType } from '@kyma-project/documentation-component';
-import { removeHref } from './mutationPlugin';
+import { Plugin, PluginType } from "@kyma-project/documentation-component";
+import { removeHref } from "./mutationPlugin";
 
 const removeHrefFromMarkdown: Plugin = {
-  name: 'remove-href-from-markdown-mutation',
+  name: "remove-href-from-markdown-mutation",
   type: PluginType.MUTATION,
-  sourceTypes: ['markdown', 'md'],
+  sourceTypes: ["markdown", "md"],
   fn: removeHref,
 };
 

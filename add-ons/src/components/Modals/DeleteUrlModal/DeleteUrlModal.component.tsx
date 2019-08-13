@@ -1,8 +1,8 @@
-import React from 'react';
-import LuigiClient from '@kyma-project/luigi-client';
-import { Modal, Button } from '@kyma-project/react-components';
+import React from "react";
+import { luigiClient } from "@kyma-project/common";
+import { Modal, Button } from "@kyma-project/react-components";
 
-import { MODAL, FORMS, CONFIGURATION_VARIABLE } from '../../../constants';
+import { MODAL, FORMS, CONFIGURATION_VARIABLE } from "../../../constants";
 
 interface Props {
   configurationName: string;
@@ -26,8 +26,8 @@ const DeleteUrlModalComponent: React.FunctionComponent<Props> = ({
       onConfirm={handleDelete}
       modalOpeningComponent={openingComponentModal}
       type="negative"
-      onShow={() => LuigiClient.uxManager().addBackdrop()}
-      onHide={() => LuigiClient.uxManager().removeBackdrop()}
+      onShow={() => luigiClient.uxManager().addBackdrop()}
+      onHide={() => luigiClient.uxManager().removeBackdrop()}
     >
       {FORMS.DELETE_URL_CONFIRM_TEXT.replace(
         CONFIGURATION_VARIABLE,

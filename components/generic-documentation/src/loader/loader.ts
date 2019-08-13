@@ -1,14 +1,14 @@
 import {
   SourceWithOptions,
   Sources,
-} from '@kyma-project/documentation-component';
-import { Asset, File, DT } from './types';
+} from "@kyma-project/documentation-component";
+import { Asset, File, DT } from "./types";
 import {
   markdownTypes,
   openApiTypes,
   asyncApiTypes,
   odataTypes,
-} from '../constants';
+} from "../constants";
 
 export class DocsLoader {
   private sources: SourceWithOptions[] = [];
@@ -51,7 +51,7 @@ export class DocsLoader {
 
     if (markdownFiles) {
       const sources = (await Promise.all(
-        markdownFiles.map(file => this.fetchFile(file, 'md')),
+        markdownFiles.map(file => this.fetchFile(file, "md")),
       )).filter(
         source => source && source !== undefined,
       ) as SourceWithOptions[];
@@ -117,7 +117,7 @@ export class DocsLoader {
   ): SourceWithOptions {
     const source: SourceWithOptions = {
       source: {
-        type: 'md',
+        type: "md",
         rawContent,
         data: {
           frontmatter: file.metadata,
@@ -130,9 +130,9 @@ export class DocsLoader {
     };
 
     const fileName = file.url
-      .split('/')
+      .split("/")
       .reverse()[0]
-      .replace('.md', '');
+      .replace(".md", "");
     let frontmatter = source.source.data!.frontmatter;
 
     if (!frontmatter) {
@@ -158,7 +158,7 @@ export class DocsLoader {
       markdownAssets.map(asset => {
         if (asset.files) {
           const files = asset.files
-            .filter(el => el.url.endsWith('.md'))
+            .filter(el => el.url.endsWith(".md"))
             .map(
               el =>
                 ({
@@ -179,15 +179,15 @@ export class DocsLoader {
       data = data.sort((first, sec) => {
         const nameA =
           first.metadata &&
-          (first.metadata.title || first.metadata.type || '').toLowerCase();
+          (first.metadata.title || first.metadata.type || "").toLowerCase();
         const nameB =
           first.metadata &&
-          (sec.metadata.title || sec.metadata.type || '').toLowerCase();
+          (sec.metadata.title || sec.metadata.type || "").toLowerCase();
 
-        if (nameA === 'overview') {
+        if (nameA === "overview") {
           return -1;
         }
-        if (nameB === 'overview') {
+        if (nameB === "overview") {
           return 1;
         }
         if (nameA < nameB) {
@@ -229,11 +229,11 @@ export class DocsLoader {
     if (!value) {
       return false;
     }
-    if (typeof value === 'boolean') {
+    if (typeof value === "boolean") {
       return value;
     }
-    if (typeof value === 'string') {
-      return value.toLowerCase() === 'true';
+    if (typeof value === "string") {
+      return value.toLowerCase() === "true";
     }
     return !!value;
   }

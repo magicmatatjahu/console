@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import {
   ModelsExtended,
   ModelCollapseExtended,
   OperationTagExtended,
   SchemesWrapperExtended,
-} from './components';
+} from "./components";
 
 const plugin = {
   wrapComponents: {

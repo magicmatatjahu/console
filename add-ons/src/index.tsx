@@ -1,22 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import { bootstrap, BackendModules } from "@kyma-project/common";
+import App from "./core/App";
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {
+  QueriesProvider,
+  MutationsProvider,
+  FiltersProvider,
+  ConfigurationsProvider,
+  LabelsProvider,
+  UrlsProvider,
+  SubscriptionsProvider,
+} from "./services";
 
-import AddonsViewContent from './core/AddonsViewContent';
+(async () => {
+  const services = [
+    QueriesProvider,
+    MutationsProvider,
+    FiltersProvider,
+    ConfigurationsProvider,
+    LabelsProvider,
+    UrlsProvider,
+    SubscriptionsProvider,
+  ];
 
-import 'fiori-fundamentals/dist/fiori-fundamentals.min.css';
-
-function Preload() {
-  return <div />;
-}
-
-ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route exact={true} path="/preload" component={Preload} />
-      <Route component={AddonsViewContent} />
-    </Switch>
-  </BrowserRouter>,
-  document.getElementById('root'),
-);
+  await bootstrap({
+    app: <App />,
+    requiredBackendModules: [
+      BackendModules.SERVICE_CATALOG,
+      BackendModules.SERVICE_CATALOG_ADDONS,
+    ],
+    enableNotifications: true,
+    services,
+  });
+})();

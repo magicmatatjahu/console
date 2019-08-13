@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import {
   MarkdownRenderEngineOptions,
   MarkdownParserPluginReturnType,
-} from '@kyma-project/dc-markdown-render-engine';
+} from "@kyma-project/dc-markdown-render-engine";
 
-import { Tooltip } from '../../../../components';
+import { Tooltip } from "../../../../components";
 
-import { RELATIVE_LINKS_DISABLED } from '../../../../constants';
+import { RELATIVE_LINKS_DISABLED } from "../../../../constants";
 
 const GreyedText = styled.div`
   display: inline;
@@ -15,7 +15,7 @@ const GreyedText = styled.div`
   .disabled-internal-link {
     color: #959697;
     cursor: info;
-    font-family: '72';
+    font-family: "72";
     font-size: 16px;
     line-height: 1.57;
   }
@@ -30,15 +30,15 @@ export const disabledInternalLinkParser = (
 ): MarkdownParserPluginReturnType => ({
   replaceChildren: true,
   shouldProcessNode: (node: any) =>
-    node.type === 'tag' &&
-    node.name === 'div' &&
+    node.type === "tag" &&
+    node.name === "div" &&
     node.attribs &&
-    node.attribs.hasOwnProperty('disabled-internal-link'),
+    node.attribs.hasOwnProperty("disabled-internal-link"),
   processNode: (node: any) => {
     if (
       !node.children ||
       !node.children[0] ||
-      node.children[0].type !== 'text'
+      node.children[0].type !== "text"
     ) {
       return null;
     }

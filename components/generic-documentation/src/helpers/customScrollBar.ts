@@ -1,12 +1,12 @@
-import { css } from 'styled-components';
+import { css } from "styled-components";
 
 export const customScrollBar = ({
-  scrollbarWidth = '6px',
-  scrollbarHeight = '6px',
-  thumbColor = '#d4d4d4',
-  thumbBorderRadius = '0',
-  trackColor = '#f1f1f1',
-  trackBorderRadius = '0',
+  scrollbarWidth = "6px",
+  scrollbarHeight = "6px",
+  thumbColor = "#d4d4d4",
+  thumbBorderRadius = "0",
+  trackColor = "#f1f1f1",
+  trackBorderRadius = "0",
 }) => css`
   &::-webkit-scrollbar {
     width: ${scrollbarWidth};

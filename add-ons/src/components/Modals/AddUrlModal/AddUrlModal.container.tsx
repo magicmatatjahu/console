@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import LuigiClient from '@kyma-project/luigi-client';
+import React, { useState, useContext } from "react";
+import { luigiClient } from "@kyma-project/common";
 
-import { useInput } from '../../../services/Forms';
+import { useInput } from "../../../services/Forms";
 import {
   MutationsService,
   ConfigurationsService,
   UrlsService,
-} from '../../../services';
+} from "../../../services";
 
-import AddUrlModal from './AddUrlModal.component';
-import { DEFAULT_CONFIGURATION, ERRORS } from '../../../constants';
+import AddUrlModal from "./AddUrlModal.component";
 
 interface Props {
   configurationName?: string;
@@ -18,7 +17,9 @@ interface Props {
 const AddUrlModalContainer: React.FunctionComponent<Props> = ({
   configurationName,
 }) => {
-  const { addAddonsConfigurationUrls } = useContext(MutationsService);
+  const {
+    addAddonsConfigurationUrls: [addAddonsConfigurationUrls],
+  } = useContext(MutationsService);
   const { configurationNames } = useContext(ConfigurationsService);
   const { getUrlsFromConfigByName, validateUrl } = useContext(UrlsService);
 
@@ -32,7 +33,7 @@ const AddUrlModalContainer: React.FunctionComponent<Props> = ({
 
     return name;
   };
-  const configurationNameField = useInput('');
+  const configurationNameField = useInput("");
 
   // Urls
   const [urls, setUrls] = useState<string[]>([]);
@@ -53,18 +54,18 @@ const AddUrlModalContainer: React.FunctionComponent<Props> = ({
   const validateUrlField = (url: string): string => {
     if (!url) {
       urlField.cleanUpField();
-      return '';
+      return "";
     }
 
     const existingUrls = [...getUrlsFromConfigByName(getConfigName()), ...urls];
     return validateUrl(url, existingUrls);
   };
   const handleEnterDownOnUrlField = (event: any) => {
-    if (event.key === 'Enter' && !urlField.error) {
+    if (event.key === "Enter" && !urlField.error) {
       addUrl();
     }
   };
-  const urlField = useInput('', validateUrlField);
+  const urlField = useInput("", validateUrlField);
 
   const onSubmit = () => {
     let urlsToCreated: string[] = [...urls];
@@ -87,11 +88,11 @@ const AddUrlModalContainer: React.FunctionComponent<Props> = ({
 
   const onShowModal = () => {
     resetFields();
-    LuigiClient.uxManager().addBackdrop();
+    luigiClient.uxManager().addBackdrop();
   };
 
   const onHideModal = () => {
-    LuigiClient.uxManager().removeBackdrop();
+    luigiClient.uxManager().removeBackdrop();
   };
 
   const configs = configurationName ? [configurationName] : configurationNames;

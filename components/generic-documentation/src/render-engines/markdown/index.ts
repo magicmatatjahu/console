@@ -1,15 +1,15 @@
-import { RenderEngineWithOptions } from '@kyma-project/documentation-component';
+import { RenderEngineWithOptions } from "@kyma-project/documentation-component";
 import {
   markdownRenderEngine,
   MarkdownRenderEngineOptions,
   plugins,
-} from '@kyma-project/dc-markdown-render-engine';
+} from "@kyma-project/dc-markdown-render-engine";
 
-import { Link, ListItem } from './custom-renderers';
-import { CopyButton } from './components';
-import { highlightTheme } from './highlightTheme';
-import { headingPrefix } from './helpers';
-import { disableInternalLinksParserPlugin } from './plugins';
+import { Link, ListItem } from "./custom-renderers";
+import { CopyButton } from "./components";
+import { highlightTheme } from "./highlightTheme";
+import { headingPrefix } from "./helpers";
+import { disableInternalLinksParserPlugin } from "./plugins";
 
 export const markdownRE: RenderEngineWithOptions<
   MarkdownRenderEngineOptions

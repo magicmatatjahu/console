@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export const useInput = (
   initialValue: string,
   validate?: (value: string) => string,
-  initialError: string = '',
+  initialError: string = "",
 ) => {
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState(initialError);
   const [valid, setValid] = useState(false);
 
-  const resetValue = () => setValue('');
-  const resetError = () => setError('');
+  const resetValue = () => setValue("");
+  const resetError = () => setError("");
   const resetValid = () => setValid(false);
 
   const cleanUpField = () => {
@@ -21,12 +21,12 @@ export const useInput = (
 
   const checkState = (): string => {
     if (error) {
-      return 'invalid';
+      return "invalid";
     }
     if (valid) {
-      return 'valid';
+      return "valid";
     }
-    return 'normal';
+    return "normal";
   };
 
   useEffect(() => {

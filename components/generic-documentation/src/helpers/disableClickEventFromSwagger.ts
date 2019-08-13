@@ -7,7 +7,7 @@ export function disableClickEventFromSwagger() {
     fn: (...args: any[]) => any,
     options: any,
   ) => {
-    if (type === 'click') {
+    if (type === "click") {
       const fnAsString = fn.toString();
       if (fnAsString.includes(beginOfSwaggerClickFunctionAsString)) {
         return;

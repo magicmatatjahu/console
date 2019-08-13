@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from "react";
+import styled, { css } from "styled-components";
 
 const buttonStyle = css`
   border-radius: 4px;
@@ -24,7 +24,7 @@ const ContentWrapper = styled.section`
       margin: 0;
       padding-right: 10px;
       height: 36px;
-      > label[for='schemes'] {
+      > label[for="schemes"] {
         margin: 0;
         & > select {
           width: 70px;
@@ -53,8 +53,8 @@ const Text = styled.p<TextProps>`
   font-family: 72;
   margin: 0;
   align-self: center;
-  color: ${props => (props.light ? '#6a6d70' : '#32363a')};
-  font-size: ${props => (props.light ? '14px' : '16px')};
+  color: ${props => (props.light ? "#6a6d70" : "#32363a")};
+  font-size: ${props => (props.light ? "14px" : "16px")};
 
   font-weight: normal;
   font-style: normal;
@@ -68,7 +68,7 @@ export const SchemesWrapperExtended = (
   Orig: typeof React.Component,
   system: any,
 ) => (props: any) => {
-  if (props.className === 'schemes wrapper') {
+  if (props.className === "schemes wrapper") {
     return (
       <Wrapper>
         <Text>API Console</Text>

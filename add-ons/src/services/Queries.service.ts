@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
-import createContainer from 'constate';
-import { useQuery } from 'react-apollo-hooks';
+import gql from "graphql-tag";
+import createContainer from "constate";
+import { useQuery } from "@apollo/react-hooks";
 
 import appInitializer from '../core/app-initializer';
 import { Configuration } from '../types';

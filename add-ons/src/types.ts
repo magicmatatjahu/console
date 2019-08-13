@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export type BackendModule = string;
 
@@ -31,10 +31,10 @@ export interface ActiveFiltersAction {
 }
 
 export enum ActiveFiltersActionType {
-  SET_SEARCH = 'SET_SEARCH',
-  SET_LABEL = 'SET_LABEL',
-  REMOVE_LABEL = 'REMOVE_LABEL',
-  REMOVE_ALL_FILTERS = 'REMOVE_ALL_FILTERS',
+  SET_SEARCH = "SET_SEARCH",
+  SET_LABEL = "SET_LABEL",
+  REMOVE_LABEL = "REMOVE_LABEL",
+  REMOVE_ALL_FILTERS = "REMOVE_ALL_FILTERS",
 }
 
 export interface RemoveFiltersInterface {
