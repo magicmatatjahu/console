@@ -71,3 +71,14 @@ yarn-error.log
 **/bundle_analyzer
 stats.html
 .rpt2_cache
+
+node_modules
+compass
+components/angular
+components/react
+core
+lambda
+logging
+scripts
+service-catalog-ui
+tests

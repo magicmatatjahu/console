@@ -31,7 +31,18 @@
   },
   "jsRules": {},
   "linterOptions": {
-    "exclude": ["*/node_modules/**/*"]
+    "exclude": [
+      "*/node_modules/**/*",
+      "*/compass/**/*",
+      "*/components/angular/**/*",
+      "*/components/react/**/*",
+      "*/core/**/*",
+      "*/lambda/**/*",
+      "*/logging/**/*",
+      "*/scripts/**/*",
+      "*/service-catalog-ui/**/*",
+      "*/tests/**/*"
+    ]
   },
   "ban-types": [
     true,
