@@ -82,3 +82,4 @@ logging
 scripts
 service-catalog-ui
 tests
+*/public/config/config.js
