@@ -4,10 +4,11 @@ ci-master: resolve validate
 .PHONY: resolve
 resolve:
 	npm run bootstrap
+	make -C "./components/react" resolve
 
 .PHONY: validate
 validate:
 	npm run conflict-check
 	npm run lint-check
 	# npm run markdownlint
-	# npm run type-check
+	npm run type-check
