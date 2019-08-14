@@ -24,8 +24,8 @@ ENV PRODUCTION true
 
 # Test & Build
 ENV CI true
-RUN npm test
-RUN npm run build
+RUN cd /app/addons && npm test
+RUN cd /app/addons && npm run build
 
 FROM nginx:1.14.0-alpine
 LABEL source git@github.com:kyma-project/console.git
