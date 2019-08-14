@@ -12,9 +12,9 @@ RUN apk update && apk upgrade && \
     apk add --no-cache curl
 
 # Install root and app dependencies
-COPY temp /app/
+COPY ./temp /app
 RUN npm run bootstrap
-COPY ./content/package.json ./content/package-lock.json ./content/config-overrides.js ./content/.env /app/content/
+COPY /package.json package-lock.json config-overrides.js .env /app/content/
 RUN cd ./app/content && npm install --no-optional
 
 # Copy sources

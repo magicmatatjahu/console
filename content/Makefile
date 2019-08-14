@@ -31,6 +31,10 @@ endif
 
 .PHONY: build-image
 build-image:
+	mkdir temp 
+	cp ../package.json ../package-lock.json ../gulpfile.js ../tsconfig.base.json temp/
+	cp -R ../common temp/common/
+	cp -R ../components temp/components/
 	docker build -t $(IMG_NAME) .
 
 .PHONY: push-image
