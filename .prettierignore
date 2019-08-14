@@ -68,6 +68,7 @@ yarn-error.log
 
 # lib
 **/dist
+**/build
 **/bundle_analyzer
 stats.html
 .rpt2_cache

@@ -99,7 +99,11 @@ const TableContentComponent: React.FunctionComponent<TableContentProps> = ({
                     <TreeView.Row key={url}>
                       <TreeView.Col className="add-ons-url">
                         {url.startsWith('http') ? (
-                          <a href={url} target="_blank" rel="noopener noreferrer">
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             {url}
                           </a>
                         ) : (
