@@ -98,7 +98,7 @@ const AddNewConfigurationModalContainer: React.FunctionComponent = () => {
       return extractedLabels;
     }
 
-    labels.map(label => {
+    labels.forEach(label => {
       const splitedLabel = label.split('=');
       extractedLabels[splitedLabel[0]] = splitedLabel[1];
     });

@@ -21,9 +21,9 @@ COPY ./public /app/addons/public
 
 # Set env variables 
 ENV PRODUCTION true
+ENV CI true
 
 # Test & Build
-ENV CI true
 RUN cd /app/addons && npm test
 RUN cd /app/addons && npm run build
 

@@ -14,7 +14,7 @@ RUN apk update && apk upgrade && \
 # Install root and app dependencies
 COPY ./temp /app
 RUN npm run bootstrap
-COPY /package.json package-lock.json config-overrides.js .env /app/content/
+COPY package.json package-lock.json config-overrides.js .env /app/content/
 RUN cd /app/content && npm install --no-optional
 
 # Copy sources
@@ -23,9 +23,11 @@ COPY ./public /app/content/public
 
 # Set env variables 
 ENV PRODUCTION true
+ENV CI true
 
 # Test & Build
-RUN cd ./app/content && npm run build
+RUN cd /app/content && npm test
+RUN cd /app/content && npm run build
 
 FROM nginx:1.14.0-alpine
 LABEL source git@github.com:kyma-project/console.git

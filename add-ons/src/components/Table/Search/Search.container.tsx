@@ -21,7 +21,7 @@ const SearchContainer: React.FunctionComponent = () => {
 
   useEffect(() => {
     setSearchFilter(searchField.value);
-  }, [searchField.value]);
+  }, [searchField.value, setSearchFilter]);
 
   return (
     <Search

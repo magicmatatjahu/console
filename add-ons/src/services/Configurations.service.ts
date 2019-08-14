@@ -84,15 +84,6 @@ const useConfigurations = () => {
     return Boolean(length);
   };
 
-  const filterBySearch = (configs: Configuration[]): Configuration[] => {
-    if (activeFilters.search) {
-      return configs.filter(config =>
-        config.name.includes(activeFilters.search),
-      );
-    }
-    return configs;
-  };
-
   useEffect(() => {
     if (!addonsConfigurations) {
       return;
@@ -108,6 +99,15 @@ const useConfigurations = () => {
     if (!originalConfigs) {
       return;
     }
+
+    const filterBySearch = (configs: Configuration[]): Configuration[] => {
+      if (activeFilters.search) {
+        return configs.filter(config =>
+          config.name.includes(activeFilters.search),
+        );
+      }
+      return configs;
+    };
 
     if (
       !Object.keys(activeFilters.labels).length ||
