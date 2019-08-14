@@ -15,7 +15,7 @@ RUN apk update && apk upgrade && \
 COPY ./temp /app
 RUN npm run bootstrap
 COPY /package.json package-lock.json config-overrides.js .env /app/content/
-RUN cd ./app/content && npm install --no-optional
+RUN cd /app/content && npm install --no-optional
 
 # Copy sources
 COPY ./src /app/content/src
