@@ -5,10 +5,10 @@ export const extractIsDevelopmentModeFlag = (
     return true;
   }
 
-  if (typeof value === "boolean") {
+  if (typeof value === 'boolean') {
     return value;
   }
-  if (value.toLowerCase() === "true") {
+  if (value.toLowerCase() === 'true') {
     return true;
   }
   return false;

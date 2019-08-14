@@ -1,13 +1,13 @@
-import ApolloClient from "apollo-client";
-import { createHttpLink } from "apollo-link-http";
-import { ApolloLink, split } from "apollo-link";
-import { setContext } from "apollo-link-context";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { getMainDefinition } from "apollo-utilities";
-import { onError } from "apollo-link-error";
+import ApolloClient from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { ApolloLink, split } from 'apollo-link';
+import { setContext } from 'apollo-link-context';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { getMainDefinition } from 'apollo-utilities';
+import { onError } from 'apollo-link-error';
 
-import { WebSocketLink } from "./apollo-client-ws";
-import { appInitializer } from "../core";
+import { WebSocketLink } from './apollo-client-ws';
+import { appInitializer } from '../core';
 
 interface Options {
   enableSubscriptions?: boolean;
@@ -15,8 +15,8 @@ interface Options {
 
 function getGraphQLEndpoint(endpoint: string): string {
   const config = {
-    graphqlApiUrlLocal: "http://localhost:3000/graphql",
-    subscriptionsApiUrlLocal: "ws://localhost:3000/graphql",
+    graphqlApiUrlLocal: 'http://localhost:3000/graphql',
+    subscriptionsApiUrlLocal: 'ws://localhost:3000/graphql',
   };
 
   const clusterConfig = (window as any).clusterConfig;
@@ -25,12 +25,12 @@ function getGraphQLEndpoint(endpoint: string): string {
 
 export function createApolloClient({ enableSubscriptions = false }: Options) {
   const graphqlApiUrl = getGraphQLEndpoint(
-    process.env.REACT_APP_LOCAL_API ? "graphqlApiUrlLocal" : "graphqlApiUrl",
+    process.env.REACT_APP_LOCAL_API ? 'graphqlApiUrlLocal' : 'graphqlApiUrl',
   );
   const subscriptionsApiUrl = getGraphQLEndpoint(
     process.env.REACT_APP_LOCAL_API
-      ? "subscriptionsApiUrlLocal"
-      : "subscriptionsApiUrl",
+      ? 'subscriptionsApiUrlLocal'
+      : 'subscriptionsApiUrl',
   );
 
   const httpLink = createHttpLink({ uri: graphqlApiUrl });
@@ -43,7 +43,7 @@ export function createApolloClient({ enableSubscriptions = false }: Options) {
   const cache = new InMemoryCache();
   const authHttpLink = authLink.concat(httpLink);
   const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (process.env.REACT_APP_ENV !== "production") {
+    if (process.env.REACT_APP_ENV !== 'production') {
       if (graphQLErrors) {
         graphQLErrors.map(({ message, locations, path }) =>
           // tslint:disable-next-line
@@ -73,8 +73,8 @@ export function createApolloClient({ enableSubscriptions = false }: Options) {
       ({ query }) => {
         const definition = getMainDefinition(query);
         return (
-          definition.kind === "OperationDefinition" &&
-          definition.operation === "subscription"
+          definition.kind === 'OperationDefinition' &&
+          definition.operation === 'subscription'
         );
       },
       wsLink,

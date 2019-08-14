@@ -1,9 +1,9 @@
-import { css } from "styled-components";
-import { ThemeInterface } from "@kyma-project/dc-async-api-render-engine";
+import { css } from 'styled-components';
+import { ThemeInterface } from '@kyma-project/dc-async-api-render-engine';
 
 export const asyncApiTheme: ThemeInterface = {
   asyncApiWrapper: css`
-    font-family: "72";
+    font-family: '72';
     font-size: 14px;
     line-height: 20px;
     font-weight: 400;
@@ -194,7 +194,7 @@ export const asyncApiTheme: ThemeInterface = {
     width: 25px;
 
     &:before {
-      content: "";
+      content: '';
       position: absolute;
       top: -15px;
       width: 13px;
@@ -278,7 +278,7 @@ export const asyncApiTheme: ThemeInterface = {
     font-size: 13px;
   `,
   codeContent: css`
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace !important;
     margin: 0 !important;
     padding: 8px 15px !important;
@@ -363,7 +363,7 @@ export const asyncApiTheme: ThemeInterface = {
     cursor: pointer;
 
     &:before {
-      content: "\uE066";
+      content: '\uE066';
       font-family: SAP-icons;
       position: absolute;
       color: #0071d4;
@@ -404,7 +404,7 @@ export const asyncApiTheme: ThemeInterface = {
     position: relative;
 
     &:before {
-      content: "";
+      content: '';
       position: absolute;
       border: 3px solid #0071d4;
       border-radius: 100%;
@@ -467,7 +467,7 @@ export const asyncApiTheme: ThemeInterface = {
     position: relative;
 
     &:before {
-      content: "";
+      content: '';
       position: absolute;
       border: 3px solid #0071d4;
       border-radius: 100%;
@@ -518,7 +518,7 @@ export const asyncApiTheme: ThemeInterface = {
     position: relative;
 
     &:before {
-      content: "";
+      content: '';
       position: absolute;
       border: 3px solid #0071d4;
       border-radius: 100%;
@@ -601,7 +601,7 @@ export const asyncApiTheme: ThemeInterface = {
     position: relative;
 
     &:before {
-      content: "";
+      content: '';
       position: absolute;
       border: 3px solid #0071d4;
       border-radius: 100%;

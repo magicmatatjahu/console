@@ -1,2 +1,2 @@
-export * from "./queries.service";
-export * from "./queries.types";
+export * from './queries.service';
+export * from './queries.types';

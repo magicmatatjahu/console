@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
-import { NotificationsService } from "../../services";
+import { NotificationsService } from '../../services';
 
-import Notification from "./Notification.component";
+import Notification from './Notification.component';
 
 const NotificationContainer: React.FunctionComponent = () => {
   const { notification, showNotification, hideNotification } = useContext(

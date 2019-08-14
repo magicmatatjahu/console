@@ -1,22 +1,22 @@
-const path = require("path");
-const gulp = require("gulp");
-const ts = require("gulp-typescript");
-const childProcess = require("child_process");
-const log = require("fancy-log");
-const clc = require("cli-color");
-const { promisify } = require("util");
+const path = require('path');
+const gulp = require('gulp');
+const ts = require('gulp-typescript');
+const childProcess = require('child_process');
+const log = require('fancy-log');
+const clc = require('cli-color');
+const { promisify } = require('util');
 
 const execFile = promisify(childProcess.execFile);
 
-process.on("unhandledRejection", err => {
+process.on('unhandledRejection', err => {
   throw err;
 });
-const distId = process.argv.indexOf("--dist");
-const dist = distId < 0 ? "" : process.argv[distId + 1];
+const distId = process.argv.indexOf('--dist');
+const dist = distId < 0 ? '' : process.argv[distId + 1];
 
-const common = "common";
-const genericDocumentation = "generic-documentation";
-const reactComponents = "components";
+const common = 'common';
+const genericDocumentation = 'generic-documentation';
+const reactComponents = 'components';
 
 const libraries = {
   [common]: ts.createProject(`./${common}/tsconfig.json`),
@@ -36,7 +36,7 @@ libModules.forEach(lib => {
   });
 });
 gulp.task(
-  "install:libraries",
+  'install:libraries',
   gulp.parallel(libModules.map(lib => `${lib}:install`)),
 );
 
@@ -48,9 +48,9 @@ libModules.forEach(lib => {
       .pipe(gulp.dest(`./${lib}/dist`));
   });
 });
-gulp.task("build:libraries", gulp.series(libModules));
+gulp.task('build:libraries', gulp.series(libModules));
 
-gulp.task("watch:libraries", () => {
+gulp.task('watch:libraries', () => {
   libModules.forEach(lib => {
     gulp.watch(
       [
@@ -66,11 +66,11 @@ gulp.task("watch:libraries", () => {
 
 const install = async dir => {
   log.info(
-    `Installing dependencies of ${clc.magenta(dir.replace(__dirname, ""))}`,
+    `Installing dependencies of ${clc.magenta(dir.replace(__dirname, ''))}`,
   );
 
   try {
-    await execFile(`npm`, ["install"], {
+    await execFile(`npm`, ['install'], {
       cwd: dir,
     });
   } catch (err) {

@@ -1,14 +1,14 @@
-import React, { useState, useContext } from "react";
-import { luigiClient } from "@kyma-project/common";
+import React, { useState, useContext } from 'react';
+import { luigiClient } from '@kyma-project/common';
 
-import { useInput } from "../../../services/Forms";
+import { useInput } from '../../../services/Forms';
 import {
   MutationsService,
   ConfigurationsService,
   UrlsService,
-} from "../../../services";
+} from '../../../services';
 
-import AddUrlModal from "./AddUrlModal.component";
+import AddUrlModal from './AddUrlModal.component';
 
 interface Props {
   configurationName?: string;
@@ -33,7 +33,7 @@ const AddUrlModalContainer: React.FunctionComponent<Props> = ({
 
     return name;
   };
-  const configurationNameField = useInput("");
+  const configurationNameField = useInput('');
 
   // Urls
   const [urls, setUrls] = useState<string[]>([]);
@@ -54,18 +54,18 @@ const AddUrlModalContainer: React.FunctionComponent<Props> = ({
   const validateUrlField = (url: string): string => {
     if (!url) {
       urlField.cleanUpField();
-      return "";
+      return '';
     }
 
     const existingUrls = [...getUrlsFromConfigByName(getConfigName()), ...urls];
     return validateUrl(url, existingUrls);
   };
   const handleEnterDownOnUrlField = (event: any) => {
-    if (event.key === "Enter" && !urlField.error) {
+    if (event.key === 'Enter' && !urlField.error) {
       addUrl();
     }
   };
-  const urlField = useInput("", validateUrlField);
+  const urlField = useInput('', validateUrlField);
 
   const onSubmit = () => {
     let urlsToCreated: string[] = [...urls];

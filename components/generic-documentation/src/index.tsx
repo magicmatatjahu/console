@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   DC,
   Sources,
   Plugins,
   RenderEngines,
   Renderers,
-} from "@kyma-project/documentation-component";
-import { plugins as markdownPlugins } from "@kyma-project/dc-markdown-render-engine";
+} from '@kyma-project/documentation-component';
+import { plugins as markdownPlugins } from '@kyma-project/dc-markdown-render-engine';
 
-import { markdownRE, openApiRE, asyncApiRE, odataRE } from "./render-engines";
-import { ContentUILayout, CatalogUILayout, InstancesUILayout } from "./layouts";
-import { MarkdownSingleRenderer } from "./renderers";
+import { markdownRE, openApiRE, asyncApiRE, odataRE } from './render-engines';
+import { ContentUILayout, CatalogUILayout, InstancesUILayout } from './layouts';
+import { MarkdownSingleRenderer } from './renderers';
 import {
   disableInternalLinksMutationPlugin,
   replaceImagePathsMutationPlugin,
   removeHrefFromMarkdown,
-} from "./render-engines/markdown/plugins";
-import { loader, ClusterDocsTopic, DocsTopic } from "./loader";
-import { disableClickEventFromSwagger } from "./helpers";
+} from './render-engines/markdown/plugins';
+import { loader, ClusterDocsTopic, DocsTopic } from './loader';
+import { disableClickEventFromSwagger } from './helpers';
 import {
   headingPrefix,
   customFirstNode,
-} from "./render-engines/markdown/helpers";
+} from './render-engines/markdown/helpers';
 
 const PLUGINS: Plugins = [
   markdownPlugins.frontmatterMutationPlugin,
@@ -67,9 +67,9 @@ function renderContent(type: LayoutType, props?: any): React.ReactNode {
 }
 
 export enum LayoutType {
-  CONTENT_UI = "content-ui",
-  CATALOG_UI = "catalog-ui",
-  INSTANCES_UI = "instances-ui",
+  CONTENT_UI = 'content-ui',
+  CATALOG_UI = 'catalog-ui',
+  INSTANCES_UI = 'instances-ui',
 }
 
 export interface GenericComponentProps {

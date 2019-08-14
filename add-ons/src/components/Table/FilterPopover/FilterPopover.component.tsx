@@ -1,5 +1,5 @@
-import React from "react";
-import { Popover, Button, Counter } from "fundamental-react";
+import React from 'react';
+import { Popover, Button, Counter } from 'fundamental-react';
 
 interface Props {
   body: React.ReactNode;

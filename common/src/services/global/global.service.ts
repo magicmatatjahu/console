@@ -1,4 +1,4 @@
-import createUseContext from "constate";
+import createUseContext from 'constate';
 
 const useGlobalService = (context: any) => ({
   ...context,

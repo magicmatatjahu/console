@@ -1,4 +1,4 @@
-import { MutableRefObject } from "react";
+import { MutableRefObject } from 'react';
 
 export const checkIsInView = (
   ref: MutableRefObject<HTMLDivElement | undefined>,

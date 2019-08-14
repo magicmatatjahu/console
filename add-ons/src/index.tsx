@@ -1,6 +1,6 @@
-import React from "react";
-import { bootstrap, BackendModules } from "@kyma-project/common";
-import App from "./core/App";
+import React from 'react';
+import { bootstrap, BackendModules } from '@kyma-project/common';
+import App from './core/App';
 
 import {
   QueriesProvider,
@@ -10,7 +10,7 @@ import {
   LabelsProvider,
   UrlsProvider,
   SubscriptionsProvider,
-} from "./services";
+} from './services';
 
 (async () => {
   const services = [

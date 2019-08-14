@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from "react";
-import createContainer from "constate";
+import { useState, useEffect, useContext } from 'react';
+import createContainer from 'constate';
 
-import { QueriesService } from "./queries.service";
-import { NavigationService } from "./navigation.service";
-import { ClusterDocsTopic } from "./types";
+import { QueriesService } from './queries.service';
+import { NavigationService } from './navigation.service';
+import { ClusterDocsTopic } from './types';
 
 const useDocsTopics = () => {
   const { docsTopics } = useContext(QueriesService);

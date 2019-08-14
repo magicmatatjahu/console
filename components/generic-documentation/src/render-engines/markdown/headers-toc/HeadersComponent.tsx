@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
-import { plugins } from "@kyma-project/dc-markdown-render-engine";
-import { RenderedHeader } from "./RenderedHeader";
-import { postProcessingHeaders } from "../helpers";
-import { HeadersNavigationsWrapper, StyledHeadersNavigation } from "./styled";
+import React, { useRef } from 'react';
+import { plugins } from '@kyma-project/dc-markdown-render-engine';
+import { RenderedHeader } from './RenderedHeader';
+import { postProcessingHeaders } from '../helpers';
+import { HeadersNavigationsWrapper, StyledHeadersNavigation } from './styled';
 
 const HN = plugins.HeadersNavigation;
 

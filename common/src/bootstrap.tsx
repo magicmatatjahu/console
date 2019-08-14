@@ -1,19 +1,19 @@
-import React from "react";
-import { render } from "react-dom";
-import { ApolloProvider } from "@apollo/react-hooks";
-import { BackendModuleDisabled } from "@kyma-project/react-components";
-import "fiori-fundamentals/dist/fiori-fundamentals.min.css";
+import React from 'react';
+import { render } from 'react-dom';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { BackendModuleDisabled } from '@kyma-project/react-components';
+import 'fiori-fundamentals/dist/fiori-fundamentals.min.css';
 
 import {
   nestServices,
   GlobalProvider,
   NotificationsProvider,
   BackendModules,
-} from "./services";
+} from './services';
 
-import { createApolloClient, QueriesOptions, MutationsOptions } from "./gql";
+import { createApolloClient, QueriesOptions, MutationsOptions } from './gql';
 
-import { appInitializer } from "./core";
+import { appInitializer } from './core';
 
 interface BootstrapOptions {
   app: React.ReactNode;
@@ -27,7 +27,7 @@ interface BootstrapOptions {
 }
 
 export const bootstrap = async ({
-  id = "root",
+  id = 'root',
   requiredBackendModules = [],
   enableNotifications = false,
   enableSubscriptions = false,
@@ -40,7 +40,7 @@ export const bootstrap = async ({
     requiredBackendModules &&
     !requiredBackendModules.every(mod => backendModules.includes(mod))
   ) {
-    render(<BackendModuleDisabled mod={""} />, document.getElementById(id));
+    render(<BackendModuleDisabled mod={''} />, document.getElementById(id));
     return;
   }
 

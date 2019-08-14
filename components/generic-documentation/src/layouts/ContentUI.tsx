@@ -1,10 +1,10 @@
-import React from "react";
-import { Content, Renderers } from "@kyma-project/documentation-component";
-import { Grid, StickyContainer, Sticky } from "@kyma-project/components";
+import React from 'react';
+import { Content, Renderers } from '@kyma-project/documentation-component';
+import { Grid, StickyContainer, Sticky } from '@kyma-project/components';
 
-import { HeadersNavigation } from "../render-engines/markdown/headers-toc";
-import { ContentUIWrapper } from "./styled";
-import { MarkdownWrapper } from "../styled";
+import { HeadersNavigation } from '../render-engines/markdown/headers-toc';
+import { ContentUIWrapper } from './styled';
+import { MarkdownWrapper } from '../styled';
 
 export interface ContentUILayoutProps {
   renderers: Renderers;

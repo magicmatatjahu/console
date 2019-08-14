@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import createUseContext from "constate";
+import { useState, useEffect } from 'react';
+import createUseContext from 'constate';
 
-import { Notification, NotificationArgs } from "./notifications.types";
+import { Notification, NotificationArgs } from './notifications.types';
 
 const NOTIFICATION_SHOW_TIME = 5000;
 
@@ -36,8 +36,8 @@ const useNotifications = () => {
     setNotification({
       title,
       content,
-      color: "#359c46",
-      icon: "accept",
+      color: '#359c46',
+      icon: 'accept',
     });
   };
 
@@ -45,8 +45,8 @@ const useNotifications = () => {
     setNotification({
       title,
       content,
-      color: "#359c46",
-      icon: "accept",
+      color: '#359c46',
+      icon: 'accept',
     });
   };
 

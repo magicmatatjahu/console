@@ -1,96 +1,96 @@
 export const highlightTheme: any = {
   plain: {
-    backgroundColor: "rgb(250, 250, 250)",
-    color: "rgb(11, 116, 222)",
+    backgroundColor: 'rgb(250, 250, 250)',
+    color: 'rgb(11, 116, 222)',
   },
   styles: [
     {
-      types: ["comment", "prolog", "doctype", "cdata", "punctuation"],
+      types: ['comment', 'prolog', 'doctype', 'cdata', 'punctuation'],
       style: {
-        color: "rgb(115, 129, 145)",
+        color: 'rgb(115, 129, 145)',
       },
     },
     {
-      types: ["namespace"],
+      types: ['namespace'],
       style: {
         opacity: 0.7,
       },
     },
     {
-      types: ["tag", "operator", "number"],
+      types: ['tag', 'operator', 'number'],
       style: {
-        color: "#063289",
+        color: '#063289',
       },
     },
     {
-      types: ["tag-id", "selector", "atrule-id", "property", "function"],
+      types: ['tag-id', 'selector', 'atrule-id', 'property', 'function'],
       style: {
-        color: "rgb(49, 97, 179)",
+        color: 'rgb(49, 97, 179)',
       },
     },
     {
-      types: ["attr-name", "key"],
+      types: ['attr-name', 'key'],
       style: {
-        color: "rgb(24, 70, 126)",
+        color: 'rgb(24, 70, 126)',
       },
     },
     {
-      types: ["boolean", "string"],
+      types: ['boolean', 'string'],
       style: {
-        color: "rgb(11, 116, 222)",
+        color: 'rgb(11, 116, 222)',
       },
     },
     {
       types: [
-        "entity",
-        "url",
-        "attr-value",
-        "keyword",
-        "control",
-        "directive",
-        "unit",
-        "statement",
-        "regex",
-        "at-rule",
+        'entity',
+        'url',
+        'attr-value',
+        'keyword',
+        'control',
+        'directive',
+        'unit',
+        'statement',
+        'regex',
+        'at-rule',
       ],
       style: {
-        color: "#728fcb",
+        color: '#728fcb',
       },
     },
     {
-      types: ["placeholder", "variable"],
+      types: ['placeholder', 'variable'],
       style: {
-        color: "#93abdc",
+        color: '#93abdc',
       },
     },
     {
-      types: ["deleted"],
+      types: ['deleted'],
       style: {
-        textDecorationLine: "line-through",
+        textDecorationLine: 'line-through',
       },
     },
     {
-      types: ["inserted"],
+      types: ['inserted'],
       style: {
-        textDecorationLine: "underline",
+        textDecorationLine: 'underline',
       },
     },
     {
-      types: ["italic"],
+      types: ['italic'],
       style: {
-        fontStyle: "italic",
+        fontStyle: 'italic',
       },
     },
     {
-      types: ["important", "bold"],
+      types: ['important', 'bold'],
       style: {
-        fontWeight: "bold",
+        fontWeight: 'bold',
       },
     },
     {
-      types: ["important"],
+      types: ['important'],
       style: {
-        color: "rgb(24, 70, 126)",
+        color: 'rgb(24, 70, 126)',
       },
     },
   ],

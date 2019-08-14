@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { Navigation } from "../services";
-import { NavigationGroup } from "./NavigationGroup";
-import { Wrapper } from "./styled";
+import { Navigation } from '../services';
+import { NavigationGroup } from './NavigationGroup';
+import { Wrapper } from './styled';
 
 interface Props {
   navigation: Navigation;
@@ -12,8 +12,8 @@ export const NavigationList: React.FunctionComponent<Props> = ({
   navigation,
 }) => {
   const icons: { [group: string]: string } = {
-    root: "database",
-    default: "Chart-Tree-Map",
+    root: 'database',
+    default: 'Chart-Tree-Map',
   };
 
   return (
@@ -21,7 +21,7 @@ export const NavigationList: React.FunctionComponent<Props> = ({
       {Object.keys(navigation).map(group => {
         const items = navigation[group];
         const groupType = group.toLowerCase();
-        const icon = icons[groupType] || icons["default"];
+        const icon = icons[groupType] || icons['default'];
         const key = `navigation-${group}`;
 
         return (

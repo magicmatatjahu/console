@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { globalHistory, HistoryLocation } from "@reach/router";
+import { useEffect, useState } from 'react';
+import { globalHistory, HistoryLocation } from '@reach/router';
 
 interface HookReturnVal {
   location: HistoryLocation;

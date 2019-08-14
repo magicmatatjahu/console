@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import cssEscape from "css.escape";
-import { sanitizeUrl as braintreeSanitizeUrl } from "@braintree/sanitize-url";
+import React from 'react';
+import styled from 'styled-components';
+import cssEscape from 'css.escape';
+import { sanitizeUrl as braintreeSanitizeUrl } from '@braintree/sanitize-url';
 
-import { Icon } from "@kyma-project/react-components";
+import { Icon } from '@kyma-project/react-components';
 
 const StyledIcon = styled(Icon)`
   font-size: 14px;
@@ -11,18 +11,18 @@ const StyledIcon = styled(Icon)`
 
 const createDeepLinkPath = (str?: string) => {
   if (!str) {
-    return "";
+    return '';
   }
 
-  return str.trim().replace(/\s/g, "%20");
+  return str.trim().replace(/\s/g, '%20');
 };
 
 const escapeDeepLinkPath = (str: string) =>
-  cssEscape(createDeepLinkPath(str).replace(/%20/g, "_"));
+  cssEscape(createDeepLinkPath(str).replace(/%20/g, '_'));
 
 const sanitizeUrl = (url?: string) => {
   if (!url) {
-    return "";
+    return '';
   }
 
   return braintreeSanitizeUrl(url);
@@ -32,7 +32,7 @@ export const OperationTagExtended = (Orig: typeof React.Component, _: any) =>
   class OperationTag extends React.Component<any, any> {
     static defaultProps = {
       tagObj: _.Im.fromJS({}),
-      tag: "",
+      tag: '',
     };
 
     render() {
@@ -48,41 +48,41 @@ export const OperationTagExtended = (Orig: typeof React.Component, _: any) =>
       } = this.props;
 
       const { docExpansion, deepLinking } = getConfigs();
-      const isDeepLinkingEnabled = deepLinking && deepLinking !== "false";
+      const isDeepLinkingEnabled = deepLinking && deepLinking !== 'false';
 
-      const Collapse = getComponent("Collapse");
-      const Markdown = getComponent("Markdown");
-      const DeepLink = getComponent("DeepLink");
-      const Link = getComponent("Link");
+      const Collapse = getComponent('Collapse');
+      const Markdown = getComponent('Markdown');
+      const DeepLink = getComponent('DeepLink');
+      const Link = getComponent('Link');
 
-      const tagDescription = tagObj.getIn(["tagDetails", "description"], null);
+      const tagDescription = tagObj.getIn(['tagDetails', 'description'], null);
       const tagExternalDocsDescription = tagObj.getIn([
-        "tagDetails",
-        "externalDocs",
-        "description",
+        'tagDetails',
+        'externalDocs',
+        'description',
       ]);
       const tagExternalDocsUrl = tagObj.getIn([
-        "tagDetails",
-        "externalDocs",
-        "url",
+        'tagDetails',
+        'externalDocs',
+        'url',
       ]);
 
-      const isShownKey = ["operations-tag", tag];
+      const isShownKey = ['operations-tag', tag];
       const showTag = layoutSelectors.isShown(
         isShownKey,
-        docExpansion === "full" || docExpansion === "list",
+        docExpansion === 'full' || docExpansion === 'list',
       );
 
       return (
         <div
           className={
-            showTag ? "opblock-tag-section is-open" : "opblock-tag-section"
+            showTag ? 'opblock-tag-section is-open' : 'opblock-tag-section'
           }
         >
           <h4
             onClick={() => layoutActions.show(isShownKey, !showTag)}
-            className={!tagDescription ? "opblock-tag no-desc" : "opblock-tag"}
-            id={isShownKey.map(v => escapeDeepLinkPath(v)).join("-")}
+            className={!tagDescription ? 'opblock-tag no-desc' : 'opblock-tag'}
+            id={isShownKey.map(v => escapeDeepLinkPath(v)).join('-')}
             data-tag={tag}
             data-is-open={showTag}
           >
@@ -104,7 +104,7 @@ export const OperationTagExtended = (Orig: typeof React.Component, _: any) =>
               {!tagExternalDocsDescription ? null : (
                 <small>
                   {tagExternalDocsDescription}
-                  {tagExternalDocsUrl ? ": " : null}
+                  {tagExternalDocsUrl ? ': ' : null}
                   {tagExternalDocsUrl ? (
                     <Link
                       href={sanitizeUrl(tagExternalDocsUrl)}
@@ -120,7 +120,7 @@ export const OperationTagExtended = (Orig: typeof React.Component, _: any) =>
 
             <button
               className="expand-operation"
-              title={showTag ? "Collapse operation" : "Expand operation"}
+              title={showTag ? 'Collapse operation' : 'Expand operation'}
               onClick={() => layoutActions.show(isShownKey, !showTag)}
             >
               {showTag ? (

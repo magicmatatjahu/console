@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext } from "react";
-import createContainer from "constate";
-import { GlobalService, useLocation } from "@kyma-project/common";
+import { useState, useEffect, useContext } from 'react';
+import createContainer from 'constate';
+import { GlobalService, useLocation } from '@kyma-project/common';
 
-import { QueriesService } from "./queries.service";
-import { ClusterDocsTopics, Navigation, NavigationItem } from "./types";
-import { ROOT_GROUP, KYMA_TOPIC } from "../constants";
+import { QueriesService } from './queries.service';
+import { ClusterDocsTopics, Navigation, NavigationItem } from './types';
+import { ROOT_GROUP, KYMA_TOPIC } from '../constants';
 
 interface ActiveNavNode {
   group: string;

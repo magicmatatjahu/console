@@ -37,9 +37,9 @@ export interface AssetStatus {
 }
 
 export enum AssetPhaseType {
-  READY = "READY",
-  PENDING = "PENDING",
-  FAILED = "FAILED",
+  READY = 'READY',
+  PENDING = 'PENDING',
+  FAILED = 'FAILED',
 }
 
 // Headless CMS
@@ -68,9 +68,9 @@ export interface DocsTopicStatus {
 }
 
 export enum DocsTopicPhaseType {
-  READY = "READY",
-  PENDING = "PENDING",
-  FAILED = "FAILED",
+  READY = 'READY',
+  PENDING = 'PENDING',
+  FAILED = 'FAILED',
 }
 
 export type DT = DocsTopic | ClusterDocsTopic;

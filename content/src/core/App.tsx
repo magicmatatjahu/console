@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
-import { Router } from "@reach/router";
-import { Grid, StickyContainer, Sticky } from "@kyma-project/components";
-import { Spinner } from "@kyma-project/react-components";
+import React, { useContext } from 'react';
+import { Router } from '@reach/router';
+import { Grid, StickyContainer, Sticky } from '@kyma-project/components';
+import { Spinner } from '@kyma-project/react-components';
 
-import { Content } from "../components/Content";
-import { Navigation } from "../components/Navigation";
-import { QueriesService } from "../services";
-import { ERRORS } from "../constants";
+import { Content } from '../components/Content';
+import { Navigation } from '../components/Navigation';
+import { QueriesService } from '../services';
+import { ERRORS } from '../constants';
 
-import { Wrapper, ErrorWrapper } from "./styled";
+import { Wrapper, ErrorWrapper } from './styled';
 
 export const App: React.FunctionComponent = () => {
   const { loading, error } = useContext(QueriesService);

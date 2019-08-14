@@ -1,23 +1,23 @@
-import React from "react";
-import { TreeView, InlineHelp } from "fundamental-react";
+import React from 'react';
+import { TreeView, InlineHelp } from 'fundamental-react';
 
-import DeleteConfigurationModal from "../Modals/DeleteConfigurationModal/DeleteConfigurationModal.container";
-import AddUrlModal from "../Modals/AddUrlModal/AddUrlModal.container";
-import DeleteUrlModal from "../Modals/DeleteUrlModal/DeleteUrlModal.container";
+import DeleteConfigurationModal from '../Modals/DeleteConfigurationModal/DeleteConfigurationModal.container';
+import AddUrlModal from '../Modals/AddUrlModal/AddUrlModal.container';
+import DeleteUrlModal from '../Modals/DeleteUrlModal/DeleteUrlModal.container';
 
 import {
   Label,
   Labels,
   TreeViewColActions,
   NoAvailableLabelsText,
-} from "./styled";
+} from './styled';
 
-import { Configuration, ConfigurationLabels } from "../../types";
+import { Configuration, ConfigurationLabels } from '../../types';
 import {
   DEFAULT_CONFIGURATION,
   DEFAULT_CONFIGURATION_DESCRIPTION,
   NO_LABELS_AVAILABLE,
-} from "../../constants";
+} from '../../constants';
 
 interface TableContentProps {
   headers: string[];
@@ -57,14 +57,14 @@ const TableContentComponent: React.FunctionComponent<TableContentProps> = ({
                     <span
                       className={
                         config.name === DEFAULT_CONFIGURATION
-                          ? "fd-tree__col--control--default-config"
-                          : ""
+                          ? 'fd-tree__col--control--default-config'
+                          : ''
                       }
                     >
                       {`${config.name}${
                         config.name === DEFAULT_CONFIGURATION
-                          ? " (default)"
-                          : ""
+                          ? ' (default)'
+                          : ''
                       }`}
                     </span>
                     {config.name === DEFAULT_CONFIGURATION ? (
@@ -98,7 +98,7 @@ const TableContentComponent: React.FunctionComponent<TableContentProps> = ({
                   {config.urls.map(url => (
                     <TreeView.Row key={url}>
                       <TreeView.Col className="add-ons-url">
-                        {url.startsWith("http") ? (
+                        {url.startsWith('http') ? (
                           <a href={url} target="_blank">
                             {url}
                           </a>

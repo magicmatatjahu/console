@@ -1,5 +1,5 @@
-import { luigiClient } from "./luigi";
-import { BackendModule } from "../services/global/global.types";
+import { luigiClient } from './luigi';
+import { BackendModule } from '../services/global/global.types';
 
 interface InitializerReturnType {
   currentNamespace: string;
@@ -7,7 +7,7 @@ interface InitializerReturnType {
 }
 
 class AppInitializer {
-  private token: string | null = "";
+  private token: string | null = '';
 
   init() {
     return new Promise<InitializerReturnType>((resolve, _) => {

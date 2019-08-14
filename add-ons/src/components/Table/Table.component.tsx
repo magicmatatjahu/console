@@ -1,13 +1,13 @@
-import React from "react";
-import { Panel } from "fundamental-react";
+import React from 'react';
+import { Panel } from 'fundamental-react';
 
-import Search from "./Search/Search.container";
-import FilterPopover from "./FilterPopover/FilterPopover.container";
-import ActiveFilters from "./ActiveFilters.container";
+import Search from './Search/Search.container';
+import FilterPopover from './FilterPopover/FilterPopover.container';
+import ActiveFilters from './ActiveFilters.container';
 
-import { CORE } from "../../constants";
+import { CORE } from '../../constants';
 
-import { PanelWrapper } from "./styled";
+import { PanelWrapper } from './styled';
 
 interface TableComponentProps {
   configurationsExist: boolean;

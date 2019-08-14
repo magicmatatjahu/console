@@ -1,17 +1,17 @@
-import React, { useContext } from "react";
-import { navigate } from "@reach/router";
-import { luigiClient, toKebabCase } from "@kyma-project/common";
+import React, { useContext } from 'react';
+import { navigate } from '@reach/router';
+import { luigiClient, toKebabCase } from '@kyma-project/common';
 
 import {
   NavigationService,
   NavigationItem as NavigationItemType,
-} from "../services";
+} from '../services';
 
 import {
   NavigationItem as StyledNavigationItem,
   NavigationLinkWrapper,
   NavigationLink,
-} from "./styled";
+} from './styled';
 
 interface Props extends NavigationItemType {
   groupType: string;

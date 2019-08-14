@@ -1,7 +1,7 @@
-import { ApolloLink, Operation, Observable, FetchResult } from "apollo-link";
-import { SubscriptionClient } from "subscriptions-transport-ws";
+import { ApolloLink, Operation, Observable, FetchResult } from 'apollo-link';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 
-import { appInitializer } from "../core";
+import { appInitializer } from '../core';
 
 export class WebSocketLink extends ApolloLink {
   subscriptionClient: SubscriptionClient;
@@ -32,8 +32,8 @@ function getWrappedWebsocket() {
   const NativeWebSocket = w.WebSocket || w.MozWebSocket;
   const customWs: any = (url: string) => {
     const bearerToken = appInitializer.getBearerToken();
-    const token = bearerToken ? bearerToken.split(" ")[1] : null;
-    const protocols = ["graphql-ws", token];
+    const token = bearerToken ? bearerToken.split(' ')[1] : null;
+    const protocols = ['graphql-ws', token];
     return new NativeWebSocket(url, protocols);
   };
 

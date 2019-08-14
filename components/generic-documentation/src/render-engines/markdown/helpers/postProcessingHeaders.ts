@@ -1,6 +1,6 @@
-import { Source } from "@kyma-project/documentation-component";
-import { plugins } from "@kyma-project/dc-markdown-render-engine";
-import { toKebabCase } from "../../../helpers/toKebabCase";
+import { Source } from '@kyma-project/documentation-component';
+import { plugins } from '@kyma-project/dc-markdown-render-engine';
+import { toKebabCase } from '../../../helpers/toKebabCase';
 
 type Header = plugins.Header;
 
@@ -58,7 +58,7 @@ export const postProcessingHeaders = (
     processedHeaders.push({
       title: type,
       id: toKebabCase(`${type}-${type}`),
-      level: "doc-type",
+      level: 'doc-type',
       children: [],
     });
   }

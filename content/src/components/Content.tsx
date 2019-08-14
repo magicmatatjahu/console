@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import { RouteComponentProps } from "@reach/router";
+import React, { useContext } from 'react';
+import { RouteComponentProps } from '@reach/router';
 import {
   GenericComponent,
   LayoutType,
-} from "@kyma-project/generic-documentation";
+} from '@kyma-project/generic-documentation';
 
-import { DocsTopicsService } from "../services";
-import { ContentWrapper } from "./styled";
+import { DocsTopicsService } from '../services';
+import { ContentWrapper } from './styled';
 
 export const Content: React.FunctionComponent<RouteComponentProps> = () => {
   const { activeDocsTopic } = useContext(DocsTopicsService);

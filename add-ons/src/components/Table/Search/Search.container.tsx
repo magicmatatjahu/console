@@ -1,16 +1,16 @@
-import React, { useState, useContext, useEffect } from "react";
-import useClickOutside from "click-outside-hook";
+import React, { useState, useContext, useEffect } from 'react';
+import useClickOutside from 'click-outside-hook';
 
-import { useInput } from "../../../services/Forms";
-import { ConfigurationsService, FiltersService } from "../../../services";
+import { useInput } from '../../../services/Forms';
+import { ConfigurationsService, FiltersService } from '../../../services';
 
-import Search from "./Search.component";
+import Search from './Search.component';
 
 const SearchContainer: React.FunctionComponent = () => {
   const { configurationsExist } = useContext(ConfigurationsService);
   const { setSearchFilter } = useContext(FiltersService);
 
-  const searchField = useInput("");
+  const searchField = useInput('');
   const [showSearchIcon, setShowSearchIcon] = useState<boolean>(true);
 
   const reference = useClickOutside(() => {

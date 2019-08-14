@@ -1,10 +1,10 @@
-import { RenderEngineWithOptions } from "@kyma-project/documentation-component";
+import { RenderEngineWithOptions } from '@kyma-project/documentation-component';
 import {
   openApiRenderEngine,
   OpenApiProps,
-} from "@kyma-project/dc-open-api-render-engine";
+} from '@kyma-project/dc-open-api-render-engine';
 
-import { ApiConsolePlugin } from "./plugins";
+import { ApiConsolePlugin } from './plugins';
 
 export const openApiRE: RenderEngineWithOptions<OpenApiProps> = {
   renderEngine: openApiRenderEngine,

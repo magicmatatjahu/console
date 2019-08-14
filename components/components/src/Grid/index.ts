@@ -3,14 +3,14 @@ import styled, {
   CSSObject,
   SimpleInterpolation,
   ThemedCssFunction,
-} from "styled-components";
+} from 'styled-components';
 
 enum Sizes {
-  SMALL_PHONE = "smallPhone",
-  PHONE = "phone",
-  TABLET = "tablet",
-  DESKTOP = "desktop",
-  LARGE_DESKTOP = "largeDesktop",
+  SMALL_PHONE = 'smallPhone',
+  PHONE = 'phone',
+  TABLET = 'tablet',
+  DESKTOP = 'desktop',
+  LARGE_DESKTOP = 'largeDesktop',
 }
 
 export const sizes: { [index in Sizes]: number } = {
@@ -48,9 +48,9 @@ interface GridContainerProps {
 }
 
 const GridContainer = styled.div<GridContainerProps>`
-  width: ${props => (props.width ? props.width : "1200px")};
+  width: ${props => (props.width ? props.width : '1200px')};
   max-width: 100%;
-  ${props => (props.padding ? props.padding : "padding: 30px 30px 0 30px")};
+  ${props => (props.padding ? props.padding : 'padding: 30px 30px 0 30px')};
   margin: 0 auto;
 `;
 
@@ -163,7 +163,7 @@ const gridUnitStyles = {
 
 const GridUnit = styled.div`
   ${defaultStyle}
-  ${(props: GridUnitProps) => props.withoutPadding && "padding: 0;"}
+  ${(props: GridUnitProps) => props.withoutPadding && 'padding: 0;'}
   ${(props: GridUnitProps) => props.df && gridUnitStyles[props.df]}
 
   ${media.largeDesktop`

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Icon } from "@kyma-project/react-components";
+import React, { useState } from 'react';
+import { Icon } from '@kyma-project/react-components';
 
-import { NavigationItem as NavigationItemType } from "../services";
-import { NavigationItem } from "./NavigationItem";
+import { NavigationItem as NavigationItemType } from '../services';
+import { NavigationItem } from './NavigationItem';
 
 import {
   NavigationContainer,
@@ -10,7 +10,7 @@ import {
   NavigationArrow,
   CollapseArrow,
   NavigationItems,
-} from "./styled";
+} from './styled';
 
 interface Props {
   title: string;

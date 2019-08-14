@@ -1,15 +1,15 @@
-import { useReducer } from "react";
-import createContainer from "constate";
+import { useReducer } from 'react';
+import createContainer from 'constate';
 
 import {
   Filters,
   ActiveFiltersAction,
   ActiveFiltersActionType,
-} from "../types";
+} from '../types';
 
 const useFilters = () => {
   const initialActiveFilters: Filters = {
-    search: "",
+    search: '',
     labels: {},
   };
 
@@ -55,7 +55,7 @@ const useFilters = () => {
     dispatchActiveFilters({
       type: ActiveFiltersActionType.SET_SEARCH,
       payload: {
-        key: "search",
+        key: 'search',
         value: search,
       },
     });
@@ -86,7 +86,7 @@ const useFilters = () => {
   const removeAllFiltersLabels = () => {
     dispatchActiveFilters({
       type: ActiveFiltersActionType.REMOVE_ALL_FILTERS,
-      payload: { key: "", value: "" },
+      payload: { key: '', value: '' },
     });
   };
 

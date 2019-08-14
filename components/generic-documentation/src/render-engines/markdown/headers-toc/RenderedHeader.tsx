@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { plugins } from "@kyma-project/dc-markdown-render-engine";
-import { CollapseArrow } from "./styled";
+import React, { useState } from 'react';
+import { plugins } from '@kyma-project/dc-markdown-render-engine';
+import { CollapseArrow } from './styled';
 
 export type Header = plugins.Header;
 export type ActiveAnchors = plugins.ActiveAnchors;
 
-const CLASS_NAME_PREFIX = "cms";
+const CLASS_NAME_PREFIX = 'cms';
 
 const createElementClass = (element: string) =>
-  element ? `${CLASS_NAME_PREFIX}__${element}` : "";
+  element ? `${CLASS_NAME_PREFIX}__${element}` : '';
 const createModifierClass = (modifier: string, element?: string) =>
   modifier
-    ? `${CLASS_NAME_PREFIX}${element ? `__${element}` : ""}--${modifier}`
-    : "";
+    ? `${CLASS_NAME_PREFIX}${element ? `__${element}` : ''}--${modifier}`
+    : '';
 
 const sumNumberOfHeaders = (headers: Header[]): number => {
   let sum: number = headers.length;
@@ -65,7 +65,7 @@ const HeaderItem: React.FunctionComponent<HeaderItemProps> = ({
       {header.children && (
         <RenderedHeader
           headers={header.children}
-          className={className ? className : ""}
+          className={className ? className : ''}
           activeAnchors={activeAnchors}
           showNode={collapseAlways || showNode || collapse}
         />
@@ -114,7 +114,7 @@ export const RenderedHeader: React.FunctionComponent<RenderedHeaderProps> = ({
   return (
     <ul
       className={
-        showNode ? `${createElementClass(`${className}-list-item--show`)}` : ""
+        showNode ? `${createElementClass(`${className}-list-item--show`)}` : ''
       }
     >
       {anchorsList}

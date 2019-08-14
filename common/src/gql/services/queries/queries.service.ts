@@ -1,7 +1,7 @@
 // import { useQuery, useLazyQuery } from '@apollo/react-hooks';
-import createUseContext from "constate";
+import createUseContext from 'constate';
 
-import { Query } from "./queries.types";
+import { Query } from './queries.types';
 
 export interface QueriesOptions {
   queries: { [query: string]: Query };

@@ -1,8 +1,8 @@
-import React from "react";
-import { luigiClient } from "@kyma-project/common";
-import { Modal, Button } from "@kyma-project/react-components";
+import React from 'react';
+import { luigiClient } from '@kyma-project/common';
+import { Modal, Button } from '@kyma-project/react-components';
 
-import { MODAL, FORMS, CONFIGURATION_VARIABLE } from "../../../constants";
+import { MODAL, FORMS, CONFIGURATION_VARIABLE } from '../../../constants';
 
 interface Props {
   configurationName: string;

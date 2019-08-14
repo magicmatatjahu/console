@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
-import createContainer from "constate";
+import { useState, useEffect, useContext } from 'react';
+import createContainer from 'constate';
 
-import { QueriesService, FiltersService } from "./index";
+import { QueriesService, FiltersService } from './index';
 
 import { randomNameGenerator } from '../helpers/random-names-generator';
 import { Configuration } from '../types';
@@ -48,11 +48,11 @@ const useConfigurations = () => {
       return NAME_ERRORS.SHORT;
     }
 
-    return "";
+    return '';
   };
 
   const configNameGenerator = (): string => {
-    let name: string = "";
+    let name: string = '';
     const condition = (data: string) =>
       originalConfigs.some(config => config.name === data);
     do {

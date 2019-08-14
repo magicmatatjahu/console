@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const ModelsExtended = (Orig: typeof React.Component, system: any) =>
   class Models extends React.Component<any, any> {
@@ -8,14 +8,14 @@ export const ModelsExtended = (Orig: typeof React.Component, system: any) =>
 
     getSchemaBasePath = () => {
       const isOAS3 = this.props.specSelectors.isOAS3();
-      return isOAS3 ? ["components", "schemas"] : ["definitions"];
+      return isOAS3 ? ['components', 'schemas'] : ['definitions'];
     };
 
-    getCollapsedContent = (name: string): string => " ";
+    getCollapsedContent = (name: string): string => ' ';
 
     handleToggle = (name: string, isExpanded: boolean) => {
       const { layoutActions } = this.props;
-      layoutActions.show(["models", name], isExpanded);
+      layoutActions.show(['models', name], isExpanded);
       if (isExpanded) {
         this.props.specActions.requestResolvedSubtree([
           ...this.getSchemaBasePath(),
@@ -40,21 +40,21 @@ export const ModelsExtended = (Orig: typeof React.Component, system: any) =>
       }
       const { Map } = Im;
       const showModels = layoutSelectors.isShown(
-        "models",
-        defaultModelsExpandDepth > 0 && docExpansion !== "none",
+        'models',
+        defaultModelsExpandDepth > 0 && docExpansion !== 'none',
       );
       const specPathBase = this.getSchemaBasePath();
       const isOAS3 = specSelectors.isOAS3();
 
-      const ModelWrapper = getComponent("ModelWrapper");
-      const Collapse = getComponent("Collapse");
-      const ModelCollapse = getComponent("ModelCollapse");
-      const JumpToPath = getComponent("JumpToPath");
+      const ModelWrapper = getComponent('ModelWrapper');
+      const Collapse = getComponent('Collapse');
+      const ModelCollapse = getComponent('ModelCollapse');
+      const JumpToPath = getComponent('JumpToPath');
 
       return (
-        <section className={showModels ? "models is-open" : "models"}>
+        <section className={showModels ? 'models is-open' : 'models'}>
           <h4>
-            <span>{isOAS3 ? "Schemas" : "Models"}</span>
+            <span>{isOAS3 ? 'Schemas' : 'Models'}</span>
           </h4>
           <Collapse isOpened={showModels}>
             {definitions
@@ -71,9 +71,9 @@ export const ModelsExtended = (Orig: typeof React.Component, system: any) =>
                   : Im.Map();
 
                 const displayName =
-                  schema.get("title") || rawSchema.get("title") || name;
+                  schema.get('title') || rawSchema.get('title') || name;
                 const isShown = layoutSelectors.isShown(
-                  ["models", name],
+                  ['models', name],
                   false,
                 );
 

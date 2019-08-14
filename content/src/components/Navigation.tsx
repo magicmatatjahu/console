@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { Icon } from "@kyma-project/react-components";
+import React, { useContext } from 'react';
+import { Icon } from '@kyma-project/react-components';
 
-import { NavigationService } from "../services";
-import { NavigationList } from "./NavigationList";
+import { NavigationService } from '../services';
+import { NavigationList } from './NavigationList';
 
-import { NavigationWrapper, GoBack } from "./styled";
+import { NavigationWrapper, GoBack } from './styled';
 
 export const Navigation: React.FunctionComponent = () => {
   const context = useContext(NavigationService);

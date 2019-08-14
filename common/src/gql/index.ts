@@ -1,2 +1,2 @@
-export * from "./apollo-client";
-export * from "./services";
+export * from './apollo-client';
+export * from './services';

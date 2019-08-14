@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { Icon } from "@kyma-project/react-components";
+import styled from 'styled-components';
+import { Icon } from '@kyma-project/react-components';
 
-const ACTIVE_COLOR = "#0b74de";
+const ACTIVE_COLOR = '#0b74de';
 
 export const NavigationWrapper = styled.div`
   background: #fff;
@@ -24,7 +24,7 @@ export const GoBack = styled.div`
   text-transform: inherit;
   transition: all 125ms ease-in;
 
-  [class^="sap-icon--"] {
+  [class^='sap-icon--'] {
     display: inline-block;
     position: relative;
     top: 2px;
@@ -66,7 +66,7 @@ export const NavigationHeader = styled.section`
   display: flex;
   justify-content: flex-start;
 
-  [class^="sap-icon--"] {
+  [class^='sap-icon--'] {
     display: inline-block;
     position: relative;
     top: 2px;
@@ -84,13 +84,13 @@ interface NavigationItemsProps {
 export const NavigationItems = styled.ul<NavigationItemsProps>`
   && {
     margin: 0;
-    margin-top: ${props => (props.marginTop ? "10px" : "0")};
-    margin-bottom: ${props => (props.marginTop ? "-10px" : "0")};
-    margin-left: ${props => (props.secondary ? "10px" : "0")};
-    padding: ${props => (props.showAll ? "0 34px 20px 34px" : "0")};
+    margin-top: ${props => (props.marginTop ? '10px' : '0')};
+    margin-bottom: ${props => (props.marginTop ? '-10px' : '0')};
+    margin-left: ${props => (props.secondary ? '10px' : '0')};
+    padding: ${props => (props.showAll ? '0 34px 20px 34px' : '0')};
     max-height: ${props =>
-      (props.show && "9000px") || (props.showAll && "auto") || "0"};
-    overflow: ${props => (props.show ? "auto" : "hidden")};
+      (props.show && '9000px') || (props.showAll && 'auto') || '0'};
+    overflow: ${props => (props.show ? 'auto' : 'hidden')};
   }
 `;
 
@@ -117,8 +117,8 @@ export const NavigationSectionArrow = styled.a<NavigationSectionArrow>`
   cursor: pointer;
 
   :before {
-    content: "";
-    display: "block";
+    content: '';
+    display: 'block';
     width: 0;
     height: 0;
     border-top: 3px solid transparent;
@@ -126,15 +126,15 @@ export const NavigationSectionArrow = styled.a<NavigationSectionArrow>`
     border-left: ${props =>
       props.active
         ? `3px solid ${ACTIVE_COLOR}`
-        : "3px solid rgba(50,54,58,0.6)"};
+        : '3px solid rgba(50,54,58,0.6)'};
     left: 2px;
     top: 50%;
     position: absolute;
     transform: translateY(-50%);
     transform: ${props =>
       props.activeArrow
-        ? "translateY(-50%) rotate(90deg)"
-        : "translateY(-50%)"};
+        ? 'translateY(-50%) rotate(90deg)'
+        : 'translateY(-50%)'};
   }
 `;
 
@@ -144,13 +144,13 @@ interface NavigationLinkProps {
 }
 
 export const NavigationLink = styled.a<NavigationLinkProps>`
-  color: ${props => (props.active ? ACTIVE_COLOR : "#32363a")};
+  color: ${props => (props.active ? ACTIVE_COLOR : '#32363a')};
   font-size: 14px;
-  font-weight: ${props => (props.active ? "bold" : "normal")};
+  font-weight: ${props => (props.active ? 'bold' : 'normal')};
   display: block;
   border: 1px solid transparent;
   border-left: ${props =>
-    props.active && props.noArrow ? "3px solid" : "1px solid transparent"};
+    props.active && props.noArrow ? '3px solid' : '1px solid transparent'};
   position: relative;
 
   :hover {
@@ -159,7 +159,7 @@ export const NavigationLink = styled.a<NavigationLinkProps>`
   }
 `;
 
-Icon.defaultProps = { glyph: "feeder-arrow", size: "s" };
+Icon.defaultProps = { glyph: 'feeder-arrow', size: 's' };
 export const CollapseArrow = styled(Icon)`
   && {
     margin-left: 5px;
@@ -170,6 +170,6 @@ export const CollapseArrow = styled(Icon)`
   }
   &:before {
     transition: 0.3s ease;
-    ${props => props.open && "transform: rotate(90deg);"};
+    ${props => props.open && 'transform: rotate(90deg);'};
   }
 `;

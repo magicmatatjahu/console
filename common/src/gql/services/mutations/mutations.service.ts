@@ -1,7 +1,7 @@
 // import { useMutation } from '@apollo/react-hooks';
-import createUseContext from "constate";
+import createUseContext from 'constate';
 
-import { Mutation } from "./mutations.types";
+import { Mutation } from './mutations.types';
 
 export interface MutationsOptions {
   mutations: { [mutation: string]: Mutation };

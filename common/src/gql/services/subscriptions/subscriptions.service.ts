@@ -2,8 +2,8 @@
 // import { useSubscription } from '@apollo/react-hooks';
 
 // import { NotificationsService } from "../../../services";
-import { Subscription } from "./subscriptions.types";
-import { ERRORS } from "../../../constants";
+import { Subscription } from './subscriptions.types';
+import { ERRORS } from '../../../constants';
 
 export interface SubscriptionsOptions {
   subscriptions: Subscription[];

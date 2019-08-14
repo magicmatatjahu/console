@@ -1,10 +1,10 @@
-import React from "react";
-import { Panel, Button } from "fundamental-react";
+import React from 'react';
+import { Panel, Button } from 'fundamental-react';
 
-import { Filters, RemoveFiltersInterface } from "../../types";
+import { Filters, RemoveFiltersInterface } from '../../types';
 
-import { StyledTokensWrapper, StyledToken } from "./styled";
-import { FILTERS } from "../../constants";
+import { StyledTokensWrapper, StyledToken } from './styled';
+import { FILTERS } from '../../constants';
 
 interface Props {
   activeFilters: Filters;

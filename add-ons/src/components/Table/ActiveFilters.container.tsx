@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
-import ActiveFiltersComponent from "./ActiveFilters.component";
-import { FiltersService } from "../../services";
+import ActiveFiltersComponent from './ActiveFilters.component';
+import { FiltersService } from '../../services';
 
 const ActiveFiltersContainer: React.FunctionComponent = () => {
   const {

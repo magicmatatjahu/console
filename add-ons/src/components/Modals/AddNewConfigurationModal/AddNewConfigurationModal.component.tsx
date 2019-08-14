@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Button,
   FormSet,
@@ -7,10 +7,10 @@ import {
   FormLabel,
   FormMessage,
   Icon,
-} from "fundamental-react";
-import { Modal } from "@kyma-project/react-components";
+} from 'fundamental-react';
+import { Modal } from '@kyma-project/react-components';
 
-import InlineHelp from "../../Atoms/InlineHelp";
+import InlineHelp from '../../Atoms/InlineHelp';
 
 import {
   MODAL,
@@ -18,9 +18,9 @@ import {
   HELP,
   PLACEHOLDERS,
   TOOLTIP_DATA_ERROR,
-} from "../../../constants";
+} from '../../../constants';
 
-import { AddedUrl, StyledToken, AddLabelButtonWrapper } from "./styled";
+import { AddedUrl, StyledToken, AddLabelButtonWrapper } from './styled';
 
 interface Props {
   nameField: any;

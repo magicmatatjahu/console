@@ -1,16 +1,18 @@
+import { useContext } from "react";
 import gql from 'graphql-tag';
 import createContainer from 'constate';
-import { FetchResult } from 'apollo-link';
 import {
   useMutation,
-  MutationHookOptions,
+  MutationTuple,
 } from '@apollo/react-hooks';
 import {
-  ExecutionResult,
   MutationFunctionOptions,
+  ExecutionResult,
 } from "@apollo/react-common";
+import {
+  GlobalService
+} from "@kyma-project/common";
 
-import appInitializer from '../core/app-initializer';
 import { ConfigurationLabels } from '../types';
 
 export const CREATE_CLUSTER_ADDONS_CONFIGURATION_MUTATION = gql`
@@ -202,43 +204,44 @@ interface ResyncAddonsConfigurationVariables {
   name: string;
   namespace?: string;
 }
-
-type MutationFn<TData, TVariables> = (options?: MutationFunctionOptions<TData, TVariables>) => Promise<void | ExecutionResult<TData>>;
  
-const mutationFactory = (namespace?: string) => <TData, TVariables>(
-  fn: MutationFn<TData, TVariables>,
-) => (
-  options?: MutationHookOptions<TData, TVariables>,
-): Promise<void | ExecutionResult<TData>> => {
-  const opts = options || {};
+const mutation = (namespace?: string) => <TData, TVariables>(
+  tuple: MutationTuple<TData, TVariables>,
+): MutationTuple<TData, TVariables> => {
+  const [fn, result] = tuple;
+  const newFn = (options?: MutationFunctionOptions<TData, TVariables>): Promise<void | ExecutionResult<TData>> => {
+    const opts = options || {};
 
-  let variables = options && options.variables;
-  if (variables && Object.keys(variables) && namespace) {
-    variables = {
-      ...variables,
-      namespace,
-    };
+    let variables = options && options.variables;
+    if (variables && Object.keys(variables) && namespace) {
+      variables = {
+        ...variables,
+        namespace,
+      };
+    }
+  
+    return fn({
+      ...opts,
+      variables,
+    });
   }
 
-  return fn({
-    ...opts,
-    variables,
-  });
+  return [newFn, result];
 };
 
 const useMutations = () => {
-  const currentNamespace = appInitializer.getCurrentNamespace();
-  const mutation = mutationFactory(currentNamespace);
+  const { currentNamespace } = useContext(GlobalService);
+  const mutationFactory = mutation(currentNamespace);
 
-  const createAddonsConfiguration = mutation(
-    useMutation<{}, CreateAddonsConfigurationVariables>(
+  const createAddonsConfiguration = mutationFactory<{}, CreateAddonsConfigurationVariables>(
+    useMutation(
       currentNamespace
         ? CREATE_ADDONS_CONFIGURATION_MUTATION
         : CREATE_CLUSTER_ADDONS_CONFIGURATION_MUTATION,
     ),
   );
 
-  const updateAddonsConfiguration = mutation(
+  const updateAddonsConfiguration = mutationFactory(
     useMutation<{}, UpdateAddonsConfigurationVariables>(
       currentNamespace
         ? UPDATE_ADDONS_CONFIGURATION_MUTATION
@@ -246,7 +249,7 @@ const useMutations = () => {
     ),
   );
 
-  const deleteAddonsConfiguration = mutation(
+  const deleteAddonsConfiguration = mutationFactory(
     useMutation<{}, DeleteAddonsConfigurationVariables>(
       currentNamespace
         ? DELETE_ADDONS_CONFIGURATION_MUTATION
@@ -254,7 +257,7 @@ const useMutations = () => {
     ),
   );
 
-  const addAddonsConfigurationUrls = mutation(
+  const addAddonsConfigurationUrls = mutationFactory(
     useMutation<{}, AddAddonsConfigurationUrlsVariables>(
       currentNamespace
         ? ADD_ADDONS_CONFIGURATION_URLS_MUTATION
@@ -262,7 +265,7 @@ const useMutations = () => {
     ),
   );
 
-  const removeAddonsConfigurationUrls = mutation(
+  const removeAddonsConfigurationUrls = mutationFactory(
     useMutation<{}, RemoveAddonsConfigurationUrlsVariables>(
       currentNamespace
         ? REMOVE_ADDONS_CONFIGURATION_URLS_MUTATION
@@ -270,7 +273,7 @@ const useMutations = () => {
     ),
   );
 
-  const resyncAddonsConfiguration = mutation(
+  const resyncAddonsConfiguration = mutationFactory(
     useMutation<{}, ResyncAddonsConfigurationVariables>(
       currentNamespace
         ? RESYNC_ADDONS_CONFIGURATION_MUTATION

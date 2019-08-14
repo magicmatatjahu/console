@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
 const ModelHeaderWrapper = styled.section`
   && {
@@ -27,7 +27,7 @@ interface CodeWrapperProps {
 const CodeWrapper = styled.section<CodeWrapperProps>`
   && {
     border-radius: 4px;
-    border: ${props => (props.expanded ? "solid 1px #89919a" : "none")};
+    border: ${props => (props.expanded ? 'solid 1px #89919a' : 'none')};
     background-color: #fafafa;
     table.model {
       width: unset;
@@ -41,7 +41,7 @@ const CodeWrapper = styled.section<CodeWrapperProps>`
 export const ModelCollapseExtended = (_: any, system: any) =>
   class ModelCollapse extends Component<any, any> {
     static defaultProps = {
-      collapsedContent: "{...}",
+      collapsedContent: '{...}',
       expanded: false,
       title: null,
       onToggle: () => null,
@@ -91,25 +91,25 @@ export const ModelCollapseExtended = (_: any, system: any) =>
 
       if (this.state.expanded) {
         if (this.props.hideSelfOnExpand) {
-          return <span className={classes || ""}>{this.props.children}</span>;
+          return <span className={classes || ''}>{this.props.children}</span>;
         }
       }
 
       return (
-        <Wrapper className={classes || ""}>
+        <Wrapper className={classes || ''}>
           <ModelHeaderWrapper>
             {title && (
               <span
                 onClick={this.toggleCollapsed}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: 'pointer' }}
               >
                 {title}
               </span>
             )}
-            <span onClick={this.toggleCollapsed} style={{ cursor: "pointer" }}>
+            <span onClick={this.toggleCollapsed} style={{ cursor: 'pointer' }}>
               <ModelToggle
                 className={
-                  "model-toggle" + (this.state.expanded ? "" : " collapsed")
+                  'model-toggle' + (this.state.expanded ? '' : ' collapsed')
                 }
               />
             </span>

@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
-import { MutationsService } from "../../../services";
-import DeleteConfigurationModal from "./DeleteUrlModal.component";
+import { MutationsService } from '../../../services';
+import DeleteConfigurationModal from './DeleteUrlModal.component';
 
-import { DeleteUrlModalWrapper } from "./styled";
+import { DeleteUrlModalWrapper } from './styled';
 
 interface Props {
   configurationName: string;

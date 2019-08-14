@@ -1,13 +1,13 @@
-import { DocumentNode } from "graphql";
-import { OperationVariables } from "@apollo/react-common";
-import { SubscriptionHookOptions } from "@apollo/react-hooks";
+import { DocumentNode } from 'graphql';
+import { OperationVariables } from '@apollo/react-common';
+import { SubscriptionHookOptions } from '@apollo/react-hooks';
 
-import { NotificationArgs } from "../../../services/notifications/notifications.types";
+import { NotificationArgs } from '../../../services/notifications/notifications.types';
 
 export enum SubscriptionType {
-  ADD = "ADD",
-  UPDATE = "UPDATE",
-  DELETE = "DELETE",
+  ADD = 'ADD',
+  UPDATE = 'UPDATE',
+  DELETE = 'DELETE',
 }
 
 export interface OnSubscriptionArgs<T> {

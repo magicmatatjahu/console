@@ -1,9 +1,9 @@
-import gql from "graphql-tag";
-import createContainer from "constate";
-import { useQuery } from "@apollo/react-hooks";
+import gql from 'graphql-tag';
+import createContainer from 'constate';
+import { useQuery } from '@apollo/react-hooks';
 
-import { ClusterDocsTopic, ClusterDocsTopics } from "./types";
-import { FILTER_EXTENSIONS, VIEW_CONTEXT, ROOT_GROUP } from "../constants";
+import { ClusterDocsTopic, ClusterDocsTopics } from './types';
+import { FILTER_EXTENSIONS, VIEW_CONTEXT, ROOT_GROUP } from '../constants';
 
 const extractGroups = (clusterDocsTopics: ClusterDocsTopic[]): string[] => {
   const groupNames: Set<string> = new Set<string>();

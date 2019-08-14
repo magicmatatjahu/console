@@ -1,2 +1,2 @@
-export * from "./nameGenerator";
-export * from "./toKebabCase";
+export * from './nameGenerator';
+export * from './toKebabCase';

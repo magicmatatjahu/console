@@ -1,4 +1,4 @@
-import { Source } from "@kyma-project/documentation-component";
+import { Source } from '@kyma-project/documentation-component';
 
 export function headingPrefix(source: Source): string {
   if (source.data && source.data.frontmatter) {
@@ -8,5 +8,5 @@ export function headingPrefix(source: Source): string {
     type = type || title;
     return `${type}-${title}`;
   }
-  return "";
+  return '';
 }

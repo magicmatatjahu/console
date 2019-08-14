@@ -1,12 +1,12 @@
-import styled, { css } from "styled-components";
-import { customScrollBar } from "../helpers";
+import styled, { css } from 'styled-components';
+import { customScrollBar } from '../helpers';
 
 export const tabsStyling = css`
   .cms__tabs {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    font-family: "72";
+    font-family: '72';
     font-weight: normal;
     margin: 0px;
     border-width: 1px;
@@ -55,7 +55,7 @@ export const tabsStyling = css`
     }
 
     &:after {
-      content: "";
+      content: '';
       bottom: 0;
       display: block;
       position: absolute;
@@ -69,7 +69,7 @@ export const tabsStyling = css`
       color: #0a6ed1;
       cursor: pointer;
       &:after {
-        content: "";
+        content: '';
         bottom: 0;
         display: block;
         position: absolute;
@@ -116,7 +116,7 @@ export const StyledMarkdown = styled.div`
     border-color: rgba(151, 151, 151, 0.26);
     border-image: initial;
     border-radius: 4px;
-    font-family: "72";
+    font-family: '72';
     font-weight: normal;
     margin: 0px 0px 16px;
     padding: 16px;
@@ -131,7 +131,7 @@ export const StyledMarkdown = styled.div`
     h4,
     h5,
     h6 {
-      font-family: "72";
+      font-family: '72';
       color: #32363a;
       font-weight: bold;
       margin: 0;
@@ -158,7 +158,7 @@ export const StyledMarkdown = styled.div`
       }
     }
     a {
-      font-family: "72";
+      font-family: '72';
       color: #0b74de;
       text-decoration: none;
 
@@ -271,7 +271,7 @@ export const StyledMarkdown = styled.div`
     }
 
     .cms__text {
-      font-family: "72";
+      font-family: '72';
       font-size: 16px;
       color: rgb(81, 85, 89);
       line-height: 1.57;
@@ -283,7 +283,7 @@ export const StyledMarkdown = styled.div`
     }
 
     .cms__code-pre-wrapper {
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
         monospace !important;
       background: rgb(250, 250, 250);
       border: 1px solid rgb(229, 229, 229);
@@ -294,8 +294,8 @@ export const StyledMarkdown = styled.div`
       -webkit-overflow-scrolling: touch;
 
       ${customScrollBar({
-        thumbBorderRadius: "0 0 4px 4px",
-        trackBorderRadius: "0 0 4px 4px",
+        thumbBorderRadius: '0 0 4px 4px',
+        trackBorderRadius: '0 0 4px 4px',
       })}
 
       > pre {
@@ -374,12 +374,12 @@ export const StyledAsyncApi = styled.div`
 
 export const StyledOData = styled.div`
   &&&&& {
-    section[class^="styled__AppWrapper"] {
+    section[class^='styled__AppWrapper'] {
       display: flex;
       flex-direction: column;
     }
 
-    button[class*="styled__CollapseButton"] {
+    button[class*='styled__CollapseButton'] {
       font-size: 14px;
       font-weight: normal;
       font-style: normal;
@@ -398,15 +398,15 @@ export const StyledOData = styled.div`
       }
     }
 
-    section[class^="styled__TableWrapper"] {
+    section[class^='styled__TableWrapper'] {
       margin-bottom: 16px;
       border-radius: 4px;
       border: solid 1px #97979742;
 
-      & > div[class*="styled__TablePanel"] {
+      & > div[class*='styled__TablePanel'] {
         border-radius: 4px;
 
-        & > div[class*="styled__TableHeaderWrapper"] {
+        & > div[class*='styled__TableHeaderWrapper'] {
           border-top: none;
           border-radius: 4px;
         }
@@ -423,14 +423,14 @@ export const StyledOData = styled.div`
       color: #32363a;
     }
 
-    tr[class^="styled__TableRow"] {
+    tr[class^='styled__TableRow'] {
       border-radius: 4px;
 
-      & > td[class^="styled__TableCell"] {
+      & > td[class^='styled__TableCell'] {
         border-radius: 4px;
       }
 
-      th[class^="styled__TableHeadCell"] {
+      th[class^='styled__TableHeadCell'] {
         background-color: #f3f4f573;
       }
     }
@@ -439,18 +439,18 @@ export const StyledOData = styled.div`
       padding: 16px 20px;
       border-radius: 4px;
 
-      & > table[class^="styled__StyledTable"] {
+      & > table[class^='styled__StyledTable'] {
         table-layout: fixed;
         border-collapse: collapse;
         border-radius: 4px;
 
-        > thead[class^="styled__TableHead"] {
+        > thead[class^='styled__TableHead'] {
           border-top-left-radius: 4px;
           border-top-right-radius: 4px;
           border: solid 1px #97979742;
         }
 
-        > tbody[class^="styled__TableBody"] {
+        > tbody[class^='styled__TableBody'] {
           border-bottom-left-radius: 4px;
           border-bottom-right-radius: 4px;
           border: solid 1px #97979742;

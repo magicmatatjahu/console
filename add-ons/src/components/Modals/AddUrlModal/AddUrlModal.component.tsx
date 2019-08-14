@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Button,
   FormSet,
@@ -8,10 +8,10 @@ import {
   FormMessage,
   Icon,
   FormSelect,
-} from "fundamental-react";
-import { Modal } from "@kyma-project/react-components";
+} from 'fundamental-react';
+import { Modal } from '@kyma-project/react-components';
 
-import InlineHelp from "../../Atoms/InlineHelp";
+import InlineHelp from '../../Atoms/InlineHelp';
 
 import {
   MODAL,
@@ -19,9 +19,9 @@ import {
   HELP,
   PLACEHOLDERS,
   TOOLTIP_DATA_ERROR,
-} from "../../../constants";
+} from '../../../constants';
 
-import { AddedUrl } from "./styled";
+import { AddedUrl } from './styled';
 
 interface Props {
   configurationName?: string;
@@ -38,7 +38,7 @@ interface Props {
 }
 
 const AddUrlModalComponent: React.FunctionComponent<Props> = ({
-  configurationName = "",
+  configurationName = '',
   configurations,
   configurationNameField,
   urlField,
