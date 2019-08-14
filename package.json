@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "bootstrap": "npm i && gulp install:libraries && npm run build:libraries",
+    "bootstrap": "npm i && gulp install:libraries && npm run build:libraries && cd components/react && npm i && npm run build",
     "bootstrap:lerna": "lerna bootstrap && npm run build:components:react && npm run git-ignore-config && sudo npm run append-hosts",
     "build:libraries": "gulp build:libraries",
     "watch:libraries": "gulp watch:libraries",
