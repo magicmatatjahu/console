@@ -4,8 +4,6 @@ ci-master: resolve validate
 .PHONY: resolve
 resolve:
 	npm run bootstrap
-	make -C "./components/react" resolve
-	make -C "./components/react" build
 
 .PHONY: validate
 validate:
