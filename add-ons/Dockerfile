@@ -5,10 +5,14 @@ WORKDIR /app
 # Copy licenses
 COPY licenses/ /app/licenses/
 
+# Install global dependencies
+RUN apk update && apk upgrade && \
+    apk add --no-cache curl
+
 # Install root and app dependencies
-COPY ../package.json ../package-lock.json ../gulpfile.js ../tsconfig.base.json ../common /app/
+COPY ./temp /app
 RUN npm run bootstrap
-COPY ./package.json ./package-lock.json ./config-overrides.js ./.env /app/addons/
+COPY /package.json package-lock.json config-overrides.js .env /app/addons/
 RUN cd ./app/addons && npm install --no-optional
 
 # Copy sources
