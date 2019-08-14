@@ -4,6 +4,7 @@
   "version": "0.5.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@kyma-project/generic-documentation": "https://github.com/magicmatatjahu/console/raw/integrate-docs-component-2/components/generic-documentation/kyma-project-generic-documentation-0.1.0.tgz",
     "@kyma-project/luigi-client": "0.6.0",
     "@kyma-project/react-components": "0.0.43",
@@ -30,17 +31,20 @@
     "react-modal": "^3.4.1",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+=======
+>>>>>>> Update everything :D
     "styled-components": "^3.4.10",
-    "styled-components-grid": "^2.2.1",
-    "subscriptions-transport-ws": "^0.9.15"
+    "styled-components-grid": "^2.2.2"
   },
   "devDependencies": {
-    "mkdirp": "^0.5.1",
-    "prettier": "^1.16.4",
     "react-app-rewired": "^2.0.1",
+<<<<<<< HEAD
     "react-scripts": "3.0.1",
     "safe-buffer": "5.1.2",
     "source-map-explorer": "^1.6.0"
+=======
+    "react-scripts": "^3.0.1"
+>>>>>>> Update everything :D
   },
   "scripts": {
     "start": "echo `` > public/config/config.js && PORT=8001 react-app-rewired start",
@@ -49,11 +53,7 @@
     "build": "REACT_APP_ENV=production react-app-rewired build",
     "test": "react-app-rewired test --passWithNoTests --env=jsdom",
     "eject": "react-app-rewired eject",
-    "copy-config": "cp ../../config.js public/config/config.js",
-    "analyze": "source-map-explorer build/static/js/main.*",
-    "lint-fix": "prettier --config ../../.prettierrc --write \"./src/**/*.{js,jsx,ts,tsx,html,css,json}\"",
-    "lint-check": "prettier --config ../../.prettierrc --check \"./src/**/*.{js,jsx,ts,tsx,html,css,json}\"",
-    "eslint-check": "eslint -c .eslinterrc ./src"
+    "copy-config": "cp ../../config.js public/config/config.js"
   },
   "browserslist": [
     ">0.2%",

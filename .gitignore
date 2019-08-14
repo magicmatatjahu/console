@@ -15,17 +15,8 @@ yarn-debug.log*
 yarn-error.log*
 .idea
 .vscode
-<<<<<<< HEAD
-
-**/lib/**/*
-
-/**/whitesource.config.json
-
-catalog/build
-instances/build
-brokers/build
-=======
 **/dist
 **/coverage
 **/build
->>>>>>> Create gulpfile and rewrite content to ts
+**/react-components/index.js
+**/temp

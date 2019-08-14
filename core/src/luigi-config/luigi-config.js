@@ -749,7 +749,28 @@ Promise.all(initPromises)
           idToken: token,
           backendModules
         },
-        icon: 'sys-help'
+        icon: 'sys-help',
+        children: [
+          {
+            pathSegment: ':group',
+            viewUrl: config.docsModuleUrl,
+            hideSideNav: true,
+            context: {
+              group: ":group",
+            },
+            children: [
+              {
+                pathSegment: ':topic',
+                viewUrl: config.docsModuleUrl,
+                hideSideNav: true,
+                context: {
+                  group: ":group",
+                  topic: ":topic",
+                },
+              }
+            ]
+          }
+        ]
       }
     ]),
       Luigi.setConfig({

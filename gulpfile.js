@@ -1,35 +1,26 @@
 const path = require('path');
 const gulp = require('gulp');
-const ts = require('gulp-typescript');
 const childProcess = require('child_process');
 const log = require('fancy-log');
 const clc = require('cli-color');
 const { promisify } = require('util');
 
-const execFile = promisify(childProcess.execFile);
+const exec = promisify(childProcess.exec);
 
 process.on('unhandledRejection', err => {
   throw err;
 });
-const distId = process.argv.indexOf('--dist');
-const dist = distId < 0 ? '' : process.argv[distId + 1];
 
-const common = 'common';
-const genericDocumentation = 'generic-documentation';
-const reactComponents = 'components';
+// LIBRARIES
+const libraries = [
+  "common",
+  "components/generic-documentation",
+  "components/components",
+  "components/react",
+];
 
-const libraries = {
-  [common]: ts.createProject(`./${common}/tsconfig.json`),
-  [`components/${reactComponents}`]: ts.createProject(
-    `./components/${reactComponents}/tsconfig.json`,
-  ),
-  [`components/${genericDocumentation}`]: ts.createProject(
-    `./components/${genericDocumentation}/tsconfig.json`,
-  ),
-};
-const libModules = Object.keys(libraries);
-
-libModules.forEach(lib => {
+// Installing libraries
+libraries.forEach(lib => {
   gulp.task(`${lib}:install`, async () => {
     const packageName = path.resolve(__dirname, `./${lib}`);
     await install(packageName);
@@ -37,32 +28,8 @@ libModules.forEach(lib => {
 });
 gulp.task(
   'install:libraries',
-  gulp.parallel(libModules.map(lib => `${lib}:install`)),
+  gulp.parallel(libraries.map(lib => `${lib}:install`)),
 );
-
-libModules.forEach(lib => {
-  gulp.task(lib, () => {
-    return libraries[lib]
-      .src()
-      .pipe(libraries[lib]())
-      .pipe(gulp.dest(`./${lib}/dist`));
-  });
-});
-gulp.task('build:libraries', gulp.series(libModules));
-
-gulp.task('watch:libraries', () => {
-  libModules.forEach(lib => {
-    gulp.watch(
-      [
-        `./${lib}/src/**/*.ts`,
-        `./${lib}/src/*.ts`,
-        `./${lib}/src/**/*.tsx`,
-        `./${lib}/src/*.tsx`,
-      ],
-      gulp.parallel(lib),
-    );
-  });
-});
 
 const install = async dir => {
   log.info(
@@ -70,7 +37,7 @@ const install = async dir => {
   );
 
   try {
-    await execFile(`npm`, ['install'], {
+    await exec(`npm install`, {
       cwd: dir,
     });
   } catch (err) {
@@ -78,3 +45,66 @@ const install = async dir => {
     throw err;
   }
 };
+
+// Building libraries
+libraries.forEach(lib => {
+  gulp.task(`${lib}:build`, async () => {
+    const packageName = path.resolve(__dirname, `./${lib}`);
+    await build(packageName);
+  });
+});
+gulp.task(
+  'build:libraries',
+  gulp.parallel(libraries.map(lib => `${lib}:build`)),
+);
+
+const build = async dir => {
+  log.info(
+    `Building library ${clc.magenta(dir.replace(__dirname, ''))}`,
+  );
+
+  try {
+    await exec(`npm run build`, {
+      cwd: dir,
+    });
+  } catch (err) {
+    log.error(`Failed building library ${dir}`);
+    throw err;
+  }
+};
+
+// Watching libraries
+gulp.task('watch:libraries', () => {
+  libraries.forEach(lib => {
+    gulp.watch(
+      [
+        `./${lib}/src/**/*`
+      ],
+      gulp.parallel(`${lib}:build`),
+    );
+  });
+});
+
+// APPS
+const apps = [
+  "add-ons",
+  "content",
+  "core",
+  "lambda",
+  "logging",
+  "service-catalog-ui/brokers",
+  "service-catalog-ui/catalog",
+  "service-catalog-ui/instances",
+];
+
+// Installing apps
+apps.forEach(app => {
+  gulp.task(`${app}:install`, async () => {
+    const packageName = path.resolve(__dirname, `./${app}`);
+    await install(packageName);
+  });
+});
+gulp.task(
+  'install:apps',
+  gulp.parallel(apps.map(app => `${app}:install`)),
+);
