@@ -14,9 +14,9 @@ process.on('unhandledRejection', err => {
 // LIBRARIES
 const libraries = [
   "common",
-  "components/generic-documentation",
   "components/components",
   "components/react",
+  "components/generic-documentation",
 ];
 
 // Installing libraries
@@ -55,7 +55,7 @@ libraries.forEach(lib => {
 });
 gulp.task(
   'build:libraries',
-  gulp.parallel(libraries.map(lib => `${lib}:build`)),
+  gulp.series(libraries.map(lib => `${lib}:build`)),
 );
 
 const build = async dir => {
