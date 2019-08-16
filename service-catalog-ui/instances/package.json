@@ -3,6 +3,15 @@
   "description": "Instances UI",
   "version": "0.5.0",
   "private": true,
+  "scripts": {
+    "start": "echo `` > public/config/config.js && PORT=8001 ../../node_modules/.bin/react-app-rewired start",
+    "start:kyma": "npm run copy-config && BROWSER=none HOST=console-dev.kyma.local PORT=8001 ../../node_modules/.bin/react-app-rewired start",
+    "start:kyma:api": "npm run copy-config && REACT_APP_LOCAL_API=true BROWSER=none HOST=console-dev.kyma.local PORT=8001 ../../node_modules/.bin/react-app-rewired start",
+    "build": "REACT_APP_ENV=production ../../node_modules/.bin/react-app-rewired build",
+    "test": "../../node_modules/.bin/react-app-rewired test --passWithNoTests --env=jsdom",
+    "eject": "../../node_modules/.bin/react-app-rewired eject",
+    "copy-config": "cp ../../config.js public/config/config.js"
+  },
   "dependencies": {
 <<<<<<< HEAD
     "@kyma-project/generic-documentation": "https://github.com/magicmatatjahu/console/raw/integrate-docs-component-2/components/generic-documentation/kyma-project-generic-documentation-0.1.0.tgz",
@@ -36,6 +45,7 @@
     "styled-components": "^3.4.10",
     "styled-components-grid": "^2.2.2"
   },
+<<<<<<< HEAD
   "devDependencies": {
     "react-app-rewired": "^2.0.1",
 <<<<<<< HEAD
@@ -54,13 +64,20 @@
     "test": "react-app-rewired test --passWithNoTests --env=jsdom",
     "eject": "react-app-rewired eject",
     "copy-config": "cp ../../config.js public/config/config.js"
+=======
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+>>>>>>> .
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "config": {
     "unsafe-perm": true
   }
