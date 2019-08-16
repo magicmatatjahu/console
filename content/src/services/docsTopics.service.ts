@@ -8,11 +8,11 @@ import { ClusterDocsTopics, ClusterDocsTopic } from './types';
 const newActiveDocsTopic = ({
   docsTopics,
   activeNavNode,
-  activeDocsTopic
+  activeDocsTopic,
 }: {
   docsTopics?: ClusterDocsTopics;
   activeNavNode: ActiveNavNode;
-  activeDocsTopic: ClusterDocsTopic | null
+  activeDocsTopic: ClusterDocsTopic | null;
 }): ClusterDocsTopic | undefined => {
   if (!activeNavNode) {
     return;
@@ -32,7 +32,7 @@ const newActiveDocsTopic = ({
     return;
   }
   return newDocsTopic;
-}
+};
 
 const useDocsTopics = () => {
   const { docsTopics } = useContext(QueriesService);
@@ -46,7 +46,7 @@ const useDocsTopics = () => {
     const newDocsTopic = newActiveDocsTopic({
       docsTopics,
       activeNavNode,
-      activeDocsTopic
+      activeDocsTopic,
     });
     newDocsTopic && setActiveDocsTopic(newDocsTopic);
   }, [docsTopics, activeNavNode, activeDocsTopic]);
@@ -55,7 +55,7 @@ const useDocsTopics = () => {
     const newDocsTopic = newActiveDocsTopic({
       docsTopics,
       activeNavNode,
-      activeDocsTopic
+      activeDocsTopic,
     });
     newDocsTopic && setActiveDocsTopic(newDocsTopic);
   }, [docsTopics, activeNavNode, activeDocsTopic]);
