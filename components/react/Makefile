@@ -3,11 +3,11 @@ ci-master: root-master resolve build test
 
 .PHONY: root-pr
 root-pr:
-	make -C "../" ci-pr
+	make -C "../../" ci-pr
 
 .PHONY: root-master
 root-master:
-	make -C "../" ci-master
+	make -C "../../" ci-master
 
 .PHONY: resolve
 resolve:
