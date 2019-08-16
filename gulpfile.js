@@ -78,6 +78,7 @@ gulp.task('watch:libraries', () => {
 // APPS
 const apps = [
   'add-ons',
+  'compass',
   'content',
   'core',
   'lambda',

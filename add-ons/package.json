@@ -1,6 +1,6 @@
 {
-  "name": "addons-ui",
-  "description": "Addons Configuration UI",
+  "name": "@kyma-project/addons-ui",
+  "description": "Addons Configuration UI for Kyma console",
   "version": "1.1.0",
   "private": true,
 <<<<<<< HEAD

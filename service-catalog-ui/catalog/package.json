@@ -1,5 +1,5 @@
 {
-  "name": "catalog-ui",
+  "name": "@kyma-project/catalog-ui",
   "description": "Catalog UI",
   "version": "0.7.0",
   "private": true,

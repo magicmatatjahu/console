@@ -74,9 +74,9 @@ stats.html
 .rpt2_cache
 
 node_modules
-compass
+compass/src/assets/luigiConfig.bundle.js
+compass/src/config/luigi-config/main.js
 components/angular
-components/react
 core
 lambda
 logging

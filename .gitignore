@@ -1,21 +1,43 @@
-# misc
 .DS_Store
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+**/.DS_Store
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
 
+node_modules
+.pnp
+.pnp.js
 **/node_modules
-.idea/
-.npmrc
+**/.pnp
+**/.pnp.js
 
 npm-debug.log*
 lerna-debug.log*
 yarn-debug.log*
 yarn-error.log*
+**/npm-debug.log*
+**/lerna-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
 .idea
 .vscode
+**/.idea
+**/.vscode
+
+dist
+lib
+coverage
+build
+react-components/index.js
+temp
 **/dist
+**/lib
 **/coverage
 **/build
 **/react-components/index.js

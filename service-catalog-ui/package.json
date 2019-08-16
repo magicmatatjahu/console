@@ -1,5 +1,5 @@
 {
-  "name": "service-catalog-ui",
+  "name": "@kyma-project/service-catalog-ui",
   "description": "All Service Catalog UIs",
   "version": "0.5.0",
   "private": true,
