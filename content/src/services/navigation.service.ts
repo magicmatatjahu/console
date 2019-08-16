@@ -6,7 +6,7 @@ import { QueriesService } from './queries.service';
 import { ClusterDocsTopics, Navigation, NavigationItem } from './types';
 import { ROOT_GROUP, KYMA_TOPIC } from '../constants';
 
-interface ActiveNavNode {
+export interface ActiveNavNode {
   group: string;
   topic: string;
 }
@@ -46,14 +46,13 @@ const useNavigation = () => {
   });
 
   useEffect(() => {
-    const { state } = location;
-    if (!state) {
+    if (!location.state) {
       return;
     }
 
     setActiveNavNode({
-      group: state.group || ROOT_GROUP,
-      topic: state.topic || KYMA_TOPIC,
+      group: location.state.group || ROOT_GROUP,
+      topic: location.state.topic || KYMA_TOPIC,
     });
   }, [location.state]);
 
