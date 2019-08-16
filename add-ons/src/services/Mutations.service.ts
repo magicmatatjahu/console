@@ -209,7 +209,7 @@ const mutation = (namespace?: string) => <TData, TVariables>(
   tuple: MutationTuple<TData, TVariables>,
 ): MutationTuple<TData, TVariables> => {
   const [fn, result] = tuple;
-  const newFn = (options?: MutationFunctionOptions<TData, TVariables>): Promise<void | ExecutionResult<TData>> => {
+  const newFn = (options?: MutationFunctionOptions<TData, TVariables>): Promise<ExecutionResult<TData>> => {
     const opts = options || {};
 
     let variables = options && options.variables;
