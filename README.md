@@ -16,32 +16,43 @@ The Console project consists of the following UI projects:
 - [`Lambda`](./lambda) - The view for lambda functions
 - [`Content`](./content) - The documentation view
 - [`Log UI`](./logging) - The logs view
-- [`Compass`](./logging) - The logs view
+- [`Compass`](./logging) - The **experimental** UI for the [Compass](https://github.com/kyma-incubator/compass/blob/master/README.md) project.
 - [`Tests`](./tests) - Acceptance and end-to-end tests
 
-Console also includes the libraries with components for the React and Angular front-end frameworks:
+Console also includes the libraries for the React and Angular:
 
-- [`React components`](./components/react)
-- [`Generic list for Angular`](./components/angular/generic-list)
+- [`React common`](./common) - common functionalities for React applications
+- [`React components`](./components/react) - components for React applications (it will be replaced by `Shared components`)
+- [`Shared components`](./components/shared) - new version of components for React applications written in TypeScript
+- [`Generic documentation`](./components/generic-documentation) - React component that uses [`@kyma-project/documentation-component`](https://github.com/kyma-incubator/documentation-component) for displaying documentation and various specifications in [`Content`](./content), [`Catalog`](./service-catalog-ui/catalog) and [`Instances`](./service-catalog-ui/instances) views.
 
 ## Installation
 
 1. Install [Kyma](https://kyma-project.io/docs/master/root/kyma/#installation-install-kyma-locally) as a backing service for your local instance of Console. Make sure you import certificates into your operating system and mark them as trusted. Otherwise, you cannot access the applications hosted in the `kyma.local` domain.
-2. Install Console that uses [Lerna](https://github.com/lerna/lerna) for managing local dependencies. To install all dependencies for all UI projects and prepare symlinks for local packages within this repository that are components for the React and Angular in the [`components`](./components) folder, run the following commands:
 
-    ```
-    npm install
+2. Install Console dependencies. To install dependencies for root and for all UI projects and prepare symlinks for local libraries within this repository, run the following command:
+
+    ``` bash
     npm run bootstrap
     ```
 
-    **NOTE:** The `npm run bootstrap` command updates your `/etc/hosts` with the `127.0.0.1 console-dev.kyma.local` host.
-3. Run the following command to run the Console with [`core`](./core) and all the views locally:
+    > **NOTE:** The `npm run bootstrap` command (in order):
+    > - installs root dependencies given in [package.json](./package.json)
+    > - installs dependencies for [`React common`](./common), [`React components`](./components/react), [`Shared components`](./components/shared) and [`Generic documentation`](./components/generic-documentation)
+    > - builds mentioned above libraries
+    > - installs dependencies for all components mentioned in [Components](#components) section
+    > - updates your `/etc/hosts` with the `127.0.0.1 console-dev.kyma.local` host
+    > - ignore all `config.js` files in git
 
-    ```
-    npm run start
-    ```
+## Usage
 
-4. To access the local instance of the Console at `http://console-dev.kyma.local:4200`, use credentials from [this](https://github.com/kyma-project/kyma/blob/master/docs/kyma/docs/031-gs-local-installation.md#access-the-kyma-console) document.
+Run the following command to run the Console with [`core`](./core) and all the views locally:
+
+``` bash
+npm run start
+```
+
+To access the local instance of the Console at `http://console-dev.kyma.local:4200`, use credentials from [this](https://kyma-project.io/docs/master/root/kyma#installation-install-kyma-on-a-cluster--provider-installation--aks--access-the-cluster) document - point 3.
 
 ## Development
 
@@ -51,6 +62,7 @@ The `Core` and other UIs run at the following addresses:
 
 - `Core` - [http://console-dev.kyma.local:4200](http://console-dev.kyma.local:4200)
 - `Lambda` - [http://console-dev.kyma.local:4201](http://console-dev.kyma.local:4201)
+- `Log UI` - [http://console-dev.kyma.local:4400](http://console-dev.kyma.local:4400)
 - `Catalog` - [http://console-dev.kyma.local:8000](http://console-dev.kyma.local:8000)
 - `Instances` - [http://console-dev.kyma.local:8001](http://console-dev.kyma.local:8001)
 - `Brokers` - [http://console-dev.kyma.local:8002](http://console-dev.kyma.local:8002)
@@ -59,16 +71,11 @@ The `Core` and other UIs run at the following addresses:
 
 If you want to run only a specific UI, follow the instructions in the appropriate folder.
 
-> **NOTE:** To clear dependencies and remove symlinks, run this command:
-> ```
-> npm run clean
-> ```
-
 ### Development with local GraphQL API
 
-By default, the [`core`](./core) and all views are connected to the **GraphQL API** running on the cluster at [this](https://console-backend.kyma.local/graphql) address. If you want to use local **GraphQL API** endpoint, follow the instructions in the **Run a local version** section of [this](https://github.com/kyma-project/kyma/tree/master/components/ui-api-layer#run-a-local-version) document and run the following command:
+By default, the [`core`](./core) and all views are connected to the **GraphQL API** running on the cluster at [this](https://console-backend.kyma.local/graphql) address. If you want to use local **GraphQL API** endpoint, follow the instructions in the **Run a local version** section of [this](https://github.com/kyma-project/kyma/tree/master/components/console-backend-service#run-a-local-version) document and run the following command:
 
-```
+``` bash
 npm run start:api
 ```
 
@@ -77,5 +84,15 @@ npm run start:api
 For the information on how to run tests and configure them, go to the [`tests`](tests) directory.
 
 ## Troubleshooting
+
+### CI fails on PR by issues related to staging dependencies
+
+Please remove `node_modules` folder and `package-lock.json` file in all libraries in (`components`)[./components] folder and also in root and rerun command `npm run bootstrap` in root context and push whole changes.
+
+### Can't access `console.kyma.local` and `console-dev.kyma.local:4200` after hibernating the Minikube cluster
+
+Please follow [this](https://kyma-project.io/docs/master/root/kyma/#troubleshooting-basic-troubleshooting-can-t-log-in-to-the-console-after-hibernating-the-minikube-cluster) document to resolve problem.
+
+### Other issues
 
 To solve most of the problems with the Console development, clear the browser cache or do a hard refresh of the website.

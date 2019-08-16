@@ -25,11 +25,12 @@ The build is minified and the filenames include hashes.
 
 Run the following command to build and run the Docker image:
 
-```
+``` bash
 sh ../scripts/build-docker-image.sh docs-ui
 docker run --rm -p 8003:80 docs-ui
-open http://localhost:8003 or http://localhost:8003/status in a browser
 ```
+
+After that open http://localhost:8003 in a browser.
 
 ## Development
 
