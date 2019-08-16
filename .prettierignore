@@ -74,13 +74,11 @@ stats.html
 .rpt2_cache
 
 node_modules
+compass/public-luigi/luigi-core
 compass/src/assets/luigiConfig.bundle.js
 compass/src/config/luigi-config/main.js
 components/angular
+logging
 core
 lambda
-logging
-scripts
-service-catalog-ui
-tests
 */public/config/config.js
