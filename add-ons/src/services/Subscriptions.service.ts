@@ -1,16 +1,16 @@
-import { useContext } from "react";
-import gql from "graphql-tag";
-import createUseContext from "constate";
+import { useContext } from 'react';
+import gql from 'graphql-tag';
+import createUseContext from 'constate';
 import {
   GlobalService,
   useSubscriptions as us,
   OnSubscriptionArgs,
   Subscription,
-} from "@kyma-project/common";
+} from '@kyma-project/common';
 
-import { ConfigurationsService } from "../services";
-import { Configuration } from "../types";
-import { NOTIFICATION, CONFIGURATION_VARIABLE } from "../constants";
+import { ConfigurationsService } from '../services';
+import { Configuration } from '../types';
+import { NOTIFICATION, CONFIGURATION_VARIABLE } from '../constants';
 
 const subscriptionFields = `
   name

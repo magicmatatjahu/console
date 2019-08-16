@@ -1,17 +1,9 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 import gql from 'graphql-tag';
 import createContainer from 'constate';
-import {
-  useMutation,
-  MutationTuple,
-} from '@apollo/react-hooks';
-import {
-  MutationFunctionOptions,
-  ExecutionResult,
-} from "@apollo/react-common";
-import {
-  GlobalService
-} from "@kyma-project/common";
+import { useMutation, MutationTuple } from '@apollo/react-hooks';
+import { MutationFunctionOptions, ExecutionResult } from '@apollo/react-common';
+import { GlobalService } from '@kyma-project/common';
 
 import { ConfigurationLabels } from '../types';
 
@@ -204,12 +196,14 @@ interface ResyncAddonsConfigurationVariables {
   name: string;
   namespace?: string;
 }
- 
+
 const mutation = (namespace?: string) => <TData, TVariables>(
   tuple: MutationTuple<TData, TVariables>,
 ): MutationTuple<TData, TVariables> => {
   const [fn, result] = tuple;
-  const newFn = (options?: MutationFunctionOptions<TData, TVariables>): Promise<ExecutionResult<TData>> => {
+  const newFn = (
+    options?: MutationFunctionOptions<TData, TVariables>,
+  ): Promise<ExecutionResult<TData>> => {
     const opts = options || {};
 
     let variables = options && options.variables;
@@ -219,12 +213,12 @@ const mutation = (namespace?: string) => <TData, TVariables>(
         namespace,
       };
     }
-  
+
     return fn({
       ...opts,
       variables,
     });
-  }
+  };
 
   return [newFn, result];
 };
@@ -233,7 +227,10 @@ const useMutations = () => {
   const { currentNamespace } = useContext(GlobalService);
   const mutationFactory = mutation(currentNamespace);
 
-  const createAddonsConfiguration = mutationFactory<{}, CreateAddonsConfigurationVariables>(
+  const createAddonsConfiguration = mutationFactory<
+    {},
+    CreateAddonsConfigurationVariables
+  >(
     useMutation(
       currentNamespace
         ? CREATE_ADDONS_CONFIGURATION_MUTATION

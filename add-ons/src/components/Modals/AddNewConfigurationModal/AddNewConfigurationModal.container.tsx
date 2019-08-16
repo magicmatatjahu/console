@@ -8,8 +8,8 @@ import {
   ConfigurationsService,
   LabelsService,
   UrlsService,
-} from "../../../services";
-import { ConfigurationLabels } from "../../../types";
+} from '../../../services';
+import { ConfigurationLabels } from '../../../types';
 
 import Component from './AddNewConfigurationModal.component';
 

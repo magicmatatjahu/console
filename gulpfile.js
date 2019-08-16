@@ -13,10 +13,10 @@ process.on('unhandledRejection', err => {
 
 // LIBRARIES
 const libraries = [
-  "common",
-  "components/components",
-  "components/react",
-  "components/generic-documentation",
+  'common',
+  'components/components',
+  'components/react',
+  'components/generic-documentation',
 ];
 
 // Installing libraries
@@ -53,15 +53,10 @@ libraries.forEach(lib => {
     await build(packageName);
   });
 });
-gulp.task(
-  'build:libraries',
-  gulp.series(libraries.map(lib => `${lib}:build`)),
-);
+gulp.task('build:libraries', gulp.series(libraries.map(lib => `${lib}:build`)));
 
 const build = async dir => {
-  log.info(
-    `Building library ${clc.magenta(dir.replace(__dirname, ''))}`,
-  );
+  log.info(`Building library ${clc.magenta(dir.replace(__dirname, ''))}`);
 
   try {
     await exec(`npm run build`, {
@@ -76,25 +71,20 @@ const build = async dir => {
 // Watching libraries
 gulp.task('watch:libraries', () => {
   libraries.forEach(lib => {
-    gulp.watch(
-      [
-        `./${lib}/src/**/*`
-      ],
-      gulp.parallel(`${lib}:build`),
-    );
+    gulp.watch([`./${lib}/src/**/*`], gulp.parallel(`${lib}:build`));
   });
 });
 
 // APPS
 const apps = [
-  "add-ons",
-  "content",
-  "core",
-  "lambda",
-  "logging",
-  "service-catalog-ui/brokers",
-  "service-catalog-ui/catalog",
-  "service-catalog-ui/instances",
+  'add-ons',
+  'content',
+  'core',
+  'lambda',
+  'logging',
+  'service-catalog-ui/brokers',
+  'service-catalog-ui/catalog',
+  'service-catalog-ui/instances',
 ];
 
 // Installing apps
@@ -104,7 +94,4 @@ apps.forEach(app => {
     await install(packageName);
   });
 });
-gulp.task(
-  'install:apps',
-  gulp.parallel(apps.map(app => `${app}:install`)),
-);
+gulp.task('install:apps', gulp.parallel(apps.map(app => `${app}:install`)));

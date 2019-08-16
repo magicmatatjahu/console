@@ -1,10 +1,8 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 import gql from 'graphql-tag';
 import createContainer from 'constate';
 import { useQuery } from '@apollo/react-hooks';
-import {
-  GlobalService,
-} from "@kyma-project/common";
+import { GlobalService } from '@kyma-project/common';
 
 import { Configuration } from '../types';
 
