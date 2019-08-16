@@ -3,7 +3,7 @@ ci-master: resolve validate
 
 .PHONY: resolve
 resolve:
-	npm run bootstrap
+	npm run bootstrap:ci
 
 .PHONY: validate
 validate:
