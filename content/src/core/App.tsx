@@ -22,10 +22,10 @@ export const App: React.FunctionComponent = () => {
 
   return (
     <Wrapper>
-      <Grid.Container className="grid-container" width="1440px">
+      <Grid.Container className="grid-container" width="1580px">
         <StickyContainer>
           <Grid.Row>
-            <Grid.Unit df={3} sm={0}>
+            <Grid.Unit df={2} sm={0}>
               <Sticky>
                 {({ style }: any) => (
                   <div style={{ ...style, zIndex: 200 }}>
@@ -34,12 +34,10 @@ export const App: React.FunctionComponent = () => {
                 )}
               </Sticky>
             </Grid.Unit>
-            <Grid.Unit df={9} sm={12}>
-              <Router>
-                <Content path="/" />
-                <Content path="/:group/:topic" />
-              </Router>
-            </Grid.Unit>
+            <Router>
+              <Content path="/" />
+              <Content path="/:group/:topic" />
+            </Router>
           </Grid.Row>
         </StickyContainer>
       </Grid.Container>

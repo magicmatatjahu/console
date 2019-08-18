@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { TooltipType } from "./index";
 
 interface TooltipContainerProps {
   minWidth?: string;
@@ -128,7 +129,7 @@ export const TooltipContent = styled.div<TooltipContentProps>`
 `;
 
 interface TooltipHeaderProps {
-  type?: string;
+  type?: TooltipType;
 }
 
 export const TooltipHeader = styled.div<TooltipHeaderProps>`
@@ -142,13 +143,13 @@ export const TooltipHeader = styled.div<TooltipHeaderProps>`
   &:after {
     ${props => {
       switch (props.type) {
-        case 'info':
+        case TooltipType.INFO:
           return "content: '\uE1C3'; color: #0b74de;";
-        case 'warning':
+        case TooltipType.WARNING:
           return "content: '\uE053'; color: #ffeb3b;";
-        case 'success':
+        case TooltipType.POSITIVE:
           return "content: '\uE1C1'; color: #4caf50;";
-        case 'error':
+        case TooltipType.NEGATIVE:
           return "content: '\uE0B1'; color: #f44336;";
         default:
           return "content: '';";

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   TooltipWrapper,
@@ -7,100 +7,86 @@ import {
   TooltipHeader,
 } from './styled';
 
+export enum TooltipType {
+  STANDARD = "",
+  INFO =  "info",
+  POSITIVE = "positive",
+  WARNING = "warning",
+  NEGATIVE = "negative",
+}
+
 export interface TooltipProps {
-  title?: any;
-  content: any;
+  title?: React.ReactNode;
+  content: React.ReactNode;
   minWidth?: string;
   maxWidth?: string;
-  type?: string;
+  type?: TooltipType;
+  show?: boolean;
   showTooltipTimeout?: number;
   hideTooltipTimeout?: number;
   orientation?: string;
   wrapperStyles?: string;
 }
 
-interface TooltipState {
-  visibleTooltip: boolean;
-  showTooltip: boolean;
-}
+export const Tooltip: React.FunctionComponent<TooltipProps> = ({
+  title,
+  content,
+  minWidth,
+  maxWidth,
+  type = TooltipType.STANDARD,
+  show = false,
+  showTooltipTimeout = 100,
+  hideTooltipTimeout = 100,
+  orientation,
+  wrapperStyles,
+  children,
+}) => {
+  const [visibleTooltip, setVisibleTooltip] = useState<boolean>(false);
 
-export class Tooltip extends React.Component<TooltipProps, TooltipState> {
-  static defaultProps = {
-    orientation: 'top',
-  };
-
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      visibleTooltip: props.show === undefined ? false : props.show,
-      showTooltip: props.show === undefined ? false : props.show,
-    };
-  }
-
-  setVisibility = (visible: boolean) => {
-    this.setState({ visibleTooltip: visible });
-  };
-
-  handleShowTooltip = () => {
-    const { showTooltipTimeout } = this.props;
-    if (typeof this.setVisibility === 'function' && !this.state.showTooltip) {
+  const handleShowTooltip = () => {
+    if (!show) {
       setTimeout(
-        () => this.setVisibility(true),
-        showTooltipTimeout ? showTooltipTimeout : 100,
+        () => setVisibleTooltip(true),
+        showTooltipTimeout,
       );
     }
   };
 
-  handleHideTooltip = () => {
-    const { hideTooltipTimeout } = this.props;
-    if (typeof this.setVisibility === 'function' && !this.state.showTooltip) {
+  const handleHideTooltip = () => {
+    if (!show) {
       setTimeout(
-        () => this.setVisibility(false),
-        hideTooltipTimeout ? hideTooltipTimeout : 100,
+        () => setVisibleTooltip(false),
+        hideTooltipTimeout,
       );
     }
-  };
-
-  render() {
-    const { visibleTooltip, showTooltip } = this.state;
-    const {
-      children,
-      title,
-      content,
-      minWidth,
-      maxWidth,
-      type,
-      orientation,
-      wrapperStyles,
-    } = this.props;
-
-    return (
-      <TooltipWrapper
-        onMouseEnter={this.handleShowTooltip}
-        onMouseLeave={this.handleHideTooltip}
-        type={type === undefined ? 'default' : type}
-        wrapperStyles={wrapperStyles}
-      >
-        {children}
-        {visibleTooltip && content && (
-          <TooltipContainer
-            minWidth={minWidth}
-            maxWidth={maxWidth}
-            type={type === undefined ? 'default' : type}
-            show={showTooltip}
-            orientation={orientation}
-          >
-            {title && (
-              <TooltipHeader type={type === undefined ? 'default' : type}>
-                {title}
-              </TooltipHeader>
-            )}
-            <TooltipContent type={type === undefined ? 'default' : type}>
-              {content}
-            </TooltipContent>
-          </TooltipContainer>
-        )}
-      </TooltipWrapper>
-    );
   }
+
+  return (
+    <TooltipWrapper
+      onMouseEnter={handleShowTooltip}
+      onMouseLeave={handleHideTooltip}
+      type={type}
+      wrapperStyles={wrapperStyles}
+    >
+      {children}
+      {visibleTooltip && content && (
+        <TooltipContainer
+          minWidth={minWidth}
+          maxWidth={maxWidth}
+          type={type}
+          show={show}
+          orientation={orientation}
+        >
+          {title && (
+            <TooltipHeader type={type}>
+              {title}
+            </TooltipHeader>
+          )}
+          <TooltipContent type={type}>
+            {content}
+          </TooltipContent>
+        </TooltipContainer>
+      )}
+    </TooltipWrapper>
+  );
 }

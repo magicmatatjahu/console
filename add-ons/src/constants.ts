@@ -1,3 +1,4 @@
+import { TooltipType } from "@kyma-project/components";
 import { isDevelopmentModeFlag } from './helpers';
 
 export const DEFAULT_CONFIGURATION =
@@ -126,6 +127,6 @@ export const ERRORS = {
 };
 
 export const TOOLTIP_DATA_ERROR = {
-  type: 'error',
+  type: TooltipType.NEGATIVE,
   content: 'Fill out all mandatory fields.',
 };

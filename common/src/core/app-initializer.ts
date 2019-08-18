@@ -10,17 +10,22 @@ class AppInitializer {
   private token: string | null = '';
 
   init() {
-    return new Promise<InitializerReturnType>((resolve, _) => {
-      const timeout = setTimeout(resolve, 1000);
+    return new Promise<InitializerReturnType>((resolve, ) => {
+      const timeout = setTimeout(() => {
+        resolve({
+          currentNamespace: "",
+          backendModules: [],
+        });
+      }, 1000);
 
-      luigiClient.addInitListener((e: any) => {
-        this.token = e.idToken;
+      luigiClient.addInitListener((context: luigiClient.Context) => {
+        this.token = context.idToken;
 
         clearTimeout(timeout);
         resolve({
-          currentNamespace: e.namespaceId,
-          backendModules: e.backendModules,
-          ...e,
+          currentNamespace: context.namespaceId,
+          backendModules: context.backendModules,
+          ...context,
         });
       });
     });
