@@ -8,9 +8,9 @@ readonly SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 readonly ROOT_DIR="$( cd "${SCRIPT_DIR}/.." && pwd )"
 
 readonly LICENSE_PATH="licenses"
-readonly LICENSE_PULLER_SCRIPT="license-puller.sh"
-LICENSE_PULLER_PATH="$( cd "$( dirname "${ROOT_DIR}/../go/src/github.com/kyma-project/test-infra/prow/scripts/${LICENSE_PULLER_SCRIPT}" )" && pwd )"
-readonly LICENSE_PULLER_PATH="${LICENSE_PULLER_PATH}/${LICENSE_PULLER_SCRIPT}"
+# readonly LICENSE_PULLER_SCRIPT="license-puller.sh"
+# LICENSE_PULLER_PATH="$( cd "$( dirname "${ROOT_DIR}/../go/src/github.com/kyma-project/test-infra/prow/scripts/${LICENSE_PULLER_SCRIPT}" )" && pwd )"
+# readonly LICENSE_PULLER_PATH="${LICENSE_PULLER_PATH}/${LICENSE_PULLER_SCRIPT}"
 
 FETCH_ROOT_LICENSES=false
 DIRS_TO_PULLING=
