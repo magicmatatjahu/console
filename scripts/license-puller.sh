@@ -8,12 +8,10 @@ readonly SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 readonly ROOT_DIR="$( cd "${SCRIPT_DIR}/.." && pwd )"
 
 readonly LICENSE_PATH="licenses"
-# readonly LICENSE_PULLER_SCRIPT="license-puller.sh"
-# LICENSE_PULLER_PATH="$( cd "$( dirname "${ROOT_DIR}/../go/src/github.com/kyma-project/test-infra/prow/scripts/${LICENSE_PULLER_SCRIPT}" )" && pwd )"
-# readonly LICENSE_PULLER_PATH="${LICENSE_PULLER_PATH}/${LICENSE_PULLER_SCRIPT}"
 
 FETCH_ROOT_LICENSES=false
 DIRS_TO_PULLING=
+LICENSE_PULLER_PATH=
 function read_arguments() {
     for arg in "${ARGS[@]}"
     do
@@ -26,6 +24,10 @@ function read_arguments() {
               DIRS_TO_PULLING=($( echo "${arg#*=}" | tr "," "\n" ))
               shift # remove --dirs-to-pulling=
               ;;
+            --license-puller-path=*)
+              LICENSE_PULLER_PATH="${arg#*=}"
+              shift # remove --license-puller-path=
+              ;;
             *)
               # unknown option
             ;;
@@ -33,6 +35,12 @@ function read_arguments() {
     done
     readonly FETCH_ROOT_LICENSES
     readonly DIRS_TO_PULLING
+    readonly LICENSE_PULLER_PATH
+
+    if [[ -z "${LICENSE_PULLER_PATH}" ]]; then
+        echo -e "ERROR: license puller path is required"
+        exit 1
+    fi
 }
 
 function gatherRootLicenses() {

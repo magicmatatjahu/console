@@ -32,7 +32,7 @@ pre-build-image:
 .PHONY: pull-licenses
 pull-licenses:
 ifdef LICENSE_PULLER_PATH
-	../scripts/license-puller.sh --fetch-root-licenses --dirs-to-pulling=brokers,catalog,instances
+	../scripts/license-puller.sh --fetch-root-licenses --dirs-to-pulling=brokers,catalog,instances --license-puller-path=$(LICENSE_PULLER_PATH)
 else
 	mkdir -p licenses
 endif
