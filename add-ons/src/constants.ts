@@ -1,10 +1,10 @@
-import { extractIsDevelopmentModeFlag } from './helpers';
+import { isDevelopmentModeFlag } from './helpers';
 
 export const DEFAULT_CONFIGURATION =
   (window as any).clusterConfig.DEFAULT_CONFIGURATION_NAME || 'helm-repos-urls';
 export const DEFAULT_CONFIGURATION_DESCRIPTION =
   'This is the default addons configuration. Do not edit or delete it.';
-export const HELM_BROKER_IS_DEVELOPMENT_MODE = extractIsDevelopmentModeFlag(
+export const HELM_BROKER_IN_DEVELOPMENT_MODE = isDevelopmentModeFlag(
   (window as any).clusterConfig.HELM_BROKER_IS_DEVELOPMENT_MODE,
 );
 
@@ -80,7 +80,7 @@ const HELP_URL_FIELD_DEVELOPMENT_MODE =
 const HELP_URL_FIELD_NOT_DEVELOPMENT_MODE =
   'The URL must be unique for a given configuration and start with the https protocol or one of the following prefixes: git::, github.com/, bitbucket.org/';
 export const HELP = {
-  URL_FIELD: HELM_BROKER_IS_DEVELOPMENT_MODE
+  URL_FIELD: HELM_BROKER_IN_DEVELOPMENT_MODE
     ? HELP_URL_FIELD_DEVELOPMENT_MODE
     : HELP_URL_FIELD_NOT_DEVELOPMENT_MODE,
   NAME_FIELD:

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Icon } from '@kyma-project/react-components';
+import { Icon } from 'fundamental-react';
 
 import { NavigationService } from '../services';
 import { NavigationList } from './NavigationList';

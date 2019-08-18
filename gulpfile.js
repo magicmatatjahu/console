@@ -14,7 +14,7 @@ process.on('unhandledRejection', err => {
 // LIBRARIES
 const libraries = [
   'common',
-  'components/components',
+  'components/shared',
   'components/react',
   'components/generic-documentation',
 ];

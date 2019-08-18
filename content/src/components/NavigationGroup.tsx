@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Icon } from '@kyma-project/react-components';
+import { Icon } from 'fundamental-react';
 
 import { NavigationItem as NavigationItemType } from '../services';
 import { NavigationItem } from './NavigationItem';

@@ -1,4 +1,4 @@
-export const extractIsDevelopmentModeFlag = (
+export const isDevelopmentModeFlag = (
   value: string | boolean,
 ): boolean | null => {
   if (value === null || value === undefined) {

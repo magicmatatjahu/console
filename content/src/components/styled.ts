@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import { Icon } from '@kyma-project/react-components';
-
-const ACTIVE_COLOR = '#0b74de';
+import { Icon } from 'fundamental-react';
 
 export const NavigationWrapper = styled.div`
   background: #fff;
@@ -124,9 +122,7 @@ export const NavigationSectionArrow = styled.a<NavigationSectionArrow>`
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
     border-left: ${props =>
-      props.active
-        ? `3px solid ${ACTIVE_COLOR}`
-        : '3px solid rgba(50,54,58,0.6)'};
+      props.active ? `3px solid #0b74de` : '3px solid rgba(50,54,58,0.6)'};
     left: 2px;
     top: 50%;
     position: absolute;
@@ -144,7 +140,7 @@ interface NavigationLinkProps {
 }
 
 export const NavigationLink = styled.a<NavigationLinkProps>`
-  color: ${props => (props.active ? ACTIVE_COLOR : '#32363a')};
+  color: ${props => (props.active ? `#0b74de` : '#32363a')};
   font-size: 14px;
   font-weight: ${props => (props.active ? 'bold' : 'normal')};
   display: block;
@@ -154,7 +150,7 @@ export const NavigationLink = styled.a<NavigationLinkProps>`
   position: relative;
 
   :hover {
-    color: ${ACTIVE_COLOR};
+    color: #0b74de;
     cursor: pointer;
   }
 `;

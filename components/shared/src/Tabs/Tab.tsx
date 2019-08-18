@@ -1,5 +1,5 @@
 import React from 'react';
-import { createElementClass, createModifierClass } from '../helpers';
+import { createElementClass, createModifierClass } from '@kyma-project/common';
 
 export interface TabProps {
   children: React.ReactNode;

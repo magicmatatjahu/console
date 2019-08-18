@@ -1,6 +1,7 @@
 import React from 'react';
 import { luigiClient } from '@kyma-project/common';
-import { Modal, Button } from '@kyma-project/react-components';
+import { Modal } from '@kyma-project/react-components';
+import { Button } from 'fundamental-react';
 
 import { MODAL, FORMS, CONFIGURATION_VARIABLE } from '../../../constants';
 

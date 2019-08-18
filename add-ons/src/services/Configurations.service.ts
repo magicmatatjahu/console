@@ -3,7 +3,7 @@ import createContainer from 'constate';
 
 import { QueriesService, FiltersService } from './index';
 
-import { randomNameGenerator } from '../helpers/random-names-generator';
+import { randomNamesGenerator } from '@kyma-project/common';
 import { Configuration } from '../types';
 import { DEFAULT_CONFIGURATION, ERRORS } from '../constants';
 
@@ -56,7 +56,7 @@ const useConfigurations = () => {
     const condition = (data: string) =>
       originalConfigs.some(config => config.name === data);
     do {
-      name = randomNameGenerator();
+      name = randomNamesGenerator();
     } while (condition(name));
 
     return name;

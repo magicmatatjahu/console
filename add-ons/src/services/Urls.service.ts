@@ -3,7 +3,7 @@ import createContainer from 'constate';
 
 import { ConfigurationsService } from './index';
 
-import { HELM_BROKER_IS_DEVELOPMENT_MODE, ERRORS } from '../constants';
+import { HELM_BROKER_IN_DEVELOPMENT_MODE, ERRORS } from '../constants';
 const URL_ERRORS = ERRORS.URL;
 
 const HTTP_PROTOCOL = 'http://';
@@ -38,7 +38,7 @@ const useUrls = () => {
     if (existingUrls.includes(url)) {
       return URL_ERRORS.ALREADY_EXISTS;
     }
-    if (HELM_BROKER_IS_DEVELOPMENT_MODE) {
+    if (HELM_BROKER_IN_DEVELOPMENT_MODE) {
       if (!DEVELOPMENT_MODE_PREFIXES.some(prefix => url.startsWith(prefix))) {
         return URL_ERRORS.STARTS_WITH_HTTP.DEVELOPMENT_MODE;
       }

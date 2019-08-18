@@ -1,13 +1,13 @@
 import React from 'react';
+import { StickyContainer, Sticky } from 'react-sticky';
 import {
   Source,
   RenderedContent,
   GroupRendererComponent,
 } from '@kyma-project/documentation-component';
-import { Grid, StickyContainer, Sticky } from '@kyma-project/components';
+import { Grid, Tabs, Tab } from '@kyma-project/components';
 
 import { HeadersNavigation } from '../render-engines/markdown/headers-toc';
-import { Tabs, Tab } from '../components';
 import { MarkdownWrapper } from '../styled';
 import {
   markdownTypes,
@@ -18,7 +18,7 @@ import {
 import { StyledAsyncApi, StyledOData } from './styled';
 import { StyledSwagger } from '../render-engines/open-api/styles';
 
-function existsFiles(sources: Source[], types: string[]) {
+function existFiles(sources: Source[], types: string[]) {
   return sources.find(source => types.includes(source.type));
 }
 
@@ -46,10 +46,10 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
     return null;
   }
 
-  const markdownsExists = existsFiles(sources, markdownTypes);
-  const openApiExists = existsFiles(sources, openApiTypes);
-  const asyncApiExists = existsFiles(sources, asyncApiTypes);
-  const odataExists = existsFiles(sources, odataTypes);
+  const markdownsExists = existFiles(sources, markdownTypes);
+  const openApiExists = existFiles(sources, openApiTypes);
+  const asyncApiExists = existFiles(sources, asyncApiTypes);
+  const odataExists = existFiles(sources, odataTypes);
 
   const tabs =
     additionalTabs &&
@@ -86,10 +86,7 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
   return (
     <Tabs
       active={tabRouteHandler.determineSelectedTab(prepareTabList())}
-      customChangeTabHandler={tabRouteHandler.selectTab.bind(
-        null,
-        prepareTabList(),
-      )}
+      changeTabHandler={tabRouteHandler.selectTab.bind(null, prepareTabList())}
     >
       {markdownsExists && (
         <Tab label="Documentation">

@@ -1,7 +1,7 @@
 {
   "name": "@kyma-project/content-ui",
-  "version": "0.1.0",
   "private": true,
+  "license": "Apache-2.0",
   "scripts": {
     "start": "echo `` > public/config/config.js && PORT=8003 ../node_modules/.bin/react-app-rewired start",
     "start:kyma": "npm run copy-config && BROWSER=none HOST=console-dev.kyma.local PORT=8003 ../node_modules/.bin/react-app-rewired start",

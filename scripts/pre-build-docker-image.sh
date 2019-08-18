@@ -2,11 +2,54 @@
 
 set -e
 
-PWD=$(pwd)
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ROOT_DIR="$( cd "${SCRIPT_DIR}/.." && pwd )" 
+readonly ARGS=("$@")
+readonly TEMP_DIR="temp"
+readonly SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+readonly ROOT_DIR="$( cd "${SCRIPT_DIR}/.." && pwd )"
 
-mkdir -p "${PWD}/temp" 
-cp "${ROOT_DIR}/package.json" "${ROOT_DIR}/package-lock.json" "${ROOT_DIR}/gulpfile.js" "${ROOT_DIR}/tsconfig.base.json" "${PWD}/temp/"
-cp -R "${ROOT_DIR}/common" "${PWD}/temp/common/"
-cp -R "${ROOT_DIR}/components" "${PWD}/temp/components/"
+COPY_ROOT_NODE_MODULES=false
+function read_arguments() {
+    for arg in "${ARGS[@]}"
+    do
+        case $arg in
+            --copy-root-node-modules)
+                COPY_ROOT_NODE_MODULES=true
+                shift # past argument with no value
+                ;;
+            *)
+                # unknown option
+            ;;
+        esac
+    done
+    readonly COPY_ROOT_NODE_MODULES
+}
+
+function copyFiles() {
+  mkdir -p "${PWD}/${TEMP_DIR}" 
+
+  echo "Copying files"
+  if [ "${COPY_ROOT_NODE_MODULES}" == true ]; then
+    cp -R  "${ROOT_DIR}/node_modules" "${PWD}/${TEMP_DIR}/node_modules/"
+  fi
+
+  local files="package.json package-lock.json gulpfile.js tsconfig.base.json"
+  local filesArray=(${files})
+
+  for f in "${filesArray[@]}"; do
+    cp "${ROOT_DIR}/${f}" "${PWD}/${TEMP_DIR}/"
+  done
+
+  local dirs="common components"
+  local dirsArray=(${dirs})
+
+  for d in "${dirsArray[@]}"; do
+    cp -R "${ROOT_DIR}/${d}" "${PWD}/${TEMP_DIR}/${d}/"
+  done
+}
+
+function main() {
+    read_arguments "${ARGS[@]}"
+    copyFiles
+}
+
+main

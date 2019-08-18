@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
-import { createElementClass } from '../helpers';
+import { createElementClass } from '@kyma-project/common';
+
 import { TabProps } from './Tab';
 
 export interface TabsProps {
   className?: string;
   active?: number;
-  customChangeTabHandler?: (index: number) => void;
+  changeTabHandler?: (index: number) => void;
 }
+
 export const Tabs: React.FunctionComponent<TabsProps> = ({
   className = '',
   active = 0,
   children,
-  customChangeTabHandler,
+  changeTabHandler,
 }) => {
   const [activeTab, setActiveTab] = useState(active);
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
-    if (customChangeTabHandler) {
-      customChangeTabHandler(index);
-    }
+    changeTabHandler && changeTabHandler(index);
   };
 
   const renderHeader = (ch: Array<React.ReactElement<TabProps>>) =>
@@ -37,9 +37,7 @@ export const Tabs: React.FunctionComponent<TabsProps> = ({
   const renderActiveTab = (ch: Array<React.ReactElement<TabProps>>) =>
     ch[activeTab] ? ch[activeTab].props.children : null;
 
-  const content = []
-    .concat(...(children as any))
-    .filter(child => child !== null && child !== undefined);
+  const content = [].concat(...(children as any)).filter(child => child);
 
   return (
     <div className={createElementClass('tabs')}>

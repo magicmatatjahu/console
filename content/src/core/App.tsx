@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { Router } from '@reach/router';
-import { Grid, StickyContainer, Sticky } from '@kyma-project/components';
-import { Spinner } from '@kyma-project/react-components';
+import { Router } from '@reach/router'
+import { StickyContainer, Sticky } from "react-sticky";
+import { Grid, Spinner } from '@kyma-project/components';
 
 import { Content } from '../components/Content';
 import { Navigation } from '../components/Navigation';

@@ -10,7 +10,7 @@ import { plugins as markdownPlugins } from '@kyma-project/dc-markdown-render-eng
 
 import { markdownRE, openApiRE, asyncApiRE, odataRE } from './render-engines';
 import { ContentUILayout, CatalogUILayout, InstancesUILayout } from './layouts';
-import { MarkdownSingleRenderer } from './renderers';
+import { MarkdownRenderer } from './renderers';
 import {
   disableInternalLinksMutationPlugin,
   replaceImagePathsMutationPlugin,
@@ -47,7 +47,7 @@ const RENDER_ENGINES: RenderEngines = [
 ];
 
 const RENDERERS: Renderers = {
-  single: [MarkdownSingleRenderer],
+  single: [MarkdownRenderer],
 };
 
 function renderContent(type: LayoutType, props?: any): React.ReactNode {

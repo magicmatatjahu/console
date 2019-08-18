@@ -36,9 +36,11 @@ coverage
 build
 react-components/index.js
 temp
+licenses
 **/dist
 **/lib
 **/coverage
 **/build
 **/react-components/index.js
 **/temp
+**/licenses

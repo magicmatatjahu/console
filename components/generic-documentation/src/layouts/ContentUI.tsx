@@ -1,6 +1,7 @@
 import React from 'react';
+import { StickyContainer, Sticky } from 'react-sticky';
 import { Content, Renderers } from '@kyma-project/documentation-component';
-import { Grid, StickyContainer, Sticky } from '@kyma-project/components';
+import { Grid } from '@kyma-project/components';
 
 import { HeadersNavigation } from '../render-engines/markdown/headers-toc';
 import { ContentUIWrapper } from './styled';

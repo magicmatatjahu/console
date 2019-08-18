@@ -1,8 +1,8 @@
 {
   "name": "@kyma-project/addons-ui",
   "description": "Addons Configuration UI for Kyma console",
-  "version": "1.1.0",
   "private": true,
+<<<<<<< HEAD
 <<<<<<< HEAD
   "dependencies": {
     "@kyma-project/luigi-client": "0.4.9",
@@ -47,6 +47,9 @@
   },
 =======
 >>>>>>> Create gulpfile and rewrite content to ts
+=======
+  "license": "Apache-2.0",
+>>>>>>> .
   "scripts": {
     "start": "echo `` > public/config/config.js && PORT=8004 ../node_modules/react-app-rewired start",
     "start:kyma": "npm run copy-config && BROWSER=none HOST=console-dev.kyma.local PORT=8004 ../node_modules/.bin/react-app-rewired start",

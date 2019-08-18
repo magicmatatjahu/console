@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { BackendModuleDisabled } from '@kyma-project/react-components';
 import 'fiori-fundamentals/dist/fiori-fundamentals.min.css';
 
+import { BackendModulesDisabled } from './containers';
 import {
   nestServices,
   GlobalProvider,
@@ -32,7 +32,7 @@ export const bootstrap = async ({
   enableNotifications = false,
   enableSubscriptions = false,
   app,
-  services: s,
+  services: svcs,
 }: BootstrapOptions) => {
   const { backendModules, ...context } = await appInitializer.init();
 
@@ -40,7 +40,10 @@ export const bootstrap = async ({
     requiredBackendModules &&
     !requiredBackendModules.every(mod => backendModules.includes(mod))
   ) {
-    render(<BackendModuleDisabled mod={''} />, document.getElementById(id));
+    render(
+      <BackendModulesDisabled modules={requiredBackendModules} />,
+      document.getElementById(id),
+    );
     return;
   }
 
@@ -52,8 +55,8 @@ export const bootstrap = async ({
   if (enableNotifications) {
     services.push(NotificationsProvider);
   }
-  if (s) {
-    services.push(...s);
+  if (svcs) {
+    services.push(...svcs);
   }
   const Services = nestServices(...services);
 

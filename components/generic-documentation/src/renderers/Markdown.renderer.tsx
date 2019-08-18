@@ -3,8 +3,10 @@ import {
   SingleRenderer,
   SingleRendererComponent,
 } from '@kyma-project/documentation-component';
-import { toKebabCase } from '../helpers';
+import { toKebabCase } from '@kyma-project/common';
+
 import { headingPrefix } from '../render-engines/markdown/helpers';
+
 import { StyledMarkdown, Header } from './styled';
 
 const Renderer: React.FunctionComponent<SingleRendererComponent> = ({
@@ -29,7 +31,7 @@ const Renderer: React.FunctionComponent<SingleRendererComponent> = ({
   );
 };
 
-export const MarkdownSingleRenderer: SingleRenderer = {
+export const MarkdownRenderer: SingleRenderer = {
   sourceType: ['markdown', 'md'],
   component: Renderer,
 };
