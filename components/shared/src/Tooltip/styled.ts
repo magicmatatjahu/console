@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TooltipType } from "./index";
+import { TooltipType } from './index';
 
 interface TooltipContainerProps {
   minWidth?: string;

@@ -41,9 +41,9 @@ export const bootstrap = async ({
     !requiredBackendModules.every(mod => backendModules.includes(mod))
   ) {
     render(
-      <BackendModulesDisabled 
+      <BackendModulesDisabled
         backendModules={backendModules}
-        requiredBackendModules={requiredBackendModules} 
+        requiredBackendModules={requiredBackendModules}
       />,
       document.getElementById(id),
     );

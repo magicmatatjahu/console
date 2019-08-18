@@ -5,7 +5,8 @@ import {
   RenderedContent,
   GroupRendererComponent,
 } from '@kyma-project/documentation-component';
-import { Grid, Tabs, Tab } from '@kyma-project/components';
+import { luigiClient } from '@kyma-project/common';
+import { Grid, Tabs, Tab, TabProps } from '@kyma-project/components';
 
 import { HeadersNavigation } from '../render-engines/markdown/headers-toc';
 import { MarkdownWrapper } from '../styled';
@@ -22,22 +23,20 @@ function existFiles(sources: Source[], types: string[]) {
   return sources.find(source => types.includes(source.type));
 }
 
+enum TabsLabels {
+  DOCUMENTATION = 'Documentation',
+  CONSOLE = 'Console',
+  EVENTS = 'Events',
+  ODATA = 'OData',
+}
+
 export interface GroupRendererProps extends GroupRendererComponent {
-  additionalTabs?: Array<{
-    label: string;
-    content: React.ReactNode;
-    id: string;
-  }>;
-  tabRouteHandler: {
-    determineSelectedTab: (tabList: string[]) => number | undefined;
-    selectTab: () => void;
-  };
+  additionalTabs?: TabProps[];
 }
 
 export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
   sources,
   additionalTabs,
-  tabRouteHandler,
 }) => {
   if (
     (!sources || !sources.length) &&
@@ -45,6 +44,20 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
   ) {
     return null;
   }
+
+  const onChangeTab = (id: string): void => {
+    try {
+      luigiClient
+        .linkManager()
+        .withParams({ selectedTab: id })
+        .navigate('');
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const onInitTabs = (): string =>
+    luigiClient.getNodeParams().selectedTab || '';
 
   const markdownsExists = existFiles(sources, markdownTypes);
   const openApiExists = existFiles(sources, openApiTypes);
@@ -54,42 +67,19 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
   const tabs =
     additionalTabs &&
     additionalTabs.map(tab => (
-      <Tab label={tab.label} key={tab.label}>
-        {tab.content}
+      <Tab label={tab.label} id={tab.id} key={tab.id}>
+        {tab.children}
       </Tab>
     ));
 
-  const prepareTabList = () => {
-    const tabList: string[] = [];
-    if (markdownsExists) {
-      tabList.push('Documentation');
-    }
-    if (openApiExists) {
-      tabList.push('Console');
-    }
-    if (asyncApiExists) {
-      tabList.push('Events');
-    }
-    if (odataExists) {
-      tabList.push('OData');
-    }
-
-    if (additionalTabs) {
-      additionalTabs.forEach(tab => {
-        tabList.push(tab.id);
-      });
-    }
-
-    return tabList;
-  };
-
   return (
     <Tabs
-      active={tabRouteHandler.determineSelectedTab(prepareTabList())}
-      changeTabHandler={tabRouteHandler.selectTab.bind(null, prepareTabList())}
+      active={TabsLabels.DOCUMENTATION}
+      onInit={onInitTabs}
+      onChangeTab={onChangeTab}
     >
       {markdownsExists && (
-        <Tab label="Documentation">
+        <Tab label={TabsLabels.DOCUMENTATION} id={TabsLabels.DOCUMENTATION}>
           <MarkdownWrapper className="custom-markdown-styling">
             <Grid.Container className="grid-container">
               <StickyContainer>
@@ -113,21 +103,21 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
         </Tab>
       )}
       {openApiExists && (
-        <Tab label="Console">
+        <Tab label={TabsLabels.CONSOLE} id={TabsLabels.CONSOLE}>
           <StyledSwagger className="custom-open-api-styling">
             <RenderedContent sourceTypes={openApiTypes} />
           </StyledSwagger>
         </Tab>
       )}
       {asyncApiExists && (
-        <Tab label="Events">
+        <Tab label={TabsLabels.EVENTS} id={TabsLabels.EVENTS}>
           <StyledAsyncApi className="custom-async-api-styling">
             <RenderedContent sourceTypes={asyncApiTypes} />
           </StyledAsyncApi>
         </Tab>
       )}
       {odataExists && (
-        <Tab label="OData">
+        <Tab label={TabsLabels.ODATA} id={TabsLabels.ODATA}>
           <StyledOData className="custom-odata-styling">
             <RenderedContent sourceTypes={odataTypes} />
           </StyledOData>

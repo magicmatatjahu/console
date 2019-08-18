@@ -2,15 +2,17 @@ import React from 'react';
 import { createElementClass, createModifierClass } from '@kyma-project/common';
 
 export interface TabProps {
-  children: React.ReactNode;
   label: React.ReactNode;
+  id: string;
   tabIndex?: number;
   isActive?: boolean;
-  parentCallback?: (value: number) => void;
+  parentCallback?: (value: string) => void;
+  children: React.ReactNode;
 }
 
 export const Tab: React.FunctionComponent<TabProps> = ({
-  label = '',
+  label,
+  id,
   tabIndex,
   isActive = false,
   parentCallback,
@@ -26,7 +28,7 @@ export const Tab: React.FunctionComponent<TabProps> = ({
       onClick={(event: any) => {
         event.preventDefault();
         if (parentCallback) {
-          parentCallback(tabIndex ? tabIndex : 0);
+          parentCallback(id);
         }
       }}
     >

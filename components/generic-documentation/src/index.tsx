@@ -7,6 +7,7 @@ import {
   Renderers,
 } from '@kyma-project/documentation-component';
 import { plugins as markdownPlugins } from '@kyma-project/dc-markdown-render-engine';
+import { TabProps } from '@kyma-project/components';
 
 import { markdownRE, openApiRE, asyncApiRE, odataRE } from './render-engines';
 import { ContentUILayout, CatalogUILayout, InstancesUILayout } from './layouts';
@@ -75,10 +76,7 @@ export enum LayoutType {
 export interface GenericComponentProps {
   docsTopic: ClusterDocsTopic | DocsTopic;
   layout?: LayoutType;
-  additionalTabs?: Array<{
-    label: string;
-    content: React.ReactNode;
-  }>;
+  additionalTabs?: TabProps[];
   tabRouteHandler?: object;
 }
 

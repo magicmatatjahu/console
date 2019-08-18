@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Modal } from 'fundamental-react';
 
-import { ModalType } from "./index";
+import { ModalType } from './index';
 
 export const ModalWrapper = styled.div`
   display: inline-block;
@@ -16,25 +16,25 @@ interface FdModalProps {
 
 function modalBorder(type?: ModalType): string {
   if (!type) {
-    return "";
+    return '';
   }
 
   const border = (color: string) => `6px solid ${color}`;
-  switch(type) {
+  switch (type) {
     case ModalType.INFO: {
-      return border("#ee0000");
+      return border('#ee0000');
     }
     case ModalType.POSITIVE: {
-      return border("#ee0000");
+      return border('#ee0000');
     }
     case ModalType.WARNING: {
-      return border("#ee0000");
+      return border('#ee0000');
     }
     case ModalType.NEGATIVE: {
-      return border("#ee0000");
+      return border('#ee0000');
     }
     default: {
-      return "";
+      return '';
     }
   }
 }

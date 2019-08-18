@@ -20,13 +20,7 @@ const FilterPopoverComponent: React.FunctionComponent<Props> = ({
     </Button>
   );
 
-  return (
-    <Popover
-      body={body}
-      control={control}
-      placement="bottom-end"
-    />
-  );
+  return <Popover body={body} control={control} placement="bottom-end" />;
 };
 
 export default FilterPopoverComponent;

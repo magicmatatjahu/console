@@ -8,11 +8,11 @@ import {
 } from './styled';
 
 export enum TooltipType {
-  STANDARD = "",
-  INFO =  "info",
-  POSITIVE = "positive",
-  WARNING = "warning",
-  NEGATIVE = "negative",
+  STANDARD = '',
+  INFO = 'info',
+  POSITIVE = 'positive',
+  WARNING = 'warning',
+  NEGATIVE = 'negative',
 }
 
 export interface TooltipProps {
@@ -45,21 +45,15 @@ export const Tooltip: React.FunctionComponent<TooltipProps> = ({
 
   const handleShowTooltip = () => {
     if (!show) {
-      setTimeout(
-        () => setVisibleTooltip(true),
-        showTooltipTimeout,
-      );
+      setTimeout(() => setVisibleTooltip(true), showTooltipTimeout);
     }
   };
 
   const handleHideTooltip = () => {
     if (!show) {
-      setTimeout(
-        () => setVisibleTooltip(false),
-        hideTooltipTimeout,
-      );
+      setTimeout(() => setVisibleTooltip(false), hideTooltipTimeout);
     }
-  }
+  };
 
   return (
     <TooltipWrapper
@@ -77,16 +71,10 @@ export const Tooltip: React.FunctionComponent<TooltipProps> = ({
           show={show}
           orientation={orientation}
         >
-          {title && (
-            <TooltipHeader type={type}>
-              {title}
-            </TooltipHeader>
-          )}
-          <TooltipContent type={type}>
-            {content}
-          </TooltipContent>
+          {title && <TooltipHeader type={type}>{title}</TooltipHeader>}
+          <TooltipContent type={type}>{content}</TooltipContent>
         </TooltipContainer>
       )}
     </TooltipWrapper>
   );
-}
+};

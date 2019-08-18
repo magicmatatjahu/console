@@ -1,25 +1,79 @@
-import React, { useState } from 'react';
-import { createElementClass } from '@kyma-project/common';
+import React, { useState, useEffect, useMemo } from 'react';
+import { createElementClass, toKebabCase } from '@kyma-project/common';
 
 import { TabProps } from './Tab';
 
+type Labels = {
+  [id: string]: number;
+};
+
+const serializeTabs = (
+  children: Array<React.ReactElement<TabProps>>,
+): Array<React.ReactElement<TabProps>> => {
+  return React.Children.map(children, child => {
+    return (
+      child &&
+      React.cloneElement(child, {
+        ...child.props,
+        id: toKebabCase(child.props.id),
+      })
+    );
+  });
+};
+
+const createLabelsIndex = (
+  children: Array<React.ReactElement<TabProps>>,
+): Labels => {
+  const labels: Labels = {};
+  React.Children.map(children, (child, index) => {
+    if (child) {
+      labels[child.props.id] = index;
+    }
+  });
+  return labels;
+};
+
 export interface TabsProps {
   className?: string;
-  active?: number;
-  changeTabHandler?: (index: number) => void;
+  active?: string;
+  onInit?: () => string | undefined;
+  onChangeTab?: (label: string) => void;
 }
 
 export const Tabs: React.FunctionComponent<TabsProps> = ({
   className = '',
-  active = 0,
-  children,
-  changeTabHandler,
+  active,
+  onInit,
+  onChangeTab,
+  children: c,
 }) => {
-  const [activeTab, setActiveTab] = useState(active);
+  const children: Array<React.ReactElement<TabProps>> = useMemo(
+    () =>
+      serializeTabs(c as Array<React.ReactElement<TabProps>>).filter(
+        child => child,
+      ),
+    [],
+  );
 
-  const handleTabClick = (index: number) => {
-    setActiveTab(index);
-    changeTabHandler && changeTabHandler(index);
+  const labels: Labels = useMemo(() => createLabelsIndex(children), []);
+  const [activeTab, setActiveTab] = useState<string>(
+    toKebabCase(active || Object.keys(labels)[0] || ''),
+  );
+
+  useEffect(() => {
+    const id = onInit && onInit();
+    if (id && Object.keys(labels).includes(id)) {
+      setActiveTab(toKebabCase(id));
+    }
+  }, []);
+
+  if (!children) {
+    return null;
+  }
+
+  const handleTabClick = (id: string) => {
+    setActiveTab(id);
+    onChangeTab && onChangeTab(id);
   };
 
   const renderHeader = (ch: Array<React.ReactElement<TabProps>>) =>
@@ -28,24 +82,23 @@ export const Tabs: React.FunctionComponent<TabsProps> = ({
       return React.cloneElement(c, {
         key: index,
         label: c.props.label,
+        id: c.props.id,
         parentCallback: handleTabClick,
         tabIndex: index,
-        isActive: index === activeTab,
+        isActive: c.props.id === activeTab,
       });
     });
 
   const renderActiveTab = (ch: Array<React.ReactElement<TabProps>>) =>
-    ch[activeTab] ? ch[activeTab].props.children : null;
-
-  const content = [].concat(...(children as any)).filter(child => child);
+    ch[labels[activeTab]] ? ch[labels[activeTab]].props.children : null;
 
   return (
-    <div className={createElementClass('tabs')}>
+    <div className={`${createElementClass('tabs')} ${className}`}>
       <ul className={createElementClass('tabs-header')}>
-        {renderHeader(content)}
+        {renderHeader(children)}
       </ul>
       <div className={createElementClass('tabs-content')}>
-        {renderActiveTab(content)}
+        {renderActiveTab(children)}
       </div>
     </div>
   );

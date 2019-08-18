@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import { Button } from "fundamental-react";
+import { Button } from 'fundamental-react';
 import { luigiClient } from '@kyma-project/common';
 
-import { Spinner } from "../Spinner";
-import { Tooltip, TooltipProps } from "../Tooltip/Tooltip";
+import { Spinner } from '../Spinner';
+import { Tooltip, TooltipProps } from '../Tooltip/Tooltip';
 
 import { FdModal, ModalWrapper } from './styled';
 
-type ButtonTypes = "standard" | "positive" | "negative" | "medium" | undefined;
+type ButtonTypes = 'standard' | 'positive' | 'negative' | 'medium' | undefined;
 
 function extractButtonType(modalType: ModalType): ButtonTypes {
-  switch(modalType) {
+  switch (modalType) {
     case ModalType.POSITIVE: {
-      return "positive";
+      return 'positive';
     }
     case ModalType.WARNING: {
-      return "medium";
+      return 'medium';
     }
     case ModalType.NEGATIVE: {
-      return "negative";
+      return 'negative';
     }
     default: {
       return;
@@ -27,11 +27,11 @@ function extractButtonType(modalType: ModalType): ButtonTypes {
 }
 
 export enum ModalType {
-  STANDARD = "",
-  INFO =  "info",
-  POSITIVE = "positive",
-  WARNING = "warning",
-  NEGATIVE = "negative",
+  STANDARD = '',
+  INFO = 'info',
+  POSITIVE = 'positive',
+  WARNING = 'warning',
+  NEGATIVE = 'negative',
 }
 
 export interface ModalProps {
@@ -52,8 +52,8 @@ export interface ModalProps {
 
 export const Modal: React.FunctionComponent<ModalProps> = ({
   title,
-  confirmText = "Confirm",
-  closeText = "Cancel",
+  confirmText = 'Confirm',
+  closeText = 'Cancel',
   openingComponent,
   type = ModalType.STANDARD,
   onOpen,
@@ -89,7 +89,7 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
   const confirm = () => {
     onConfirm && onConfirm();
     closeModal();
-  }
+  };
 
   const actionsFactory = (): React.ReactNode => {
     const confirmMessage = waiting ? (
@@ -103,7 +103,7 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
     let confirmButton = (
       <Button
         type={extractButtonType(type)}
-        option={onConfirm && "emphasized"}
+        option={onConfirm && 'emphasized'}
         onClick={confirm}
         disabled={disabledConfirm}
         data-e2e-id="modal-confirmation-button"
@@ -134,13 +134,11 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
         {confirmButton}
       </>
     );
-  }
+  };
 
   return (
     <>
-      <ModalWrapper onClick={openModal}>
-        {openingComponent}
-      </ModalWrapper>
+      <ModalWrapper onClick={openModal}>{openingComponent}</ModalWrapper>
       <FdModal
         width={width}
         type={type}
@@ -153,4 +151,4 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
       </FdModal>
     </>
   );
-}
+};

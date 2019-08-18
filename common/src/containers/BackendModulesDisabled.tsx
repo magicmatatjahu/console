@@ -20,22 +20,23 @@ export const BackendModulesDisabled: React.FunctionComponent<Props> = ({
   backendModules = [],
   requiredBackendModules = [],
 }) => {
-  const modules = requiredBackendModules.filter(reqMod => !backendModules.includes(reqMod));
+  const modules = requiredBackendModules.filter(
+    reqMod => !backendModules.includes(reqMod),
+  );
 
   const modulesLength = modules.length;
   if (!modulesLength) {
     return null;
   }
 
-  const capitalize = (str: string): string => {
-    return `${str[0].toUpperCase()}${str.slice(1)}`;
-  }
+  const capitalize = (str: string): string =>
+    `${str[0].toUpperCase()}${str.slice(1)}`;
 
   const text =
     modulesLength === 1
       ? `${capitalize(modules[0])} backend module is disabled.`
       : `${modules.map((mod, index) =>
-          index ? ` ${capitalize(mod)}` : capitalize(mod)
+          index ? ` ${capitalize(mod)}` : capitalize(mod),
         )} backend modules is disabled.`;
 
   return (

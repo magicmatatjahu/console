@@ -1,4 +1,4 @@
-import { TooltipType } from "@kyma-project/components";
+import { TooltipType } from '@kyma-project/components';
 import { isDevelopmentModeFlag } from './helpers';
 
 export const DEFAULT_CONFIGURATION =
