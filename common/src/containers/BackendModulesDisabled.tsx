@@ -12,22 +12,30 @@ export const Wrapper = styled.div`
 `;
 
 interface Props {
-  modules: BackendModules[];
+  backendModules: BackendModules[];
+  requiredBackendModules: BackendModules[];
 }
 
 export const BackendModulesDisabled: React.FunctionComponent<Props> = ({
-  modules = [],
+  backendModules = [],
+  requiredBackendModules = [],
 }) => {
+  const modules = requiredBackendModules.filter(reqMod => !backendModules.includes(reqMod));
+
   const modulesLength = modules.length;
   if (!modulesLength) {
     return null;
   }
 
+  const capitalize = (str: string): string => {
+    return `${str[0].toUpperCase()}${str.slice(1)}`;
+  }
+
   const text =
     modulesLength === 1
-      ? `${modules[0]} backend module is disabled.`
+      ? `${capitalize(modules[0])} backend module is disabled.`
       : `${modules.map((mod, index) =>
-          index ? `, ${mod}` : mod,
+          index ? ` ${capitalize(mod)}` : capitalize(mod)
         )} backend modules is disabled.`;
 
   return (

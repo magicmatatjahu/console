@@ -1,5 +1,3 @@
-export type BackendModule = string;
-
 export enum BackendModules {
   AUTHENTICATION = 'authentication',
   APPLICATION = 'application',

@@ -7,7 +7,7 @@ import {
   TooltipHeader,
 } from './styled';
 
-interface TooltipProps {
+export interface TooltipProps {
   title?: any;
   content: any;
   minWidth?: string;

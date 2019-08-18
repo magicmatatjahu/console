@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { luigiClient } from '@kyma-project/common';
+// import { luigiClient } from '@kyma-project/common';
 
 import { useInput } from '../../../services/Forms';
 import {
@@ -135,12 +135,7 @@ const AddNewConfigurationModalContainer: React.FunctionComponent = () => {
 
   const onShowModal = () => {
     resetFields();
-    luigiClient.uxManager().addBackdrop();
     nameField.setValue(configNameGenerator());
-  };
-
-  const onHideModal = () => {
-    luigiClient.uxManager().removeBackdrop();
   };
 
   return (
@@ -158,7 +153,6 @@ const AddNewConfigurationModalContainer: React.FunctionComponent = () => {
       handleEnterDownOnLabelsField={handleEnterDownOnLabelsField}
       handleEnterDownOnUrlField={handleEnterDownOnUrlField}
       onShowModal={onShowModal}
-      onHideModal={onHideModal}
       error={Boolean(error)}
     />
   );

@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { luigiClient } from '@kyma-project/common';
 
 import { useInput } from '../../../services/Forms';
 import {
@@ -88,11 +87,6 @@ const AddUrlModalContainer: React.FunctionComponent<Props> = ({
 
   const onShowModal = () => {
     resetFields();
-    luigiClient.uxManager().addBackdrop();
-  };
-
-  const onHideModal = () => {
-    luigiClient.uxManager().removeBackdrop();
   };
 
   const configs = configurationName ? [configurationName] : configurationNames;
@@ -109,7 +103,6 @@ const AddUrlModalContainer: React.FunctionComponent<Props> = ({
       removeUrl={removeUrl}
       handleEnterDownOnUrlField={handleEnterDownOnUrlField}
       onShowModal={onShowModal}
-      onHideModal={onHideModal}
     />
   );
 };

@@ -1,9 +1,9 @@
 import { luigiClient } from './luigi';
-import { BackendModule } from '../services/global/global.types';
+import { BackendModules } from '../services/global/global.types';
 
 interface InitializerReturnType {
   currentNamespace: string;
-  backendModules: BackendModule[];
+  backendModules: BackendModules[];
 }
 
 class AppInitializer {

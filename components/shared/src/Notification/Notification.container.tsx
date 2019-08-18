@@ -3,11 +3,11 @@ import React, { useContext } from 'react';
 import { NotificationsService } from '@kyma-project/common';
 import { Notification } from './Notification.component';
 
-interface Props {
+export interface NotificationContainerProps {
   orientation?: string;
 }
 
-export const NotificationContainer: React.FunctionComponent<Props> = ({
+export const NotificationContainer: React.FunctionComponent<NotificationContainerProps> = ({
   orientation = 'bottom',
 }) => {
   const { notification, showNotification, hideNotification } = useContext(

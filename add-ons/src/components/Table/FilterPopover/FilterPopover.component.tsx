@@ -25,7 +25,6 @@ const FilterPopoverComponent: React.FunctionComponent<Props> = ({
       body={body}
       control={control}
       placement="bottom-end"
-      className="fd-popover__popper"
     />
   );
 };

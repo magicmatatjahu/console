@@ -10,7 +10,7 @@ import {
   NotificationSeparator,
 } from './styled';
 
-interface Props {
+export interface NotificationProps {
   title: string;
   color?: string;
   icon?: string;
@@ -20,7 +20,7 @@ interface Props {
   orientation: string;
 }
 
-export const Notification: React.FunctionComponent<Props> = ({
+export const Notification: React.FunctionComponent<NotificationProps> = ({
   title,
   color,
   icon,

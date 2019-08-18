@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useCallback } from 'react';
 import createContainer from 'constate';
 
 import {
@@ -50,7 +50,7 @@ const useFilters = () => {
     initialActiveFilters,
   );
 
-  const setSearchFilter = (search: string) => {
+  const setSearchFilter = useCallback((search: string) => {
     dispatchActiveFilters({
       type: ActiveFiltersActionType.SET_SEARCH,
       payload: {
@@ -58,7 +58,7 @@ const useFilters = () => {
         value: search,
       },
     });
-  };
+  }, []);
 
   const setFilterLabel = (key: string, value: string) => {
     if (!activeFilters.labels[key]) {
