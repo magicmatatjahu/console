@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { TooltipType } from './index';
+import { TooltipType, TooltipOrientation } from './index';
 
 interface TooltipContainerProps {
   minWidth?: string;
   maxWidth?: string;
-  type?: string;
+  type?: TooltipType;
   light?: boolean;
-  orientation?: string;
+  orientation?: TooltipOrientation;
   show?: boolean;
 }
 
@@ -17,27 +17,29 @@ export const TooltipContainer = styled.div<TooltipContainerProps>`
   min-width: ${props => (props.minWidth ? props.minWidth : '120px')};
   max-width: ${props => (props.maxWidth ? props.maxWidth : '420px')};
   background: ${props =>
-    props.type === 'default' && !props.light ? '#32363a' : '#fff'};
-  font-size: ${props => (props.type === 'default' ? '11px' : '12px')};
-  line-height: ${props => (props.type === 'default' ? '11px' : '12px')};
+    props.type === TooltipType.STANDARD && !props.light ? '#32363a' : '#fff'};
+  font-size: ${props =>
+    props.type === TooltipType.STANDARD ? '11px' : '12px'};
+  line-height: ${props =>
+    props.type === TooltipType.STANDARD ? '11px' : '12px'};
   color: ${props =>
-    props.type === 'default' && !props.light ? '#fff' : '#32363b'};
+    props.type === TooltipType.STANDARD && !props.light ? '#fff' : '#32363b'};
   filter: drop-shadow(rgba(0, 0, 0, 0.12) 0 0px 2px);
   box-shadow: 0 0 4px 0 #00000026, 0 12px 20px 0 #00000019;
   border-radius: 3px;
   border-left: ${props => {
     let color = '';
     switch (props.type) {
-      case 'info':
+      case TooltipType.INFO:
         color = '#0b74de';
         break;
-      case 'warning':
+      case TooltipType.WARNING:
         color = '#ffeb3b';
         break;
-      case 'success':
+      case TooltipType.POSITIVE:
         color = '#4caf50';
         break;
-      case 'error':
+      case TooltipType.NEGATIVE:
         color = '#f44336';
         break;
       default:
@@ -48,11 +50,11 @@ export const TooltipContainer = styled.div<TooltipContainerProps>`
   ${props => (props.orientation === 'top' ? 'bottom: 100%;' : 'top: 100%')};
   right: 50%;
 
-  ${props => (props.type === 'light' && 'left: 0;') || 'right: 50%'};
+  ${props => (props.type === TooltipType.LIGHT && 'left: 0;') || 'right: 50%'};
   transform: translateX(
     ${props =>
-      (props.type === 'default' && '50%') ||
-      (props.type === 'light' && '-40px') ||
+      (props.type === TooltipType.STANDARD && '50%') ||
+      (props.type === TooltipType.LIGHT && '-40px') ||
       '40px'}
   );
   visibility: ${props => (props.show ? 'visibility' : 'hidden')};
@@ -60,36 +62,42 @@ export const TooltipContainer = styled.div<TooltipContainerProps>`
   ${props => {
     switch (props.orientation) {
       case 'bottom':
-        return `margin-top: ${props.type === 'default' ? '8px' : '16px'}`;
+        return `margin-top: ${
+          props.type === TooltipType.STANDARD ? '8px' : '16px'
+        }`;
       default:
-        return `margin-bottom: ${props.type === 'default' ? '8px' : '16px'}`;
+        return `margin-bottom: ${
+          props.type === TooltipType.STANDARD ? '8px' : '16px'
+        }`;
     }
   }};
 
   &:after {
-    border: ${props => (props.type === 'default' ? '6px' : '10px')} solid;
+    border: ${props => (props.type === TooltipType.STANDARD ? '6px' : '10px')}
+      solid;
     border-color: ${props => {
       switch (props.orientation) {
         case 'bottom':
           return `transparent transparent ${
-            props.type === 'default' ? '#32363b' : '#fff'
+            props.type === TooltipType.STANDARD ? '#32363b' : '#fff'
           }`;
         default:
           return `${
-            props.type === 'default' ? '#32363b' : '#fff'
+            props.type === TooltipType.STANDARD ? '#32363b' : '#fff'
           } transparent transparent`;
       }
     }};
     content: '';
     ${props =>
-      (props.type === 'default' && 'right: 50%;') ||
-      (props.type === 'light' && 'left: 48px;') ||
+      (props.type === TooltipType.STANDARD && 'right: 50%;') ||
+      (props.type === TooltipType.LIGHT && 'left: 48px;') ||
       'right: 25px'};
-    ${props => (props.type === 'default' ? 'transform: translateX(6px)' : '')};
+    ${props =>
+      props.type === TooltipType.STANDARD ? 'transform: translateX(6px)' : ''};
     margin-left: -10px;
     position: absolute;
     ${props =>
-      props.orientation === 'top'
+      props.orientation === TooltipOrientation.TOP
         ? 'top: 100%; margin-top: -1px;'
         : 'bottom: 100%; margin-bottom: -1px;'};
   }
@@ -114,7 +122,7 @@ export const TooltipWrapper = styled.div<TooltipWrapperProps>`
 `;
 
 interface TooltipContentProps {
-  type?: string;
+  type?: TooltipType;
 }
 
 export const TooltipContent = styled.div<TooltipContentProps>`
@@ -124,8 +132,10 @@ export const TooltipContent = styled.div<TooltipContentProps>`
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  text-align: ${props => (props.type === 'default' ? 'center' : 'left')};
-  padding: ${props => (props.type === 'default' ? '6px 10px' : '12px 14px')};
+  text-align: ${props =>
+    props.type === TooltipType.STANDARD ? 'center' : 'left'};
+  padding: ${props =>
+    props.type === TooltipType.STANDARD ? '6px 10px' : '12px 14px'};
 `;
 
 interface TooltipHeaderProps {

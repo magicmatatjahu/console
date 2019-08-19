@@ -9,10 +9,16 @@ import {
 
 export enum TooltipType {
   STANDARD = '',
+  LIGHT = 'light',
   INFO = 'info',
   POSITIVE = 'positive',
   WARNING = 'warning',
   NEGATIVE = 'negative',
+}
+
+export enum TooltipOrientation {
+  TOP = 'top',
+  BOTTOM = 'bottom',
 }
 
 export interface TooltipProps {
@@ -24,7 +30,7 @@ export interface TooltipProps {
   show?: boolean;
   showTooltipTimeout?: number;
   hideTooltipTimeout?: number;
-  orientation?: string;
+  orientation?: TooltipOrientation;
   wrapperStyles?: string;
 }
 
@@ -37,7 +43,7 @@ export const Tooltip: React.FunctionComponent<TooltipProps> = ({
   show = false,
   showTooltipTimeout = 100,
   hideTooltipTimeout = 100,
-  orientation,
+  orientation = TooltipOrientation.TOP,
   wrapperStyles,
   children,
 }) => {

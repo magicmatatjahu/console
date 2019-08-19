@@ -1,16 +1,13 @@
 import { useContext } from 'react';
 import gql from 'graphql-tag';
 import createUseContext from 'constate';
-import {
-  GlobalService,
-  useSubscriptions as us,
-  OnSubscriptionArgs,
-  Subscription,
-} from '@kyma-project/common';
+import { useSubscription } from '@apollo/react-hooks';
+import { GlobalService, NotificationsService } from '@kyma-project/common';
 
 import { ConfigurationsService } from '../services';
 import { Configuration } from '../types';
 import { NOTIFICATION, CONFIGURATION_VARIABLE } from '../constants';
+import { SubscriptionType } from './types';
 
 const subscriptionFields = `
   name
@@ -44,6 +41,17 @@ export const ADDONS_CONFIGURATION_EVENT_SUBSCRIPTION = gql`
   }
 `;
 
+interface SubscriptionPayload {
+  clusterAddonsConfigurationEvent?: {
+    type: SubscriptionType;
+    addonsConfiguration: Configuration;
+  };
+  addonsConfigurationEvent?: {
+    type: SubscriptionType;
+    addonsConfiguration: Configuration;
+  };
+}
+
 interface AddonsConfigurationSubscriptionVariables {
   namespace?: string;
 }
@@ -51,11 +59,11 @@ interface AddonsConfigurationSubscriptionVariables {
 const useSubscriptions = () => {
   const { currentNamespace } = useContext(GlobalService);
   const { setOriginalConfigs } = useContext(ConfigurationsService);
+  const { successNotification, errorNotification } = useContext(
+    NotificationsService,
+  );
 
-  const onAdd = ({
-    item,
-    successNotification,
-  }: OnSubscriptionArgs<Configuration>) => {
+  const onAdd = (item: Configuration) => {
     successNotification({
       title: NOTIFICATION.ADD_CONFIGURATION.TITLE,
       content: NOTIFICATION.ADD_CONFIGURATION.CONTENT.replace(
@@ -66,10 +74,7 @@ const useSubscriptions = () => {
     setOriginalConfigs(configs => [...configs, item]);
   };
 
-  const onUpdate = ({
-    item,
-    successNotification,
-  }: OnSubscriptionArgs<Configuration>) => {
+  const onUpdate = (item: Configuration) => {
     successNotification({
       title: NOTIFICATION.UPDATE_CONFIGURATION.TITLE,
       content: NOTIFICATION.UPDATE_CONFIGURATION.CONTENT.replace(
@@ -82,10 +87,7 @@ const useSubscriptions = () => {
     );
   };
 
-  const onDelete = ({
-    item,
-    successNotification,
-  }: OnSubscriptionArgs<Configuration>) => {
+  const onDelete = (item: Configuration) => {
     successNotification({
       title: NOTIFICATION.DELETE_CONFIGURATION.TITLE,
       content: NOTIFICATION.DELETE_CONFIGURATION.CONTENT.replace(
@@ -100,37 +102,62 @@ const useSubscriptions = () => {
     ? ADDONS_CONFIGURATION_EVENT_SUBSCRIPTION
     : CLUSTER_ADDONS_CONFIGURATION_EVENT_SUBSCRIPTION;
 
-  if (currentNamespace) {
-    us({
-      subscriptions: [
-        {
-          subscription,
-          options: {
-            variables: {
-              namespace: currentNamespace,
-            },
-          },
-          onAdd,
-          onUpdate,
-          onDelete,
-        } as Subscription<
-          Configuration,
-          AddonsConfigurationSubscriptionVariables
-        >,
-      ],
-    });
-    return;
-  }
+  useSubscription<
+    SubscriptionPayload,
+    AddonsConfigurationSubscriptionVariables
+  >(subscription, {
+    variables: {
+      namespace: currentNamespace,
+    },
+    onSubscriptionData: ({ subscriptionData }) => {
+      const { data, error } = subscriptionData;
 
-  us({
-    subscriptions: [
-      {
-        subscription,
-        onAdd,
-        onUpdate,
-        onDelete,
-      } as Subscription<Configuration>,
-    ],
+      if (error) {
+        // errorNotification('Error', ERRORS.SERVER);
+        errorNotification({
+          title: 'Error',
+          content: '',
+        });
+        return;
+      }
+      if (!data) {
+        return;
+      }
+
+      const {
+        clusterAddonsConfigurationEvent,
+        addonsConfigurationEvent,
+      } = data;
+      const event = currentNamespace
+        ? addonsConfigurationEvent
+        : clusterAddonsConfigurationEvent;
+      if (!event) {
+        return;
+      }
+      const type = event.type;
+      const addonsConfiguration = event.addonsConfiguration;
+
+      if (!type || !addonsConfiguration) {
+        return;
+      }
+
+      switch (type) {
+        case SubscriptionType.ADD: {
+          onAdd(addonsConfiguration);
+          break;
+        }
+        case SubscriptionType.UPDATE: {
+          onUpdate(addonsConfiguration);
+          break;
+        }
+        case SubscriptionType.DELETE: {
+          onDelete(addonsConfiguration);
+          break;
+        }
+        default:
+          break;
+      }
+    },
   });
 };
 

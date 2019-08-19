@@ -79,7 +79,7 @@ const AddUrlModalComponent: React.FunctionComponent<Props> = ({
       onConfirm={onSubmit}
       disabledConfirm={disabledConfirm}
       onOpen={onShowModal}
-      tooltipData={TOOLTIP_DATA_ERROR}
+      tooltipData={disabledConfirm ? TOOLTIP_DATA_ERROR : undefined}
     >
       <FormSet>
         <FormItem key="configurationName">

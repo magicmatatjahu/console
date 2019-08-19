@@ -37,7 +37,10 @@ export interface TabsProps {
   className?: string;
   active?: string;
   onInit?: () => string | undefined;
-  onChangeTab?: (label: string) => void;
+  onChangeTab?: {
+    func: (label: string) => void;
+    preventDefault?: boolean;
+  };
 }
 
 export const Tabs: React.FunctionComponent<TabsProps> = ({
@@ -56,15 +59,14 @@ export const Tabs: React.FunctionComponent<TabsProps> = ({
   );
 
   const labels: Labels = useMemo(() => createLabelsIndex(children), []);
-  const [activeTab, setActiveTab] = useState<string>(
-    toKebabCase(active || Object.keys(labels)[0] || ''),
-  );
+  const [activeTab, setActiveTab] = useState<string>('');
 
   useEffect(() => {
-    const id = onInit && onInit();
-    if (id && Object.keys(labels).includes(id)) {
-      setActiveTab(toKebabCase(id));
+    let id = onInit && onInit();
+    if (!id || !Object.keys(labels).includes(id)) {
+      id = active || Object.keys(labels)[0] || '';
     }
+    setActiveTab(toKebabCase(id));
   }, []);
 
   if (!children) {
@@ -72,8 +74,15 @@ export const Tabs: React.FunctionComponent<TabsProps> = ({
   }
 
   const handleTabClick = (id: string) => {
+    if (onChangeTab) {
+      const { func, preventDefault } = onChangeTab;
+
+      func(id);
+      if (preventDefault) {
+        return;
+      }
+    }
     setActiveTab(id);
-    onChangeTab && onChangeTab(id);
   };
 
   const renderHeader = (ch: Array<React.ReactElement<TabProps>>) =>

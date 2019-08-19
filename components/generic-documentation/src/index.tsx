@@ -77,7 +77,6 @@ export interface GenericComponentProps {
   docsTopic: ClusterDocsTopic | DocsTopic;
   layout?: LayoutType;
   additionalTabs?: TabProps[];
-  tabRouteHandler?: object;
 }
 
 export const GenericComponent: React.FunctionComponent<

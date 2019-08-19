@@ -51,15 +51,6 @@ const useDocsTopics = () => {
     newDocsTopic && setActiveDocsTopic(newDocsTopic);
   }, [docsTopics, activeNavNode, activeDocsTopic]);
 
-  useEffect(() => {
-    const newDocsTopic = newActiveDocsTopic({
-      docsTopics,
-      activeNavNode,
-      activeDocsTopic,
-    });
-    newDocsTopic && setActiveDocsTopic(newDocsTopic);
-  }, [docsTopics, activeNavNode, activeDocsTopic]);
-
   return {
     activeDocsTopic,
   };

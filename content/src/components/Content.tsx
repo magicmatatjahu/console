@@ -11,6 +11,8 @@ import { ContentWrapper } from './styled';
 export const Content: React.FunctionComponent<RouteComponentProps> = () => {
   const { activeDocsTopic } = useContext(DocsTopicsService);
 
+  console.log('dupa');
+
   if (!activeDocsTopic) {
     return null;
   }

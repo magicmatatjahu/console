@@ -76,7 +76,10 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
     <Tabs
       active={TabsLabels.DOCUMENTATION}
       onInit={onInitTabs}
-      onChangeTab={onChangeTab}
+      onChangeTab={{
+        func: onChangeTab,
+        preventDefault: true,
+      }}
     >
       {markdownsExists && (
         <Tab label={TabsLabels.DOCUMENTATION} id={TabsLabels.DOCUMENTATION}>

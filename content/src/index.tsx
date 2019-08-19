@@ -18,5 +18,7 @@ import {
       BackendModules.ASSET_STORE,
       BackendModules.HEADLESS_CMS,
     ],
+    enableNotifications: false,
+    enableSubscriptions: false,
   });
 })();

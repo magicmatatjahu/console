@@ -1,10 +1,15 @@
 import styled from 'styled-components';
+import { media } from '@kyma-project/components';
 import { Icon } from 'fundamental-react';
 
 export const NavigationWrapper = styled.div`
   background: #fff;
   height: 100vh;
   box-shadow: rgba(50, 54, 58, 0.08) 0px 5px 20px 0px;
+
+  ${media.phone`
+    display: none;
+  `};
 `;
 
 export const ContentWrapper = styled.div`

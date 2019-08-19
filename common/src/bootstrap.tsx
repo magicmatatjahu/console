@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/react-common';
 import 'fiori-fundamentals/dist/fiori-fundamentals.min.css';
 
 import { BackendModulesDisabled } from './containers';

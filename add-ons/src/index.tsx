@@ -37,6 +37,7 @@ import {
       BackendModules.SERVICE_CATALOG_ADDONS,
     ],
     enableNotifications: true,
+    enableSubscriptions: true,
     services,
   });
 })();

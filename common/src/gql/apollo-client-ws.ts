@@ -12,10 +12,19 @@ export class WebSocketLink extends ApolloLink {
     if (paramsOrClient instanceof SubscriptionClient) {
       this.subscriptionClient = paramsOrClient;
     } else {
+      const bearerToken = appInitializer.getBearerToken();
+      const protocols = ['graphql-ws'];
+
+      const token = bearerToken ? bearerToken.split(' ')[1] : null;
+      if (token) {
+        protocols.push(token);
+      }
+
       this.subscriptionClient = new SubscriptionClient(
         paramsOrClient.uri,
         paramsOrClient.options,
-        getWrappedWebsocket(),
+        null,
+        protocols,
       );
     }
   }
@@ -25,21 +34,4 @@ export class WebSocketLink extends ApolloLink {
       FetchResult
     >;
   }
-}
-
-function getWrappedWebsocket() {
-  const w = window as any;
-  const NativeWebSocket = w.WebSocket || w.MozWebSocket;
-  const customWs: any = (url: string) => {
-    const bearerToken = appInitializer.getBearerToken();
-    const token = bearerToken ? bearerToken.split(' ')[1] : null;
-    const protocols = ['graphql-ws', token];
-    return new NativeWebSocket(url, protocols);
-  };
-
-  customWs.OPEN = NativeWebSocket.OPEN;
-  customWs.CONNECTING = NativeWebSocket.CONNECTING;
-  customWs.CLOSED = NativeWebSocket.CLOSED;
-
-  return customWs;
 }
