@@ -11,15 +11,13 @@ import { ContentWrapper } from './styled';
 export const Content: React.FunctionComponent<RouteComponentProps> = () => {
   const { activeDocsTopic } = useContext(DocsTopicsService);
 
-  console.log('dupa');
-
   if (!activeDocsTopic) {
     return null;
   }
 
   return (
     <ContentWrapper>
-      <h1>{activeDocsTopic.displayName}</h1>
+      <h1 data-e2e-id="toolbar-header">{activeDocsTopic.displayName}</h1>
       <GenericComponent
         docsTopic={activeDocsTopic}
         layout={LayoutType.CONTENT_UI}

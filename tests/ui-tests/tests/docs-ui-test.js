@@ -14,7 +14,7 @@ import {
 
 let page, browser;
 
-const REQUIRED_MODULE = 'content';
+const REQUIRED_MODULE = 'cms';
 
 describeIf(dex.isStaticUser(), 'Docs basic tests', () => {
   beforeAll(async () => {
@@ -43,7 +43,7 @@ describeIf(dex.isStaticUser(), 'Docs basic tests', () => {
 
     // consts
     const docsHeaderSelector = catalog.prepareSelector('go-to-environment');
-    const docsExpectedHeader = 'Back to Environment';
+    const docsExpectedHeader = 'Back to Namespaces';
 
     await Promise.all([
       page.goto(docsUrl),
