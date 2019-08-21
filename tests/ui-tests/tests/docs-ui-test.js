@@ -77,17 +77,18 @@ describeIf(dex.isStaticUser(), 'Docs basic tests', () => {
         `${navLink}-${serviceCatalogID}`,
       );
 
-      // consts
-      const articleHeaderSelector = catalog.prepareSelector('toolbar-header');
-
-      let frame;
-      await retry(async () => {
-        await page.reload({ waitUntil: ['domcontentloaded', 'networkidle0'] });
+      const waitForHeader = async () => {
         frame = await kymaConsole.getFrame(page);
         await frame.waitForSelector(articleHeaderSelector, {
           timeout: 50000,
         });
-      });
+      }
+
+      // consts
+      const articleHeaderSelector = catalog.prepareSelector('toolbar-header');
+
+      let frame;
+      await retry(waitForHeader);
 
       await frame.$$eval(
         articleHeaderSelector,
@@ -97,12 +98,9 @@ describeIf(dex.isStaticUser(), 'Docs basic tests', () => {
         articleExpectedHeader,
       );
 
-      await Promise.all([
-        frame.click(serviceCatalogLink),
-        frame.waitForNavigation({
-          waitUntil: ['domcontentloaded', 'networkidle0'],
-        }),
-      ]);
+      await frame.click(serviceCatalogLink)
+      await retry(waitForHeader);
+
       await frame.$$eval(
         articleHeaderSelector,
         (item, articleExpectedServiceCatalogHeader) => {

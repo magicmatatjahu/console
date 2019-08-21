@@ -11,7 +11,7 @@ import {
   BackendModules,
 } from './services';
 
-import { createApolloClient, QueriesOptions, MutationsOptions } from './gql';
+import { createApolloClient } from './gql';
 
 import { appInitializer } from './core';
 
@@ -22,8 +22,6 @@ interface BootstrapOptions {
   enableNotifications?: boolean;
   enableSubscriptions?: boolean;
   services?: React.FunctionComponent[];
-  queriesOptions?: QueriesOptions;
-  mutationsOptions?: MutationsOptions;
 }
 
 export const bootstrap = async ({
