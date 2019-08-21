@@ -12,7 +12,7 @@ The Console project consists of the following UI projects:
 - [`Catalog`](./service-catalog-ui/catalog) - The UI layer for Service Catalog
 - [`Instances`](./service-catalog-ui/instances) - The view for displaying Service Instances
 - [`Brokers`](./service-catalog-ui/brokers) - The view for displaying Service Brokers
-- [`Addons`](./add-ons) - The view for displaying Namespaced-scoped and cluster-wide Addons
+- [`Addons`](./add-ons) - The view for displaying Namespace-scoped and cluster-wide Addons
 - [`Lambda`](./lambda) - The view for lambda functions
 - [`Content`](./content) - The documentation view
 - [`Log UI`](./logging) - The logs view
@@ -85,9 +85,9 @@ For the information on how to run tests and configure them, go to the [`tests`](
 
 ## Troubleshooting
 
-### CI fails on PRs related to staging dependencies
+> **TIP:** To solve most of the problems with the Console development, clear the browser cache or do a hard refresh of the website.
 
-TIP: To solve most of the problems with the Console development, clear the browser cache or do a hard refresh of the website.
+### CI fails on PRs related to staging dependencies
 
 Remove the `node_modules` folder and the `package-lock.json` file in all libraries in the (`components`)[./components] folder and on the root. Then rerun the `npm run bootstrap` command in the root context and push all the changes.
 

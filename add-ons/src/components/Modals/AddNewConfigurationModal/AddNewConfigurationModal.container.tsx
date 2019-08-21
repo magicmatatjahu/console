@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-// import { luigiClient } from '@kyma-project/common';
 
 import { useInput } from '../../../services/Forms';
 import {

@@ -82,7 +82,7 @@ describeIf(dex.isStaticUser(), 'Docs basic tests', () => {
         await frame.waitForSelector(articleHeaderSelector, {
           timeout: 50000,
         });
-      }
+      };
 
       // consts
       const articleHeaderSelector = catalog.prepareSelector('toolbar-header');
@@ -98,7 +98,7 @@ describeIf(dex.isStaticUser(), 'Docs basic tests', () => {
         articleExpectedHeader,
       );
 
-      await frame.click(serviceCatalogLink)
+      await frame.click(serviceCatalogLink);
       await retry(waitForHeader);
 
       await frame.$$eval(
