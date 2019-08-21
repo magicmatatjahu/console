@@ -54,6 +54,12 @@ npm run start
 
 To access the local instance of the Console at `http://console-dev.kyma.local:4200`, use credentials from [this](https://kyma-project.io/docs/master/root/kyma#installation-install-kyma-on-a-cluster--provider-installation--aks--access-the-cluster) document - point 3.
 
+If you want to watch changes in the React libraries, run the following command in a new terminal window:
+
+``` bash
+npm run watch:libraries
+```
+
 ## Development
 
 Once you start Kyma with Console locally, you can start development. All modules have hot-reload enabled therefore you can edit the code real time and see the changes in your browser.
