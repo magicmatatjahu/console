@@ -12,7 +12,7 @@ import {
 } from './services';
 
 import { createApolloClient } from './gql';
-
+import { preloadingStrategy } from "./utils";
 import { appInitializer } from './core';
 
 interface BootstrapOptions {
@@ -32,41 +32,46 @@ export const bootstrap = async ({
   app,
   services: svcs,
 }: BootstrapOptions) => {
-  const { backendModules, ...context } = await appInitializer.init();
+  const init = async (): Promise<void> => {
+    console.log("dupa")
+    const { backendModules = [], ...context } = await appInitializer.init();
 
-  if (
-    requiredBackendModules &&
-    !requiredBackendModules.every(mod => backendModules.includes(mod))
-  ) {
+    if (
+      requiredBackendModules &&
+      !requiredBackendModules.every(mod => backendModules.includes(mod))
+    ) {
+      render(
+        <BackendModulesDisabled
+          backendModules={backendModules}
+          requiredBackendModules={requiredBackendModules}
+        />,
+        document.getElementById(id),
+      );
+      return;
+    }
+  
+    const client = createApolloClient({
+      enableSubscriptions: Boolean(enableSubscriptions),
+    });
+  
+    const services: any[] = [GlobalProvider];
+    if (enableNotifications) {
+      services.push(NotificationsProvider);
+    }
+    if (svcs) {
+      services.push(...svcs);
+    }
+    const Services = nestServices(...services);
+  
     render(
-      <BackendModulesDisabled
-        backendModules={backendModules}
-        requiredBackendModules={requiredBackendModules}
-      />,
+      <ApolloProvider client={client}>
+        <Services backendModules={backendModules} {...context}>
+          {app}
+        </Services>
+      </ApolloProvider>,
       document.getElementById(id),
     );
-    return;
   }
 
-  const client = createApolloClient({
-    enableSubscriptions: Boolean(enableSubscriptions),
-  });
-
-  const services: any[] = [GlobalProvider];
-  if (enableNotifications) {
-    services.push(NotificationsProvider);
-  }
-  if (svcs) {
-    services.push(...svcs);
-  }
-  const Services = nestServices(...services);
-
-  render(
-    <ApolloProvider client={client}>
-      <Services backendModules={backendModules} {...context}>
-        {app}
-      </Services>
-    </ApolloProvider>,
-    document.getElementById(id),
-  );
+  preloadingStrategy(init);
 };
