@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Spinner } from '@kyma-project/react-components';
+import { Spinner } from '@kyma-project/components';
 
 import TableComponent from './Table.component';
 import TableContentComponent from './TableContent.component';
