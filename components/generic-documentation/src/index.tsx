@@ -10,9 +10,9 @@ import { plugins as markdownPlugins } from '@kyma-project/dc-markdown-render-eng
 import { TabProps } from '@kyma-project/components';
 
 import { markdownRE, openApiRE, asyncApiRE, odataRE } from './render-engines';
-import { 
-  ContentUILayout, 
-  CatalogUILayout, 
+import {
+  ContentUILayout,
+  CatalogUILayout,
   InstancesUILayout,
   CompassUILayout,
 } from './layouts';
@@ -48,7 +48,7 @@ const PLUGINS: Plugins = [
 const RENDER_ENGINES: RenderEngines = [
   {
     ...markdownRE,
-    sourceTypes: ["markdown", "mdown", "mkdn", "md"],
+    sourceTypes: ['markdown', 'mdown', 'mkdn', 'md'],
   },
   openApiRE,
   asyncApiRE,
@@ -94,11 +94,11 @@ export interface GenericComponentProps {
 
 export const GenericComponent: React.FunctionComponent<
   GenericComponentProps
-> = ({ 
+> = ({
   docsTopic,
   sources: srcs = [],
-  layout = LayoutType.CONTENT_UI, 
-  ...others 
+  layout = LayoutType.CONTENT_UI,
+  ...others
 }) => {
   useEffect(() => {
     disableClickEventFromSwagger();

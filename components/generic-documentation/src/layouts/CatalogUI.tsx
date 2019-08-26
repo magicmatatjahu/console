@@ -14,10 +14,7 @@ export const CatalogUILayout: React.FunctionComponent<CatalogUILayoutProps> = ({
   additionalTabs,
 }) => {
   renderers.group = (otherProps: any) => (
-    <GroupRenderer
-      {...otherProps}
-      additionalTabs={additionalTabs}
-    />
+    <GroupRenderer {...otherProps} additionalTabs={additionalTabs} />
   );
 
   return (

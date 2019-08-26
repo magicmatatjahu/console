@@ -11,9 +11,7 @@ export interface InstancesUILayoutProps {
 export const InstancesUILayout: React.FunctionComponent<
   InstancesUILayoutProps
 > = ({ renderers }) => {
-  renderers.group = (props: any) => (
-    <GroupRenderer {...props} />
-  );
+  renderers.group = (props: any) => <GroupRenderer {...props} />;
 
   return (
     <InstancesUIWrapper>
