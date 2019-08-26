@@ -12,7 +12,7 @@ import {
 } from './services';
 
 import { createApolloClient } from './gql';
-import { preloadingStrategy } from "./utils";
+import { preloadingStrategy } from './utils';
 import { appInitializer } from './core';
 
 interface BootstrapOptions {
@@ -33,7 +33,6 @@ export const bootstrap = async ({
   services: svcs,
 }: BootstrapOptions) => {
   const init = async (): Promise<void> => {
-    console.log("dupa")
     const { backendModules = [], ...context } = await appInitializer.init();
 
     if (
@@ -49,11 +48,11 @@ export const bootstrap = async ({
       );
       return;
     }
-  
+
     const client = createApolloClient({
       enableSubscriptions: Boolean(enableSubscriptions),
     });
-  
+
     const services: any[] = [GlobalProvider];
     if (enableNotifications) {
       services.push(NotificationsProvider);
@@ -62,7 +61,7 @@ export const bootstrap = async ({
       services.push(...svcs);
     }
     const Services = nestServices(...services);
-  
+
     render(
       <ApolloProvider client={client}>
         <Services backendModules={backendModules} {...context}>
@@ -71,7 +70,7 @@ export const bootstrap = async ({
       </ApolloProvider>,
       document.getElementById(id),
     );
-  }
+  };
 
   preloadingStrategy(init);
 };

@@ -1,4 +1,4 @@
-# Copying .env in 20 line is a temporary solution for issue with babel-loader package in react-scripts 
+# Copying .env in 17 line is a temporary solution for issue with babel-loader package in react-scripts 
 
 FROM node:10.11.0-alpine as ui-generator
 

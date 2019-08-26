@@ -35,6 +35,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+package-lock.json
+**/package-lock.json
 
 # Typescript v1 declaration files
 typings/
@@ -67,13 +69,13 @@ yarn-error.log
 .DS_Store
 
 # lib
+**/lib
 **/dist
 **/build
 **/bundle_analyzer
 stats.html
 .rpt2_cache
 
-node_modules
 compass/public-luigi/luigi-core
 compass/src/assets/luigiConfig.bundle.js
 compass/src/config/luigi-config/main.js

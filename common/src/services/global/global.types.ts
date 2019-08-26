@@ -7,4 +7,5 @@ export enum BackendModules {
   SERVICE_CATALOG_ADDONS = 'servicecatalogaddons',
   ASSET_STORE = 'assetstore',
   HEADLESS_CMS = 'cms',
+  GRAFANA = 'grafana',
 }
