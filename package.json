@@ -14,7 +14,6 @@
     "lint-check": "tslint -c ./tslint.json --project tsconfig.base.json --format verbose && prettier --config ./.prettierrc --ignore-path ./.prettierignore --check '**/*.{ts,tsx,js,jsx,json,html,css,yaml}'",
     "lint-fix": "tslint -c ./tslint.json --project tsconfig.base.json --format verbose --fix && prettier --config ./.prettierrc --ignore-path ./.prettierignore --write '**/*.{ts,tsx,js,jsx,json,html,css,yaml}'",
     "conflict-check": "tslint-config-prettier-check ./tslint.json",
-    "type-check": "tsc --noEmit",
     "markdownlint": "markdownlint **/*.md",
     "lint-staged": "lint-staged",
     "git-ignore-config": "git update-index --assume-unchanged core/src/assets/config/config.js lambda/src/assets/config/config.js service-catalog-ui/catalog/public/config/config.js service-catalog-ui/instances/public/config/config.js service-catalog-ui/brokers/public/config/config.js content/public/config/config.js logging/src/assets/config/config.js add-ons/public/config/config.js",

@@ -2,8 +2,8 @@ IMG_NAME = content-ui
 IMG = $(DOCKER_PUSH_REPOSITORY)$(DOCKER_PUSH_DIRECTORY)/$(IMG_NAME)
 TAG = $(DOCKER_TAG)
 
-ci-pr: root-pr resolve build pre-build-image pull-licenses build-image push-image
-ci-master: root-master resolve build pre-build-image pull-licenses build-image push-image
+ci-pr: root-pr resolve validate build pre-build-image pull-licenses build-image push-image
+ci-master: root-master resolve validate build pre-build-image pull-licenses build-image push-image
 
 .PHONY: root-pr
 root-pr:
@@ -16,6 +16,10 @@ root-master:
 .PHONY: resolve
 resolve:
 	npm install
+
+.PHONY: validate
+resolve:
+	npm run type-check
 
 .PHONY: build
 build:
