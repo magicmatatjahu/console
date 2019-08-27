@@ -53,9 +53,9 @@
     "react-sticky": "^6.0.3",
     "click-outside-hook": "^1.1.0",
     "constate": "^1.2.0",
-    "fiori-fundamentals": "^1.7.1",
-    "fundamental-react": "^0.6.1",
-    "fundamental-styles": "^0.1.0",
+    "fiori-fundamentals": "1.7.1",
+    "fundamental-react": "0.6.1",
+    "fundamental-styles": "0.1.0",
     "styled-components": "4.3.2",
     "prop-types": "^15.7.2"
   },

@@ -18,11 +18,11 @@ const StatusIndicator = ({ data, testId }) => {
     .filter((type, index, array) => array.indexOf(type) === index);
 
   let statusesLength = 0;
-  for (let type of statusTypes) {
+  statusTypes.forEach(type => {
     const length = data.filter(item => item.status.type === type).length;
     statusesStats[type] = length;
     statusesLength += length;
-  }
+  });
 
   return (
     <Fragment>

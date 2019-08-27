@@ -32,7 +32,6 @@ export const PanelWrapper = styled.div`
 
       button {
         top: 10px;
-        height: 19px;
       }
     }
 
@@ -50,7 +49,6 @@ export const PanelWrapper = styled.div`
 
         button {
           top: 12px;
-          height: 19px;
         }
 
         .fd-tree__col--control--default-config {

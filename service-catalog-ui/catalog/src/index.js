@@ -4,8 +4,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CatalogViewContent from './components/App/CatalogViewContent.component';
 
-import './index.css';
-
 function Preload() {
   return <div></div>;
 }

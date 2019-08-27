@@ -4,8 +4,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import InstancesViewContent from './components/App/InstancesViewContent.component';
 
-import './index.css';
-
 function Preload() {
   return <div></div>;
 }

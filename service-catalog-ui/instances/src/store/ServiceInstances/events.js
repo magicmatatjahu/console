@@ -62,6 +62,7 @@ export const handleServiceBindingUsageEvent = (
     );
   }
 
+  /* eslint-disable no-unused-vars */
   if (idx === -1) {
     // Try to search in another way
     idx = currentItems.findIndex(instance => {
@@ -78,6 +79,7 @@ export const handleServiceBindingUsageEvent = (
       return instancesObj;
     }
   }
+  /* eslint-enable no-unused-vars */
 
   const currentInstanceServiceBindingUsages =
     currentItems[idx].serviceBindingUsages || [];
