@@ -48,9 +48,13 @@ export function createCompassApolloClient() {
 }
 
 export function createKymaApolloClient() {
-  const graphqlApiUrl = getURL(
-    process.env.REACT_APP_LOCAL_API ? 'graphqlApiUrlLocal' : 'graphqlApiUrl',
-  );
+  // TODO: Uncomment
+  // const graphqlApiUrl = getURL(
+  //   process.env.REACT_APP_LOCAL_API ? 'graphqlApiUrlLocal' : 'graphqlApiUrl',
+  // );
+
+  const graphqlApiUrl =
+    'https://console-backend.lucky.wookiee.hudy.ninja/graphql';
 
   const httpLink = new HttpLink({
     uri: graphqlApiUrl,

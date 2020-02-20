@@ -44,7 +44,7 @@ export const PageHeader = ({ title, breadcrumbItems, actions, children }) => (
         ) : null}
 
         <Panel.Head title={title} />
-        <section className="column-wrapper"> {children}</section>
+        <section className="column-wrapper">{children}</section>
       </section>
 
       {actions && <Panel.Actions>{actions}</Panel.Actions>}

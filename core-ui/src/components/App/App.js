@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { NotificationProvider } from 'react-shared';
-import NamespaceList from '../NamespaceList/NamespaceList';
-import Lambdas from '../Lambdas/Lambdas';
-import LambdaDetailsWrapper from '../Lambdas/LambdaDetails/LambdaDetailsWrapper';
 
-import CreateApiRule from '../ApiRules/CreateApiRule/CreateApiRule';
+import NamespaceList from 'components/NamespaceList/NamespaceList';
 
+import LambdasView from 'views/lambdas/LambdasView';
+
+import CreateApiRule from 'components/ApiRules/CreateApiRule/CreateApiRule';
 import ApiRules from 'components/ApiRules/ApiRules';
 import ApiRuleDetails from 'components/ApiRules/ApiRuleDetails/ApiRuleDetails';
 import EditApiRule from 'components/ApiRules/EditApiRule/EditApiRule';
@@ -25,8 +25,7 @@ export default function App() {
         <Route path="/preload" component={() => null} />
         <Route path="/namespaces" component={NamespaceList} />
 
-        <Route path="/lambdas" exact component={Lambdas} />
-        <Route path="/lambda/:name" component={RoutedLambdaDetails} />
+        <LambdasView />
 
         <Route exact path="/applications" component={ApplicationList} />
         <Route
@@ -70,10 +69,6 @@ export default function App() {
       </Switch>
     </NotificationProvider>
   );
-}
-
-function RoutedLambdaDetails({ match }) {
-  return <LambdaDetailsWrapper lambdaName={match.params.name} />;
 }
 
 function RoutedApiRuleDetails({ match }) {
