@@ -8,6 +8,8 @@ import {
 import { luigiClient } from '@kyma-project/common';
 import { Grid, Tabs, Tab, TabProps } from '@kyma-project/components';
 
+import { APIRenderedContent } from './APIRenderedContent';
+
 import { HeadersNavigation } from '../render-engines/markdown/headers-toc';
 import { MarkdownWrapper } from '../styled';
 import {
@@ -16,14 +18,12 @@ import {
   asyncApiTypes,
   odataTypes,
 } from '../constants';
-import { StyledOData, StyledAsyncAPI } from './styled';
-import { StyledSwagger } from '../render-engines/open-api/styles';
 
 function existFiles(sources: Source[], types: string[]) {
   return sources.find(source => types.includes(source.type));
 }
 
-enum TabsLabels {
+export enum TabsLabels {
   DOCUMENTATION = 'Documentation',
   CONSOLE = 'Console',
   EVENTS = 'Events',
@@ -105,25 +105,25 @@ export const GroupRenderer: React.FunctionComponent<GroupRendererProps> = ({
         </Tab>
       )}
       {openApiExists && (
-        <Tab label={TabsLabels.CONSOLE} id={TabsLabels.CONSOLE}>
-          <StyledSwagger className="custom-open-api-styling">
-            <RenderedContent sourceTypes={openApiTypes} />
-          </StyledSwagger>
-        </Tab>
+        <APIRenderedContent
+          apiLabel={TabsLabels.CONSOLE}
+          apiClassName="custom-open-api-styling"
+          sourceTypes={openApiTypes}
+        />
       )}
       {asyncApiExists && (
-        <Tab label={TabsLabels.EVENTS} id={TabsLabels.EVENTS}>
-          <StyledAsyncAPI className="custom-async-api-styling">
-            <RenderedContent sourceTypes={asyncApiTypes} />
-          </StyledAsyncAPI>
-        </Tab>
+        <APIRenderedContent
+          apiLabel={TabsLabels.EVENTS}
+          apiClassName="custom-async-api-styling"
+          sourceTypes={asyncApiTypes}
+        />
       )}
       {odataExists && (
-        <Tab label={TabsLabels.ODATA} id={TabsLabels.ODATA}>
-          <StyledOData className="custom-odata-styling">
-            <RenderedContent sourceTypes={odataTypes} />
-          </StyledOData>
-        </Tab>
+        <APIRenderedContent
+          apiLabel={TabsLabels.ODATA}
+          apiClassName="custom-odata-styling"
+          sourceTypes={odataTypes}
+        />
       )}
       {tabs}
     </Tabs>
