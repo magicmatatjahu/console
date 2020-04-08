@@ -1,7 +1,46 @@
 import gql from 'graphql-tag';
 
+export const GET_LAMBDA = gql`
+  query function($name: String!, $namespace: String!) {
+    function(name: $name, namespace: $namespace) {
+      name
+      namespace
+      UID
+      labels
+      source
+      dependencies
+      replicas {
+        min
+        max
+      }
+      resources {
+        requests {
+          memory
+          cpu
+        }
+        limits {
+          memory
+          cpu
+        }
+      }
+      env {
+        name
+        value
+        valueFrom {
+          type
+          name
+          key
+        }
+      }
+      status {
+        phase
+      }
+    }
+  }
+`;
+
 export const GET_EVENT_ACTIVATIONS = gql`
-  query EventActivations($namespace: String!) {
+  query eventActivations($namespace: String!) {
     eventActivations(namespace: $namespace) {
       name
       displayName
@@ -17,7 +56,7 @@ export const GET_EVENT_ACTIVATIONS = gql`
 `;
 
 export const GET_EVENT_TRIGGERS = gql`
-  query EventTriggers($namespace: String!, $subscriber: SubscriberInput) {
+  query eventTriggers($namespace: String!, $subscriber: SubscriberInput) {
     triggers(namespace: $namespace, subscriber: $subscriber) {
       name
       namespace
@@ -47,6 +86,35 @@ export const GET_SERVICE_INSTANCES = gql`
             name
             data
           }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_SERVICE_BINDING_USAGES = gql`
+  query serviceBindingUsages(
+    $namespace: String!
+    $resourceKind: String
+    $resourceName: String
+  ) {
+    serviceBindingUsages(
+      namespace: $namespace
+      resourceKind: $resourceKind
+      resourceName: $resourceName
+    ) {
+      name
+      parameters {
+        envPrefix {
+          name
+        }
+      }
+      serviceBinding {
+        name
+        serviceInstanceName
+        secret {
+          name
+          data
         }
       }
     }

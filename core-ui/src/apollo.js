@@ -70,9 +70,12 @@ export function createCompassApolloClient() {
 }
 
 export function createKymaApolloClient() {
-  const graphqlApiUrl = getURL(
-    process.env.REACT_APP_LOCAL_API ? 'graphqlApiUrlLocal' : 'graphqlApiUrl',
-  );
+  // const graphqlApiUrl = getURL(
+  //   process.env.REACT_APP_LOCAL_API ? 'graphqlApiUrlLocal' : 'graphqlApiUrl',
+  // );
+
+  const graphqlApiUrl =
+    'https://console-backend.standard-beach.wookiee.hudy.ninja/graphql';
 
   const httpLink = createHttpLink({
     uri: graphqlApiUrl,

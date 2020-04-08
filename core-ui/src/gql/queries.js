@@ -38,11 +38,8 @@ export const GET_LAMBDAS = gql`
       name
       namespace
       labels
-      runtime
-      size
-      status
-      serviceBindingUsages {
-        name
+      status {
+        phase
       }
     }
   }
@@ -55,26 +52,33 @@ export const GET_LAMBDA = gql`
       namespace
       UID
       labels
-      runtime
-      size
-      status
-      content
+      source
       dependencies
-      serviceBindingUsages {
+      replicas {
+        min
+        max
+      }
+      resources {
+        requests {
+          memory
+          cpu
+        }
+        limits {
+          memory
+          cpu
+        }
+      }
+      env {
         name
-        parameters {
-          envPrefix {
-            name
-          }
-        }
-        serviceBinding {
+        value
+        valueFrom {
+          type
           name
-          serviceInstanceName
-          secret {
-            name
-            data
-          }
+          key
         }
+      }
+      status {
+        phase
       }
     }
   }

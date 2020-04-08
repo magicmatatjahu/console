@@ -8,6 +8,16 @@ export const lambdaMock = {
   },
   runtime: 'nodejs8',
   size: 'S',
+  env: [
+    {
+      name: 'foo',
+      value: 'bar',
+    },
+    {
+      name: 'pico',
+      value: 'bello',
+    },
+  ],
 };
 
 export const eventActivationMock = {

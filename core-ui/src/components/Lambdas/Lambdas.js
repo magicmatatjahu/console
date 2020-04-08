@@ -128,7 +128,7 @@ export default function Lambdas() {
       },
     },
   ];
-  const headerRenderer = () => ['Name', 'Runtime', 'Labels', 'Status'];
+  const headerRenderer = () => ['Name', 'Labels', 'Status'];
   const rowRenderer = item => [
     <span
       className="link"
@@ -137,9 +137,8 @@ export default function Lambdas() {
     >
       {item.name}
     </span>,
-    <span>{item.runtime}</span>,
     <Labels labels={item.labels} />,
-    <LambdaStatusBadge status={item.status} />,
+    <LambdaStatusBadge status={item.status.phase} />,
   ];
 
   const headerActions = <CreateLambdaModal />;

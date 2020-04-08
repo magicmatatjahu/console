@@ -1,16 +1,21 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import CodeTab from './../CodeTab';
 
 describe('Lambda Code Tab', () => {
   it('Render with minimal props', () => {
-    const component = renderer.create(
+    const { getByText } = render(
       <CodeTab
+        lambda={{
+          serviceBindingUsages: [],
+          env: [],
+        }}
+        refetchLambda={() => void 0}
         codeEditorComponent={<p>Code</p>}
         dependenciesComponent={<p>Dependencies</p>}
       />,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(getByText('Code')).toBeInTheDocument();
   });
 });

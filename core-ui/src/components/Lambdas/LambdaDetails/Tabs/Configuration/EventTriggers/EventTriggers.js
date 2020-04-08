@@ -73,6 +73,7 @@ export default function EventTriggers({
       </>
     ),
     showCollapseControl: showCollapseControl(eventTrigger.schema),
+    withCollapseControl: true,
   });
   const textSearchProperties = [
     'eventType',

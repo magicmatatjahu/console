@@ -35,6 +35,36 @@ export const GQL_QUERIES = {
 };
 
 export const GQL_MUTATIONS = {
+  CREATE_LAMBDA: {
+    SUCCESS_MESSAGE: `"{lambdaName}" Lambda is successfully created`,
+    ERROR_MESSAGE: `Error while creating "{lambdaName}" Lambda: {error}`,
+  },
+  UPDATE_LAMBDA: {
+    GENERAL_CONFIGURATION: {
+      SUCCESS_MESSAGE: `General Configuration for "{lambdaName}" Lambda are successfully updated`,
+      ERROR_MESSAGE: `Error while updating General Configuration for "{lambdaName}" Lambda: {error}`,
+    },
+    CODE_AND_DEPENDENCIES: {
+      SUCCESS_MESSAGE: `Code and Dependencies for "{lambdaName}" Lambda are successfully updated`,
+      ERROR_MESSAGE: `Error while updating Code and Dependencies for "{lambdaName}" Lambda: {error}`,
+    },
+    RESOURCES_AND_REPLICAS: {
+      SUCCESS_MESSAGE: `Resources and Replicas for "{lambdaName}" Lambda are successfully updated`,
+      ERROR_MESSAGE: `Error while updating Resources and Replicas for "{lambdaName}" Lambda: {error}`,
+    },
+    VARIABLES: {
+      SUCCESS_MESSAGE: `Environment Variables for "{lambdaName}" Lambda are successfully updated`,
+      ERROR_MESSAGE: `Error while updating Environment Variables for "{lambdaName}" Lambda: {error}`,
+    },
+  },
+  DELETE_LAMBDA: {
+    SUCCESS_MESSAGE: `"{lambdaName}" Lambda is successfully removed`,
+    ERROR_MESSAGE: `Error while deleting "{lambdaName}" Lambda: {error}`,
+    CONFIRM_MODAL: {
+      TITLE: `Remove {lambdaName} Lambda`,
+      MESSAGE: `Are you sure you want to delete "{lambdaName}" Lambda and whole related to it resources?`,
+    },
+  },
   CREATE_TRIGGERS: {
     SUCCESS_MESSAGE_SINGLE: `Event Trigger created successfully`,
     SUCCESS_MESSAGE_MANY: `Event Triggers created successfully`,
@@ -58,6 +88,61 @@ export const TRIGGER_SCHEMA = {
   COLUMN_NAMES: ['Name', 'Title', 'Type', 'Format', 'Default', 'Description'],
 };
 
+export const MODALS = {
+  CREATE_BINDING: {
+    CREATE_BUTTON_POPUP_MESSAGE: 'At least one event must be marked.',
+  },
+};
+
+export const RESOURCES_MANAGEMENT_PANEL = {
+  TITLE: 'Resources and Replicas Configuration',
+  EDIT_MODAL: {
+    TITLE: 'Edit Resources and Replicas Configuration',
+    OPEN_BUTTON: {
+      TEXT: 'Edit Configuration',
+    },
+    CONFIRM_BUTTON: {
+      TEXT: 'Save',
+    },
+  },
+  REPLICAS_MODE: {
+    MIN_NUMBER: {
+      TITLE: 'Minimum number of replicas',
+      DESCRIPTION: 'Enable scale to zero.',
+    },
+    MAX_NUMBER: {
+      TITLE: 'Maximum number of replicas',
+      DESCRIPTION: 'Enable scale to zero.',
+    },
+    SCALE_TO_ZERO: {
+      TITLE: 'Scale to zero',
+      DESCRIPTION: 'Enable scale to zero.',
+    },
+    FIXED: {
+      TITLE: 'Fixed replicas',
+      DESCRIPTION: 'Enable fixed replicas.',
+    },
+  },
+  RESOURCES: {
+    REQUESTS: {
+      TITLE: 'Requests Resources',
+      DESCRIPTION:
+        'Requests describes the minimum amount of compute resources required.',
+    },
+    LIMITS: {
+      TITLE: 'Limits Resources',
+      DESCRIPTION:
+        'Limits describes the maximum amount of compute resources allowed.',
+    },
+    MEMORY: {
+      TITLE: 'Memory',
+    },
+    CPU: {
+      TITLE: 'CPU',
+    },
+  },
+};
+
 export const EVENT_TRIGGERS_PANEL = {
   LIST: {
     TITLE: 'Event Triggers',
@@ -68,12 +153,12 @@ export const EVENT_TRIGGERS_PANEL = {
     },
   },
   ADD_MODAL: {
+    TITLE: 'Add Event Trigger',
     OPEN_BUTTON: {
       TEXT: 'Add Event Trigger',
       NOT_ENTRIES_POPUP_MESSAGE:
         'No Events available to connect in current namespace.',
     },
-    TITLE: 'Add Event Trigger',
     CONFIRM_BUTTON: {
       TEXT: 'Add',
       INVALID_POPUP_MESSAGE: 'At least one Event must be checked.',
@@ -110,3 +195,74 @@ export const SERVICE_BINDINGS_PANEL = {
       'There are no Secrets available. Create a new Secret to bind the Service Instance.',
   },
 };
+
+export const CODE_AND_DEPENDENCIES_PANEL = {
+  TABS: {
+    CODE: 'Lambda Code',
+    DEPENDENCIES: 'Dependencies',
+  },
+  SAVE_BUTTON: {
+    TEXT: 'Save',
+    POPUP_MESSAGE: 'No changes made',
+  },
+  DIFF_TOGGLE: 'Diff',
+};
+
+export const ENVIRONMENT_VARIABLES_PANEL = {
+  LIST: {
+    TITLE: 'Environment Variables',
+  },
+  EDIT_MODAL: {
+    TITLE: 'Edit Environment Variables',
+    OPEN_BUTTON: {
+      TEXT: 'Edit Environment Variables',
+    },
+    CONFIRM_BUTTON: {
+      TEXT: 'Save',
+      POPUP_MESSAGES: {
+        NO_ENVS_DEFINED: 'At least one Variable must be defined.',
+        COLLECTIONS_EQUAL: 'Changes in Variables are required.',
+        ERROR:
+          'At least one Variable is duplicated, has wrong name format or is empty.',
+      },
+    },
+    ADD_ENV_BUTTON: {
+      TEXT: 'Add new Variable',
+    },
+  },
+  ERRORS: {
+    EMPTY: 'Variable is empty.',
+    DUPLICATED: 'Duplicated Variable name.',
+    INVALID:
+      'Invalid Variable name: must consist of alphanumeric characters or "_" and no spaces (for example "VARIABLE_NAME").',
+  },
+  WARNINGS: {
+    VARIABLE_CAN_OVERRIDE_SBU:
+      'The Variable can override Variable injected by one of the created Service Bindings.',
+    SBU_CAN_BE_OVERRIDE: {
+      BY_CUSTOM_ENV: 'The Variable can be override by one of custom Variables.',
+      BY_SBU:
+        'The Variable can be override by Variable injected by one of the created Service Bindings.',
+      BY_CUSTOM_ENV_AND_SBU:
+        'The Variable can be override by one of custom Variables or Variable injected by one of the created Service Bindings.',
+    },
+  },
+  VARIABLE_TYPE: {
+    CUSTOM: 'Custom',
+    BINDING_USAGE: 'Injected by Service Binding',
+  },
+};
+
+export const FUNCTION_USAGE_KIND = 'knative-service';
+
+export const DEFAULT_LAMBDA_CODE = `module.exports = { 
+  main: function (event, context) {
+
+  }
+}`;
+
+export const DEFAULT_LAMBDA_DEPS = `{ 
+  "name": "{lambdaName}",
+  "version": "1.0.0",
+  "dependencies": {}
+}`;

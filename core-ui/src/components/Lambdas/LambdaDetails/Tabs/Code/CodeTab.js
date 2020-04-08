@@ -1,18 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const CodeTab = ({ codeEditorComponent, dependenciesComponent }) => {
+import CodeAndDependencies from './CodeAndDependencies/CodeAndDependencies';
+import LambdaVariables from './LambdaVariables/LambdaVariables';
+
+import { serializeVariables } from 'components/Lambdas/helpers/envs';
+
+export default function CodeTab({ lambda, bindingUsages }) {
+  const {
+    customVariables,
+    customValueFromVariables,
+    injectedVariables,
+  } = serializeVariables({
+    lambdaVariables: lambda.env,
+    bindingUsages,
+  });
+
   return (
     <>
-      {codeEditorComponent}
-      {dependenciesComponent}
+      <CodeAndDependencies lambda={lambda} />
+      <LambdaVariables
+        lambda={lambda}
+        customVariables={customVariables}
+        customValueFromVariables={customValueFromVariables}
+        injectedVariables={injectedVariables}
+      />
     </>
   );
-};
-
-CodeTab.propTypes = {
-  codeEditorComponent: PropTypes.element.isRequired,
-  dependenciesComponent: PropTypes.element.isRequired,
-};
-
-export default CodeTab;
+}
