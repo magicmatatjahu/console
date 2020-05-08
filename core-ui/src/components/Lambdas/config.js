@@ -10,7 +10,12 @@ function getConfigValue(field) {
     return defaultValue;
   }
 
-  const configValue = clusterConfig[field];
+  const serverlessConfig = clusterConfig.serverless;
+  if (!serverlessConfig) {
+    return defaultValue;
+  }
+
+  const configValue = serverlessConfig[field];
   if (!configValue) {
     return defaultValue;
   }
